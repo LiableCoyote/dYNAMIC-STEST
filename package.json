@@ -5,7 +5,7 @@
   "main": "out/html/index.html",
   "scripts": {
     "dendrynexus": "dendrynexus",
-    "build": "dendrynexus make-html --pretty && cp out/game.json out/html/",
+    "build": "node scripts/build.js",
     "serve": "npx --yes http-server out/html -p 8080 -c-1",
     "smoke": "node scripts/smoke.js"
   },
