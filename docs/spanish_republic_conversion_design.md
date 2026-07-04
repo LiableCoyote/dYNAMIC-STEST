@@ -6,6 +6,10 @@
 
 **Purpose of this document:** Assess feasibility and break the work into **general areas of effort**. Each area is intentionally high-level; Claude Code can later expand any single area into a detailed implementation plan. This is a scoping/architecture document, **not** an implementation plan.
 
+> **Start here if you're a fresh session:** read [`../CLAUDE.md`](../CLAUDE.md) for orientation (build/verify workflow, the rename maps, the concatenation trap, current status, and how to continue).
+>
+> **Progress (updated 1936-era engine work):** **Area A** (scaffolding) ✅ · **Area B** (state schema / `root.scene.dry` / HUD display) ✅ · **Area C** (election engine — calendar, 1933 bloc-list law, CNT abstention, calibration harness, yearly ticks) ✅ *(remaining C-2/C-5/C-8 parts are coupled to Area H content)* · **Areas D–M** 🔲 not started. Detailed status lives in [`planning/BC_election_engine_execution_plan.md`](planning/BC_election_engine_execution_plan.md) (Execution status section). The **electoral engine is mechanically complete and verified by simulation**, but the game is **not yet end-to-end playable** — it still boots into Weimar narrative content that Areas D–I replace.
+
 ---
 
 ## 1. Feasibility Verdict (read first)

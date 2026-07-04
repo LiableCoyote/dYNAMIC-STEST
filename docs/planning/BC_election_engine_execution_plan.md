@@ -1,5 +1,14 @@
 # Plan: Area B remnants + Area C (Election & Demographic Engine)
 
+> **Session handoff (Areas B & C are essentially complete).** New session: read
+> [`../../CLAUDE.md`](../../CLAUDE.md) first, then the **Execution status** section just
+> below for the exact state. In short: all of Area B and the Area C *engine* are done and
+> verified; the only remaining C items (C-2/C-5/C-8's live-game parts) are blocked on
+> Area H content that doesn't exist yet. **The recommended next work is Area H (the content
+> spine, which unblocks playability) or Area D (PSOE factions) — not more of this plan.**
+> This document stays as the record of B/C work + the still-valid ground rules (§0) that
+> the whole conversion follows.
+
 **Audience: a Sonnet-class executor.** Follow steps literally and in order. Do not infer scope beyond what is written. After **every** numbered stage, run the verification for that stage before moving on. If a build fails, you introduced a JS syntax error in a `{! ... !}` block — fix it before continuing.
 
 Prerequisite reading (read these first, in full):
