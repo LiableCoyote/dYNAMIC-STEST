@@ -32,8 +32,9 @@ on-arrival: {!
 Q.started = 1;
 // time elapsed (in months)
 Q.time = 1;
-Q.year = 1928;
-Q.month = 1;
+// The Second Spanish Republic is proclaimed, April 1931.
+Q.year = 1931;
+Q.month = 4;
 Q.week = 0;
 Q.week_checked = 0;
 // how many actions have been taken this month?
@@ -120,81 +121,84 @@ Q.moderate_plan_adopted = 0;
 
 // organizations
 
-// inter-party relations
-Q.z_relation = 50;
-Q.kpd_relation = 25;
-Q.ddp_relation = 60;
-Q.dvp_relation = 35;
-// DNVP and NSDAP are invariably hostile
-Q.dnvp_relation = 5;
-Q.nsdap_relation = 0;
-Q.lvp_relation = 0;
+// inter-party relations (PSOE's relations with the other Spanish parties)
+Q.izq_rep_relation = 62;    // Republican Left (Azaña) — the PSOE's natural ally
+Q.pce_relation = 25;        // PCE — communist rival to the left
+Q.radical_relation = 35;    // Radical Party (Lerroux) — wary centre
+Q.ceda_relation = 15;       // CEDA — the Catholic authoritarian right
+// Monarchists and the Falange are invariably hostile
+Q.monarchist_relation = 5;
+Q.falange_relation = 0;
 
-Q.kpd_leader = "Thälmann";
-Q.z_leader = "Marx";
-Q.z_ideology = "Right";
-Q.cvp_ideology = "Moderate";
-Q.stegerwald_path = 0;
-Q.nsdap_leader = "Hitler";
-Q.nsdap_chancellor = "Hitler";
+Q.pce_leader = "Díaz";
+Q.ceda_leader = "Gil-Robles";
+Q.ceda_ideology = "Right";
+Q.radical_ideology = "Moderate";
+Q.falange_leader = "Primo de Rivera";
 
-// hmm... maybe we can play nice with Hindenburg???
-Q.hindenburg_relation = 25;
-Q.hindenburg_angry = 0;
-Q.hindenburg_grr_amount = 0;
+// relations with the President of the Republic (Alcalá-Zamora, later Azaña)
+Q.president_relation = 30;
+Q.president_angry = 0;
+Q.president_grr_amount = 0;
 
-// prussian activities lol
-Q.spd_prussia = 1;
-Q.right_prussia = 0;
-Q.prussia_leader = "Braun"
+// Catalonia — the flagship autonomous region (Generalitat / ERC); full mechanics in Area F
+Q.psoe_catalonia = 0;
+Q.right_catalonia = 0;
+Q.catalonia_leader = "Macià"
 
 // The array of forces - paramilitary groups
 // Number of members in 1928 (in thousands)
 // Reichsbanner, stahlhelm, SA, rotfrontkämpferbund
-Q.rb_strength = 2000;
-Q.rb_militancy = 0.01;
-Q.women_in_rb = 0;
-Q.rb_banned = 0;
-Q.sh_strength = 500;
-Q.sh_militancy = 0.5;
-Q.sh_banned = 0;
-Q.sh_banned_prussia = 0;
-Q.sa_strength = 30;
-Q.sa_militancy = 0.8;
-Q.sa_banned = 0;
-Q.sa_banned_prussia = 0;
-Q.rfb_strength = 130;
-Q.rfb_militancy = 0.5;
-Q.rfb_banned = 0;
-Q.rfb_banned_prussia = 0;
+// Paramilitary groups (member counts, thousands). Structure mirrors the base game;
+// the full Spanish militia landscape (milicias, Guardia Civil vs Asalto) is refined in Area F.
+// ugt_militia = socialist/UGT workers' militia (player); requetes = Carlist Requetés;
+// falange_militia = Falange (tiny in 1931); cnt_militia = anarcho-syndicalist CNT-FAI (far-left rival).
+Q.ugt_militia_strength = 1000;
+Q.ugt_militia_militancy = 0.1;
+Q.women_in_militia = 0;
+Q.ugt_militia_banned = 0;
+Q.requetes_strength = 200;
+Q.requetes_militancy = 0.6;
+Q.requetes_banned = 0;
+Q.requetes_banned_catalonia = 0;
+Q.falange_militia_strength = 10;
+Q.falange_militia_militancy = 0.8;
+Q.falange_militia_banned = 0;
+Q.falange_militia_banned_catalonia = 0;
+Q.cnt_militia_strength = 300;
+Q.cnt_militia_militancy = 0.6;
+Q.cnt_militia_banned = 0;
+Q.cnt_militia_banned_catalonia = 0;
 
-Q.interior_police_strength = 50;
-Q.interior_police_militancy = 1;
-Q.interior_police_loyalty = 0.45;
+// Guardia Civil — the conservative rural gendarmerie (unreliable to the Republic)
+Q.guardia_civil_strength = 60;
+Q.guardia_civil_militancy = 2;
+Q.guardia_civil_loyalty = 0.3;
 
-Q.prussian_police_strength = 90;
-Q.prussian_police_militancy = 2;
-Q.prussian_police_loyalty = 0.5;
+// Guardia de Asalto — the Republic's loyal urban police
+Q.asalto_strength = 40;
+Q.asalto_militancy = 2;
+Q.asalto_loyalty = 0.7;
 
-// strength includes actual military and de facto reserves?
-Q.reichswehr_strength = 100;
-Q.reichswehr_militancy = 5;
-Q.reichswehr_loyalty = 0.2;
+// The Spanish Army. army_loyalty is the central input to the July-1936 coup clock.
+Q.army_strength = 100;
+Q.army_militancy = 5;
+Q.army_loyalty = 0.25;
 
 // The state of the country
 
 // popular opinion
 // national ideology - on a binary scale
 // nationalism vs internationalism or pacifism or non-nationalism
-Q.nationalism = 60;
+Q.nationalism = 55;
 // socialism vs capitalism
-Q.socialism = 40;
-// pro-republic vs anti-republic
-Q.pro_republic = 59;
+Q.socialism = 45;
+// pro-republic vs anti-republic (high in the 1931 republican euphoria)
+Q.pro_republic = 62;
 
 Q.emergency_rule = 0;
 
-// minimum percentage of votes to be represented in the Reichstag
+// minimum percentage of votes to be represented in the Cortes
 Q.electoral_threshold = 0;
 // constitutional reform level
 Q.constitutional_reform = 0;
@@ -204,53 +208,75 @@ Q.constructive_vonc = 0;
 Q.presidential_powers = 0;
 // allows banning of non-constitutional parties
 Q.constitutional_protection = 0;
-Q.kpd_banned = 0;
-Q.nsdap_banned = 0;
+Q.pce_banned = 0;
+Q.falange_banned = 0;
 
 // coups and capital strikes happen when you upset the right or the capitalists too much with your policies. they're an additional check on your policies, when purely electoral checks don't suffice.
 // when coup_progress reaches 10 or capital_strike_progress reaches 10, there's a special event that launches the coup.
+// coup_progress is the road to the July 1936 military uprising.
 Q.coup_progress = 0;
 Q.capital_strike_progress = 0;
 
 Q.budget = 4;
 
-// Proportion of different social groups
-// source: https://surface.syr.edu/cgi/viewcontent.cgi?filename=3&article=1016&context=books&type=additional page 45, table 3.4 - using 1925 figures
-Q.workers = 48; // industry and trade
-Q.old_middle = 13; // "old mittelstand"
-// 16.4 trade & commerce, 6.6 public and private services, 4.4 domestic help
-Q.new_middle = 14; // "new mittelstand"
-Q.rural = 25; // agriculture and forestry employment... but many of those are proletarians so...
-// source: https://surface.syr.edu/cgi/viewcontent.cgi?filename=3&article=1016&context=books&type=additional page 43, table 3.3
-Q.unemployed = 8.6;
-Q.catholics = 30;
+// --- Spanish-Republic subsystem axes (declared here; mechanics designed in Area F) ---
+// Anarcho-syndicalism (CNT-FAI): a large non-electoral revolutionary bloc the player
+// cannot recruit but must manage. electoral_stance: 1 = participate (1931/36), 0 = abstain (1933).
+Q.anarchist_strength = 30;
+Q.anarchist_militancy = 0.5;
+Q.anarchist_electoral_stance = 1;
+Q.anarchist_insurrection = 0;
+// Regional autonomy (statutes of autonomy)
+Q.catalan_autonomy = 0;
+Q.basque_autonomy = 0;
+// Church / anticlericalism and the Catholic hierarchy as an actor
+Q.clerical_conflict = 0;
+Q.church_relation = 20;
+// The Army of Africa / Africanista officer corps — the engine of the 1936 conspiracy
+Q.africa_army = 0;
 
-// unemployment: 1929 - 13.3, 1930 - 22.7, 1931 - 34.3, 1932 - 43.8 (same source as above)
+// Proportion of different social groups (weights; overlapping — the Catholic bloc
+// cross-cuts the others, so these need not sum to 100). Spain 1931 was far more
+// agrarian than Weimar Germany: the large rural population splits into landless
+// day-laborers (braceros, dominant in the south) and smallholders (north).
+// Placeholder proportions; Area C sources them precisely.
+Q.industrial = 26;     // industrial / urban workers
+Q.smallholder = 20;    // peasant proprietors and tenant farmers
+Q.urban_middle = 14;   // salaried middle class, professionals, functionaries
+Q.landless = 25;       // agricultural day-laborers (braceros)
+Q.unemployed = 10;     // rural underemployment kept the effective figure high
+Q.catholic = 30;       // practicing-Catholic cross-cutting bloc
 
-// income for industrial workers in reichsmarks/year - 1928 = 1600 Reichsmarks/year; 1931 = 1440 Reichsmarks/year; 1933 = 1138 Reichsmarks/year - source: https://babel.hathitrust.org/cgi/pt?id=uiug.30112104147985&seq=50
-Q.income = 1600;
-// what about incomes for different classes? rural workers? middle-class workers?
+// income for industrial workers (pesetas/year, placeholder; Area C/economic events refine)
+Q.income = 3000;
 
-// inflation (in %; 1928: 2.9; 1929: 0; 1930: -5%; 1931: -10%; 1932: -10%) - source: https://en.wikipedia.org/wiki/File:BSPDRWeltkriseEngl.PNG, derived from https://www.destatis.de/DE/Methoden/WISTA-Wirtschaft-und-Statistik/2009/03/rezession-betrachtung-032009.pdf?__blob=publicationFile
-Q.inflation = 2.9;
+// inflation (%, placeholder — Spain's early-1930s prices were roughly flat/mildly deflationary)
+Q.inflation = 0;
 
-// economic growth - same source as above, Table 2 (preisbereinigt) - this is also the source for the yearly changes in the great depression.
-Q.economic_growth = 4.4;
+// economic growth (%, placeholder — stagnant early-1930s Spanish economy; Area C refines)
+Q.economic_growth = 0.5;
 
 // economic expansion timer
 Q.economic_expansion = 0;
 
-// quality of life (as % of 1928 - currently unused - should be welfare-adjusted.)
-Q.workers_qol = 100;
-Q.rural_qol = 100;
+// quality of life (as % of 1931 - currently unused - should be welfare-adjusted.)
+Q.industrial_qol = 100;
+Q.landless_qol = 100;
 Q.unemployed_qol = 100;
-Q.old_middle_qol = 100;
-Q.new_middle_qol = 100;
+Q.smallholder_qol = 100;
+Q.urban_middle_qol = 100;
 
-Q.classes = ['workers', 'old_middle', 'new_middle', 'rural', 'unemployed', 'catholics'];
-Q.parties = ['spd', 'kpd', 'z', 'ddp', 'dvp', 'dnvp', 'nsdap', 'other'];
-Q.parties_graph = ['spd', 'kpd', 'z', 'ddp', 'dvp', 'dnvp', 'nsdap', 'other'];
+// Spanish Republic electoral schema (see docs/planning/B_state_schema.md).
+// classes: industrial workers, landless laborers (braceros), smallholders,
+// urban middle class, unemployed, and the practicing-Catholic cross-cutting bloc.
+Q.classes = ['industrial', 'landless', 'smallholder', 'urban_middle', 'unemployed', 'catholic'];
+// parties: PSOE (player), PCE, CEDA, Republican Left, Radicals, Monarchists,
+// Falange (the existential end-boss, starts ~0), and other (regionalists + minor).
+Q.parties = ['psoe', 'pce', 'ceda', 'izq_rep', 'radical', 'monarchist', 'falange', 'other'];
+Q.parties_graph = ['psoe', 'pce', 'ceda', 'izq_rep', 'radical', 'monarchist', 'falange', 'other'];
 
+// Legacy splinter-formation flags (inert; the German splinter machinery is excised,
+// Spanish realignments are designed in Areas C/E).
 Q.sapd_formed = 0;
 Q.dnf_formed = 0;
 Q.dnef_formed = 0;
@@ -258,68 +284,70 @@ Q.kvp_formed = 0;
 Q.lvp_formed = 0;
 Q.cvp_formed = 0;
 
-// Support for party by social group
-// they don't have to sum to 100 since the electoral calculations will be normalized.
-Q.workers_spd = 55;
-Q.workers_kpd = 22;
-Q.workers_z = 5;
-Q.workers_ddp = 2;
-Q.workers_dvp = 0;
-Q.workers_dnvp = 6;
-Q.workers_nsdap = 0;
-Q.workers_other = 10;
+// Support for party by social group (proposed June-1931 baseline; Area C calibrates).
+// Weights are relative — the electoral calculation normalizes them, so they need not sum to 100.
+// CNT-abstention caveat: the 'other'/turnout share among industrial + landless is
+// modulated by anarchist electoral stance (participate 1931/36 vs abstain 1933) — mechanic in C/F.
+Q.industrial_psoe = 45;
+Q.industrial_pce = 8;
+Q.industrial_ceda = 5;
+Q.industrial_izq_rep = 10;
+Q.industrial_radical = 12;
+Q.industrial_monarchist = 2;
+Q.industrial_falange = 0;
+Q.industrial_other = 18;
 
-Q.new_middle_spd = 8;
-Q.new_middle_kpd = 1;
-Q.new_middle_z = 10;
-Q.new_middle_ddp = 23;
-Q.new_middle_dvp = 22;
-Q.new_middle_dnvp = 10;
-Q.new_middle_nsdap = 4;
-Q.new_middle_other = 22;
+Q.urban_middle_psoe = 12;
+Q.urban_middle_pce = 1;
+Q.urban_middle_ceda = 12;
+Q.urban_middle_izq_rep = 25;
+Q.urban_middle_radical = 25;
+Q.urban_middle_monarchist = 5;
+Q.urban_middle_falange = 1;
+Q.urban_middle_other = 19;
 
-Q.old_middle_spd = 4;
-Q.old_middle_kpd = 0;
-Q.old_middle_z = 6;
-Q.old_middle_ddp = 10;
-Q.old_middle_dvp = 27;
-Q.old_middle_dnvp = 24;
-Q.old_middle_nsdap = 9;
-Q.old_middle_other = 20;
+Q.smallholder_psoe = 10;
+Q.smallholder_pce = 1;
+Q.smallholder_ceda = 30;
+Q.smallholder_izq_rep = 8;
+Q.smallholder_radical = 20;
+Q.smallholder_monarchist = 12;
+Q.smallholder_falange = 0;
+Q.smallholder_other = 19;
 
-Q.rural_spd = 9;
-Q.rural_kpd = 0;
-Q.rural_z = 5;
-Q.rural_ddp = 4;
-Q.rural_dvp = 15;
-Q.rural_dnvp = 46;
-Q.rural_nsdap = 3;
-Q.rural_other = 16;
+Q.landless_psoe = 40;
+Q.landless_pce = 6;
+Q.landless_ceda = 8;
+Q.landless_izq_rep = 8;
+Q.landless_radical = 14;
+Q.landless_monarchist = 6;
+Q.landless_falange = 0;
+Q.landless_other = 18;
 
-Q.unemployed_spd = 21;
-Q.unemployed_kpd = 50;
-Q.unemployed_z = 1;
-Q.unemployed_ddp = 0;
-Q.unemployed_dvp = 0;
-Q.unemployed_dnvp = 4;
-Q.unemployed_nsdap = 13;
-Q.unemployed_other = 7;
+Q.unemployed_psoe = 35;
+Q.unemployed_pce = 10;
+Q.unemployed_ceda = 6;
+Q.unemployed_izq_rep = 8;
+Q.unemployed_radical = 12;
+Q.unemployed_monarchist = 3;
+Q.unemployed_falange = 1;
+Q.unemployed_other = 25;
 
-Q.catholics_spd = 21;
-Q.catholics_kpd = 2;
-Q.catholics_z = 49;
-Q.catholics_ddp = 0;
-Q.catholics_dvp = 5;
-Q.catholics_dnvp = 5;
-Q.catholics_nsdap = 0;
-Q.catholics_other = 16;
+Q.catholic_psoe = 6;
+Q.catholic_pce = 0;
+Q.catholic_ceda = 45;
+Q.catholic_izq_rep = 5;
+Q.catholic_radical = 10;
+Q.catholic_monarchist = 15;
+Q.catholic_falange = 1;
+Q.catholic_other = 18;
 
-Q.workers_spd_old = 60;
-Q.new_middle_spd_old = 8;
-Q.old_middle_spd_old = 4;
-Q.rural_spd_old = 8;
-Q.unemployed_spd_old = 25;
-Q.catholics_spd_old = 20;
+Q.industrial_psoe_old = 45;
+Q.urban_middle_psoe_old = 12;
+Q.smallholder_psoe_old = 10;
+Q.landless_psoe_old = 40;
+Q.unemployed_psoe_old = 35;
+Q.catholic_psoe_old = 6;
 
 // Current Reichstag composition
 // % of Reichstag in Jan 1928

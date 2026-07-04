@@ -141,6 +141,34 @@ if (idx) {
   else ok('index.html identity updated');
 }
 
+// 5. Area B state-schema guard (source-level; runtime Q.* aren't in game.json) ----
+// The electoral schema is authored in root.scene.dry's @start on-arrival block.
+const ROOT_DRY = path.join(ROOT, 'source', 'scenes', 'root.scene.dry');
+const root = readOrFail(ROOT_DRY, 'source/scenes/root.scene.dry');
+if (root) {
+  // New Spanish party/class arrays must be present...
+  const needsPresent = [
+    ["Q.parties = ['psoe', 'pce', 'ceda', 'izq_rep', 'radical', 'monarchist', 'falange', 'other']", 'Spanish parties array'],
+    ["Q.classes = ['industrial', 'landless', 'smallholder', 'urban_middle', 'unemployed', 'catholic']", 'Spanish classes array'],
+    ['Q.anarchist_strength', 'anarchist axis'],
+    ['Q.army_loyalty', 'army_loyalty axis'],
+    ['Q.catalan_autonomy', 'regional-autonomy axis'],
+    ['Q.year = 1931', '1931 start date'],
+  ];
+  for (const [needle, label] of needsPresent) {
+    if (!root.includes(needle)) fail(`root.scene.dry missing ${label}`);
+  }
+  // ...and the old Weimar electoral array literals must be gone.
+  const banned = [
+    ["['spd', 'kpd', 'z', 'ddp', 'dvp', 'dnvp', 'nsdap', 'other']", 'legacy Weimar parties array'],
+    ["['workers', 'old_middle', 'new_middle', 'rural', 'unemployed', 'catholics']", 'legacy Weimar classes array'],
+  ];
+  for (const [needle, label] of banned) {
+    if (root.includes(needle)) fail(`root.scene.dry still contains ${label}`);
+  }
+  if (failures.length === 0 || !failures.some(f => f.includes('root.scene.dry'))) ok('root.scene.dry Spanish electoral schema present');
+}
+
 // ---- report ------------------------------------------------------------
 for (const n of notes) console.log(`  ok  ${n}`);
 if (failures.length) {
