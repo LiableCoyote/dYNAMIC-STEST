@@ -77,7 +77,7 @@ The conversion's coherence depends on a defensible Weimar→Spain mapping. Propo
 | Prussian *Reichsexekution* / civil-war triggers | **Asturias / Catalonia October 1934 revolution** | A natural mid-game crisis climax. |
 | Hitler takes power (end state) | **Nationalist coup, 17–18 July 1936** | Game end / civil-war branch. |
 
-**Timeline shift:** base game runs ~1928→1934 (≈6 years). Spain would run **April 1931 → July 1936** (≈5 years), with an optional epilogue into the war's opening.
+**Timeline shift:** base game runs ~1928→1934 (≈6 years). Spain runs **April 1931 → July 1936** (≈5 years). **Decided:** the game **ends at the July 1936 coup** (mirroring the base game's "Hitler takes power" end state); a war epilogue is explicitly deferred as possible future scope, not built in the first pass.
 
 ---
 
@@ -88,7 +88,7 @@ Each area is a candidate for its own detailed Claude Code planning pass. Ordered
 ### A. Engine, Build & Project Scaffolding — *Size S · Reuse*
 - Fork/duplicate repo, rename package (`social_democracy` → new id), update `info.dry`, `README`, `modinfo`, credits scaffolding.
 - Confirm `dendrynexus make-html` builds cleanly; set up a repeatable local build + smoke-test loop.
-- Decide mod-vs-standalone: base game has a `mod_loader` — decide whether the conversion ships as a standalone build or leverages the mod system.
+- **Decided:** ships as a **standalone total-conversion** (own build/repo, full control of engine + assets), *not* as a mod via the existing `mod_loader`.
 - **Deliverable for planning:** build/CI recipe, naming conventions, asset-path strategy.
 
 ### B. Global State Model Redesign — *Size L · Rewrite (of `root.scene.dry`)*
@@ -179,8 +179,8 @@ These have **no base-game analogue** and are the most design-intensive:
 - **Asset licensing (K):** the single most likely blocker for public release. Resolve sourcing/licensing policy before mass-collecting images.
 - **Historical framing:** the Spanish Civil War is politically sensitive; decide the intended tone/POV (the base game is sympathetic-to-SPD but historically grounded) up front so events are written consistently.
 - **Naming residue:** hidden German strings in JS-heavy `on-arrival` blocks and qdisplays will surface only through play — budget QA time.
-- **Decision needed:** standalone build vs. mod via the existing `mod_loader`?
-- **Decision needed:** end at the coup (mirror base game) or continue an epilogue into the war's first weeks?
+- ~~**Decision needed:** standalone build vs. mod via the existing `mod_loader`?~~ **Resolved: standalone total-conversion.**
+- ~~**Decision needed:** end at the coup or epilogue into the war?~~ **Resolved: end at the July 1936 coup; war epilogue deferred as possible future scope.**
 
 ---
 
