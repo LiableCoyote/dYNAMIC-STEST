@@ -7,6 +7,19 @@ Prerequisite reading (read these first, in full):
 - `docs/spanish_republic_conversion_design.md` §B and §C.
 - Already-done Area B work is committed: the electoral schema core in `source/scenes/root.scene.dry`, the generic math in `source/scenes/election_algorithm.scene.dry`, ministries, and the difficulty/mode blocks.
 
+## Execution status (updated as stages land)
+
+**✅ DONE — B-3, B-4, B-5, B-6, B-7, and the display-facing part of B-8.**
+- B-3/B-4/B-5: Cortes composition, adjustmentFactors, government/coalition flags all renamed to the Spanish schema in `root.scene.dry`; provisional-government cast set (Alcalá-Zamora); `next_election_year/month` fixed to June 1931 (was still Dec 1928); `next_election_*_prussia` → `_catalonia`.
+- B-6: the three challenge-mode scenes (joever/hitler/unemployed_mode) deleted — they hardcoded the old class/party keys and sat off the normal play path.
+- B-7: `library.scene.dry` fully rewritten — `@figures` (seat chart + Cortes table), `@curr_gov`, `@cabinet` (ministries), `@election_projections` (vote list + per-class breakdown table), `@paramilitaries` (fixed an active NaN-writing bug).
+- B-8 (display side): `status.scene.dry` fully rewritten — status head, `@paramilitaries` (fixed an active **crash** bug — `.toFixed()` on now-undefined vars), `@politics` "Inter-party Relations", `@polls`. `status_right.scene.dry` confirmed orphaned (zero incoming references anywhere) — left untouched.
+- **Verified at every stage:** `npm run build && npm run smoke` green; final pass added headless-Chromium confirmation of no JS errors on the start menu.
+- **Explicitly left as documented content debt** (Area D/E/F/H, not B/C): `@government`/`@weimar_timeline`/`@demographics`/`@parties` prose in `library.scene.dry`; `@emergency` and the "Party Leadership"/"Industrial Backing" sections in `status.scene.dry`; the "Distribution of Power" streetfighting block (its vars were never initialized even in the original game — dormant, not a regression); `status_right.scene.dry` in full (orphaned Papen/Schleicher camarilla screen).
+- B-9 (qdisplay renames): **not yet done as a dedicated pass** — the generic qdisplays (`confidence`, `dissent`, `strength`, `militancy`, `loyalty`, `relationships`, etc.) are reused correctly throughout; the German-named ones (`hindenburg_angry`, `schleicher_spd*`, `nazi_funds`, `cvp_dnvp_balance`, `camarilla_strength`) are still referenced by their old qdisplay *names* at a couple of call sites (e.g. `[+ president_angry : hindenburg_angry +]`) even though the underlying `Q.*` variable is already renamed — functionally harmless (the qdisplay is just a value→label formatter), but a real rename is still open.
+
+**🔲 NOT STARTED — all of Part 2 (Area C).** C-1 through C-8 as originally scoped below.
+
 ---
 
 ## 0. Ground rules (memorize before editing)
