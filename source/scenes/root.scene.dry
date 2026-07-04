@@ -642,24 +642,24 @@ Q.spd_toleration_right = 0;
 Q.minority_government = 0;
 
 // ministries - which parties control the ministries?
-// starting with the 4th Marx cabinet https://en.wikipedia.org/wiki/Fourth_Marx_cabinet
-// is the agricultural ministry useful at all?
-Q.foreign_minister = 'Stresemann';
-Q.foreign_minister_party = 'DVP';
-Q.interior_minister = 'von Keudell';
-Q.interior_minister_party = 'DNVP';
-Q.justice_minister = 'Hergt';
-Q.justice_minister_party = 'DNVP';
-Q.labor_minister = 'Brauns';
-Q.labor_minister_party = 'Z';
-Q.reichswehr_minister = 'Groener';
-Q.reichswehr_minister_party = 'I';
-Q.economic_minister = 'Curtius';
-Q.economic_minister_party = 'DVP';
-Q.finance_minister = 'Köhler';
-Q.finance_minister_party = 'Z';
-Q.agriculture_minister = 'Schiele';
-Q.agriculture_minister_party = 'DNVP';
+// The provisional government of the Republic, April 1931 (var names kept as internal
+// slots; the war ministry reuses the reichswehr_minister slot). Party labels are display strings.
+Q.foreign_minister = 'Lerroux';
+Q.foreign_minister_party = 'Radical';
+Q.interior_minister = 'Maura';
+Q.interior_minister_party = 'DLR';
+Q.justice_minister = 'De los Ríos';
+Q.justice_minister_party = 'PSOE';
+Q.labor_minister = 'Largo Caballero';
+Q.labor_minister_party = 'PSOE';
+Q.reichswehr_minister = 'Azaña';
+Q.reichswehr_minister_party = 'IR';
+Q.economic_minister = "Nicolau d'Olwer";
+Q.economic_minister_party = 'ERC';
+Q.finance_minister = 'Prieto';
+Q.finance_minister_party = 'PSOE';
+Q.agriculture_minister = 'Domingo';
+Q.agriculture_minister_party = 'PRRS';
 
 // Events: what has occurred?
 Q.panzerkreuzer_seen = 0;
@@ -1261,11 +1261,11 @@ For more information on the politics and government of the German Republic, see 
 - @1928_challenge: Custom Modes
 
 @1928_easy
-on-arrival: difficulty = -1; resources = 4; dues = 5; base_dues = 5; rb_strength = 2500; kpd_relation = 29; z_relation = 54; dvp_relation = 49; ddp_relation = 65; budget = 5;
+on-arrival: difficulty = -1; resources = 4; dues = 5; base_dues = 5; ugt_militia_strength = 1200; pce_relation = 30; ceda_relation = 19; radical_relation = 45; izq_rep_relation = 67; budget = 5;
 go-to: 1928_main
 
 @1928_hard
-on-arrival: difficulty = 1; resources = 0; dues = 3; base_dues = 3; rb_strength = 1000; reformist_dissent = 25; left_dissent = 30; labor_dissent = 25; center_dissent = 25; z_relation = 41; kpd_relation = 16; dvp_relation = 31; ddp_relation = 50; budget = 3
+on-arrival: difficulty = 1; resources = 0; dues = 3; base_dues = 3; ugt_militia_strength = 600; reformist_dissent = 25; left_dissent = 30; labor_dissent = 25; center_dissent = 25; ceda_relation = 11; pce_relation = 17; radical_relation = 31; izq_rep_relation = 53; budget = 3
 go-to: 1928_main
 
 @1928_historical
@@ -1276,15 +1276,15 @@ Q.historical_mode = 1;
 Q.resources = 2;
 Q.dues = 2;
 Q.base_dues = 2;
-Q.rb_strength = 2000;
+Q.ugt_militia_strength = 1000;
 Q.reformist_dissent = 25;
 Q.left_dissent = 30;
 Q.labor_dissent = 25;
 Q.center_dissent = 25;
-Q.z_relation = 41;
-Q.kpd_relation = 16;
-Q.dvp_relation = 31;
-Q.ddp_relation = 55;
+Q.ceda_relation = 11;
+Q.pce_relation = 17;
+Q.radical_relation = 31;
+Q.izq_rep_relation = 55;
 Q.budget = 2;
 this.state.disableSaves = true;
 !}
@@ -1298,11 +1298,11 @@ Q.dynamic_mode = 1;
 Q.resources = 3;
 Q.dues = 3;
 Q.base_dues = 3;
-Q.rb_strength = 2000;
-Q.z_relation = 41;
-Q.kpd_relation = 21;
-Q.dvp_relation = 31;
-Q.ddp_relation = 55;
+Q.ugt_militia_strength = 1000;
+Q.ceda_relation = 11;
+Q.pce_relation = 21;
+Q.radical_relation = 31;
+Q.izq_rep_relation = 55;
 Q.budget = 2;
 !}
 go-to: 1928_main
@@ -1314,11 +1314,11 @@ Q.difficulty = -1;
 Q.resources = 3;
 Q.dues = 3;
 Q.base_dues = 3;
-Q.rb_strength = 2000;
-Q.z_relation = 41;
-Q.kpd_relation = 21;
-Q.dvp_relation = 31;
-Q.ddp_relation = 55;
+Q.ugt_militia_strength = 1000;
+Q.ceda_relation = 11;
+Q.pce_relation = 21;
+Q.radical_relation = 31;
+Q.izq_rep_relation = 55;
 Q.budget = 2;
 !}
 go-to: 1928_main
