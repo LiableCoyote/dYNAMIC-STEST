@@ -719,12 +719,14 @@ Q.elections_1932 = 0;
 Q.prussian_reichsexekution_timer = 0;
 // elections are not on a timer, but rather there is an indicator for whether you're in an electoral cycle.
 Q.in_election = 1;
-Q.in_election_prussia = 1;
-Q.next_election_time_prussia = 5;
-Q.next_election_year_prussia = 1928;
-Q.next_election_month_prussia = 5;
-Q.next_election_year = 1928;
-Q.next_election_month = 12;
+Q.in_election_catalonia = 1;
+Q.next_election_time_catalonia = 5;
+// Catalonia's first regional Parliament election was held Nov 1932 (Area C finalizes)
+Q.next_election_year_catalonia = 1932;
+Q.next_election_month_catalonia = 11;
+// The constituent Cortes election was held June 1931 (Area C-1 finalizes the full calendar)
+Q.next_election_year = 1931;
+Q.next_election_month = 6;
 Q.next_election_time = 12;
 // government affairs timers
 Q.campaigning_timer = 0;
