@@ -1,10 +1,27 @@
-title: Reichstag Elections
+title: Cortes Elections
 new-page: true
 tags: event
 priority: -2
 view-if: (year = next_election_year and month >= next_election_month and (next_election_week == week or not rubicon)) or (year > next_election_year)
 on-arrival: election_boycott = 0
-on-departure: in_election = 0; next_election_year = next_election_year + 4; n_elections += 1; next_election_time = time + 48
+on-departure: {!
+// Spanish Republic election calendar: 1931 (constituent) -> 1933 -> 1936, then the
+// game is heading toward the July-1936 coup end-state (no further scheduled election).
+// Replaces the Weimar fixed 4-year term (docs/planning/BC_election_engine_execution_plan.md, C-1).
+Q.in_election = 0;
+Q.n_elections += 1;
+if (Q.next_election_year <= 1931) {
+    Q.next_election_year = 1933;
+    Q.next_election_month = 11;
+} else if (Q.next_election_year <= 1933) {
+    Q.next_election_year = 1936;
+    Q.next_election_month = 2;
+} else {
+    Q.next_election_year = 9999;
+    Q.next_election_month = 1;
+}
+Q.next_election_time = Q.time + 12 * (Q.next_election_year - Q.year);
+!}
 set-jump: post_election_1928
 set-bg: img/map_2.jpg
 #face-image: img/Rothe_Wahlen_1903.jpg
@@ -12,7 +29,7 @@ set-bg: img/map_2.jpg
 
 = Elections, [+ month : month +] [+ year +]
 
-The Reichstag elections are to be held now.
+The Cortes elections are to be held now.
 
 - @election_algorithm: May we do our best...
 - @cancel_elections
@@ -187,100 +204,19 @@ on-arrival: {!
     Q.pre_previous_z_last_election_votes = Q.previous_z_last_election_votes;
     Q.z_votes_pre = Q.z_votes;
 
-    Q.adjustmentFactors_votes_spd = 1.0;
-    Q.adjustmentFactors_votes_sapd = 1.0;
-    Q.adjustmentFactors_votes_kpd = 1.0;
-    Q.adjustmentFactors_votes_z = 1.0;
-    Q.adjustmentFactors_votes_ddp = 1.0;
-    Q.adjustmentFactors_votes_dvp = 1.0;
-    Q.adjustmentFactors_votes_lvp = 1.0;
-    Q.adjustmentFactors_votes_dnvp = 1.0;
-    Q.adjustmentFactors_votes_nsdap = 1.0;
-    Q.adjustmentFactors_votes_dnf = 1.0;
-    Q.adjustmentFactors_votes_kvp = 1.0;
-    Q.adjustmentFactors_votes_other = 1.0;
-
-    Q.adjustmentFactors_spd = 1.0;
-    Q.adjustmentFactors_sapd = 1.0;
-    Q.adjustmentFactors_kpd = 1.0;
-    Q.adjustmentFactors_z = 1.0;
-    Q.adjustmentFactors_ddp = 1.0;
-    Q.adjustmentFactors_dvp = 1.0;
-    Q.adjustmentFactors_lvp = 1.0;
-    Q.adjustmentFactors_dnvp = 1.0;
-    Q.adjustmentFactors_nsdap = 1.0;
-    Q.adjustmentFactors_dnf = 1.0;
-    Q.adjustmentFactors_dnef = 1.0;
-    Q.adjustmentFactors_kvp = 1.0;
-    Q.adjustmentFactors_other = 0.75;
-
+    // 1933 majoritarian bloc-list law (docs/planning/BC_election_engine_execution_plan.md,
+    // C-3): parties running on a joint/coalesced list get a seat bonus; parties
+    // running solo take a penalty. Replaces the old per-party German-narrative-
+    // conditioned adjustment factors (Hugenberg/Triumvirate/CVP/ASPD-specific chains),
+    // which depended on Weimar plot flags with no Spanish equivalent.
     var new_party_sum = 0;
     var total_reichstag_without = 0;  // Initialize a variable to accumulate 'reichstag_without_' values
     var total_other_party_sum = 0;    // Initialize a variable to accumulate '_other_party_sum' values
-    if (Q.year === 1928 && Q.dnvp_leader === "Hugenberg" || Q.dnvp_westarp) {
-        Q.adjustmentFactors_other = 0.75;
-    } else if (Q.year === 1929 && Q.dnvp_leader === "Hugenberg") {
-        Q.adjustmentFactors_other = 0.85;
-    } else if (Q.year === 1930 && Q.dnvp_leader === "Hugenberg") {
-        Q.adjustmentFactors_other = 0.9;
-    } else if (Q.year === 1931 && Q.dnvp_leader === "Hugenberg") {
-        Q.adjustmentFactors_other = 0.8;
-    } else if (Q.year >= 1932 && Q.dnvp_leader === "Hugenberg") {
-        Q.adjustmentFactors_other = 0.6;
-    } else if (Q.year >= 1928 && Q.dnvp_leader === "Triumvirate") {
-        Q.adjustmentFactors_other = 0.75;
-    } else if (Q.year === 1928 && Q.dnvp_ideology === "Moderate") {
-        Q.adjustmentFactors_other = 0.65;
-    } else if (Q.year === 1929 && Q.dnvp_ideology === "Moderate") {
-        Q.adjustmentFactors_other = 0.7;
-    } else if (Q.year === 1930 && Q.dnvp_ideology === "Moderate") {
-        Q.adjustmentFactors_other = 0.75;
-    } else if (Q.year === 1931 && Q.dnvp_ideology === "Moderate") {
-        Q.adjustmentFactors_other = 0.7;
-    } else if (Q.year >= 1932 && Q.dnvp_ideology === "Moderate") {
-        Q.adjustmentFactors_other = 0.6;
+    for (var bloc_party of Q.parties) {
+        var bloc_factor = Q[bloc_party + '_in_bloc'] ? (1 + Q.bloc_bonus) : (1 - Q.solo_penalty);
+        Q['adjustmentFactors_votes_' + bloc_party] = bloc_factor;
+        Q['adjustmentFactors_' + bloc_party] = bloc_factor;
     }
-    if (Q.kvp_cnblp_sister) {
-        Q.adjustmentFactors_other += 0.05;
-    }
-    if (Q.bourgeois_parliament || Q.bourgeois_parliament_no_liberals) {
-        Q.adjustmentFactors_other += 0.05;
-    }
-    if (Q.other_votes >= 8 && Q.year >= 1931) {
-        Q.adjustmentFactors_other += 0.1;
-    }
-    if (Q.other_dnef) {
-        Q.adjustmentFactors_other = 0;
-    }
-    if (Q.cvp_formed) Q.adjustmentFactors_other = 0.6;
-    if (Q.aspd_other) Q.adjustmentFactors_other += 0.4;
-    Q.adjustmentFactors_ddp = 1.0;
-    if (!Q.bourgeois_list_ddp && !Q.dstp_dnef) {
-        if (Q.ddp_votes < 1 && Q.year >= 1930) {
-            Q.adjustmentFactors_ddp = 0.3;
-        } else if (Q.ddp_votes < 1.5 && Q.year >= 1930) {
-            Q.adjustmentFactors_ddp = 0.65;
-        } else if (Q.ddp_votes < 3 && Q.year >= 1930) {
-            Q.adjustmentFactors_ddp = 0.75;
-        } else if (Q.ddp_votes < 4 && Q.year >= 1930) {
-            Q.adjustmentFactors_ddp = 0.85;
-        }
-    }
-    if (Q.ddp_alliance) Q.adjustmentFactors_ddp = 0.8;
-    if (Q.ddp_alliance_glaze) Q.adjustmentFactors_ddp = 1.1;
-    Q.adjustmentFactors_dvp = 1.0;
-    if (!Q.hugenberg_dvp && !Q.bourgeois_list && !Q.dvp_dnef) {
-        if (Q.dvp_votes < 1.5) {
-            Q.adjustmentFactors_dvp = 0.25;
-        } else if (Q.dvp_votes < 2) {
-            Q.adjustmentFactors_dvp = 0.4;
-        } else if (Q.dvp_votes < 2.5) {
-            Q.adjustmentFactors_dvp = 0.6;            
-        } else if (Q.dvp_votes < 3) {
-            Q.adjustmentFactors_dvp = 0.8;   
-        }
-    }
-    if (Q.hugenberg_dvp) Q.adjustmentFactors_dvp = 1.0;
 
     if (Q.election_boycott) {
         Q.adjustmentFactors_votes_spd = 1.0*(1-Q.spd_boycott_efficacy);
@@ -363,8 +299,6 @@ on-arrival: {!
             }
         }
     }
-    
-console.log(Q.spd_r)
 
 // Step 2: Redistribute results among non-adjusted parties to ensure the total is 100%
 if (new_party_sum > 0) {
@@ -375,8 +309,6 @@ if (new_party_sum > 0) {
 
         var total_reichstag_without_party = total_reichstag_without - (100 - Q['original_' + party + '_r']);
         var total_other_party_sum_party = total_other_party_sum - (Q['reichstag_without_' + party] - (Q[party + '_votes'] - Q[party + '_r']));
-
-        console.log(Q.spd_r)
 
         if (factor === 1.0) {
             if (total_other_party_sum > 0) {
@@ -389,28 +321,25 @@ if (new_party_sum > 0) {
             Q[party + '_r'] = Math.round(Q[party + '_r'] * scaling_factor * 10) / 10;
         }
     }
+}
 
-    console.log(Q.spd_r)
-
-    // Step 3: Normalize to ensure the total sums to exactly 100%
-    let total_r_sum = 0;
-
-    // Calculate the total of all `r` values after redistribution
+// Step 3: Normalize to ensure the total sums to exactly 100%. Always runs
+// (moved outside the `new_party_sum > 0` gate above) because the Spanish bloc-bonus
+// scheme gives every party a non-1.0 factor, so new_party_sum is always 0 --
+// the original code only ran this when at least one party had a neutral factor.
+let total_r_sum = 0;
+for (var party of Q.parties) {
+    total_r_sum += Q[party + '_r'];
+}
+if (total_r_sum !== 100 && total_r_sum > 0) {
+    let normalization_factor = 100 / total_r_sum;
     for (var party of Q.parties) {
-        total_r_sum += Q[party + '_r'];
-    }
-
-    // Adjust each party's `r` value proportionally if the total isn't 100
-    if (total_r_sum !== 100) {
-        let normalization_factor = 100 / total_r_sum;
-        for (var party of Q.parties) {
-            if (Q[party + '_r'] > 0) {
-                Q[party + '_r'] = Math.round(Q[party + '_r'] * normalization_factor * 10) / 10;
-            }
+        if (Q[party + '_r'] > 0) {
+            Q[party + '_r'] = Math.round(Q[party + '_r'] * normalization_factor * 10) / 10;
         }
     }
-    console.log(Q.spd_r)
 }
+
 if (Q.election_boycott) {
     Q.dnef_votes += Q.spd_votes;
     Q.spd_votes = 0;

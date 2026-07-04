@@ -450,10 +450,24 @@ Q.adjustmentFactors_falange_catalonia = 1.0;
 Q.adjustmentFactors_other_catalonia = 0.7;
 
 // the 1933 majoritarian bloc-list law: coalesced lists get a seat bonus, solo
-// parties a penalty. Area C wires this into seat allocation (docs/planning/
-// BC_election_engine_execution_plan.md, C-3).
+// parties a penalty. Wired into seat allocation in events/election_1928.scene.dry
+// (docs/planning/BC_election_engine_execution_plan.md, C-3).
 Q.bloc_bonus = 0.35;
 Q.solo_penalty = 0.25;
+
+// which electoral bloc each party runs in for the CURRENT election (1 = ran on a
+// joint/coalesced list, 0 = ran solo). Historical baseline: the 1931 constituent
+// election saw a broad Republican-Socialist-Radical coalition. Later elections
+// (1933 Radical-CEDA bloc, 1936 Popular Front) should update these via events
+// (Area H); until then this default carries forward.
+Q.psoe_in_bloc = 1;
+Q.pce_in_bloc = 0;
+Q.ceda_in_bloc = 0;
+Q.izq_rep_in_bloc = 1;
+Q.radical_in_bloc = 1;
+Q.monarchist_in_bloc = 0;
+Q.falange_in_bloc = 0;
+Q.other_in_bloc = 0;
 
 // array of objects of the form {date: Date(), psoe: 10, pce: 12, ...} for each election
 Q.election_records = [];
