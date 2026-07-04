@@ -93,12 +93,14 @@ Each area is a candidate for its own detailed Claude Code planning pass. Ordered
 - **Deliverable for planning:** build/CI recipe, naming conventions, asset-path strategy.
 
 ### B. Global State Model Redesign — *Size L · Rewrite (of `root.scene.dry`)*
+> 📄 **State schema:** [`planning/B_state_schema.md`](planning/B_state_schema.md) · **Remaining B work + all of Area C:** [`planning/BC_election_engine_execution_plan.md`](planning/BC_election_engine_execution_plan.md)
 - Rewrite the `on-arrival` init block: dates (1931 start), the `classes`/`parties` arrays, all faction vars, all relation vars, paramilitary rosters, state-force rosters, national-opinion axes.
 - Re-source demographic weights from Spanish data (heavy rural/landless share; low industrial share vs Germany).
 - Define new axes needed by Spanish subsystems (see F): `anarchist_strength`, `catalan_autonomy`, `land_reform`, `clerical_conflict`, `army_loyalty`, `africa_army`.
 - **This is the linchpin.** Almost every other area reads/writes these variables, so its variable naming and semantics must be settled early.
 
 ### C. Election & Demographic Engine — *Size L · Reweight + Retarget*
+> 📄 **Expanded into a detailed plan (combined with remaining Area B work):** [`planning/BC_election_engine_execution_plan.md`](planning/BC_election_engine_execution_plan.md)
 - Keep the `classes × parties` matrix architecture (it is genuinely reusable and elegant).
 - Replace class list to reflect Spain: e.g. `industrial_workers`, `landless_laborers (braceros)`, `smallholders`, `petite_bourgeoisie`, `middle_class`, `catholics`, `regional_nationalists` — reweighted toward the countryside.
 - Replace party list with the Spanish roster (§3) and rebuild per-class baseline support tables from Spanish electoral history (1931/1933/1936).
