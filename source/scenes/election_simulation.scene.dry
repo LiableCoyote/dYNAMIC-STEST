@@ -1,319 +1,324 @@
 title: Election Simulation
 set-jump: post_election
 
+# Standalone calibration harness for the Spanish Republic electoral model
+# (docs/planning/BC_election_engine_execution_plan.md, C-6). Not on the live
+# play path -- never referenced by root.scene.dry or any other scene. Exercises
+# the class->party matrix, the 1933 bloc-list law (C-3), and the CNT abstention
+# mechanic (C-4) against the three historical elections: 1931 (constituent),
+# 1933 (Radical-CEDA), 1936 (Popular Front). Values are directional placeholders
+# for Area C-8 to calibrate against real historical results, not exact matches.
 
-- @1928: 1928 historical scenario
-- @1930: 1930 historical scenario
-- @1932: 1932 (July) historical scenario
+- @1931: 1931 (constituent) historical scenario
+- @1933: 1933 (Radical-CEDA) historical scenario
+- @1936: 1936 (Popular Front) historical scenario
 
-@1928
+@1931
 on-arrival: {!
-Q.workers = 46; // industry and trade
-Q.old_middle = 13; // "old mittelstand"
-// 16.4 trade & commerce, 6.6 public and private services, 4.4 domestic help
-Q.new_middle = 14; // "new mittelstand"
-Q.rural = 25; // agriculture and forestry employment... but many of those are proletarians so...
-// source: https://surface.syr.edu/cgi/viewcontent.cgi?filename=3&article=1016&context=books&type=additional page 43, table 3.3
-Q.unemployed = 8.6;
-Q.catholics = 30;
+Q.industrial = 26;
+Q.landless = 25;
+Q.smallholder = 20;
+Q.urban_middle = 14;
+Q.unemployed = 10;
+Q.catholic = 30;
 
-Q.classes = ['workers', 'old_middle', 'new_middle', 'rural', 'unemployed', 'catholics'];
-Q.parties = ['spd', 'kpd', 'z', 'ddp', 'dvp', 'dnvp', 'nsdap', 'other'];
+Q.classes = ['industrial', 'landless', 'smallholder', 'urban_middle', 'unemployed', 'catholic'];
+Q.parties = ['psoe', 'pce', 'ceda', 'izq_rep', 'radical', 'monarchist', 'falange', 'other'];
 
-// Support for party by social group
-// they don't have to sum to 100 since the electoral calculations will be normalized.
-Q.workers_spd = 65;
-Q.workers_kpd = 20;
-Q.workers_z = 5;
-Q.workers_ddp = 0;
-Q.workers_dvp = 0;
-Q.workers_dnvp = 5;
-Q.workers_nsdap = 0;
-Q.workers_other = 10;
+// The broad Republican-Socialist-Radical coalition of the constituent Cortes.
+Q.psoe_in_bloc = 1;
+Q.pce_in_bloc = 0;
+Q.ceda_in_bloc = 0;
+Q.izq_rep_in_bloc = 1;
+Q.radical_in_bloc = 1;
+Q.monarchist_in_bloc = 0;
+Q.falange_in_bloc = 0;
+Q.other_in_bloc = 0;
 
-Q.old_middle_spd = 5;
-Q.old_middle_kpd = 0;
-Q.old_middle_z = 5;
-Q.old_middle_ddp= 10;
-Q.old_middle_dvp = 25;
-Q.old_middle_dnvp = 25;
-Q.old_middle_nsdap = 10;
-Q.old_middle_other = 10;
+// CNT-FAI largely participated in 1931.
+Q.anarchist_electoral_stance = 1;
+Q.anarchist_strength = 30;
 
-Q.new_middle_spd = 5;
-Q.new_middle_kpd = 0;
-Q.new_middle_z = 10;
-Q.new_middle_ddp= 25;
-Q.new_middle_dvp = 25;
-Q.new_middle_dnvp = 10;
-Q.new_middle_nsdap = 5;
-Q.new_middle_other = 15;
+Q.industrial_psoe = 45;
+Q.industrial_pce = 8;
+Q.industrial_ceda = 5;
+Q.industrial_izq_rep = 10;
+Q.industrial_radical = 12;
+Q.industrial_monarchist = 2;
+Q.industrial_falange = 0;
+Q.industrial_other = 18;
 
-Q.rural_spd = 10;
-Q.rural_kpd = 0;
-Q.rural_z = 5;
-Q.rural_ddp= 5;
-Q.rural_dvp = 15;
-Q.rural_dnvp = 45;
-Q.rural_nsdap = 5;
-Q.rural_other = 10;
+Q.landless_psoe = 40;
+Q.landless_pce = 6;
+Q.landless_ceda = 8;
+Q.landless_izq_rep = 8;
+Q.landless_radical = 14;
+Q.landless_monarchist = 6;
+Q.landless_falange = 0;
+Q.landless_other = 18;
 
-Q.unemployed_spd = 25;
-Q.unemployed_kpd = 55;
-Q.unemployed_z = 1;
-Q.unemployed_ddp = 0;
-Q.unemployed_dvp = 0;
-Q.unemployed_dnvp = 5;
-Q.unemployed_nsdap = 15;
-Q.unemployed_other = 9;
+Q.smallholder_psoe = 10;
+Q.smallholder_pce = 1;
+Q.smallholder_ceda = 30;
+Q.smallholder_izq_rep = 8;
+Q.smallholder_radical = 20;
+Q.smallholder_monarchist = 12;
+Q.smallholder_falange = 0;
+Q.smallholder_other = 19;
 
-Q.catholics_spd = 15;
-Q.catholics_kpd = 5;
-Q.catholics_z = 50;
-Q.catholics_ddp = 0;
-Q.catholics_dvp = 5;
-Q.catholics_dnvp = 5;
-Q.catholics_nsdap = 0;
-Q.catholics_other = 10;
+Q.urban_middle_psoe = 12;
+Q.urban_middle_pce = 1;
+Q.urban_middle_ceda = 12;
+Q.urban_middle_izq_rep = 25;
+Q.urban_middle_radical = 25;
+Q.urban_middle_monarchist = 5;
+Q.urban_middle_falange = 1;
+Q.urban_middle_other = 19;
+
+Q.unemployed_psoe = 35;
+Q.unemployed_pce = 10;
+Q.unemployed_ceda = 6;
+Q.unemployed_izq_rep = 8;
+Q.unemployed_radical = 12;
+Q.unemployed_monarchist = 3;
+Q.unemployed_falange = 1;
+Q.unemployed_other = 25;
+
+Q.catholic_psoe = 6;
+Q.catholic_pce = 0;
+Q.catholic_ceda = 45;
+Q.catholic_izq_rep = 5;
+Q.catholic_radical = 10;
+Q.catholic_monarchist = 15;
+Q.catholic_falange = 1;
+Q.catholic_other = 18;
 !}
 go-to: election_algorithm
 set-jump: post_election
 
-@1930
+@1933
 on-arrival: {!
-Q.workers = 46; // industry and trade
-Q.old_middle = 13; // "old mittelstand"
-// 16.4 trade & commerce, 6.6 public and private services, 4.4 domestic help
-Q.new_middle = 14; // "new mittelstand"
-Q.rural = 25; // agriculture and forestry employment... but many of those are proletarians so...
-// source: https://surface.syr.edu/cgi/viewcontent.cgi?filename=3&article=1016&context=books&type=additional page 43, table 3.3
-Q.unemployed = 20;
-Q.catholics = 30;
+Q.industrial = 26;
+Q.landless = 25;
+Q.smallholder = 20;
+Q.urban_middle = 14;
+Q.unemployed = 12;
+Q.catholic = 30;
 
-Q.classes = ['workers', 'old_middle', 'new_middle', 'rural', 'unemployed', 'catholics'];
-Q.parties = ['spd', 'kpd', 'z', 'ddp', 'dvp', 'dnvp', 'nsdap', 'other'];
+Q.classes = ['industrial', 'landless', 'smallholder', 'urban_middle', 'unemployed', 'catholic'];
+Q.parties = ['psoe', 'pce', 'ceda', 'izq_rep', 'radical', 'monarchist', 'falange', 'other'];
 
-// Support for party by social group
-// they don't have to sum to 100 since the electoral calculations will be normalized.
-Q.workers_spd = 60;
-Q.workers_kpd = 20;
-Q.workers_z = 5;
-Q.workers_ddp = 0;
-Q.workers_dvp = 0;
-Q.workers_dnvp = 0;
-Q.workers_nsdap = 10;
-Q.workers_other = 15;
+// The 1933-35 Radical-CEDA bloc: PSOE and Republican Left ran divided and alone.
+Q.psoe_in_bloc = 0;
+Q.pce_in_bloc = 0;
+Q.ceda_in_bloc = 1;
+Q.izq_rep_in_bloc = 0;
+Q.radical_in_bloc = 1;
+Q.monarchist_in_bloc = 1;
+Q.falange_in_bloc = 0;
+Q.other_in_bloc = 0;
 
-Q.old_middle_spd = 5;
-Q.old_middle_kpd = 0;
-Q.old_middle_z = 5;
-Q.old_middle_ddp= 5;
-Q.old_middle_dvp = 10;
-Q.old_middle_dnvp = 20;
-Q.old_middle_nsdap = 30;
-Q.old_middle_other = 15;
+// CNT-FAI called for abstention in 1933 -- a major factor in the left's defeat.
+Q.anarchist_electoral_stance = 0;
+Q.anarchist_strength = 35;
 
-Q.new_middle_spd = 5;
-Q.new_middle_kpd = 0;
-Q.new_middle_z = 5;
-Q.new_middle_ddp = 10;
-Q.new_middle_dvp = 20;
-Q.new_middle_dnvp = 10;
-Q.new_middle_nsdap = 25;
-Q.new_middle_other = 15;
+Q.industrial_psoe = 35;
+Q.industrial_pce = 10;
+Q.industrial_ceda = 8;
+Q.industrial_izq_rep = 6;
+Q.industrial_radical = 14;
+Q.industrial_monarchist = 4;
+Q.industrial_falange = 1;
+Q.industrial_other = 22;
 
-Q.rural_spd = 5;
-Q.rural_kpd = 0;
-Q.rural_z = 5;
-Q.rural_ddp= 5;
-Q.rural_dvp = 10;
-Q.rural_dnvp = 20;
-Q.rural_nsdap = 25;
-Q.rural_other = 15;
+Q.landless_psoe = 32;
+Q.landless_pce = 8;
+Q.landless_ceda = 14;
+Q.landless_izq_rep = 6;
+Q.landless_radical = 16;
+Q.landless_monarchist = 8;
+Q.landless_falange = 0;
+Q.landless_other = 16;
 
-Q.unemployed_spd = 20;
-Q.unemployed_kpd = 50;
-Q.unemployed_z = 0;
-Q.unemployed_ddp = 0;
-Q.unemployed_dvp = 0;
-Q.unemployed_dnvp = 5;
-Q.unemployed_nsdap = 25;
-Q.unemployed_other = 5;
+Q.smallholder_psoe = 6;
+Q.smallholder_pce = 1;
+Q.smallholder_ceda = 40;
+Q.smallholder_izq_rep = 5;
+Q.smallholder_radical = 22;
+Q.smallholder_monarchist = 14;
+Q.smallholder_falange = 0;
+Q.smallholder_other = 12;
 
-Q.catholics_spd = 10;
-Q.catholics_kpd = 5;
-Q.catholics_z = 50;
-Q.catholics_ddp = 0;
-Q.catholics_dvp = 5;
-Q.catholics_dnvp = 5;
-Q.catholics_nsdap = 10;
-Q.catholics_other = 5;
+Q.urban_middle_psoe = 8;
+Q.urban_middle_pce = 1;
+Q.urban_middle_ceda = 20;
+Q.urban_middle_izq_rep = 18;
+Q.urban_middle_radical = 28;
+Q.urban_middle_monarchist = 8;
+Q.urban_middle_falange = 2;
+Q.urban_middle_other = 15;
 
-Q.spd_r = 25;
-Q.kpd_r = 10;
-Q.z_r = 15;
-Q.ddp_r = 10;
-Q.dvp_r = 10;
-Q.dnvp_r = 14;
-Q.nsdap_r = 10;
-Q.other_r = 5;
+Q.unemployed_psoe = 28;
+Q.unemployed_pce = 14;
+Q.unemployed_ceda = 8;
+Q.unemployed_izq_rep = 6;
+Q.unemployed_radical = 14;
+Q.unemployed_monarchist = 4;
+Q.unemployed_falange = 2;
+Q.unemployed_other = 24;
+
+Q.catholic_psoe = 4;
+Q.catholic_pce = 0;
+Q.catholic_ceda = 55;
+Q.catholic_izq_rep = 3;
+Q.catholic_radical = 11;
+Q.catholic_monarchist = 18;
+Q.catholic_falange = 1;
+Q.catholic_other = 8;
 !}
 go-to: election_algorithm
 set-jump: post_election
 
-@1932
+@1936
 on-arrival: {!
-Q.workers = 46; // industry and trade
-Q.old_middle = 13; // "old mittelstand"
-// 16.4 trade & commerce, 6.6 public and private services, 4.4 domestic help
-Q.new_middle = 14; // "new mittelstand"
-Q.rural = 25; // agriculture and forestry employment... but many of those are proletarians so...
-// source: https://surface.syr.edu/cgi/viewcontent.cgi?filename=3&article=1016&context=books&type=additional page 43, table 3.3
-Q.unemployed = 33;
-Q.catholics = 30;
+Q.industrial = 26;
+Q.landless = 25;
+Q.smallholder = 20;
+Q.urban_middle = 14;
+Q.unemployed = 14;
+Q.catholic = 30;
 
-Q.classes = ['workers', 'old_middle', 'new_middle', 'rural', 'unemployed', 'catholics'];
-Q.parties = ['spd', 'kpd', 'z', 'ddp', 'dvp', 'dnvp', 'nsdap', 'other'];
+Q.classes = ['industrial', 'landless', 'smallholder', 'urban_middle', 'unemployed', 'catholic'];
+Q.parties = ['psoe', 'pce', 'ceda', 'izq_rep', 'radical', 'monarchist', 'falange', 'other'];
 
-// Support for party by social group
-// they don't have to sum to 100 since the electoral calculations will be normalized.
-Q.workers_spd = 55;
-Q.workers_kpd = 20;
-Q.workers_z = 5;
-Q.workers_ddp = 0;
-Q.workers_dvp = 0;
-Q.workers_dnvp = 0;
-Q.workers_nsdap = 15;
-Q.workers_other = 5;
+// The 1936 Popular Front: PSOE + PCE + Republican Left reunited on a joint list.
+// The right ran comparatively divided (the Radical Party had collapsed after
+// the Straperlo scandal; CEDA and the Monarchists did not fully coalesce).
+Q.psoe_in_bloc = 1;
+Q.pce_in_bloc = 1;
+Q.ceda_in_bloc = 0;
+Q.izq_rep_in_bloc = 1;
+Q.radical_in_bloc = 0;
+Q.monarchist_in_bloc = 0;
+Q.falange_in_bloc = 0;
+Q.other_in_bloc = 0;
 
-Q.old_middle_spd = 0;
-Q.old_middle_kpd = 0;
-Q.old_middle_z = 5;
-Q.old_middle_ddp = 4;
-Q.old_middle_dvp = 4;
-Q.old_middle_dnvp = 15;
-Q.old_middle_nsdap = 70;
-Q.old_middle_other = 5;
+// CNT-FAI did not officially endorse the Popular Front, but rank-and-file
+// participation was far higher than in 1933.
+Q.anarchist_electoral_stance = 1;
+Q.anarchist_strength = 35;
 
-Q.new_middle_spd = 5;
-Q.new_middle_kpd = 0;
-Q.new_middle_z = 5;
-Q.new_middle_ddp = 10;
-Q.new_middle_dvp = 10;
-Q.new_middle_dnvp = 10;
-Q.new_middle_nsdap = 60;
-Q.new_middle_other = 5;
+Q.industrial_psoe = 42;
+Q.industrial_pce = 14;
+Q.industrial_ceda = 5;
+Q.industrial_izq_rep = 12;
+Q.industrial_radical = 6;
+Q.industrial_monarchist = 2;
+Q.industrial_falange = 2;
+Q.industrial_other = 17;
 
-Q.rural_spd = 0;
-Q.rural_kpd = 0;
-Q.rural_z = 5;
-Q.rural_ddp = 0;
-Q.rural_dvp = 5;
-Q.rural_dnvp = 15;
-Q.rural_nsdap = 65;
-Q.rural_other = 5;
+Q.landless_psoe = 40;
+Q.landless_pce = 10;
+Q.landless_ceda = 8;
+Q.landless_izq_rep = 10;
+Q.landless_radical = 6;
+Q.landless_monarchist = 6;
+Q.landless_falange = 1;
+Q.landless_other = 19;
 
-Q.unemployed_spd = 20;
-Q.unemployed_kpd = 40;
-Q.unemployed_z = 0;
-Q.unemployed_ddp = 0;
-Q.unemployed_dvp = 0;
-Q.unemployed_dnvp = 0;
-Q.unemployed_nsdap = 50;
-Q.unemployed_other = 5;
+Q.smallholder_psoe = 10;
+Q.smallholder_pce = 2;
+Q.smallholder_ceda = 32;
+Q.smallholder_izq_rep = 10;
+Q.smallholder_radical = 10;
+Q.smallholder_monarchist = 16;
+Q.smallholder_falange = 2;
+Q.smallholder_other = 18;
 
-Q.catholics_spd = 10;
-Q.catholics_kpd = 5;
-Q.catholics_z = 60;
-Q.catholics_ddp = 0;
-Q.catholics_dvp = 5;
-Q.catholics_dnvp = 5;
-Q.catholics_nsdap = 10;
-Q.catholics_other = 5;
+Q.urban_middle_psoe = 12;
+Q.urban_middle_pce = 2;
+Q.urban_middle_ceda = 12;
+Q.urban_middle_izq_rep = 28;
+Q.urban_middle_radical = 12;
+Q.urban_middle_monarchist = 6;
+Q.urban_middle_falange = 3;
+Q.urban_middle_other = 25;
 
-Q.spd_r = 25;
-Q.kpd_r = 10;
-Q.z_r = 15;
-Q.ddp_r = 10;
-Q.dvp_r = 10;
-Q.dnvp_r = 14;
-Q.nsdap_r = 10;
-Q.other_r = 5;
+Q.unemployed_psoe = 34;
+Q.unemployed_pce = 15;
+Q.unemployed_ceda = 6;
+Q.unemployed_izq_rep = 10;
+Q.unemployed_radical = 5;
+Q.unemployed_monarchist = 3;
+Q.unemployed_falange = 2;
+Q.unemployed_other = 25;
+
+Q.catholic_psoe = 7;
+Q.catholic_pce = 1;
+Q.catholic_ceda = 42;
+Q.catholic_izq_rep = 6;
+Q.catholic_radical = 8;
+Q.catholic_monarchist = 20;
+Q.catholic_falange = 2;
+Q.catholic_other = 14;
 !}
 go-to: election_algorithm
 set-jump: post_election
 
 @post_election
 on-arrival: {!
-// set congress proportion to votes
-Q.spd_r = Q.spd_votes;
-Q.z_r = Q.z_votes;
-Q.kpd_r = Q.kpd_votes;
-Q.ddp_r = Q.ddp_votes;
-Q.dvp_r = Q.dvp_votes;
-Q.dnvp_r = Q.dnvp_votes;
-Q.nsdap_r = Q.nsdap_votes;
-Q.other_r = Q.other_votes;
-
-// The largest party can only be the NSDAP or the <span style="color: #c00000;">**SPD**</span>.
-Q.largest_party = 'SPD';
-if (Q.nsdap_r >= Q.spd_r && Q.nsdap_r >= Q.kpd_r) {
-    Q.largest_party = 'NSDAP';
-}
-if (Q.kpd_r >= Q.spd_r && Q.kpd_r >= Q.nsdap_r) {
-    Q.largest_party = 'KPD';
+// set congress proportion to votes (this harness has no adjustmentFactors/
+// bloc-bonus post-processing of its own -- run @post_election_1928 in
+// events/election_1928.scene.dry for the full seat-allocation pipeline)
+for (var party of Q.parties) {
+    Q[party + '_r'] = Q[party + '_votes'];
 }
 
-// coalitions
-Q.weimar_coalition = Q.spd_r + Q.ddp_r + Q.z_r - 3;
-Q.grand_coalition = Q.spd_r + Q.ddp_r + Q.z_r + Q.dvp_r;
-Q.bourgeois_coalition = Q.ddp_r + Q.z_r + Q.dvp_r + Q.other_r;
-Q.center_right_coalition = Q.z_r + Q.ddp_r + Q.dvp_r + Q.other_r + Q.dnvp_r;
-Q.right_coalition = Q.z_r + Q.dvp_r + Q.other_r + Q.dnvp_r;
-Q.far_right_coalition = Q.dnvp_r + Q.nsdap_r;
-Q.left_coalition = Q.spd_r + Q.kpd_r;
-// this is an absurd concept lol
-Q.united_front_coalition = Q.spd_r + Q.kpd_r + Q.z_r + Q.ddp_r - 3;
-Q.anti_democratic_coalition = Q.kpd_r + Q.nsdap_r;
-// aka everyone except nazi, kpd, dnvp
-Q.neo_weimar_coalition = Q.spd_r + Q.ddp_r + Q.z_r + Q.dvp_r + Q.other_r;
+Q.largest_party = 'PSOE';
+if (Q.ceda_r >= Q.psoe_r && Q.ceda_r >= Q.pce_r) {
+    Q.largest_party = 'CEDA';
+}
+if (Q.pce_r >= Q.psoe_r && Q.pce_r >= Q.ceda_r) {
+    Q.largest_party = 'PCE';
+}
+
+// Spanish coalition possibilities (a small, curated set -- see
+// docs/planning/BC_election_engine_execution_plan.md, C-5)
+Q.republican_socialist = Q.psoe_r + Q.izq_rep_r + Q.radical_r;
+Q.radical_ceda = Q.radical_r + Q.ceda_r;
+Q.popular_front = Q.psoe_r + Q.pce_r + Q.izq_rep_r;
+Q.national_bloc = Q.ceda_r + Q.monarchist_r + Q.falange_r;
+Q.workers_alliance = Q.psoe_r + Q.pce_r;
 !}
 
-The electoral system is essentially proportional, with the proportion of Reichstag seats roughly equal to the proportion of votes.
- 
-**Election results:**
+The electoral system combines proportional representation with the 1933 majoritarian bloc-list law: coalesced lists receive a seat bonus, solo lists a penalty (run through `events/election_1928.scene.dry`'s `@post_election_1928` for the full pipeline -- this harness only shows raw vote-to-seat before that adjustment).
 
-# 1928: 30, 1930: 25, 1932: 22
-SPD: [+ spd_r +]
+**Election results (raw vote share, pre-bloc-adjustment):**
 
-# 1928: 15, 1930: 15, 1932: 
-Z + BVP: [+ z_r +]
+PSOE: [+ psoe_r +]
 
-# 1928: 10, 1930: 13
-KPD: [+ kpd_r +]
+PCE: [+ pce_r +]
 
-# 1928: 5, 1930: 4 (as DStP)
-DDP: [+ ddp_r +]
+CEDA: [+ ceda_r +]
 
-# 1928: 9, 1930: 5
-DVP: [+ dvp_r +]
+Republican Left (IR): [+ izq_rep_r +]
 
-# 1928: 14, 1930: 7
-DNVP: [+ dnvp_r +]
+Radical Party (PRR): [+ radical_r +]
 
-# 1928: 3, 1930: 18
-NSDAP: [+ nsdap_r +]
+Monarchist: [+ monarchist_r +]
 
-# 1928: 9, 1930: 10
+Falange: [+ falange_r +]
+
 Other: [+ other_r +]
 
 **Potential coalitions:**
 
-Weimar Coalition (SPD + Z + DDP): [+ weimar_coalition +]
+Republican-Socialist (PSOE + IR + Radicals, 1931-style): [+ republican_socialist +]
 
-Grand Coalition (SPD + Z + BVP + DDP + DVP): [+ grand_coalition +]
+Radical-CEDA Bloc (1933-style): [+ radical_ceda +]
 
-Bourgeois Coalition (Z + BVP + DDP + DVP + Others): [+ bourgeois_coalition +]
+Popular Front (PSOE + PCE + IR, 1936-style): [+ popular_front +]
 
-Right-wing Coalition (Z + BVP + DVP + Others + DNVP): [+ right_coalition +]
+National Bloc (CEDA + Monarchist + Falange): [+ national_bloc +]
 
+Workers' Alliance (PSOE + PCE): [+ workers_alliance +]
