@@ -1,0 +1,12 @@
+title: 1936
+subtitle: A new year
+audio: shuffle music/communist/A_las_barricadas.ogg music/communist/workers_of_vienna_normalized.mp3
+on-arrival: {!
+Q.economic_growth += 1;
+!}
+tags: event
+view-if: year = 1936 and month = 1
+priority: 2
+max-visits: 1
+
+A new year begins. The Popular Front elections are set for February. After two years of the "Bienio Negro," the reunited left and its regionalist allies hope to reverse the rollback of the Republic's reforms. The right, meanwhile, grows increasingly convinced that only extra-parliamentary means can stop them.

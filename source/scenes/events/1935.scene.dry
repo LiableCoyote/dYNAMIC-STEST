@@ -1,0 +1,13 @@
+title: 1935
+subtitle: A new year
+on-arrival: {!
+// see post_event.scene.dry for changes.
+Q.economic_growth -= 1;
+
+!}
+tags: event
+view-if: year = 1935 and month = 1
+priority: 2
+max-visits: 1
+
+A new year begins. The Radical-CEDA governments of the "Bienio Negro" have rolled back much of the Republic's early reforms. Political tensions remain high after the October 1934 uprising in Asturias and Catalonia, and its brutal suppression by the army.
