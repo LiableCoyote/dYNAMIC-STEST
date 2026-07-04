@@ -1,22 +1,30 @@
 {
-  "name": "social_democracy_alternate_history",
-  "version": "0.11.1",
-  "description": "Building the game:",
+  "name": "social_democracy_spanish_republic",
+  "version": "0.1.0",
+  "description": "Social Democracy: The Spanish Republic — a total conversion of Social Democracy: An Alternate History, set in the Second Spanish Republic (1931-1936).",
   "main": "out/html/index.html",
   "scripts": {
-    "dendrynexus": "dendrynexus"
+    "dendrynexus": "dendrynexus",
+    "build": "dendrynexus make-html --pretty && cp out/game.json out/html/",
+    "serve": "npx --yes http-server out/html -p 8080 -c-1",
+    "smoke": "node scripts/smoke.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/originn0/dynamic_social_democracy.git"
+    "url": "git+https://github.com/LiableCoyote/dYNAMIC-STEST.git"
   },
-  "keywords": [],
-  "author": "Autumn Chen",
+  "keywords": [
+    "dendry",
+    "interactive-fiction",
+    "spanish-republic",
+    "history"
+  ],
+  "author": "Spanish Republic conversion authors — based on 'Social Democracy: An Alternate History' by Autumn Chen and the Dynamic Social Democracy contributors",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/originn0/dynamic_social_democracy/issues"
+    "url": "https://github.com/LiableCoyote/dYNAMIC-STEST/issues"
   },
-  "homepage": "https://github.com/originn0/dynamic_social_democracy",
+  "homepage": "https://github.com/LiableCoyote/dYNAMIC-STEST",
   "dependencies": {
     "dendrynexus": "github:originn0/dendrynexus",
     "parliament-svg": "^3.0.0"

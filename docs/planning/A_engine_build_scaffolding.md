@@ -4,6 +4,8 @@
 > **Size: S · Type: Reuse.** This is the foundation layer: it unblocks every other area but writes almost no game content.
 > **Decisions locked:** standalone total-conversion (own repo/build, not a `mod_loader` mod); game ends at the July 1936 coup.
 
+> **✅ EXECUTED.** All eight tasks (§6) are done. Renamed to *Social Democracy: The Spanish Republic* (pkg `social_democracy_spanish_republic`, new IFID `76CDC709-…`); `npm run build`/`smoke`/`serve` scripts + `scripts/smoke.js` added; CI split into build+smoke (all branches/PRs) and deploy (main only) on Node 20; asset folder scheme + placeholders + credits sections created. Verified end-to-end: clean build, smoke passes (5 checks), and headless Chromium renders the new title + start menu with no console errors. Upstream attribution to Autumn Chen / Dynamic Social Democracy preserved.
+
 ---
 
 ## 0. Objective & Scope
@@ -46,7 +48,7 @@ favicon.ico     img/         music/
 ```
 - `game.js` (~11 KB) is the author's **custom UI glue** (`main = function(dendryUI){…}`), not compiled content.
 - `index.html` references the generated `core.js` **and** the committed `game.js`. It carries the human-visible title.
-- **Open verification (do first):** confirm whether `make-html` overwrites `index.html`/`game.js` or preserves the committed shell. The gitignore pattern (ignores `core.js`, tracks `index.html`+`game.js`) strongly implies the shell is preserved — but confirm on a scratch build so we know whether title edits belong in a template or in the committed file.
+- **✅ RESOLVED (verified on a scratch build):** `make-html --pretty` **preserves the committed shell** — it overwrites only `core.js` and `jquery-1.11.1.min.js` (both gitignored) and leaves `index.html`/`game.js`/`game.css` byte-identical (md5-checked). So identity edits go **directly into the committed `index.html`**, no template hunt needed. (Note: the flag is `--pretty` as a direct arg; under `npm run` the `-- --pretty` form also works, but `npx dendrynexus make-html -- --pretty` misparses `--pretty` as a directory.)
 
 ### 1.3 Where the project identity lives (rename surface)
 | # | File | String(s) carrying old identity |
@@ -112,7 +114,7 @@ This makes the smoke test double as a **rename regression guard** and a **broken
 Adapt `.github/workflows/build.yaml`. Current workflow: on push to `main`, Node 16, `npm install`, build, copy `game.json`, deploy to Pages.
 
 Planned changes:
-1. **Node version:** bump `16` → an actively-supported LTS (20) unless a scratch build proves dendrynexus/parliament-svg pin Node 16. Verify before changing; note the result here.
+1. **Node version:** bump `16` → **20**. **✅ Verified:** `npm install` + `npm run build` + `npm run smoke` all succeed on **Node 22** locally (no Node-16 pin in dendrynexus/parliament-svg surfaced), so CI on Node 20 LTS is safe.
 2. **Build parity:** replace the inline build+copy steps with `npm run build` (§2.1) so local and CI are identical.
 3. **Add the smoke gate:** run `npm run smoke` after build, before the Pages upload — CI must fail on a broken/renamed-wrong build, not silently deploy it.
 4. **Branch model:** deploy trigger stays `push: branches: ["main"]`. Development happens on the feature branch per repo policy; `main` deploys. Add a **build-only (no-deploy) job** triggered on `pull_request` / feature-branch pushes so scaffolding is validated before it reaches `main`. (Pages deploy stays `main`-only to avoid clobbering the live URL.)
@@ -145,7 +147,7 @@ Execute as a single reviewable commit. **Do not** blind global-replace across th
 8. `changes.txt`: start a fresh changelog section for the conversion; keep prior history for provenance.
 
 ### 4.3 IFID handling (don't copy it)
-The `ifid` (`7FCDF039-…`) uniquely identifies the *original* work in the IF archive. A standalone derivative needs a **new UUID** in both `source/info.dry` and the `index.html` `ifiction:ifid` meta. Generate once (`uuidgen`), record it here, keep the two in sync (the §2.2 smoke test checks this).
+The `ifid` (`7FCDF039-…`) uniquely identifies the *original* work in the IF archive. A standalone derivative needs a **new UUID** in both `source/info.dry` and the `index.html` `ifiction:ifid` meta. **✅ Minted:** `76CDC709-E6BD-46FA-BA29-41E607DBD81A` — set in both files and kept in sync (the §2.2 smoke test enforces this).
 
 ### 4.4 Conventions to carry forward (so later areas stay consistent)
 - **Quality/variable names:** the `snake_case` `Q.*` convention (root.scene.dry) stays. New Spanish variables follow it (`cnt_strength`, `catalan_autonomy`). Documented in Area B, referenced here so scaffolding doesn't invent a competing style.

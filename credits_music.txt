@@ -1,5 +1,17 @@
 Music credits:
 
+= Spanish Republic conversion — music:
+
+New tracks (folders music/1931_1933, music/1933_1936, music/anarchist,
+music/republican) are credited here. RULE: no track lands in out/html/music/
+without a line stating a redistributable license, source URL, and attribution.
+Already present and reusable: "A Las Barricadas" (CNT, CC-BY-SA 3.0) and
+"Workers of Vienna", credited in the general list below.
+
+(further tracks added in Area K of the conversion roadmap)
+
+= Original (Weimar) set:
+
 Choir. English:  The Internationale in German. 19XX. https://www.youtube.com/watch?v=UXKr4HSPHT8, Wikimedia Commons, https://commons.wikimedia.org/wiki/File:Internationale-de.ogg. CC-BY-SA 4.0 https://creativecommons.org/licenses/by-sa/4.0/deed.en
 
 CNT. A Las Barricadas (Instrumental). 17 June 2014. http://www.cnt.es/, Wikimedia Commons, https://commons.wikimedia.org/wiki/File:A_las_barricadas_(Instrumental).ogg. CC-BY-SA 3.0 https://creativecommons.org/licenses/by-sa/3.0/deed.en

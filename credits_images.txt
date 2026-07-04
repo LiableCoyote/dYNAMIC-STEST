@@ -1,6 +1,14 @@
+= Images — Spanish Republic conversion:
+
+New images for the Spanish Republic conversion are credited here. RULE: no image
+lands in out/html/img/ (including img/es/**) without a line below stating a
+license that permits redistribution, plus source URL and attribution. Columns:
+file — creator — title/date — source URL — license.
+
+(none yet — assets are added in Area K of the conversion roadmap)
 
 
-= Images (general):
+= Images (general) — original (Weimar) set:
 
 map.jpg, map_2.jpg: Anonymous. Meyers Blitz-Lexikon. English:  scanned by User:LA2 in September 2005, Wikimedia Commons, https://commons.wikimedia.org/wiki/File:LA2-Blitz-0083.jpg. Accessed 3 Feb. 2024. Public Domain
 

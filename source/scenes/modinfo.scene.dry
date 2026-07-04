@@ -4,11 +4,13 @@ go-to: flavors
 @flavors
 new-page: true
 
-= Dynamic Social Democracy
+= Social Democracy: The Spanish Republic
+
+> **Total conversion — work in progress.** This project re-sets *Social Democracy: An Alternate History* in the Second Spanish Republic (1931–1936). The engine and systems are being adapted; much of the text below still describes the original Weimar setting and will be replaced. See the design docs under `docs/` for the conversion roadmap.
 
 I know you don't want to read allat, but please do, reading will make everything make sense.
 
-- @infotext: Dynamic Social Democracy (Highly recommended for new players)
+- @infotext: About this conversion (Highly recommended for new players)
 - @faq: Frequently Asked Questions
 - @paths: What are all the paths?
 - @changelog: Changelog + Future Updates!
