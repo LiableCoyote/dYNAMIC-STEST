@@ -86,6 +86,7 @@ The conversion's coherence depends on a defensible Weimar→Spain mapping. Propo
 Each area is a candidate for its own detailed Claude Code planning pass. Ordered roughly by dependency. **Size** = relative build effort (S/M/L/XL). **Type** = Reuse / Reweight / Rewrite / New.
 
 ### A. Engine, Build & Project Scaffolding — *Size S · Reuse*
+> 📄 **Expanded into a detailed plan:** [`planning/A_engine_build_scaffolding.md`](planning/A_engine_build_scaffolding.md)
 - Fork/duplicate repo, rename package (`social_democracy` → new id), update `info.dry`, `README`, `modinfo`, credits scaffolding.
 - Confirm `dendrynexus make-html` builds cleanly; set up a repeatable local build + smoke-test loop.
 - **Decided:** ships as a **standalone total-conversion** (own build/repo, full control of engine + assets), *not* as a mod via the existing `mod_loader`.
