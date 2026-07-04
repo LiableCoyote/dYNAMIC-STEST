@@ -15,6 +15,20 @@ for (var c of Q.classes) {
     }
 }
 
+// CNT-FAI abstention (docs/planning/BC_election_engine_execution_plan.md, C-4):
+// the anarcho-syndicalist movement is largely non-electoral. When it calls for
+// abstention (Q.anarchist_electoral_stance = 0, as in 1933), effective turnout
+// among the classes where it's strongest (industrial, landless) drops -- shrinking
+// those classes' weight in the overall electorate and indirectly favoring parties
+// strong elsewhere. When it calls for participation (1931, 1936), no penalty.
+var abstention_factor = 1;
+if (!Q.anarchist_electoral_stance) {
+    abstention_factor = 1 - (0.3 * Q.anarchist_strength / 100);
+}
+function classTurnoutWeight(c) {
+    return (c === 'industrial' || c === 'landless') ? Q[c] * abstention_factor : Q[c];
+}
+
 // 1. calculate support for each of the parties
 var total_support = 0;
 for (var party of Q.parties) {
@@ -25,11 +39,11 @@ for (var party of Q.parties) {
         if (Q.old_demographics) {
             // okay i'm pretty sure this is wrong, and the hard version is correct
             // basically this allows for "spillover" effects in other demographics.
-            // so you can campaign among say the workers and 
-            party_support += Q[c]*Q[c+'_'+party];
+            // so you can campaign among say the workers and
+            party_support += classTurnoutWeight(c)*Q[c+'_'+party];
             // However, there should be a cap on how much party support you can get in a certain demo.
         } else  {
-            party_support += Q[c]*Q[c+'_'+party+'_normalized'];
+            party_support += classTurnoutWeight(c)*Q[c+'_'+party+'_normalized'];
         }
     }
     Q[party + '_support'] = party_support;
