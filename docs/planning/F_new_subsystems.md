@@ -1,10 +1,135 @@
 # Plan: Area F — The Four New Spain-Specific Subsystems
 
-> **Session handoff.** 🔲 **APPROVED — NOT YET STARTED.** This is the detailed, deliberately
-> redundant execution plan for Area F, the largest area yet (four net-new subsystems, built
-> partly on broken substrate inherited from Areas B/C). No F-stage has been executed yet.
-> When execution begins, add an "Execution status" section at the top (mirroring
-> `E_party_landscape.md`) tracking exactly what's done, and flip the banner to ✅ as F-6 lands.
+> **Session handoff.** ✅ **Executed and verified.** F-0 through F-6 are all done. Build +
+> smoke green throughout; full verification sweep (grep, compiled-output scan, headless load,
+> and a standalone-Node "inert stub → live" check on all six of Area B's declared-inert axes)
+> passed. See "Execution status" for exact commits/findings and the July-1936 endgame-trigger
+> spec left for Area H.
+
+## Execution status
+
+**✅ DONE — F-0 through F-6.**
+- **F-0:** declared `Q.rural_policy` in `root.scene.dry` — read by 5 files but never
+  initialized anywhere, a latent bug present since the base game itself (undefined `+=`
+  silently produced `NaN`, permanently disabling every downstream gate).
+- **F-1 (militia/street-politics foundation):** rewrote all 6 dead `party_affairs` militia
+  cards onto the live Spanish militia slate — `reichsbanner.scene.dry` → **UGT Militia**
+  investment card, `iron_front.scene.dry` → **Alianza Obrera** coordination card,
+  `streetfighting.scene.dry` → UGT-vs-Falange/Requetés violence (gated on a new
+  self-contained militia-strength comparison, not the dead `far_right_force`),
+  `confronting_nazis.scene.dry` → "Confronting the Authoritarian Right" (regated on
+  `ceda_r`/`coup_progress`/`radicalization`, the same fix pattern as Area D's live-bug #2),
+  `weimar_rally.scene.dry` → **Republican Coordination** (regated on the live
+  `in_republican_socialist` flag instead of three simultaneously-dead vars),
+  `response_to_antisemitism.scene.dry` → retired with an inline flag (no Spanish equivalent
+  subject matter). Also cleaned up `rally.scene.dry`'s dead `sa_disrupt` subplot (flagged by
+  Area E) and replaced `status.scene.dry`'s broken "Distribution of Power" panel — which
+  depended on `post_event.scene.dry`'s dead force-computation block and rendered
+  `Prussian police: NaN%` in a live, reachable screen — with a self-contained computation
+  over the live militia/security-force vars. Declared two new root vars this stage needed
+  (`asalto_training`, `cnt_truce`) rather than let them silently NaN.
+- **F-2 (anarchism/CNT):** new `party_affairs/cnt_relations.scene.dry` (negotiate/
+  concessions/confront) wires `anarchist_electoral_stance` — which `election_algorithm.scene.dry`'s
+  C-4 mechanic already consumes to modulate turnout — and `anarchist_militancy`. New
+  `events/casas_viejas.scene.dry` (January 1933, self-contained, `max-visits: 1`) gives
+  `anarchist_insurrection` its first writer. Declared `cnt_relations_timer` and registered it
+  in **both** `Q.timers` and `Q.rubicon_timers` decrement arrays (missed the first array on
+  the initial pass — a card whose timer isn't registered in both fires once and then never
+  again, a different failure mode from `NaN` but the same root cause).
+- **F-3 (agrarian):** rewrote `government_affairs/agricultural_policy.scene.dry` as the IRA/
+  latifundio/braceros debate. The core fix: every effect line now writes to the live
+  `landless_psoe`/`landless_ceda`/etc. class-matrix rows instead of the phantom
+  `rural_spd`/`rural_nsdap`/`rural_other` variables — land reform had **zero effect on the
+  real demographic model** since Area B's rename until this fix. Fixed the
+  `agriculture_minister_party = "SPD"` gate (root.scene.dry sets it to `'PRRS'`, a coalition
+  partner's portfolio, not PSOE's — switched to `psoe_in_government`). Gave `rural_policy`
+  (F-0) its first coherent semantics.
+- **F-4 (regional autonomy):** new `government_affairs/catalan_affairs.scene.dry`
+  ("The Statute of Autonomy") replaces the 4 permanently-dead `prussian_affairs*.scene.dry`
+  cards (flagged superseded with an inline comment, not ported) — wires `catalan_autonomy`
+  (ratify/resist the Catalan Statute), a minimal Basque-statute option wiring
+  `basque_autonomy`, and a Catalonia-specific militia-ban option reusing the three
+  already-live `*_banned_catalonia` flags (picks whichever militia is strongest by
+  `strength*militancy`). Declared `catalan_affairs_timer` and registered it in both timer
+  arrays.
+- **F-5 (church-military-Africa/the coup):** rewrote `government_affairs/military_policy.scene.dry`
+  around Azaña's real officer-corps reform vs. the Africanista faction (Sanjurjo, Mola,
+  Franco, Goded) — fixed the `reichswehr_minister_party = "SPD"` gate (root.scene.dry sets it
+  to `'IR'`, Azaña's own party — switched to `psoe_in_government`) and retargeted
+  `reichswehr_loyalty/_strength/_militancy` onto the live `army_*` family **in this one file
+  only** (the other ~71 consumer files are flagged Area H debt). Wired `africa_army` so that
+  reform visibly increases Africanista disloyalty even as formal army loyalty improves. New
+  `government_affairs/religious_policy.scene.dry` ("The Church Question") wires
+  `church_relation`/`clerical_conflict` around the 1931 church-burning aftermath and
+  secularization. New `events/sanjurjada_1932.scene.dry` — a single self-contained,
+  date-gated stub (August 1932) nudging `coup_progress`/`africa_army` on the existing
+  escalating-counter shape, without touching or depending on the 53-file chain. Declared
+  `religious_policy_timer` and registered it in both timer arrays.
+- **F-6:** full verification sweep (see below); found and closed a gap where two of the six
+  target vars (`church_relation`, `basque_autonomy`) had a writer but no reader anywhere —
+  added a `church_relation`-tier flavor readout to `religious_policy.scene.dry` and a
+  `basque_autonomy >= 2` soft cap to `catalan_affairs.scene.dry`. Updated `CLAUDE.md` and the
+  design doc's §F. This file's status banner flipped to ✅.
+
+**Out of scope — flagged engine-scale debt (not fixed, per the plan's own scoping call):**
+1. **`post_event.scene.dry`'s dead force-computation (~290-316) and coalition-taxonomy
+   (~4900-5079) blocks** — both have been silently producing `NaN` every turn since Area B
+   (keyed on `prussian_police_*`/dead party letters that no longer exist). Area C-remnant/H
+   scale; F-1 routed around this entirely by computing its own self-contained force
+   comparison in `status.scene.dry` rather than reading these blocks' outputs.
+2. **The 53-file `coup_progress` event chain**, including the coup-trigger event itself
+   (`events/march_on_berlin.scene.dry`) — 100% Weimar content (Hindenburg, Prussia, SA/SH
+   bans, old party/class keys). Area H's whole domain. F-5's Sanjurjada stub writes to the
+   same counter using the same shape, but does not depend on or touch this chain.
+3. **The 72-file `reichswehr_*→army_*` rename** beyond `military_policy.scene.dry` (the one
+   file F-5 rewrote) — `reichswehr_loyalty/_strength/_militancy` are never initialized in
+   `root.scene.dry`, so every other consumer (the SA/SH ban-unban mechanic,
+   `foreign_policy.scene.dry`, `military_angry.scene.dry`, etc.) silently produces `NaN` on
+   first write. Area B-remnant/H scale.
+4. **The 4 `prussian_affairs*.scene.dry` files** — left in place with an inline flag noting
+   they're superseded by `catalan_affairs.scene.dry`, not deleted or ported (all four gate on
+   undefined vars and can never appear).
+5. **A newly-discovered, unrelated bug in `status.scene.dry`'s `@polls` section**: below the
+   already-correct "Projected election results" summary, a "Detailed results for each
+   demographic" block is 100% dead German content (`workers_spd_display`, `z_party_name`,
+   `dnvp`/`dnef`/`kvp`-formed toggles, etc.). This is an Area B/C-remnant election-display
+   bug, not part of Area F's militia/street-politics/subsystem scope — found during F-1's
+   grep sweep, flagged here rather than silently fixed.
+
+**The July-1936 endgame-trigger spec (for Area H):** F-5 deliberately does not build the
+coup's climax. The trigger needs a new event (analogous to `events/march_on_berlin.scene.dry`)
+gated on `coup_progress >= 10` (or `capital_strike_progress >= 10`, per the existing
+either/or design already declared in `root.scene.dry`'s comments), most naturally checked from
+the same yearly-tick or `post_event.scene.dry` mechanism the German version used. It should
+read `army_loyalty`/`africa_army` to determine how the coup unfolds (a swift military
+takeover if army loyalty is low and Africanista sentiment is high, vs. a botched/partial
+rising — mirroring the real divergence between the coup's success in some garrisons and its
+failure in others, which is what actually produced the Civil War rather than a clean
+takeover). This is Area H's to design and build; Area F only establishes the counter
+mechanics it would read.
+
+**Verification performed (not just "it compiles"):**
+- `npm run build && npm run smoke` green after every file.
+- Dead-var grep sweep across all 14 F-owned files (7 `party_affairs`, 4 `government_affairs`,
+  2 `events`, plus `status.scene.dry` and `root.scene.dry`) → **zero** unexpected hits.
+- German-term grep sweep → zero unexpected hits (only the kept-generic `weimar_rally` scene
+  id/timer/asset-filename and the `reichswehr_goal_completed` internal tracking flag,
+  explicitly out of this stage's renaming scope).
+- Compiled-output scan of `out/game.json` across all 15 F-owned scene-id prefixes (91
+  sub-scenes) → the same accounted-for exceptions (the flagged dead `prussian_affairs.*`
+  files and the `weimar_rally` scene-id string), zero unexpected residue.
+- Headless Chromium load (`--dump-dom`) → no `Uncaught`/`ReferenceError`/`TypeError`.
+- **Standalone Node behavioral checks** for every stage that wrote new math or wired a
+  previously-inert var (F-1 through F-5): seeded `Q` with real Spanish start values, exercised
+  every reachable branch, asserted no `NaN` writes and directional correctness (e.g. the
+  militia-strength comparison formulas sum to ~100%, banning the strongest militia in
+  Catalonia correctly identifies which one is strongest, land reform now moves the live
+  demographic rows, `coup_progress` composes across `military_policy` + the Sanjurjada stub
+  without runaway).
+- **F-6's consolidated final check:** all six of Area B's declared-inert axes
+  (`anarchist_insurrection`, `catalan_autonomy`, `basque_autonomy`, `church_relation`,
+  `clerical_conflict`, `africa_army`) confirmed to have at least one writer and one reader —
+  the concrete "did this stage actually do something" bar the plan set at the outset.
 
 > **Audience: a Sonnet-class executor working cold.** This is the largest, least-precedented
 > area yet — four net-new subsystems with no German base-game analogue, built partly on a
