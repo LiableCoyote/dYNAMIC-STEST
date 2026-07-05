@@ -1,0 +1,11 @@
+title: Casas Viejas
+subtitle: An anarchist rising, and its suppression
+tags: event
+view-if: year = 1933 and month <= 2 and anarchist_militancy >= 0.4 and anarchist_insurrection == 0
+priority: 2
+max-visits: 1
+on-arrival: anarchist_insurrection = 1; coup_progress += 1; radicalization += 1; industrial_pce += 2; landless_pce += 3; industrial_psoe -= 1; landless_psoe -= 2; anarchist_militancy += 0.1
+
+In the small Andalusian village of Casas Viejas, CNT-FAI militants have declared local communism and raised the black-and-red flag, part of a wider - though scattered - anarchist rising against the Republic. The Assault Guard has been sent in to suppress it, with brutal results: several villagers are massacred after surrendering.
+
+The massacre is a political catastrophe for the government we are part of. The Caballerista left and the CNT's own base are radicalized against us, while the authoritarian right seizes on the violence as proof the Republic cannot maintain order.

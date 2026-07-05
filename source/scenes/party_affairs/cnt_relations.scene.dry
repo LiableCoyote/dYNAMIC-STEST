@@ -1,0 +1,45 @@
+title: The CNT-FAI
+new-page: true
+is-card: true
+tags: party_affairs
+view-if: cnt_relations_timer <= 0
+on-arrival: month_actions += 1; cnt_relations_timer = 6
+card-image: img/poster_1.png
+#subtitle: The anarcho-syndicalist movement - too large to ignore, impossible to recruit.
+
+= The CNT-FAI
+
+The <span style="color: #333333;">**CNT-FAI**</span> is Spain's other mass workers' movement - a large anarcho-syndicalist confederation, contemptuous of parliamentary politics and independent of the <span style="color: #c00000;">**PSOE**</span>. We cannot recruit them, but we cannot ignore them either: whether they call for their members to vote or to abstain shapes the outcome of every election.
+
+Current CNT-FAI militancy: [+ anarchist_militancy : militancy +]. [? if anarchist_electoral_stance : They are presently calling for participation in elections. ?][? if not anarchist_electoral_stance : They are presently calling for abstention from elections. ?]
+
+- @negotiate: Negotiate with moderate CNT figures for electoral participation.
+- @concessions: Offer labor concessions to ease tensions with the CNT rank and file.
+- @confront: Confront the CNT's growing militancy directly.
+- @ignore: Leave the CNT to its own affairs.
+- @easy_discard
+
+@negotiate
+subtitle: -1 resources
+choose-if: resources >= 1 and anarchist_militancy <= 0.6
+unavailable-subtitle: [? if resources < 1: Not enough resources. ?][? if anarchist_militancy > 0.6: The CNT is too militant right now to consider participation. ?]
+on-arrival: resources -= 1; anarchist_electoral_stance = 1; anarchist_militancy -= 0.05; reformist_dissent += 3
+
+Moderate voices within the CNT - who see some value in using the ballot alongside direct action - are persuaded to call for participation rather than abstention. The Prietistas are uneasy about legitimizing an organization that rejects parliamentary politics.
+
+@concessions
+subtitle: -1 resources
+choose-if: resources >= 1
+unavailable-subtitle: Not enough resources.
+on-arrival: resources -= 1; anarchist_militancy -= 0.08; industrial_psoe += 2*(1-dissent); landless_psoe += 2*(1-dissent); left_dissent += 3
+
+We push for concessions to organized labor generally - wages, hours, land access - that ease the pressure driving CNT militancy, even if the credit does not accrue to us alone.
+
+@confront
+on-arrival: anarchist_militancy += 0.1; anarchist_electoral_stance = 0 if anarchist_militancy >= 0.7; left_dissent += 5; pce_relation += 2
+
+We denounce the CNT's rejection of organized politics and compete openly for the loyalty of the industrial and landless working class. The confrontation only hardens CNT militancy, and further militancy risks pushing them toward abstention at the next election. [? if anarchist_militancy >= 0.7: The CNT leadership has hardened its line and now calls for abstention. ?]
+
+@ignore
+
+We have more pressing concerns than the CNT-FAI for now.

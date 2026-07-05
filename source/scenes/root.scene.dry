@@ -662,7 +662,7 @@ Q.timers = ['advisor_action', 'confronting_nazis', 'crisis_program',
     'iron_front', 'media', 'enemies',
     'party_organizations', 'rally', 'reichsbanner',
     'shuffle_leadership', 'streetfighting', 'peoples_party',
-    'party_disunity',
+    'party_disunity', 'cnt_relations',
     // govt
     'agricultural_policy', 'domestic_enemies', 'fiscal_policy',
     'foreign_policy', 'judiciary', 'labor_affairs', 'military_policy',
@@ -688,7 +688,7 @@ Q.rubicon_timers = ['advisor_action', 'confronting_nazis', 'crisis_program',
     'iron_front', 'media', 'enemies',
     'party_organizations', 'rally', 'reichsbanner',
     'shuffle_leadership', 'streetfighting', 'peoples_party',
-    'party_disunity',
+    'party_disunity', 'cnt_relations',
     // govt
     'agricultural_policy', 'domestic_enemies', 'fiscal_policy',
     'foreign_policy', 'judiciary', 'labor_affairs', 'military_policy',
@@ -709,6 +709,7 @@ Q.rubicon_timers = ['advisor_action', 'confronting_nazis', 'crisis_program',
     'campaigning', 'dsu_policy'];
 Q.advisor_action_timer = 0;
 // party affairs timers
+Q.cnt_relations_timer = 0;
 Q.confronting_nazis_timer = 0;
 Q.crisis_program_timer = 0;
 Q.fundraising_timer = 0;
