@@ -5,73 +5,65 @@ tags: party_affairs
 view-if: rally_timer <= 0
 on-arrival: month_actions += 1; rally_timer = 6 if next_election_time - time > 6 and not (year == 1928 and month == 1); rally_timer = 2 if (year == 1928 and month == 1) or (next_election_time - time <= 6)
 card-image: img/protest.jpg
-# The rally-disruption subplot below (sa_force/sa_banned/rb_strength/prussia_leader) is
-# the German street-violence mechanic; its Spanish replacement (UGT militia vs.
-# Falange/requeté violence) is Area F's job. Its gating vars are uninitialized in the
-# Spanish schema, so `sa_disrupt` never fires today - left in place as documented debt
-# rather than silently deleted, since Area F may want to graft its new mechanic onto
-# this same routing point.
-go-to: main_rally; sa_disrupt if sa_force > 25 and not sa_banned and not return_to_normalcy
+go-to: main_rally; sa_disrupt if falange_militia_strength*falange_militia_militancy > 25 and not falange_militia_banned and not return_to_normalcy
 
 @sa_disrupt
 
-The <span style="color: #7A3C00;">Nazi</span> <span style="color: #7A3C00;">**SA**</span> has disrupted our rally! Their street troops are preventing us from meeting.
+The <span style="color: #7A3C00;">**Falange**</span> has disrupted our rally! Their street squads are preventing us from meeting.
 
-- @police_protect: Call the police to protect our rally.
-- @rb_protect: Use the Reichsbanner to protect our rally.
-- @both_protect: The police and Reichsbanner should work together to protect our rally.
+- @police_protect: Call the Guardia de Asalto to protect our rally.
+- @rb_protect: Use the militia to protect our rally.
+- @both_protect: The Guardia de Asalto and the militia should work together to protect our rally.
 - @cancel: Cancel the rally.
 
 @police_protect
-view-if: prussia_leader = "Braun" or prussia_leader = "Rosenfeld"
-on-arrival: police_protect_success = prussian_police_loyalty * prussian_police_militancy * prussian_police_strength*2 - sa_militancy*sa_strength;
+on-arrival: police_protect_success = asalto_loyalty * asalto_militancy * asalto_strength*2 - falange_militia_militancy*falange_militia_strength;
 go-to: police_protect_win if police_protect_success >= 0; police_protect_lose if police_protect_success < 0
 
 @police_protect_win
 go-to: main_rally
 
-The police successfully protected our rally, so it can go ahead as usual.
+The Guardia de Asalto successfully protected our rally, so it can go ahead as usual.
 
 @police_protect_lose
-on-arrival: workers_nsdap += 3; strife += 1
+on-arrival: industrial_falange += 3; strife += 1
 
-Unfortunately, the police were unable or unwilling to hold back the <span style="color: #7A3C00;">**SA**</span> mob. The <span style="color: #7A3C00;">Nazis</span> have won this show of strength.
+Unfortunately, the Guardia de Asalto were unable or unwilling to hold back the <span style="color: #7A3C00;">**Falange**</span> mob. The <span style="color: #7A3C00;">Falangists</span> have won this show of strength.
 
 @rb_protect
-on-arrival: rb_success = rb_strength*rb_militancy - sa_strength*sa_militancy; strife += 1
+on-arrival: rb_success = ugt_militia_strength*ugt_militia_militancy - falange_militia_strength*falange_militia_militancy; strife += 1
 go-to: rb_protect_win if rb_success >= 0; rb_protect_lose if rb_success < 0
 
 @rb_protect_win
 go-to: main_rally
 
-The Reichsbanner has successfully protected our rally against the <span style="color: #7A3C00;">**SA**</span>! Our meeting can go ahead as usual.
+The militia has successfully protected our rally against the <span style="color: #7A3C00;">**Falange**</span>! Our meeting can go ahead as usual.
 
 @rb_protect_lose
-on-arrival: workers_nsdap += 3; rb_strength -= 50
+on-arrival: industrial_falange += 3; ugt_militia_strength -= 50
 
-Unfortunately, the Reichsbanner was not able to hold back the <span style="color: #7A3C00;">**SA**</span> mob. The <span style="color: #7A3C00;">Nazis</span> have won this show of strength.
+Unfortunately, the militia was not able to hold back the <span style="color: #7A3C00;">**Falange**</span> mob. The <span style="color: #7A3C00;">Falangists</span> have won this show of strength.
 
 @both_protect
-view-if: prussia_leader = "Braun" or prussia_leader = "Rosenfeld"
-choose-if: prussian_police_training > 0
-unavailable-subtitle: The loyal sections of the police have never coordinated with the Reichsbanner before.
-on-arrival: rb_success = rb_strength*rb_militancy - sa_strength*sa_militancy + prussian_police_loyalty*prussian_police_militancy*prussian_police_strength*2; strife += 1
+choose-if: asalto_training > 0
+unavailable-subtitle: The loyal sections of the Guardia de Asalto have never coordinated with the militia before.
+on-arrival: rb_success = ugt_militia_strength*ugt_militia_militancy - falange_militia_strength*falange_militia_militancy + asalto_loyalty*asalto_militancy*asalto_strength*2; strife += 1
 go-to: both_protect_win if rb_success >= 0; both_protect_lose if rb_success < 0
 
 @both_protect_win
 go-to: main_rally
 
-The police and Reichsbanner have successfully protected our rally against the <span style="color: #7A3C00;">**SA**</span>! Our meeting can go ahead as usual.
+The Guardia de Asalto and the militia have successfully protected our rally against the <span style="color: #7A3C00;">**Falange**</span>! Our meeting can go ahead as usual.
 
 @both_protect_lose
-on-arrival: workers_nsdap += 3; rb_strength -= 50
+on-arrival: industrial_falange += 3; ugt_militia_strength -= 50
 
-Unfortunately, the police and Reichsbanner were not able to hold back the <span style="color: #7A3C00;">**SA**</span> mob. The <span style="color: #7A3C00;">Nazi</span> have won this show of strength.
+Unfortunately, the Guardia de Asalto and the militia were not able to hold back the <span style="color: #7A3C00;">**Falange**</span> mob. The <span style="color: #7A3C00;">Falangists</span> have won this show of strength.
 
 @cancel
-on-arrival: workers_nsdap += 3;
+on-arrival: industrial_falange += 3;
 
-The <span style="color: #7A3C00;">**SA**</span> have won this show of strength.
+The <span style="color: #7A3C00;">**Falange**</span> have won this show of strength.
 
 @main_rally
 

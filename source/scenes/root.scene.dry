@@ -179,6 +179,8 @@ Q.guardia_civil_loyalty = 0.3;
 Q.asalto_strength = 40;
 Q.asalto_militancy = 2;
 Q.asalto_loyalty = 0.7;
+Q.asalto_training = 0; // read by party_affairs/streetfighting.scene.dry, rally.scene.dry (Area F)
+Q.cnt_truce = 0; // UGT-CNT militia truce flag; read by party_affairs/streetfighting.scene.dry (Area F)
 
 // The Spanish Army. army_loyalty is the central input to the July-1936 coup clock.
 Q.army_strength = 100;

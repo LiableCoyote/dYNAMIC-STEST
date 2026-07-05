@@ -224,6 +224,33 @@ Q.ugt_militia_strength_2 = Q.ugt_militia_strength.toFixed(1);
 Q.cnt_militia_strength_2 = Q.cnt_militia_strength.toFixed(1);
 Q.requetes_strength_2 = Q.requetes_strength.toFixed(1);
 Q.falange_militia_strength_2 = Q.falange_militia_strength.toFixed(1);
+
+// Self-contained "Distribution of Power" computation (Area F, F-1). Deliberately does NOT
+// read post_event.scene.dry's dead prussia_force/far_right_force/etc. aggregate (that block
+// has been producing NaN since Area B - see docs/planning/F_new_subsystems.md) - this is an
+// independent calculation over the live militia/security-force vars only.
+Q.left_force = Q.ugt_militia_strength * Q.ugt_militia_militancy;
+Q.right_force = Q.falange_militia_strength * Q.falange_militia_militancy + Q.requetes_strength * Q.requetes_militancy;
+Q.cnt_force = Q.cnt_militia_strength * Q.cnt_militia_militancy;
+Q.state_force = Q.asalto_strength * Q.asalto_loyalty + Q.guardia_civil_strength * Q.guardia_civil_loyalty;
+var totalForce = Q.left_force + Q.right_force + Q.cnt_force + Q.state_force;
+if (totalForce > 0) {
+    Q.left_force_pct = ((Q.left_force / totalForce) * 100).toFixed(1);
+    Q.right_force_pct = ((Q.right_force / totalForce) * 100).toFixed(1);
+    Q.cnt_force_pct = ((Q.cnt_force / totalForce) * 100).toFixed(1);
+    Q.state_force_pct = ((Q.state_force / totalForce) * 100).toFixed(1);
+} else {
+    Q.left_force_pct = "0.0"; Q.right_force_pct = "0.0"; Q.cnt_force_pct = "0.0"; Q.state_force_pct = "0.0";
+}
+if (Q.left_force >= Q.right_force && Q.left_force >= Q.cnt_force && Q.left_force >= Q.state_force) {
+    Q.streets_controlled_by = "the Republican left (UGT Militia)";
+} else if (Q.right_force >= Q.cnt_force && Q.right_force >= Q.state_force) {
+    Q.streets_controlled_by = "the authoritarian right (Falange/Requetés)";
+} else if (Q.cnt_force >= Q.state_force) {
+    Q.streets_controlled_by = "the CNT-FAI";
+} else {
+    Q.streets_controlled_by = "the forces of the state";
+}
 !}
 
 = Paramilitaries
@@ -244,31 +271,23 @@ Q.falange_militia_strength_2 = Q.falange_militia_strength.toFixed(1);
 
 <span style="color: #14322a;">**Falange Militia**</span> Militarization: [+ falange_militia_militancy : militancy +]
 
-[? if year >= 1930 and not streetfighting_joever: <h1>Distribution of Power</h1> ?]
+<h1>Distribution of Power</h1>
 
-[? if year >= 1930 and not streetfighting_joever: <h4>[? if not kpd_truce: <span style="color: #000000;">Dem</span><span style="color: #DD0000;">ocra</span><span style="color: #FFCC00;">tic</span>?][? if kpd_truce: Anti-<span style="color: #7A3C00;">Fascist</span>?] strength: [+ democracy_force +]%</h4>?]
+<h4><span style="color: #c00000;">Republican left</span> strength: [+ left_force_pct +]%</h4>
 
-[? if year >= 1930 and not streetfighting_joever: <span style="color: #c00000;">**Reichsbanner**</span>: [+ rb_force +]%?]
+<span style="color: #700000;">**UGT Militia**</span>: [+ left_force_pct +]%
 
-[? if year >= 1930 and not streetfighting_joever and prussia_leader != "Papen" and prussia_leader != "Schleicher" and prussia_leader != "Strasser": <b>Prussian police: [+ prussia_force +]%</b>?]
+<h4><span style="color: #003755;">Authoritarian right</span> strength: [+ right_force_pct +]%</h4>
 
-[? if year >= 1930 and not streetfighting_joever and kpd_truce: <span style="color: #8B0000;">**RFB**</span>: [+ rfb_force +]%?]
+<span style="color: #7A3C00;">**Falange**</span>/<span style="color: #2E3B6E;">**Requetés**</span>: [+ right_force_pct +]%
 
-[? if year >= 1930 and not streetfighting_joever: <h4><span style="color: #7A3C00;">Far</span>-<span style="color: #3E88B3;">right</span> strength: [+ far_right_force +]%</h4>?]
+<h4><span style="color: #333333;">**CNT-FAI**</span> strength: [+ cnt_force_pct +]%</h4>
 
-[? if year >= 1930 and not streetfighting_joever: <span style="color: #7A3C00;">**SA**</span>: [+ sa_force +]%?]
+<h4><span style="color: #BFC8CC;">State</span> strength: [+ state_force_pct +]%</h4>
 
-[? if year >= 1930 and not streetfighting_joever: <span style="color: #3E88B3;">**Stahlhelm**</span>: [+ sh_force +]%?]
+<b>Guardia de Asalto/Guardia Civil: [+ state_force_pct +]%</b>
 
-[? if year >= 1930 and not streetfighting_joever and not kpd_truce: <span style="color: #8B0000;">**RFB**</span>: [+ rfb_force +]%?]
-
-[? if year >= 1930 and not streetfighting_joever and (prussia_leader == "Papen" or prussia_leader == "Schleicher" or prussia_leader == "Strasser") or reichswehr_street: <h4><span style="color: #BFC8CC;">**State**</span> strength: [+ state_force +]%</h4>?]
-
-[? if year >= 1930 and not streetfighting_joever and prussia_leader == "Papen" or prussia_leader == "Schleicher" or prussia_leader == "Strasser": <b>Prussian police: [+ prussia_force +]%</b>?]
-
-[? if year >= 1930 and not streetfighting_joever and reichswehr_street: <b>Reichswehr Gendarmerie: [+ reichswehr_force +]%</b>?]
-
-[? if year >= 1930 and not streetfighting_joever: Currently, the streets are [? if far_right_paramilitary and rfb_force < far_right_force:[? if far_right_paramilitary_highest: fully controlled by the <span style="color: #7A3C00;">far</span>-<span style="color: #3E88B3;">right</span>?][? if far_right_paramilitary_high: dominated by the <span style="color: #7A3C00;">far</span>-<span style="color: #3E88B3;">right</span>?][? if far_right_paramilitary_med: controlled by the <span style="color: #7A3C00;">far</span>-<span style="color: #3E88B3;">right</span>?][? if far_right_paramilitary_low: in the slight control of the <span style="color: #7A3C00;">far</span>-<span style="color: #3E88B3;">right</span>?][? if sa_paramilitary:, mainly by the violent <span style="color: #7A3C00;">**SA**</span>?]?][? if rfb_force >= far_right_force and far_right_paramilitary: controlled by the <span style="color: #700000;">**RFB**</span>?][? if democracy_paramilitary and rfb_force < democracy_force:[? if democracy_paramilitary_highest: fully controlled by the <span style="color: #000000;">repu</span><span style="color: #DD0000;">bli</span><span style="color: #FFCC00;">cans</span>?][? if democracy_paramilitary_high: dominated by the <span style="color: #000000;">repu</span><span style="color: #DD0000;">bli</span><span style="color: #FFCC00;">cans</span>?][? if democracy_paramilitary_med: controlled by the <span style="color: #000000;">repu</span><span style="color: #DD0000;">bli</span><span style="color: #FFCC00;">cans</span>?][? if democracy_paramilitary_low: in the slight control of the <span style="color: #000000;">repu</span><span style="color: #DD0000;">bli</span><span style="color: #FFCC00;">cans</span>?]?][? if rfb_force >= democracy_force and democracy_paramilitary: controlled by the <span style="color: #700000;">**RFB**</span>?][? if state_paramilitary:[? if state_paramilitary_highest: fully controlled by the <span style="color: #BFC8CC;">**State**</span>?][? if state_paramilitary_high: dominated by the <span style="color: #BFC8CC;">**State**</span>?][? if state_paramilitary_med: controlled by the <span style="color: #BFC8CC;">**State**</span>?][? if state_paramilitary_low: in the slight control of the <span style="color: #BFC8CC;">**State**</span>?]?].?]
+Currently, the streets are dominated by [+ streets_controlled_by +].
 
 
 = Official military/paramilitaries
