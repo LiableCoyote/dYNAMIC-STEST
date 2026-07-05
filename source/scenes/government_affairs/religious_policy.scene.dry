@@ -1,0 +1,47 @@
+title: The Church Question
+new-page: true
+is-card: true
+tags: govt_affairs, cabinet
+on-arrival: religious_policy_timer += 6; month_actions += 1
+view-if: psoe_in_government = 1 and religious_policy_timer <= 0
+card-image: img/poster_2.jpg
+#subtitle: Secularization, the aftermath of the 1931 church burnings, and the Church as a political actor.
+
+= The Church Question
+
+The Republic was born amid church burnings in May 1931, and the Constitution's secularizing articles - ending state salaries for clergy, expelling the Jesuits, secularizing education - have made the Catholic Church one of the Republic's most determined enemies. The <span style="color: #003755;">**CEDA**</span> has built its mass base substantially on defense of the Church. How should we handle religious policy?
+
+- @secularize_schools: Press ahead with secular, state-run education.
+- @moderate: Seek a modus vivendi - enforce the Constitution without provocation.
+- @condemn_violence: Publicly condemn anticlerical violence and church burnings.
+- @tolerate_violence: Decline to spend political capital defending the Church.
+- @root: No change to religious policy for now.
+- @easy_discard
+- @cancel_advisor_action
+
+@secularize_schools
+subtitle: -1 budget
+choose-if: budget >= 1
+unavailable-subtitle: We do not have the budget.
+on-arrival: budget -= 1; clerical_conflict += 1; church_relation -= 5; ceda_relation -= 5; left_strength += 3; left_dissent -= 3; democratization += 1
+
+We press ahead with building secular schools to replace the religious orders' near-monopoly on education. The Caballerista left and Besteiristas are pleased; the <span style="color: #003755;">**CEDA**</span> denounces us as persecutors of the faith, and the Church hierarchy grows more implacably hostile.
+
+@moderate
+on-arrival: church_relation += 3*(1-dissent); clerical_conflict -= 1 if clerical_conflict >= 1; reformist_dissent -= 2; left_dissent += 2
+
+We enforce the Constitution's secularizing articles without seeking further confrontation, hoping to avoid deepening the conflict. The Prietistas approve of the restraint; the Caballerista left considers it a missed opportunity.
+
+@condemn_violence
+choose-if: clerical_conflict >= 1
+unavailable-subtitle: There has been no notable anticlerical violence to respond to yet.
+on-arrival: church_relation += 5*(1-dissent); clerical_conflict -= 1; left_dissent += 5; reformist_dissent -= 3
+
+We publicly condemn the burning of churches and convents, insisting the Republic's quarrel is with clerical political power, not with the Catholic faith itself. This eases tensions with the Church but draws accusations of hypocrisy from the anticlerical left of our own party.
+
+@tolerate_violence
+choose-if: clerical_conflict >= 1
+unavailable-subtitle: There has been no notable anticlerical violence to respond to yet.
+on-arrival: church_relation -= 4*(1-dissent); clerical_conflict += 1; left_strength += 2; ceda_relation -= 3
+
+We decline to spend political capital defending an institution most of our base regards as an enemy of the Republic. The Church hierarchy and the <span style="color: #003755;">**CEDA**</span> take our silence as confirmation of our hostility.

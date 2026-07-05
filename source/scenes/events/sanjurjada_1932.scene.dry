@@ -1,0 +1,11 @@
+title: The Sanjurjada
+subtitle: General Sanjurjo's rising against the Republic
+tags: event
+view-if: year = 1932 and month >= 6 and month <= 9 and (africa_army >= 1 or army_loyalty <= 0.2)
+priority: 2
+max-visits: 1
+on-arrival: coup_progress += 2; africa_army += 1; army_loyalty -= 0.05 if army_loyalty > 0; radical_relation += 2; ceda_relation += 2; pro_republic += 3*(1-dissent)
+
+General José Sanjurjo, dismissed as head of the Guardia Civil after showing too much sympathy for the old order, has risen in revolt in Seville, denouncing the government's military and religious reforms. The rising is poorly coordinated and collapses within a day - Sanjurjo flees across the Portuguese border - but it is the first open sign that a faction of the officer corps is willing to move against the Republic by force.
+
+The government's decisive response earns some credit among republicans, but the Africanista officers who quietly sympathized with Sanjurjo - among them Mola, Franco, and Goded - draw a lesson: next time, they will prepare more carefully.
