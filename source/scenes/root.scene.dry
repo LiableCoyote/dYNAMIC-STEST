@@ -603,6 +603,9 @@ Q.welfare = 0;
 // level of support for farmers
 Q.agricultural_policy = 0;
 Q.land_reform = 0;
+// cumulative land-reform actions taken; read by campaigning.scene.dry, peoples_party*.scene.dry,
+// advisors/baade.scene.dry, and government_affairs/agricultural_policy.scene.dry (Area F)
+Q.rural_policy = 0;
 // works-creation programs (i.e. WTB-plan) - how much have they implemented?
 Q.works_program = 0;
 Q.wtb_implemented = 0;
