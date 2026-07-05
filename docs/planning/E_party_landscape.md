@@ -1,10 +1,83 @@
 # Plan: Area E — Political Landscape (Parties, Leaders & Relations)
 
-> **Session handoff. 🔲 APPROVED — NOT YET STARTED.** This is the detailed, deliberately
-> redundant execution plan for Area E, written for a Sonnet-class agent to complete cold.
-> No E-stage has been executed yet. When execution begins, add an "Execution status" section
-> at the top (mirroring `D_faction_semantics.md`) tracking exactly what's done, and flip the
-> banner to ✅ as E-6 lands.
+> **Session handoff.** ✅ **Executed and verified.** E-1 through E-6 are all done, including
+> the two scope-boundary calls E-3 had to make mid-execution (see "Execution status" below).
+> Build + smoke green throughout; full verification sweep (grep, compiled-output scan,
+> headless load, standalone-Node behavioral spot-check) passed. See "Execution status" for
+> exact commits/findings.
+
+## Execution status
+
+**✅ DONE — E-1 through E-6.**
+- **E-1:** `inter_party_relationships.scene.dry` fully rebuilt around the real Spanish party
+  geometry (Republican Left/Radical Party/CEDA/PCE/monarchists/Falange), branching on the
+  live national coalition-state flags (`in_republican_socialist`, `in_radical_ceda`,
+  `in_popular_front`, `in_workers_alliance`) instead of hardcoded German chancellor-name
+  checks. The `wacky_weimar` easter-egg (DNVP "wholesome"/Harzburg-Front apparatus + the
+  German-splinter parliament-SVG block) was stripped rather than ported.
+- **E-2:** `enemies.scene.dry` rebuilt around Spanish opponents (the combined anti-Republican
+  extremes, the authoritarian right, the Falange alone, the PCE alone, the republican
+  parties). Also fixed a `view-if: year <= 1930` that made the card permanently unreachable
+  in a game starting in 1931 (same bug class as Area D's `neorevisionism.scene.dry` find) →
+  widened to `year <= 1933`.
+- **E-3:** the 7 generic party-ops cards (`campaigning`, `media`, `fundraising`,
+  `party_organizations`, `rally`, `international_relations`, `crisis_program`) had the
+  rename maps applied and German prose de-Germanized. Two files turned out more entangled
+  with the militia subsystem than the plan anticipated — see "Findings during execution."
+- **E-4:** `library.scene.dry`'s `@demographics` (six German class paragraphs → the six live
+  Spanish class-matrix rows, dropping "Jews" — no Spanish equivalent) and `@parties` (full
+  German splinter-party roster → the eight Spanish parties) rewritten. `@government` and
+  `@weimar_timeline` deliberately left untouched (Area H/L timeline debt, per the plan).
+- **E-5:** `peoples_party.scene.dry` + `peoples_party_campaigning.scene.dry` reframed as the
+  PSOE *obrerismo*-vs-broadening debate (Prietista/anti-fascist-mobilization vs.
+  Caballerista/Besteirista), mechanic unchanged. Achievement id (`volkspartei`) kept — its
+  display text is Area K/L's job.
+- **E-6:** full verification sweep run (see "Verification performed" below); `CLAUDE.md` and
+  the design doc's §E updated; this file's status banner flipped to ✅.
+
+**Findings during execution (scope calls made, not pre-decided in the plan):**
+1. **`rally.scene.dry`'s SA-disruption/police-protection subplot** (`sa_force`, `rb_strength`,
+   `prussia_leader`, `prussian_police_*`) turned out to be far more entangled with the
+   paramilitary/militia subsystem than the plan anticipated — this card wasn't on the
+   deferred-paramilitary list, but its disruption mechanic clearly is one. All of its gating
+   vars are uninitialized in the Spanish schema (confirmed via `root.scene.dry` grep), so the
+   subplot is **already dead code** (never fires) — left untouched with an inline `#`-comment
+   flagging it as Area F debt, rather than silently deleted or redesigned.
+2. **`party_organizations.scene.dry`'s `@rb`/`@youth`** and **`international_relations.scene.dry`'s
+   `@austria`** reach into the same militia space, but their target vars (`rb_strength`,
+   `rb_militancy`) have an obvious live replacement already provisioned in `root.scene.dry`
+   (`ugt_militia_strength`, `ugt_militia_militancy` — with a comment there noting "the full
+   Spanish militia landscape is refined in Area F"). Swapped these three options onto the live
+   vars — a variable-target fix using pre-existing keys, not new subsystem design, so it stayed
+   in scope.
+3. **`crisis_program.scene.dry`** turned out to be a much more detailed German economic-policy
+   narrative (Hilferding/Woytinsky/Tarnow/Baade/ADGB) than "generic party-ops" implied. Rather
+   than invent Spanish economists or defer the whole file, reframed the debate onto the
+   already-established PSOE faction voices from Area D (Besteiro/Besteiristas, the UGT,
+   Caballeristas, Prietistas) — preserves the same mechanic/effects, adds no new lore.
+4. **One qdisplay-id residue found, not fixed:** `library.scene.dry`'s `@curr_gov` (Area B's
+   section, not E's) reads `[+ president_angry : hindenburg_angry +]` — `hindenburg_angry` is
+   a *qdisplay formatting id*, not a state variable, and the same id is used across **83**
+   `events/`, `government_affairs/`, `status.scene.dry`, `main.scene.dry`, and `root.scene.dry`
+   call sites. This is squarely the Area J qdisplay-rename debt the design doc already flags
+   (`schleicher_*`/`hindenburg_*` qdisplays need Spanish analogues) — out of scope for E,
+   flagged here rather than silently expanded into.
+
+**Verification performed (not just "it compiles"):**
+- `npm run build && npm run smoke` green after every file.
+- Dangling-var grep sweep across all 12 E-owned files → **zero** unexpected hits (the one hit,
+  the qdisplay-id above, is documented debt, not a dangling state var).
+- German-term grep sweep → zero unexpected hits (only the asset filename `weimar_coalition_2.jpg`
+  [Area K job], the `volkspartei` achievement id [Area K/L job], and the intentionally-untouched
+  `rally.scene.dry` paramilitary subplot, all flagged inline).
+- Compiled-output check: scanned `out/game.json` across all 12 E-owned top-level scene ids
+  (118 sub-scenes) for banned German terms → the same accounted-for exceptions, zero
+  unexpected residue.
+- Headless Chromium load (`--dump-dom`) → no `Uncaught`/`ReferenceError`/`TypeError`.
+- **Standalone Node behavioral spot-check** on the two highest-traffic cards
+  (`inter_party_relationships`, `enemies`): seeded `Q` with the real Spanish start values from
+  `root.scene.dry`, ran all 12 reachable effect branches, asserted no `NaN` writes (every LHS
+  target pre-exists) and that relations move in the intended direction. All 12 passed.
 
 > **Audience: a Sonnet-class executor working cold.** This plan is deliberately
 > **redundant** — the same few guardrails are repeated in every stage on purpose, because
