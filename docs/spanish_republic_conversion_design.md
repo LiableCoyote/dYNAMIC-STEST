@@ -8,7 +8,7 @@
 
 > **Start here if you're a fresh session:** read [`../CLAUDE.md`](../CLAUDE.md) for orientation (build/verify workflow, the rename maps, the concatenation trap, current status, and how to continue).
 >
-> **Progress (updated 1936-era engine work):** **Area A** (scaffolding) ✅ · **Area B** (state schema / `root.scene.dry` / HUD display) ✅ · **Area C** (election engine — calendar, 1933 bloc-list law, CNT abstention, calibration harness, yearly ticks) ✅ *(remaining C-2/C-5/C-8 parts are coupled to Area H content)* · **Areas D–M** 🔲 not started. Detailed status lives in [`planning/BC_election_engine_execution_plan.md`](planning/BC_election_engine_execution_plan.md) (Execution status section). The **electoral engine is mechanically complete and verified by simulation**, but the game is **not yet end-to-end playable** — it still boots into Weimar narrative content that Areas D–I replace.
+> **Progress:** **Area A** (scaffolding) ✅ · **Area B** (state schema / `root.scene.dry` / HUD display) ✅ · **Area C** (election engine — calendar, 1933 bloc-list law, CNT abstention, calibration harness, yearly ticks) ✅ *(remaining C-2/C-5/C-8 parts are coupled to Area H content)* · **Area D** (PSOE faction semantics — ideology deck, faction display, disunity/discovery cards) ✅ · **Areas E–M** 🔲 not started. Detailed status lives in [`planning/BC_election_engine_execution_plan.md`](planning/BC_election_engine_execution_plan.md) and [`planning/D_faction_semantics.md`](planning/D_faction_semantics.md) (Execution status sections). The **electoral engine is mechanically complete and verified by simulation**, and the **player-party internals now have PSOE identity**, but the game is **not yet end-to-end playable** — it still boots into Weimar narrative content that Areas E–I replace. Area D flagged ~16 `party_affairs/*` files with dangling renamed vars, out of its scope — a natural first task for Area E.
 
 ---
 
@@ -113,9 +113,10 @@ Each area is a candidate for its own detailed Claude Code planning pass. Ordered
 - **Depends on:** B.
 
 ### D. Party & Faction System (PSOE internals) — *Size M · Reweight*
-- Remap the six-faction model to PSOE's real factional geometry (Caballerista left / Prietista centre / Besteirista right / UGT / youth (FJS) radicalization).
-- Rewrite `party_affairs/ideology.scene.dry` options and the ideology sliders to Spanish debates: revolution-vs-reform, collaboration with bourgeois republicans, the "bolshevization" of the FJS, fusion with the PCE (the real 1936 JSU merger).
-- Rewrite the other `party_affairs` cards (fundraising, media, rallies, inter-party relations, streetfighting, etc.) to Spanish context.
+> 📄 **Executed:** [`planning/D_faction_semantics.md`](planning/D_faction_semantics.md) — ✅ done for the ideology deck + faction display/disunity/discovery cards. The faction *keys* were kept generic (Area B precedent), only their identity/content changed.
+- Remap the six-faction model to PSOE's real factional geometry (Caballerista left / Prietista centre / Besteirista right / UGT / youth (FJS) radicalization). ✅ done.
+- Rewrite `party_affairs/ideology.scene.dry` options and the ideology sliders to Spanish debates: revolution-vs-reform, collaboration with bourgeois republicans, fusion with the PCE. ✅ done (the FJS-"bolshevization" youth-radicalization angle was not separately modeled — the existing `neorevisionist` slot was repurposed as an anti-fascist mobilization current instead; revisit if Area H wants a dedicated youth-radicalization mechanic).
+- Rewrite the other `party_affairs` cards (fundraising, media, rallies, inter-party relations, streetfighting, etc.) to Spanish context. **🔲 Not done** — scoped out of D's actual execution (the approved plan bounded D to 4 files + 2 display sections); these ~16 files still contain dangling Area-B-renamed vars. Flagged as the natural first task for whoever picks this up.
 - **Depends on:** B.
 
 ### E. Political Landscape: Parties, Leaders & Relations — *Size M · Rewrite*
