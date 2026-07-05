@@ -441,49 +441,49 @@ Loyalty: [+ asalto_loyalty : loyalty +]
 
 Overall dissent: [+ dissent_percent : dissent +]
 
-**Left**
+**Caballeristas (Left)**
 
-Many leftists are former members of the <span style="color: #D47B9B;">**USPD**</span> (the left-wing, anti-war <span style="color: #D47B9B;">Independent Social Democratic Party</span>), or are young radicals. Many are interested in closer cooperation with the <span style="color: #700000;">**KPD**</span>, and some support extra-parliamentary action.
+Followers of Francisco Largo Caballero, the "Spanish Lenin." Many favor closer cooperation with the <span style="color: #700000;">**PCE**</span> and the anarcho-syndicalist unions, and some support extra-parliamentary action to defend the working class.
 
 Strength: [+ left_strength : strength +]
 
 Dissent: [+ left_dissent : dissent +]
 
-**Centrists**
+**Besteiristas (Centrists)**
 
-Centrists in the <span style="color: #c00000;">**SPD**</span> are followers of the doctrine of orthodox <span style="color: #9B0000;">Marxism</span> as expounded by Karl Kautsky and later Rudolf Hilferding. They seek a middle course between reform and revolution, while defending the democratic state.
+Followers of Julián Besteiro's orthodox <span style="color: #9B0000;">Marxism</span>. They seek a middle course between reform and revolution, while defending the democratic state and rejecting collaboration with the bourgeois parties.
 
 Strength: [+ center_strength : strength +]
 
 Dissent: [+ center_dissent : dissent +]
 
-**Labor**
+**UGT (Labor)**
 
-Many <span style="color: #c00000;">**SPD**</span> members are also part of the ADGB, the federation of free trade unions. Their goal is economic reform and benefits for organized workers.
+Members of the <span style="color: #700000;">**UGT**</span>, the socialist trade union federation. Their goal is economic reform and material benefits for organized workers.
 
 Strength: [+ labor_strength : strength +]
 
 Dissent: [+ labor_dissent : dissent +]
 
-**Reformists**
+**Prietistas (Reformists)**
 
-Reformists are pragmatic participants in government, and seek to expand the welfare state and defend democracy against the <span style="color: #7A3C00;">far</span>-<span style="color: #3E88B3;">right</span> and <span style="color: #700000;">left</span>. [? if spd_prussia : They are dominant in the state government of Prussia. ?]
+Followers of Indalecio Prieto. They are pragmatic participants in government, and seek to expand the welfare state and defend the Republic against both the authoritarian right and the revolutionary left. [? if psoe_catalonia : They are dominant in the Catalan government. ?]
 
 Strength: [+ reformist_strength : strength +]
 
 Dissent: [+ reformist_dissent : dissent +]
 
-[? if neorevisionism: **Neorevisionists** ?]
+[? if neorevisionism: **Anti-Fascist Mobilization** ?]
 
-[? if neorevisionism: Neorevisionists focus on defending the republic and expanding democracy, while also expanding the party's base beyond the working class to create a people's party. They support new propaganda methods and extra-parliamentary action in defense of the republic. ?]
+[? if neorevisionism: This current focuses on defending the Republic against the authoritarian right, while also expanding the party's base beyond organized labor to build a broader popular movement. They support new propaganda methods and extra-parliamentary mobilization in defense of the Republic. ?]
 
 [? if neorevisionism: Strength: [+ neorevisionist_strength : strength +] ?]
 
 [? if neorevisionism: Dissent: [+ neorevisionist_dissent : dissent +] ?]
 
-[? if social_patriot: **Social Patriots** ?]
+[? if social_patriot: **National Unity Current** ?]
 
-[? if social_patriot: Social Patriots combine support for pro-worker social programs with fervent German nationalism and anti-<span style="color: #700000;">communism</span>. Many of those who identify with this tendency seem to be little more than lapdogs of Schleicher[? if dnef_formed :&nbsp;and his <span style="color: #BFC8CC;">**DNEF**</span>?]. Other factions view their positions as contradictory and incoherent[? if schleicher_spd_influence > 5 :, but perhaps they may know best after all..?]. ?]
+[? if social_patriot: A small tendency that argues the <span style="color: #c00000;">**PSOE**</span> and <span style="color: #700000;">**UGT**</span> should set aside class conflict in the name of national unity above party or class. Other factions view their positions as unprincipled accommodation with the existing order. ?]
 
 [? if social_patriot: Strength: [+ social_patriot_strength : strength +] ?]
 

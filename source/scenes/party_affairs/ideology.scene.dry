@@ -10,15 +10,15 @@ max-visits: 3
 
 = Questions of Ideology
 
-The <span style="color: #c00000;">**SPD**</span> is torn between many different ideological currents. What should be our primary ideological guidance for now?
+The <span style="color: #c00000;">**PSOE**</span> is torn between many different ideological currents. What should be our primary ideological guidance for now?
 
 [? if ideology != 0 : We have previously chosen a [+ ideology +] ideology. Changing it will likely have drawbacks. ?]
 
-- @class_struggle: Class struggle and preparing the proletariat for the revolution are our primary goals.
-- @centrist: The Center <span style="color: #9B0000;">Marxism</span> of Karl Kautsky remains the best way to resolve our internal contradictions.
-- @labor: We should work with the trade unions to improve the lives of workers.
-- @reform: Following Eduard Bernstein, we should work for ethical <span style="color: #c00000;">socialism</span>, strengthen democracy, and expand the party's electorate.
-- @socpat: Pursue the fusion of <span style='color: #c00000;'>socialism</span> and patriotism.
+- @class_struggle: Largo Caballero's course of revolutionary class struggle and a worker alliance with the <span style="color: #700000;">**PCE**</span> are our primary goals.
+- @centrist: Julián Besteiro's orthodox Marxism remains the best way to resolve our internal contradictions.
+- @labor: We should work with the <span style="color: #700000;">**UGT**</span> to improve the lives of organized workers.
+- @reform: Following Indalecio Prieto, we should collaborate with the republicans, strengthen democracy, and expand the party's electorate.
+- @socpat: Pursue a fusion of <span style='color: #c00000;'>socialism</span> and national unity above class politics.
 - @easy_discard
 
 @class_struggle
@@ -28,9 +28,9 @@ if (Q.ideology && Q.ideology != "left") {
 }
 !}
 go-to: changed if changed = 1
-on-departure: ideology = "left"; left_strength += 8; communist_coalition += 1; left_dissent -= 5; reformist_dissent += 5; z_relation -= 3; dvp_relation -= 5; ddp_relation -= 3; lvp_relation -= 3; ddp_cohesion -= 0.5; nationalization_support += 1; kpd_relation += 3; ddp_right += 1; dvp_right += 1.5; lvp_right += 1
+on-departure: ideology = "left"; left_strength += 8; communist_coalition += 1; left_dissent -= 5; reformist_dissent += 5; ceda_relation -= 3; radical_relation -= 5; izq_rep_relation -= 3; nationalization_support += 1; pce_relation += 3
 
-The radical left of the party supports a course of class struggle, and potentially a reconciliation with the <span style="color: #700000;">**Communists**</span>.
+The Caballerista left of the party supports a course of class struggle, and potentially a worker alliance with the <span style="color: #700000;">**PCE**</span>.
 
 @centrist
 on-arrival: {!
@@ -41,7 +41,7 @@ if (Q.ideology && Q.ideology != "centrist") {
 go-to: changed if changed = 1
 on-departure: ideology = "centrist"; center_strength += 8; center_dissent -= 10; left_dissent -= 5; reformist_dissent -= 5
 
-The Center Marxists, represented by Kautsky and Hilferding, support a middle course of preparing for revolution while building up the consciousness of the working class.
+The Besteiristas, followers of Julián Besteiro's orthodox Marxism, support a middle course: preparing the party for eventual socialism while building up the consciousness of the working class, and rejecting both premature revolution and bourgeois collaboration.
 
 @labor
 on-arrival: {!
@@ -50,9 +50,9 @@ if (Q.ideology && Q.ideology != "labor") {
 }
 !}
 go-to: changed if changed = 1
-on-departure: ideology = "labor"; labor_strength += 8; center_dissent += 5; wtb_support += 1; labor_dissent -= 5; kpd_relation -= 3
+on-departure: ideology = "labor"; labor_strength += 8; center_dissent += 5; wtb_support += 1; labor_dissent -= 5; pce_relation -= 3
 
-The labor wing of the party supports continued participation in government in order to provide benefits to the workers, and the creation of public works programs for employment.
+The <span style="color: #700000;">**UGT**</span> wing of the party supports continued participation in government in order to provide benefits to organized workers, and the creation of public works programs for employment.
 
 @reform
 on-arrival: {!
@@ -61,9 +61,9 @@ if (Q.ideology && Q.ideology != "reformist") {
 }
 !}
 go-to: changed if changed = 1
-on-departure: ideology = "reformist"; reformist_strength += 8; democratization += 1; reformist_dissent -= 5; left_dissent += 5; z_relation += 5; dvp_relation += 5; ddp_relation += 5; lvp_relation += 5; kpd_relation -= 8; moderate_plan_support += 1; dvp_left += 1; ddp_left += 0.5; ddp_cohesion += 0.5; lvp_left += 1
+on-departure: ideology = "reformist"; reformist_strength += 8; democratization += 1; reformist_dissent -= 5; left_dissent += 5; ceda_relation += 5; radical_relation += 5; izq_rep_relation += 5; pce_relation -= 8; moderate_plan_support += 1
 
-The reformist wing of the party seeks to preserve the Republic and the democratic system of government, and is most supportive of coalitions with the other pro-democracy parties.
+The Prietista wing of the party seeks to preserve the Republic through collaboration with the republican parties, and is most supportive of coalitions with the other pro-Republic forces.
 
 @socpat
 view-if: social_patriot
@@ -73,9 +73,9 @@ if (Q.ideology && Q.ideology != "socpat") {
 }
 !}
 go-to: changed if changed = 1
-on-departure: ideology = "socpat"; social_patriot_strength += 10; left_dissent += 10; center_dissent += 10; reformist_dissent += 5; z_relation += 6; dvp_relation += 6; ddp_relation += 6; lvp_relation += 6; kpd_relation -= 15; dvp_left += 1; ddp_left += 0.5; ddp_cohesion += 0.5; lvp_left += 1
+on-departure: ideology = "socpat"; social_patriot_strength += 10; left_dissent += 10; center_dissent += 10; reformist_dissent += 5; ceda_relation += 6; radical_relation += 6; izq_rep_relation += 6; pce_relation -= 15
 
-The social patriot wing of the party, widely regarded as Schleicher's puppets, is the most supportive of the <span style='color: #c00000;'>**SPD**</span> and ADGB adopting a more nationalist stance.
+This small current within the party, regarded by many as unprincipled accommodationists, argues that the <span style="color: #c00000;">**PSOE**</span> and <span style="color: #700000;">**UGT**</span> should set aside class politics in favor of national unity.
 
 @changed
 on-arrival: left_dissent += 5; center_dissent += 5; labor_dissent += 5; reformist_dissent += 5

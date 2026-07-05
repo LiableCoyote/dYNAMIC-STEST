@@ -206,15 +206,17 @@ Economic growth: [+ economic_growth_2 +]%
 
 = Internal Factions of the <span style="color: #c00000;">**PSOE**</span>
 
-{!<span class="tooltip-text" title="The Left is interested in radical, transformative policies and cooperation with the KPD.">Left</span>!} strength: [+ left_strength : strength +], dissent: [+ left_dissent : dissent +]
+{!<span class="tooltip-text" title="The Caballerista left favors revolutionary class struggle and cooperation with the PCE.">Caballerista</span>!} strength: [+ left_strength : strength +], dissent: [+ left_dissent : dissent +]
 
-{!<span class="tooltip-text" title="The Center is a faction of Center Marxists, between reform and revolution.">Center</span>!} strength: [+ center_strength : strength +], dissent: [+ center_dissent : dissent +]
+{!<span class="tooltip-text" title="The Besteiristas follow orthodox Marxism, between reform and revolution.">Besteirista</span>!} strength: [+ center_strength : strength +], dissent: [+ center_dissent : dissent +]
 
-{!<span class="tooltip-text" title="Labor's goal is economic reform and benefits for organized workers.">Labor</span>!} strength: [+ labor_strength : strength +], dissent: [+ labor_dissent : dissent +]
+{!<span class="tooltip-text" title="The UGT's goal is economic reform and benefits for organized workers.">UGT</span>!} strength: [+ labor_strength : strength +], dissent: [+ labor_dissent : dissent +]
 
-{!<span class="tooltip-text" title="Reformists are pragmatic participants in government, and seek to expand the welfare state and defend democracy.">Reformist</span>!} strength: [+ reformist_strength : strength +], dissent: [+ reformist_dissent : dissent +]
+{!<span class="tooltip-text" title="The Prietistas are pragmatic participants in government, and seek to expand the welfare state and defend the Republic.">Prietista</span>!} strength: [+ reformist_strength : strength +], dissent: [+ reformist_dissent : dissent +]
 
-[? if neorevisionism: {!<span class="tooltip-text" title="Neorevisionists focus on defending the republic and expanding democracy, supporting new propaganda methods and extra-parliamentary action">Neorevisionist</span>!} strength: [+ neorevisionist_strength : strength +], dissent: [+ neorevisionist_dissent : dissent +] ?]
+[? if neorevisionism: {!<span class="tooltip-text" title="This current focuses on defending the Republic and mobilizing beyond organized labor, supporting new propaganda methods and extra-parliamentary action">Anti-Fascist Mobilization</span>!} strength: [+ neorevisionist_strength : strength +], dissent: [+ neorevisionist_dissent : dissent +] ?]
+
+[? if social_patriot: {!<span class="tooltip-text" title="This small current argues for setting aside class conflict in favor of national unity">National Unity Current</span>!} strength: [+ social_patriot_strength : strength +], dissent: [+ social_patriot_dissent : dissent +] ?]
 
 @paramilitaries
 on-arrival: {!
