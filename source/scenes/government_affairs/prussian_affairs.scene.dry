@@ -1,3 +1,8 @@
+# Superseded (Area F, F-4): this card and its 3 variants (_dvp/_left/_majority) are dead
+# German content - all four gate on in_*_coalition_prussia/prussia_leader-family vars that
+# root.scene.dry no longer initializes, so none of them can ever appear. The Spanish
+# Catalonia autonomy-affairs card is government_affairs/catalan_affairs.scene.dry. Left in
+# place as documented debt rather than deleted or ported.
 title: The Prussian Bulwark
 new-page: true
 is-card: true

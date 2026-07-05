@@ -1,0 +1,49 @@
+title: The Statute of Autonomy
+new-page: true
+is-card: true
+on-arrival: catalan_affairs_timer += 6; month_actions += 1
+view-if: psoe_in_government = 1 and catalan_affairs_timer == 0
+card-image: img/poster_0.jpg
+tags: govt_affairs
+#subtitle: Catalonia's Generalitat, the Basque statute, and the limits of devolution.
+
+= The Statute of Autonomy
+
+Catalonia's Generalitat, restored in 1931 under [+ catalonia_leader +], presses for a full Statute of Autonomy - its own parliament, its own police, control over language and education. The Basque Country and its Catholic-nationalist PNV want the same. How far should the Republic go in devolving power to the regions?
+
+- @grant_statute: Support ratification of the Catalan Statute in the Cortes.
+- @basque_statute: Extend the same principle to a Basque statute.
+- @militia_catalonia: Use the Generalitat's own authority to rein in a militia in Catalonia.
+- @centralize: Resist further devolution; the Republic must remain unitary.
+- @root: Take no action for now.
+- @easy_discard
+- @cancel_advisor_action
+
+@grant_statute
+subtitle: -1 budget
+choose-if: budget >= 1
+unavailable-subtitle: Not enough resources.
+on-arrival: budget -= 1; catalan_autonomy += 1; izq_rep_relation += 5*(1-dissent); ceda_relation -= 3; radical_relation -= 2; left_dissent += 3
+
+We back full ratification of the Catalan Statute of Autonomy. The <span style="color: #4a7d3a;">**Republican Left**</span>, closely tied to Catalan republicanism, is grateful for our support. The <span style="color: #003755;">**CEDA**</span> and centralist elements of the <span style="color: #d9a441;">Radical Party</span> denounce it as the breakup of Spain.
+
+@basque_statute
+subtitle: -1 budget
+choose-if: budget >= 1 and catalan_autonomy >= 1
+unavailable-subtitle: [? if budget < 1 : Not enough resources. ?][? if catalan_autonomy < 1 : Ratify the Catalan Statute first - it is the template every other region will point to. ?]
+on-arrival: budget -= 1; basque_autonomy += 1; church_relation += 2; left_dissent += 2
+
+We extend the same principle to the Basque provinces. Unlike Catalonia's secular republicans, the Basque autonomist movement is led by the Catholic-nationalist PNV - an uneasy partner for us, but Basque autonomy also eases some of our tension with the Church.
+
+@militia_catalonia
+subtitle: -1 resources
+choose-if: resources >= 1 and not (falange_militia_banned_catalonia and requetes_banned_catalonia and cnt_militia_banned_catalonia)
+unavailable-subtitle: [? if resources < 1 : Not enough resources. ?][? if falange_militia_banned_catalonia and requetes_banned_catalonia and cnt_militia_banned_catalonia : Every militia in Catalonia is already banned. ?]
+on-arrival: resources -= 1; falange_militia_banned_catalonia = 1 if falange_militia_strength > requetes_strength and falange_militia_strength > cnt_militia_strength and not falange_militia_banned_catalonia; requetes_banned_catalonia = 1 if requetes_strength >= falange_militia_strength and requetes_strength > cnt_militia_strength and not requetes_banned_catalonia; cnt_militia_banned_catalonia = 1 if cnt_militia_strength >= falange_militia_strength and cnt_militia_strength >= requetes_strength and not cnt_militia_banned_catalonia; catalan_autonomy += 1
+
+Using the Generalitat's own public-order powers, we move to ban whichever militia is currently strongest within Catalonia - a demonstration that autonomy means real authority, not just a name.
+
+@centralize
+on-arrival: catalan_autonomy -= 1 if catalan_autonomy >= 1; radical_relation += 3; ceda_relation += 2; izq_rep_relation -= 5*(1-dissent); left_dissent += 2
+
+We resist further devolution, arguing the Republic cannot afford to fragment its authority while the authoritarian right still threatens it. This pleases centralists among the <span style="color: #d9a441;">Radicals</span> and the <span style="color: #003755;">**CEDA**</span>, but strains our alliance with the <span style="color: #4a7d3a;">**Republican Left**</span>.

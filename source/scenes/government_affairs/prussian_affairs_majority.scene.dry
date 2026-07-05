@@ -1,3 +1,5 @@
+# Superseded (Area F, F-4): see prussian_affairs.scene.dry's header comment - dead German
+# content, gate can never fire. Replacement: government_affairs/catalan_affairs.scene.dry.
 title: The Prussian Bulwark
 new-page: true
 is-card: true
