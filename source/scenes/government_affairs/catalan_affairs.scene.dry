@@ -29,11 +29,11 @@ We back full ratification of the Catalan Statute of Autonomy. The <span style="c
 
 @basque_statute
 subtitle: -1 budget
-choose-if: budget >= 1 and catalan_autonomy >= 1
-unavailable-subtitle: [? if budget < 1 : Not enough resources. ?][? if catalan_autonomy < 1 : Ratify the Catalan Statute first - it is the template every other region will point to. ?]
+choose-if: budget >= 1 and catalan_autonomy >= 1 and basque_autonomy < 2
+unavailable-subtitle: [? if budget < 1 : Not enough resources. ?][? if catalan_autonomy < 1 : Ratify the Catalan Statute first - it is the template every other region will point to. ?][? if basque_autonomy >= 2 : The Basque statute is already substantially in place. ?]
 on-arrival: budget -= 1; basque_autonomy += 1; church_relation += 2; left_dissent += 2
 
-We extend the same principle to the Basque provinces. Unlike Catalonia's secular republicans, the Basque autonomist movement is led by the Catholic-nationalist PNV - an uneasy partner for us, but Basque autonomy also eases some of our tension with the Church.
+We extend the same principle to the Basque provinces. Unlike Catalonia's secular republicans, the Basque autonomist movement is led by the Catholic-nationalist PNV - an uneasy partner for us, but Basque autonomy also eases some of our tension with the Church. [? if basque_autonomy >= 1 : This builds on the statute we have already granted. ?]
 
 @militia_catalonia
 subtitle: -1 resources

@@ -11,6 +11,8 @@ card-image: img/poster_2.jpg
 
 The Republic was born amid church burnings in May 1931, and the Constitution's secularizing articles - ending state salaries for clergy, expelling the Jesuits, secularizing education - have made the Catholic Church one of the Republic's most determined enemies. The <span style="color: #003755;">**CEDA**</span> has built its mass base substantially on defense of the Church. How should we handle religious policy?
 
+[? if church_relation < 10 : The hierarchy now regards us as an openly hostile power. ?][? if church_relation >= 10 and church_relation < 20 : Relations with the Church remain badly strained. ?][? if church_relation >= 20 : The Church hierarchy, while wary, has not yet written off all possibility of coexistence. ?]
+
 - @secularize_schools: Press ahead with secular, state-run education.
 - @moderate: Seek a modus vivendi - enforce the Constitution without provocation.
 - @condemn_violence: Publicly condemn anticlerical violence and church burnings.
