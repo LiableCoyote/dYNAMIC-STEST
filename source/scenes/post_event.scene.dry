@@ -287,6 +287,22 @@ if (Q.dissent < 0) {
     Q.dissent = 0.95;
 }
 
+// Area H Phase 1 (H-5): neutralized ("Block A" per docs/planning/H_event_corpus.md).
+// This block computed a German paramilitary force-share (SA/Stahlhelm/Reichsbanner/
+// RFB/Prussian-police) that has been silently producing NaN every turn since Area B -
+// every input (sa_strength, sh_strength, rb_strength, rfb_strength, prussian_police_*,
+// reichswehr_street) is undefined in the Spanish schema. Traced every consumer of its
+// outputs (far_right_force, democracy_force, state_force, *_paramilitary*, sa/sh/rb/
+// rfb/prussia_force): all are confirmed-dead German scenes, except status.scene.dry,
+// which read far_right_force/democracy_force/state_force/*_paramilitary* for a
+// "Distribution of Power" line that always rendered a dangling sentence fragment as a
+// result - fixed in this same pass with a self-contained live-var computation (see
+// status.scene.dry's on-arrival and @paramilitaries, matching Area F's F-1 idiom).
+// Guarded off rather than rewritten to Spanish: a Spanish version of this force-share
+// model is superseded by the live @paramilitaries panel and the July-1936 coup
+// resolver (events/july_1936_coup.scene.dry, H-4), both of which compute forces fresh
+// from live vars. No live scene depends on this block's outputs after H-4/H-5.
+if (false) {
 Q.sa_force = Q.sa_strength*Q.sa_militancy;
 Q.sh_force = Q.sh_strength*Q.sh_militancy;
 Q.rb_force = Q.rb_strength*Q.rb_militancy;
@@ -379,6 +395,7 @@ Q.dnf_r = Math.round(Q.dnf_r * 10) / 10;
 Q.dnvp_r = Math.round(Q.dnvp_r * 10) / 10;
 Q.kvp_r = Math.round(Q.kvp_r * 10) / 10;
 Q.nsdap_r = Math.round(Q.nsdap_r * 10) / 10;
+}
 
 if (Q.ddp_r) Q.ddp_r_last = Q.ddp_r;
 if (Q.lvp_r) Q.lvp_r_last = Q.lvp_r;
@@ -4863,6 +4880,23 @@ if (Q.stegerwald_path && Q.bvp_votes >= 4) {
     Q.bvp_votes = 4;
 }
 
+// Area H Phase 1 (H-5): neutralized ("Block B" per docs/planning/H_event_corpus.md).
+// This block computed a German coalition-percentage taxonomy (weimar_coalition,
+// grand_coalition, far_right_coalition, popular_front_coalition, and ~20 more,
+// plus a _prussia-suffixed duplicate set) entirely from undefined German party-seat
+// vars (spd_r, ddp_r, z_r, dvp_r, lvp_r, dnvp_r, nsdap_r, kpd_r, sapd_r, dnef_r, the
+// _prussia variants) - producing NaN every turn since Area B. Traced every consumer
+// of its ~45 output vars: all are confirmed-dead German scenes (the Bruning/Papen/
+// Schleicher chancellor simulation, the Prussia collapse chain, presidential-election
+// events, advisor scripts gated on those same dead scenes) except a handful of
+// government_affairs/*.scene.dry files and main.scene.dry that read spd_prussia/
+// right_prussia - but those two vars were already permanently undefined regardless
+// (their own if/else-if conditions all depend on other vars this same block left
+// undefined), so guarding this block off changes nothing for those readers. Guarded
+// off rather than rewritten to Spanish: a Spanish electoral-coalition-taxonomy is
+// only needed for an electoral-takeover ending path, which this phase does not add
+// (see H_event_corpus.md's Deferred section).
+if (false) {
 if (Q.lvp_formed) {
     Q.weimar_coalition = parseFloat((Q.spd_r + Q.lvp_r + Q.z_r - Q.bvp_r).toFixed(1));
 } else {
@@ -5077,6 +5111,7 @@ if (Q.in_social_catholic_coalition_prussia || Q.in_social_liberal_coalition_prus
 } else if (Q.in_right_coalition_prussia == 1 || Q.in_center_right_coalition_prussia == 1 || Q.prussia_leader == "Papen" || Q.prussia_leader == "Goring" || Q.in_far_right_coalition_prussia == 1) {
     Q.right_prussia = 1;
     Q.spd_prussia = 0;
+}
 }
 
 for (var c of Q.classes) {

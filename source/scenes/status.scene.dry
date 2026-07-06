@@ -12,6 +12,26 @@ Q.economic_growth_2 = '0';
 if (Q.economic_growth) {
     Q.economic_growth_2 = Q.economic_growth.toFixed(1);
 }
+
+// Area H Phase 1 (H-5): self-contained "who controls the streets" computation,
+// same live-var idiom as the @paramilitaries panel below (Area F, F-1) - deliberately
+// NOT reading post_event.scene.dry's dead prussia_force/far_right_force/etc.
+// aggregate. Needed here (not just in @paramilitaries) because the "Party" section
+// on this same page used to read that dead aggregate directly and always rendered
+// a dangling sentence fragment as a result.
+Q.left_force = Q.ugt_militia_strength * Q.ugt_militia_militancy;
+Q.right_force = Q.falange_militia_strength * Q.falange_militia_militancy + Q.requetes_strength * Q.requetes_militancy;
+Q.cnt_force = Q.cnt_militia_strength * Q.cnt_militia_militancy;
+Q.state_force = Q.asalto_strength * Q.asalto_loyalty + Q.guardia_civil_strength * Q.guardia_civil_loyalty;
+if (Q.left_force >= Q.right_force && Q.left_force >= Q.cnt_force && Q.left_force >= Q.state_force) {
+    Q.streets_controlled_by = "the Republican left (UGT Militia)";
+} else if (Q.right_force >= Q.cnt_force && Q.right_force >= Q.state_force) {
+    Q.streets_controlled_by = "the authoritarian right (Falange/Requetés)";
+} else if (Q.cnt_force >= Q.state_force) {
+    Q.streets_controlled_by = "the CNT-FAI";
+} else {
+    Q.streets_controlled_by = "the forces of the state";
+}
 !}
 
 = Status
@@ -118,7 +138,7 @@ Support for the Republic: [+ pro_republic_disp +]%<br>
 [? if red_general_unlock: <span style="color: #c00000;">**SPD**</span> stance on [? if chancellor == "Schleicher" or not schleicher_post: Schleicher?][? if chancellor != "Schleicher" and schleicher_post: the State?]: [+ schleicher_spd_support : schleicher_spd_2 +]<br> ?]
 [? if schleicher_spd_influence and schleicher_time >= 8: [? if chancellor == "Schleicher": Schleicher?][? if chancellor != "Schleicher" and schleicher_post: The State?]'s influence in <span style="color: #c00000;">**SPD**</span>: [+ schleicher_spd_influence : schleicher_spd_3 +]<br> ?]
 <span style="color: #7A3C00;">**NSDAP**</span> financial situation: [+ nazi_funds : nazi_funds +]<br>
-[? if not streetfighting_joever: Currently, the streets are [? if far_right_paramilitary and rfb_force < far_right_force:[? if far_right_paramilitary_highest: fully controlled by the <span style="color: #7A3C00;">far</span>-<span style="color: #3E88B3;">right</span>?][? if far_right_paramilitary_high: dominated by the <span style="color: #7A3C00;">far</span>-<span style="color: #3E88B3;">right</span>?][? if far_right_paramilitary_med: controlled by the <span style="color: #7A3C00;">far</span>-<span style="color: #3E88B3;">right</span>?][? if far_right_paramilitary_low: in the slight control of the <span style="color: #7A3C00;">far</span>-<span style="color: #3E88B3;">right</span>?][? if sa_paramilitary:, mainly by the violent <span style="color: #7A3C00;">**SA**</span>?]?][? if rfb_force >= far_right_force and far_right_paramilitary: controlled by the <span style="color: #700000;">**RFB**</span>?][? if democracy_paramilitary and rfb_force < democracy_force:[? if democracy_paramilitary_highest: fully controlled by the <span style="color: #000000;">repu</span><span style="color: #DD0000;">bli</span><span style="color: #FFCC00;">cans</span>?][? if democracy_paramilitary_high: dominated by the <span style="color: #000000;">repu</span><span style="color: #DD0000;">bli</span><span style="color: #FFCC00;">cans</span>?][? if democracy_paramilitary_med: controlled by the <span style="color: #000000;">repu</span><span style="color: #DD0000;">bli</span><span style="color: #FFCC00;">cans</span>?][? if democracy_paramilitary_low: in the slight control of the <span style="color: #000000;">repu</span><span style="color: #DD0000;">bli</span><span style="color: #FFCC00;">cans</span>?]?][? if rfb_force >= democracy_force and democracy_paramilitary: controlled by the <span style="color: #700000;">**RFB**</span>?][? if state_paramilitary:[? if state_paramilitary_highest: fully controlled by the <span style="color: #BFC8CC;">**State**</span>?][? if state_paramilitary_high: dominated by the <span style="color: #BFC8CC;">**State**</span>?][? if state_paramilitary_med: controlled by the <span style="color: #BFC8CC;">**State**</span>?][? if state_paramilitary_low: in the slight control of the <span style="color: #BFC8CC;">**State**</span>?]?].?]
+Currently, the streets are dominated by [+ streets_controlled_by +].
 
 = Economics
 
