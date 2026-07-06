@@ -1176,15 +1176,13 @@ if (Q.percentComplete >= 100) {
 set-bg: img/map_2.jpg
 new-page: true
 
-> *"Such a general development cannot be attributed to the false tactics of any single party or to the mistakes of individual leaders. On the contrary, the conduct of individual leaders is determined largely by the sentiments of the people as a whole. It would be erroneous, however, to regard the sentiments of the moment as reflecting the natural make-up and character of the people. They are merely the consequence of the special circumstances which have brought about this profound degradation of the entire nation."*
+> *"Spain has ceased to be Catholic... Not because every Spaniard has stopped believing in the Catholic religion, but because Spain has constituted itself, politically and juridically, as a secular state."*
 
- - Karl Kautsky, *Hitlerism and Social Democracy*, 1934
+ - Manuel Azaña, address to the Constituent Cortes, October 1931
 
 This is a game of alternate history. While historical accuracy is a major concern, keep in mind that this is a *game*, and that any divergence from actual events will necessarily have to involve some element of make-believe. Nevertheless, please let the author know if there are any glaring mistakes.
 
-For more information on the politics and government of the German Republic, see the "Library" page on the top left. If this is your first time playing the game, it is strongly recommended that you read at least some of this information.
-
-**If you are playing this mod via the Mod Loader in base game, there will be various items missing (parliament colours, images, arrows, etc.). For the intended experience, please play using <a href="https://originn0.github.io/dynamic_social_democracy/" style="color: #0077FF">this</a> link.**
+For more information on the politics and parties of the Second Spanish Republic, see the "Library" page on the top left. If this is your first time playing the game, it is strongly recommended that you read at least some of this information.
 
 - @1928_mod_mode: Begin (<span style="color: #0077FF;">dynamic</span> mode)
 - @1928_easy: Begin (<span style="color: #5B9A8D;">easy</span> difficulty)
@@ -1223,7 +1221,7 @@ this.state.disableSaves = true;
 go-to: 1928_main
 
 @1928_mod_mode
-subtitle: Intended way of experiencing this mod.
+subtitle: The recommended way to experience this game.
 on-arrival: {!
 Q.difficulty = -1;
 Q.dynamic_mode = 1;
@@ -1240,7 +1238,7 @@ Q.budget = 2;
 go-to: 1928_main
 
 @1928_mod_mode_lite
-subtitle: Intended way of experiencing this mod.
+subtitle: The recommended way to experience this game.
 on-arrival: {!
 Q.difficulty = -1;
 Q.resources = 3;
@@ -1278,4 +1276,4 @@ new-page: true
 go-to: main if difficulty >= 0; main.main_easy if difficulty < 0
 
 
-= 1928
+= 1931

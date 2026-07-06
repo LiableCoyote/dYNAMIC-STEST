@@ -1,9 +1,15 @@
+# Area H Phase 1 (H-3): gated off. Already unreachable in practice (its precondition
+# customs_union is only ever set by austrian_customs_union.scene.dry, itself gated on
+# customs_union == 0, which is never true since the var starts undefined - a dead-var
+# trap, not a live German plot flag) and its own effects lean on spd_in_government
+# (also never set truthy in Spanish play). Explicitly retired rather than left to rely
+# on that chain never breaking.
 title: Banking Crisis
 subtitle: The collapse of the German banking system...
 new-page: true
 on-arrival: banking_crisis_seen = 1; workers_kpd += 2; unemployed_kpd += 5; workers_nsdap += 3 if chancellor != "Hitler"; new_middle_nsdap += 5 if chancellor != "Hitler"; old_middle_nsdap += 5 if chancellor != "Hitler"; rural_nsdap += 3 if chancellor != "Hitler"; unemployed += 3; crisis_urgency += 1; workers_spd -= 4 if spd_in_government; new_middle_spd -= 5 if spd_in_government; old_middle_spd -= 5 if spd_in_government; rural_spd -= 4 if spd_in_government; economic_growth -= 1.4; hindenburg_angry_bruning += 20; hindenburg_angry += 40; dnvp_angry += 1 if spd_toleration_right; banking_crisis_fallout_time = time + 6
 tags: event
-view-if: customs_union = 1 and banking_crisis_timer = 0
+view-if: 0
 max-visits: 1
 priority: 1
 face-image: img/danat_bank.jpg

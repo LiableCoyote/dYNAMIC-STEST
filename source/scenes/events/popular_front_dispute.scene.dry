@@ -1,6 +1,11 @@
+# Area H Phase 1 (H-3): gated off. Already unreachable (its #tags: event line was
+# already commented out, and its gate requires a ministry party of "Z" - Zentrum -
+# which no Spanish ministry-party label is ever set to). Explicitly retired for
+# clarity; the PSOE-PCE coalition-dissent tension it modeled is covered by the live
+# pce_coalition_dissent var instead.
 title: Disputes within the Popular Front
 subtitle: As expected, there are clashes between the <span style="color: #700000;">**KPD**</span> and [? if z_party_name != "CVP": <span style="color: #000000;">Center Party</span>?][? if z_party_name == "CVP": <span style="color: #000000;">**CVP**</span>?].
-view-if: in_popular_front = 1 and popular_front_dispute_timer = 0 and (labor_minister_party = "Z" or economic_minister_party = "Z" or interior_minister_party = "Z" or agriculture_minister_party = "Z")
+view-if: 0
 new-page: true
 on-arrival: popular_front_dispute_timer = 5;
 #tags: event

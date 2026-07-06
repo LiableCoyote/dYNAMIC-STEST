@@ -1,5 +1,9 @@
+# Area H Phase 1 (H-3): gated off. Already unreachable - requires kpd_goals_seen = 1,
+# which only kpd_goals.scene.dry/kpd_goals_2.scene.dry set, and both are themselves
+# unreachable (spd_in_government is never set truthy in Spanish play). Explicitly
+# retired for clarity.
 title: The <span style="color: #700000;">**KPD**</span> checks upon our progress in accomplishing the coalition's goals...
-view-if: (in_popular_front or in_left_front) and (kpd_ultimatum_timer = 0 or (welfare_goal_completed and agriculture_goal_completed and economy_goal_completed and finance_goal_completed and labor_goal_completed and reichswehr_goal_completed)) and kpd_goals_seen = 1 and kpd_ultimatum_seen = 0 and spd_in_government
+view-if: 0
 on-arrival: {!
 Q.kpd_ultimatum_seen = 1;
 Q.kpd_goals_completed = 1;

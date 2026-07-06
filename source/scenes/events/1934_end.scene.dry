@@ -1,8 +1,11 @@
+# Area H Phase 1 (H-3): retired. Gated on hindenburg_dead, a Weimar victory-check
+# with no Spanish equivalent (the Republic has no analogous "president dies" win
+# condition) - the Spanish endgame is the July-1936 coup, built separately (H-4).
 title: A New Day in Germany
 subtitle: Has democracy finally triumphed?
 tags: event
 priority: 3
-view-if: hindenburg_dead = 1 and president != "Hitler" and president != "Göring" and president != "Seldte"
+view-if: 0
 max-visits: 1
 on-arrival: {!
 !}
