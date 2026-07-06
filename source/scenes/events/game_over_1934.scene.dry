@@ -1,3 +1,8 @@
+# Area H Phase 1 (H-4): superseded. This scene's only entry point was
+# events/1934_end.scene.dry's @game_over_1934 choice, and 1934_end.scene.dry was
+# retired in H-3 (its hindenburg_dead gate had no Spanish equivalent). Spain's hard
+# stop is now the July-1936 coup (events/july_1936_coup.scene.dry), which routes to
+# game_over.scene.dry directly. Left in place, unreachable, rather than deleted.
 on-arrival: {!
 // Einigkeit und Recht und Freiheit - survive without a civil war.
 if (Q.dynamic_mode || Q.historical_mode) {

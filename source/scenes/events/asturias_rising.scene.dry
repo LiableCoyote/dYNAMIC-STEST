@@ -1,0 +1,15 @@
+title: The Asturias Rising
+subtitle: An October insurrection against the CEDA's entry into government
+tags: event
+view-if: year = 1934 and month >= 10 and in_radical_ceda = 1
+max-visits: 1
+priority: 2
+on-arrival: coup_progress += 3; africa_army += 2; army_loyalty -= 0.05 if army_loyalty > 0.05; radicalization += 2; industrial_pce += 3; landless_pce += 2; industrial_psoe += 2; ceda_relation -= 5; radical_relation -= 2; left_strength += 5; left_dissent -= 5
+
+= The Asturias Rising
+
+With the CEDA's entry into the government, the UGT and the Socialist Youth call a general strike that becomes an armed insurrection in the mining valleys of Asturias. For two weeks, workers' committees hold much of the province, proclaiming a short-lived "red republic" in some mining towns. Scattered risings elsewhere - Catalonia briefly declares its own independent state - collapse within days.
+
+The government's response is not the regular Army but the Army of Africa - Moorish regulars and Legion troops under General Franco's direction - who suppress the rising with a brutality that shocks even conservative opinion. Asturias is left occupied and embittered.
+
+For the officers who led the campaign, the rising is proof of the Army's usefulness as a domestic weapon, and a rehearsal for a larger reckoning. For the left, it is proof that legal opposition may not be enough - and a martyrdom it will not forget when the Popular Front is formed.

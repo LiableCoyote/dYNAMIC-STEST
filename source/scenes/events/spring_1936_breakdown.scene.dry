@@ -1,0 +1,13 @@
+title: The Breakdown of Order
+subtitle: Church burnings, land seizures, and street violence
+tags: event
+view-if: year = 1936 and month >= 4 and month <= 6 and in_popular_front = 1
+max-visits: 1
+priority: 2
+on-arrival: coup_progress += 2; clerical_conflict += 1; church_relation -= 5; anarchist_militancy += 0.1; falange_militia_strength += 10; left_dissent -= 3; ceda_relation -= 3
+
+= The Breakdown of Order
+
+The spring of 1936 brings a wave of disorder that the government struggles to contain. Landless laborers in Extremadura and Andalusia seize estates ahead of any formal land reform; churches and convents burn in scattered towns; Falangist gunmen and Socialist or anarchist militants trade assassinations in the streets of Madrid and other cities.
+
+Neither side controls its own extremists. The government's authority is visibly slipping, and both the authoritarian right and the revolutionary left increasingly speak of the Republic's institutions as an obstacle to be swept aside rather than a framework to work within.

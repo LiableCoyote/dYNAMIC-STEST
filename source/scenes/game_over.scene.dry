@@ -396,15 +396,22 @@ go-to: eg_menu
 Adolf Hitler has taken power in Germany. However, we have rallied the democratic forces of the country against him, and are fighting back. The outcome of this war is uncertain.
 
 
+# Area H Phase 1 (H-4): repurposed as the Spanish "Republic endures" ending. The
+# original German condition here (chancellor/president never "Hitler"/"Göring" and
+# chancellor_party never "NSDAP") was trivially always true in Spanish play, meaning
+# this ending would fire on every single playthrough regardless of outcome - the most
+# visible German-content-leak bug found in Area H Phase 1, since this is the terminal
+# screen. Retargeted onto the actual Spanish default: no coup was ever triggered
+# (republic_victory/long_war/total_defeat are all unset).
 @no_hitler
-view-if: chancellor != "Hitler" and president != "Hitler" and president != "Göring" and chancellor_party != "NSDAP"
-title: Hitler does not yet control Germany...
+view-if: not republic_victory and not long_war and not total_defeat
+title: The Republic endures.
 tags: endings
 go-to: eg_menu
 
-Hitler does not yet control Germany. [? if chancellor == "Papen" : However, Chancellor Papen's <span style="color: #808080;">authoritarianism</span> and <span style="color: #7A3C00;">far</span>-<span style="color: #3E88B3;">right</span> politics are paving the way for Hitler, or someone like him, to take power. ?] [? if chancellor == "Schleicher" : However, Chancellor Schleicher's <span style="color: #808080;">authoritarianism</span> and scheming is paving the way for Hitler, or someone like him, to take power. ?][? if resist_coup == 1 and republic_victory == 0 and long_war == 0 and coup_victory == 0 : Given our defeat in the Prussian coup, the <span style="color: #7A3C00;">far</span>-<span style="color: #3E88B3;">right</span> appears to be ascendant. ?][? if chancellor == "Brüning" : However, Chancellor Brüning's austerity policies and the continuation of the depression are paving the way for Hitler, or someone like him, to take power. ?]
+[? if coup_progress >= 7 : The plotting of the authoritarian right and the disloyal officer corps never quite comes together into an open rising - Sanjurjo, Mola, and the Africanista generals bide their time, but July 1936 passes without a coup. The Republic has survived its most dangerous hour, though the men who might have overthrown it have not gone away. ?][? if coup_progress < 7 : The Republic reaches July 1936 without ever coming close to a military rising. Whatever else can be said of these five years, the Second Republic has endured. ?]
 
-[? if hitler_deported == 1 : We have deported Hitler back to Austria. Hopefully he will never return. ?]
+[? if in_popular_front : The Popular Front government continues its work, for however long its uneasy coalition can hold together. ?][? if in_radical_ceda : The Radical-CEDA government continues to govern, the PSOE still in opposition. ?][? if in_republican_socialist : The Republican-Socialist coalition continues its reform program. ?]
 
 @nsdap_win
 view-if: chancellor == "Goebbels" or chancellor == "Göring" or president == "Göring" or president == "Frick"
@@ -416,30 +423,30 @@ go-to: eg_menu
 
 
 @civil_war_won
-title: We have won the civil war.
+title: The rising has failed.
 view-if: republic_victory == 1
 tags: endings
 go-to: eg_menu
 
-We have won the civil war against the <span style="color: #808080;">reactionary</span> forces. Germany will be changed forever, but it is too early to know how.
+The military rising has failed. Loyal units of the Army, the UGT and CNT militias, and the Assault Guard have held the country's major cities, and the rebel generals' bid for power has collapsed within days. The Republic survives - but Spain has been changed forever by the violence of July 1936, and it is too early to know how.
 
 @civil_war_lost
-title: We lost the civil war.
+title: The Republic has fallen.
 view-if: total_defeat == 1
 tags: endings
 go-to: eg_menu
 
-We have lost the civil war. At least it was a quick coup, and ended before Germany could be plunged into total war.
+The rising has succeeded. The Army of Africa and the rebel garrisons have overwhelmed the Republic's defenses too quickly for organized resistance to form. The Second Republic is dead; a military dictatorship takes its place. At least it was a swift defeat, and Spain has been spared the prolonged agony of a long civil war.
 
 @long_war
-title: Germany is gripped by civil war.
+title: Spain is gripped by civil war.
 view-if: long_war == 1
 tags: endings
 go-to: eg_menu
 
-Germany is currently in the grip of a civil war, a brutal affair that has no obvious end. Thousands of lives have already been extinguished, and it is likely that the war will not stop until Germany's cities are reduced to ruins. 
+Neither the rising nor the Republic's defense of it has proven decisive. Spain has split in two: a Nationalist zone under the rebel generals, and a Republican zone still loyal to the government. This will not be a quick affair - it is the opening of a long civil war whose end is impossible to foresee, and which will not stop until much of Spain lies in ruins.
 
-[? if is_favorable == 0 : The current conditions are not favorable for us. ?][? if west_relation >= 2: Our cause is popular in the West, but their sclerotic governments are reluctant to send us aid. ?][? if soviet_aid >= 1 : The <span style="color: #750e0e;">Soviet Union</span> has aided the <span style="color: #700000;">Communists</span>, but not the <span style="color: #c00000;">socialists</span> and <span style="color: #D3C24D;">democrats</span>, in an attempt to shape Germany's future government. ?][? if east_aid >= 1 : <span style="color: #DC143C;">Pol</span><span style="color: #FFFFFF;">and</span> and <span style="color: #11457E;">Czech</span><span style="color: #FFFFFF;">oslo</span><span style="color: #D7141A;">vakia</span> have sent some assistance against the fascists. ?]
+[? if is_favorable == 0 : The balance of forces is not favorable for the Republic. ?][? if west_relation >= 2 : The Republic's cause has sympathizers in France and Britain, but their governments are reluctant to intervene directly. ?][? if soviet_relation >= 2 : The Soviet Union has begun sending aid to the Republic, though its price may be steep. ?]
 
 
 @braun_victorious

@@ -1,0 +1,13 @@
+title: The Calvo Sotelo Assassination
+subtitle: The killing that arms the conspiracy
+tags: event
+view-if: year = 1936 and month >= 7 and in_popular_front = 1
+max-visits: 1
+priority: 3
+on-arrival: coup_progress += 3; army_loyalty -= 0.1 if army_loyalty > 0.1; monarchist_relation -= 5; ceda_relation -= 5; radicalization += 2; pro_republic -= 5
+
+= The Calvo Sotelo Assassination
+
+In the early hours, a detachment of Assault Guards and allied militiamen - avenging the murder of one of their own lieutenants, José Castillo, by Falangist gunmen - take the monarchist leader José Calvo Sotelo from his home and shoot him. His body is dumped at a Madrid cemetery.
+
+The killing of a sitting parliamentary deputy by men in government uniform electrifies the conspiracy that General Mola has spent months assembling. Officers who had hesitated now consider the moment decisive: if the state itself cannot guarantee the safety of a leader of the opposition, they argue, the state no longer deserves obedience. The rising that had been quietly gathering strength across the garrisons is now only a matter of days away.

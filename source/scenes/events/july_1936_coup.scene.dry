@@ -1,0 +1,90 @@
+title: The July 1936 Rising
+subtitle: The generals move against the Republic
+tags: event
+view-if: year = 1936 and month >= 7 and (coup_progress >= 10 or army_loyalty <= 0.1)
+max-visits: 1
+priority: 1
+new-page: true
+on-arrival: army_choices = 0
+
+= The Rising
+
+On the 17th of July, the garrison of Spanish Morocco rises against the Republic. General Franco flies from the Canaries to take command of the Army of Africa; on the mainland, garrison after garrison follows over the next two days, coordinated by General Mola from Pamplona.
+
+[? if army_loyalty <= 0.15 and africa_army >= 5 : The rising is disciplined and nearly total. Officer after officer has already made up his mind; only a handful of units anywhere hesitate before declaring for the rebellion. ?][? if not (army_loyalty <= 0.15 and africa_army >= 5) : The rising is not the clean sweep its planners hoped for. In Madrid, Barcelona, and much of the northern coast, workers pour into the streets demanding arms, and enough of the garrison stays loyal - or is overwhelmed by armed civilians - to keep the government's main cities out of rebel hands. Spain is splitting in two along the fault line of who obeys, and who is obeyed. ?]
+
+The government must decide how to respond, before the balance of forces settles one way or the other.
+
+- @appeal_army: Appeal to the loyal officer corps to hold the line.
+- @arm_militias: Arm the UGT and CNT militias.
+- @general_strike: Call a general strike against the rising.
+- @resolve: See how the country divides.
+
+@appeal_army
+max-visits: 1
+on-arrival: army_choices += 1; army_loyalty += 0.1 if army_loyalty < 0.9
+go-to: coup_menu
+
+The government appeals directly to the officer corps, promising that loyalty to the Republic will be rewarded and warning of the consequences of treason. [? if army_loyalty < 0.3 : Few respond - the officer corps has already made its choice, and it was not this one. ?][? if army_loyalty >= 0.3 : Some wavering garrisons choose to stay loyal rather than risk everything on the rising. ?]
+
+@arm_militias
+max-visits: 1
+on-arrival: army_choices += 1; ugt_militia_strength += 500; cnt_militia_strength += 300
+go-to: coup_menu
+
+Arsenals and armories are thrown open to the UGT and CNT militias. In Madrid and Barcelona above all, thousands of workers are armed within hours - it is this, as much as any decision by the regular Army, that will decide whether the rising succeeds in the Republic's main cities.
+
+@general_strike
+max-visits: 1
+on-arrival: army_choices += 1; general_strike_called = 1
+go-to: coup_menu
+
+The UGT and CNT jointly call a general strike. Transport, telegraph, and industry across Republican Spain grind to a halt, denying the rebels the logistics they need to move quickly and buying time for the government's defenders to organize.
+
+@coup_menu
+
+- @appeal_army: Appeal to the loyal officer corps to hold the line.
+- @arm_militias: Arm the UGT and CNT militias.
+- @general_strike: Call a general strike against the rising.
+- @resolve: See how the country divides.
+
+@resolve
+choose-if: army_choices >= 2
+unavailable-subtitle: We should try more than one approach before committing to a course.
+new-page: true
+on-arrival: {!
+Q.total_power = 0;
+Q.total_power += Q.ugt_militia_strength * Q.ugt_militia_militancy;
+Q.total_power += Q.cnt_militia_strength * Q.cnt_militia_militancy;
+Q.total_power += Q.army_strength * Q.army_loyalty * Q.army_militancy;
+Q.total_power += Q.asalto_strength * Q.asalto_loyalty * Q.asalto_militancy;
+Q.total_power += Q.guardia_civil_strength * Q.guardia_civil_loyalty * Q.guardia_civil_militancy;
+if (Q.general_strike_called) { Q.total_power += 150; }
+
+Q.enemy_power = 0;
+Q.enemy_power += Q.falange_militia_strength * Q.falange_militia_militancy;
+Q.enemy_power += Q.requetes_strength * Q.requetes_militancy;
+Q.enemy_power += Q.africa_army * 15 * 0.9;
+Q.enemy_power += Q.army_strength * (1 - Q.army_loyalty) * Q.army_militancy;
+Q.enemy_power += Q.guardia_civil_strength * (1 - Q.guardia_civil_loyalty) * Q.guardia_civil_militancy;
+
+Q.is_favorable = (Q.total_power >= Q.enemy_power * 0.9) ? 1 : 0;
+
+if (Q.total_power > Q.enemy_power * 1.1) {
+    Q.republic_victory = 1;
+} else if (Q.total_power / Q.enemy_power >= 0.6) {
+    Q.long_war = 1;
+} else {
+    Q.total_defeat = 1;
+}
+
+Q.total_power = Math.round(Q.total_power);
+Q.enemy_power = Math.round(Q.enemy_power);
+!}
+go-to: game_over
+
+= The Balance of Forces
+
+The Republic's defenders - the UGT and CNT militias, the loyal Army, the Assault Guard, and whatever portion of the Guardia Civil has not gone over - muster a combined strength of roughly [+ total_power +]. Ranged against them, the rebel generals command the Army of Africa, the Falange and Requetés militias, and the disloyal garrisons, totaling roughly [+ enemy_power +].
+
+[? if republic_victory : The rising has failed to take the country. ?][? if long_war : Neither side has the strength to finish the other quickly. ?][? if total_defeat : The rebels have the upper hand. ?]

@@ -1,0 +1,13 @@
+title: The Right's Reaction
+subtitle: The authoritarian right responds to defeat at the polls
+tags: event
+view-if: year = 1936 and month >= 2 and month <= 3 and in_popular_front = 1
+max-visits: 1
+priority: 2
+on-arrival: coup_progress += 3; africa_army += 1; army_loyalty -= 0.1 if army_loyalty > 0.1; ceda_relation -= 3; monarchist_relation -= 3; radical_relation -= 2; pro_republic -= 3
+
+= The Right's Reaction
+
+The Popular Front's victory at the polls is met with alarm among monarchists, the CEDA's more radical wing, and a growing circle of army officers who no longer believe the ballot box can be trusted to keep "revolution" at bay. General Emilio Mola, posted to Pamplona, quietly begins sounding out fellow officers about a coordinated rising against the government - not yet a plan, but the seed of one.
+
+The CEDA, having lost its bid to govern through elections, increasingly speaks of the Republic itself as illegitimate. Monarchist deputies openly call for the Army to intervene.
