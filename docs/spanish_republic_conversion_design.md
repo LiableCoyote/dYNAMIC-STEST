@@ -143,6 +143,16 @@ These have **no base-game analogue** and are the most design-intensive:
 - Reuse **structural templates** from the base game: yearly turn events (`1931.scene.dry` pattern), election events, coalition-formation events, party-congress events, coup/civil-war trigger events. The *shapes* port; the *content* does not.
 - **Strong candidate for phased delivery:** ship a playable spine (yearly events + elections + end-state) first, then flesh out optional/flavor event chains.
 - **Depends on:** B–G.
+- **✅ Phase 1 (the playable spine) done** — see `docs/planning/H_event_corpus.md` for full
+  detail. Built the coalition-formation writer (the government now actually changes across
+  the three elections: Republican-Socialist → Radical-CEDA *bienio negro* → Popular Front,
+  modeling the real Prieto/Caballero split), the Spanish election-results presentation
+  (replacing the dead German parliament chart/coalition-menu tree that followed the live
+  Area-C seat math), and the July-1936 endgame (4 new escalation events + a coup trigger/
+  resolver computing forces from live militia/army vars, feeding into fixed Spanish
+  `game_over.scene.dry` endings). **The game is now end-to-end playable, April 1931 → July
+  1936.** Phase 2 (deferred): bulk deletion of the ~196 dead German files, the 72-file
+  `reichswehr_*→army_*` rename, `ending_slides.scene.dry`'s conversion, deep flavor chains.
 
 ### I. Advisors / Cabinet — *Size M · Rewrite*
 - Replace all 28 advisors (named German socialists) with Spanish figures: Largo Caballero, Prieto, Besteiro, Negrín, De los Ríos, Araquistáin, Zugazagoitia, etc., each with an advice/action card and stat effects.

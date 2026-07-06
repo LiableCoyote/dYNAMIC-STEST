@@ -1,13 +1,156 @@
 # Plan: Area H — Phase 1: The Playable Spine
 
-> **Session handoff.** 🔲 **APPROVED — NOT YET STARTED.** This is the detailed, deliberately
-> redundant execution plan for **Area H Phase 1** — the minimum-viable playable spine (April
-> 1931 → three elections → July 1936 coup ending). Area H is the largest area in the project
-> (the ~380-file `events/` corpus); this plan scopes only the spine and explicitly defers the
-> ~196 dead German files, the 72-file `reichswehr_*→army_*` rename, and deep flavor chains to
-> later phases. No H-stage has been executed yet. When execution begins, add an "Execution
-> status" section at the top (mirroring `F_new_subsystems.md`) tracking exactly what's done,
-> and flip the banner to ✅ as H-6 lands.
+> **Session handoff.** ✅ **Executed and verified.** H-0 through H-6 are all done. The game is
+> now end-to-end playable: April 1931 boot → three elections (each running the real Area-C vote
+> math, a Spanish results screen, and a coalition-formation choice that actually changes the
+> government) → the escalation chain → the July-1936 coup trigger and resolver → one of four
+> Spanish endings. Build + smoke green throughout; a standalone-Node end-to-end simulation drives
+> the whole arc and asserts no `NaN` in any live var. See "Execution status" for exact findings,
+> what was deliberately left as debt, and a few real deviations from this plan's original text
+> (discovered mid-execution, not blind adherence).
+
+## Execution status
+
+**✅ DONE — H-0 through H-6.**
+
+- **H-0 (recon):** confirmed clean baseline build+smoke. The single biggest correction to this
+  plan's own premise: `election_1928.scene.dry`'s `@post_election_1928` is **not** simply "a
+  ~150-sub-scene German coalition-formation tree" to route around. Its `on-arrival`
+  (~1100 lines) is the **live, correct Area-C bloc-bonus seat math** (concatenation-based, auto-
+  follows Spanish party keys) and had to be preserved byte-for-byte except one bug fix
+  (`nsdap_r` → `falange_r` in its `on-departure`). Only the `on-display` chart, the "Election
+  results" prose table, and everything from `@achievement_check_e`/`@coalition_menu` onward
+  (~2200 lines of German coalition-choice branches) is the actually-dead part. This changed the
+  execution approach from "create a new file and repoint `set-jump`" to "surgically replace two
+  sections in place, leave the German coalition-menu tree orphaned-not-deleted."
+- **H-1 (the coalition-formation writer — the linchpin):** new `events/coalition_formation.scene.dry`.
+  Branches on the election year and offers the historically-grounded, agency-preserving choices
+  the plan called for: confirm the Republican-Socialist coalition under Azaña (1931, two minor
+  flavor variants); accept opposition or attempt a doomed left coalition in the *bienio negro*
+  (1933 — the "defy" branch sets `republican_socialist_failed` and still ends up in
+  `in_radical_ceda`, at a cost, modeling the real futility of clinging to power without a
+  majority); the real Prieto (join cabinet) vs. Caballero (support from outside) split over the
+  1936 Popular Front. Every branch writes exactly one of
+  `in_republican_socialist`/`in_radical_ceda`/`in_popular_front` (clearing the other two),
+  `psoe_in_government`/`psoe_toleration`, `chancellor`/`chancellor_party`, and the load-bearing
+  ministry vars, using the exact party-label strings `library.scene.dry`'s Cabinet display
+  already recognizes ("PSOE"/"IR"/"Radical"/"CEDA"/"Monarchist"/"Falange"/"ERC"/"DLR"/"PRRS").
+- **H-2 (Spanish election-results presentation):** in `election_1928.scene.dry`, replaced the
+  dead German parliament-seat chart (`on-display`) with a Spanish version adapted directly from
+  `library.scene.dry`'s `@figures` idiom (same `Q.cortes_size`, same 8-party color/name map), and
+  replaced the German "Election results" prose table with a lean Spanish vote/seat table plus the
+  election-history line graph. Repointed the results screen's `go-to` from the dead
+  `@achievement_check_e` to the new `@coalition_formation`. The old German
+  `@achievement_check_e`→`@coalition_menu` tree (~2200 lines, ~22 coalition branches, the
+  ministries sub-scenes) is flagged inline as orphaned dead code, not deleted.
+- **H-3 (mid-game hygiene):** retired `events/1934_end.scene.dry` (a `hindenburg_dead`
+  Weimar-victory-check with no Spanish equivalent). Traced all 9 "reachable-but-German" events
+  this plan flagged (`banking_crisis`, `capital_strike`, `popular_front_dispute`,
+  `kpd_goals`/`kpd_goals_2`/`kpd_ultimatum`, `cabinet_reshuffled`,
+  `vote_of_no_confidence`/`_joever`) and found **all 9 were already unreachable** — every one
+  gates on `spd_in_government` (never set truthy in Spanish play; only `psoe_in_government` is)
+  or a ministry-party string comparison against a German party letter ("SPD"/"Z"/"KPD") that no
+  Spanish ministry label ever matches. This plan's own grep heuristic (live var OR'd with a
+  German token) produced false positives here — the German token half of each gate is what's
+  actually load-bearing and always false. All 9 got explicit `view-if: 0` + a comment anyway
+  (documenting *why*, not just flagging), rather than leaving them to rely on that dead-var chain
+  never accidentally becoming live. Fixed the turn-1 opening prose (the epigraph, now an Azaña
+  quote from the 1931 Constituent Cortes; dropped the now-inapplicable Mod Loader paragraph,
+  since this is a standalone build per `CLAUDE.md`; the visible `= 1928` difficulty-screen
+  header → `= 1931`; the two "mod mode" difficulty options' subtitles no longer call this a
+  mod). Found and fixed one real bug in `main.scene.dry`'s hub decks: the Economic Policy deck's
+  gate (`spd_in_government`/minister-party `== "SPD"`) could never pass — but **deliberately did
+  not** retarget it onto the Spanish equivalents, since `government_affairs/economic_policy.scene.dry`
+  is itself still 100% unconverted German content (part of Area G's ~37-card backlog). Making the
+  gate pass would have surfaced that content to the player, which is worse than the deck not
+  appearing at all — left explicitly `view-if: 0` with a comment for whoever picks up Area G.
+- **H-4 (the July-1936 endgame):** four new escalation events
+  (`events/asturias_rising.scene.dry` — October 1934, the largest single bump;
+  `events/popular_front_victory_shock.scene.dry` — Feb/Mar 1936; `events/spring_1936_breakdown.scene.dry`
+  — Apr-Jun 1936; `events/calvo_sotelo_assassination.scene.dry` — July 1936) that, together with
+  the already-live Sanjurjada/Casas Viejas events, push `coup_progress` past the July-1936
+  threshold across ordinary playthroughs (an end-to-end sim confirmed 12-14 reached even on a
+  fully passive path taking no confrontational cards). New `events/july_1936_coup.scene.dry`
+  is the trigger + resolver in one scene: forks its framing on `army_loyalty`/`africa_army` (a
+  clean sweep vs. the historical divergence — succeeding in some regions, failing in Madrid/
+  Barcelona), offers three response choices (appeal to the army, arm the UGT/CNT militias,
+  general strike), then computes `total_power` vs. `enemy_power` entirely from live
+  militia/army/Guardia Civil vars and sets exactly one of
+  `republic_victory`/`long_war`/`total_defeat`. Fixed the single highest-visibility German-
+  content bug found in the whole of Area H: `game_over.scene.dry`'s `@no_hitler` ending's
+  condition (chancellor/president never "Hitler"/"Göring", chancellor_party never "NSDAP") was
+  **trivially always true** in Spanish play, so it fired on *every single playthrough*
+  regardless of outcome — the terminal screen every player sees. Repurposed it as "The Republic
+  Endures" (the coup-averted/stable-government ending), gated on no coup outcome being set.
+  Rewrote `@civil_war_won`/`@civil_war_lost`/`@long_war` (already gated on the live
+  `republic_victory`/`total_defeat`/`long_war` flags, confirming this plan's own "rename-only"
+  prediction) to Spanish prose. `events/game_over_1934.scene.dry` (the old German date-hard-stop,
+  orphaned by H-3's retirement of its only entry point) is flagged as superseded.
+  `ending_slides.scene.dry` (the optional "View ending slides" deep-dive screen, reachable
+  whenever `not total_defeat`) is deliberately **not** rewritten — its German
+  president/Mussolini/Austria flavor content is out of Phase-1 scope; flagged below as known
+  reachable debt for a later pass.
+- **H-5 (neutralize dead `post_event.scene.dry` blocks):** guarded off (`if (false) { ... }`,
+  not deleted) **Block A** (the German paramilitary force-share model, ~290-376) and **Block B**
+  (the ~25-var German coalition-percentage taxonomy plus its `_prussia` duplicate, ~4883-5097) —
+  both have been silently producing `NaN` every turn since Area B. Traced every consumer of
+  both blocks' outputs: all confirmed-dead German scenes, except `status.scene.dry`, which read
+  Block A's outputs for a "Distribution of Power" sentence that — independent of this guard —
+  always rendered as a dangling fragment (its own gate, `streetfighting_joever`, is also always
+  false). Fixed in the same pass: added the same live-var force computation Area F already used
+  for the `@paramilitaries` panel to `status.scene.dry`'s top-level `on-arrival`, so the
+  Party-section line now reads correctly every time. Verified via a standalone Node simulation
+  running a full `root.scene.dry` boot + one `post_event` turn tick: confirmed neither block's
+  outputs are ever written (proving the guard is inert) and that no live var anywhere in the
+  game comes out `NaN`.
+- **H-6 (verification sweep + docs):** the headline check — a standalone Node **end-to-end
+  playthrough simulation** driving boot → the 1931/1933/1936 elections (each running the real
+  compiled `election_algorithm` + `post_election_1928` math) → H-1's coalition writer (asserting
+  the government actually transitions Republican-Socialist → Radical-CEDA → Popular Front, PM
+  Alcalá-Zamora → Azaña → Lerroux) → the escalation chain → the July-1936 coup trigger and
+  resolver → a single, correctly-resolved ending, with **zero unexpected `NaN`** anywhere in `Q`
+  across the whole run. German-token grep sweep across every new/touched Area H file and a
+  compiled-`game.json` scan across all new scene IDs → zero player-visible German content (two
+  harmless false positives: a code comment citing "Weimar" by name in a doc-comment, and the
+  kept scene id `@no_hitler`, which is a scene identifier string, not displayed prose — matches
+  the project's "scene IDs are not renamed" policy). Headless Chromium load → no
+  `Uncaught`/`ReferenceError`/`TypeError`. `CLAUDE.md` and this doc updated.
+
+**New findings from execution, not anticipated by the plan text:**
+1. **`@post_election_1928`'s scale and composition** (H-0, above) — the plan's own research
+   pass mischaracterized it; corrected before any edits were made.
+2. **All 9 of the plan's "reachable-but-German" H-3 events were already dead**, via a different
+   mechanism (a `spd_in_government`/ministry-string trap) than the plan's grep heuristic assumed.
+   Gated off anyway, with the real reason documented, rather than leaving the false-safety net in
+   place.
+3. **`main.scene.dry`'s Economic Policy hub-deck gate** was similarly dead, but here fixing the
+   gate the way the plan literally suggested ("so the pinned Government/Economic decks appear
+   correctly") would have been actively harmful, since the deck's content is unconverted Area-G
+   debt. Left off on purpose — a case where the plan's literal instruction had to be overridden
+   by what was actually found.
+4. **A second, smaller dead-German block interleaved inside `@post_election_1928`'s live math**
+   (hardcoded `bvp_r`/`z_minus_bvp_r`/`weimar_coalition`/`grand_coalition`/etc., computed from
+   old party letters never touched by the Spanish rename since they were never written via
+   concatenation) — produces `NaN` on every election, distinct from post_event.scene.dry's
+   Block A/B. Confirmed no live consumer (same "dead output" pattern). **Not neutralized in
+   Phase 1** — it's interleaved with the live bloc-bonus math H-1/H-2 had to preserve intact, and
+   untangling it safely is a more surgical job than this stage's mandate. Flagged here for
+   whoever next touches `election_1928.scene.dry`.
+5. **`ending_slides.scene.dry`** (game_over.scene.dry's optional "View ending slides" link) is
+   reachable whenever `not total_defeat` (i.e., most endings) and is still 100% unconverted
+   German/Austria/Mussolini flavor content. Out of Phase-1 scope (a much larger rewrite than the
+   primary `#endings` scan this stage fixed) — flagged for a later pass.
+
+**Deferred / explicitly out of scope for Phase 1 (unchanged from the plan's original list):**
+bulk deletion of the ~196 dead German files; the 72-file `reichswehr_*→army_*` mass rename; a
+full Spanish rewrite of `post_event.scene.dry` Block B (only needed for an electoral-takeover
+ending path this phase doesn't add); a Spanish mid-term government-collapse mechanic (H-1's three
+elections drive the three governments, which is enough for the spine); the full
+`main.scene.dry` flavor-trigger rewrite and the deep per-year demographic-drift matrix
+(`post_event.scene.dry` ~1683-2248); deep flavor event chains (Area G / a later Area H phase);
+`ending_slides.scene.dry`'s full conversion (new, see finding 5 above).
+
+---
 
 > **Audience: a Sonnet-class executor working cold.** Read `CLAUDE.md`,
 > `docs/planning/B_state_schema.md`, and `docs/planning/F_new_subsystems.md` before touching
