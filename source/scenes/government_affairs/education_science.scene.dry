@@ -117,9 +117,13 @@ Are you sure about this? The <span style="color: #000000;">We</span><span style=
 - @ed_menu: No, do not touch religious education.
 - @cancel_advisor_action
 
+# Area H2-1: the go-to target vote_of_no_confidence.vonc_menu was deleted in the
+# Phase 2 bulk-deletion pass (dead German content; this whole scene is unreachable
+# anyway, gated on spd_in_government at the top of this file). Dead go-to clause
+# dropped rather than left dangling; nothing else in this untouched Area G file
+# was changed.
 @secularize_2
 on-arrival: secularized = 1; secularized_a = 1; budget -= 1; catholics_spd -= 15; catholics -= 5; z_relation -= 15; dvp_relation += 6*(1-dissent); ddp_relation += 6*(1-dissent); lvp_relation += 6*(1-dissent); kpd_relation += 6*(1-dissent); new_middle_spd += 3*(1-dissent); workers_spd += 3*(1-dissent); education_science += 0.5; new_middle_ddp += 4; new_middle_dvp += 4; new_middle_lvp += 8; dvp_left += 3; ddp_left += 3; ddp_cohesion += 2; lvp_left += 5; education_goal_spd += 1; coalition_dissent += 3 if constructive_vonc and ((in_weimar_coalition and not in_social_liberal_coalition) or in_grand_coalition or in_popular_front or in_emergency_government)
-go-to: vote_of_no_confidence.vonc_menu if ((in_weimar_coalition and not in_social_liberal_coalition) or in_grand_coalition or in_popular_front or in_emergency_government) and not constructive_vonc
 
 # instant VONC from zentrum
 

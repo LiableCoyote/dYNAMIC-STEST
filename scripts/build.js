@@ -8,6 +8,15 @@
  * partially-broken game.json and report success. This wrapper fails the
  * build (non-zero exit, no copy) whenever an "Error:" line appears in the
  * compiler's output, regardless of its own exit code.
+ *
+ * We always pass --force. Without it, dendrynexus skips recompilation
+ * whenever out/game.json's mtime is >= the newest mtime among the *remaining*
+ * files in source/ (lib/cli/utils.js's isUpToDate). That check only ever
+ * looks at surviving files, so it is blind to deletions: `git rm` on a scene
+ * file doesn't touch any other file's mtime, so a stale game.json that still
+ * contains the deleted scene looks "up to date" and gets silently reused --
+ * a build that reports BUILD OK without having recompiled anything. Found
+ * during Area H Phase 2's bulk-deletion pass.
  */
 'use strict';
 
@@ -17,7 +26,7 @@ const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
 
-const result = spawnSync('npx', ['dendrynexus', 'make-html', '--pretty'], {
+const result = spawnSync('npx', ['dendrynexus', 'make-html', '--pretty', '--force'], {
   cwd: ROOT,
   encoding: 'utf8',
 });
