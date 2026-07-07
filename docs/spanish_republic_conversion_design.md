@@ -151,8 +151,21 @@ These have **no base-game analogue** and are the most design-intensive:
   Area-C seat math), and the July-1936 endgame (4 new escalation events + a coup trigger/
   resolver computing forces from live militia/army vars, feeding into fixed Spanish
   `game_over.scene.dry` endings). **The game is now end-to-end playable, April 1931 → July
-  1936.** Phase 2 (deferred): bulk deletion of the ~196 dead German files, the 72-file
-  `reichswehr_*→army_*` rename, `ending_slides.scene.dry`'s conversion, deep flavor chains.
+  1936.**
+- **✅ Phase 2 (the bulk cleanup) done** — see `docs/planning/H2_bulk_cleanup.md` for full
+  detail. Physically deleted 371 dead German scene files (493 → 122 total scene files;
+  `events/` 386 → 15), including the ~2200-line dead German coalition-menu tree Phase 1 had
+  left orphaned inside `election_1928.scene.dry`. Resolved the `reichswehr_*` residue (the
+  feared 72-file rename turned out to be mostly moot — nearly all consumers were themselves
+  dead files). Converted `ending_slides.scene.dry` to four Spanish epilogue slides. Found and
+  closed 7 more reachable-but-German events beyond Phase 1's 9, plus one live policy card with
+  no gate at all routing into dead content. The interleaved dead block inside
+  `@post_election_1928`'s live seat math remains deliberately deferred (confirmed inert, not
+  worth the surgical risk). Verified via the same end-to-end simulation re-run after every
+  deletion batch — byte-identical output before and after, proving the game plays exactly the
+  same with a much smaller tree. Two screens (`status.scene.dry`'s `@emergency` sub-scene,
+  `status_right.scene.dry`) were found to hold substantial unconverted German content of
+  uncertain reachability and left flagged for a pass with interactive browser access.
 
 ### I. Advisors / Cabinet — *Size M · Rewrite*
 - Replace all 28 advisors (named German socialists) with Spanish figures: Largo Caballero, Prieto, Besteiro, Negrín, De los Ríos, Araquistáin, Zugazagoitia, etc., each with an advice/action card and stat effects.

@@ -1,15 +1,154 @@
 # Plan: Area H — Phase 2: The Bulk Cleanup
 
-> **Session handoff.** 🔲 **APPROVED — NOT YET STARTED.** This is the detailed, deliberately
-> redundant execution plan for **Area H Phase 2** — the deferred bulk cleanup that Phase 1
-> (`H_event_corpus.md`) explicitly left behind. Phase 1 made the game **end-to-end playable**
-> (April 1931 → three elections → July-1936 coup → four Spanish endings) without deleting
-> anything; it routed *around* the dead German corpus and neutralized the NaN-producing engine
-> blocks in place. Phase 2 is the **demolition and tidy-up pass**: physically delete the ~200
-> dead German scene files, mop up the `reichswehr_*` residue, convert the one remaining
-> reachable German screen (`ending_slides.scene.dry`), and optionally excise the small dead
-> block still interleaved in the live election math. **None of this changes gameplay** — it is
-> pure cleanup. The whole point is that the game plays *identically* before and after, only with
+> **Session handoff.** ✅ **Executed and verified.** H2-0 through H2-5 are all done. 371 dead
+> German scene files deleted (493 → 122 total scene files; `events/` 386 → 15, exactly the
+> keep-list); the `reichswehr_*` residue resolved; `ending_slides.scene.dry` converted to four
+> Spanish epilogue slides; the interleaved dead block in `@post_election_1928` deliberately left
+> deferred per the plan's own risk calculus (verified, not just assumed, to be inert). The H-6
+> end-to-end regression simulation's output is **byte-identical** before and after the whole
+> phase — the game plays exactly the same, with 371 fewer files and no German content on any
+> path this session could verify as reachable. See "Execution status" for exact findings,
+> including one real bug found and fixed (a live Area-G card routing into now-deleted German
+> content) and one open finding left for a future pass (`status_right.scene.dry`, whose
+> reachability could not be conclusively determined without interactive browser testing).
+
+## Execution status
+
+**✅ DONE — H2-0 through H2-5.**
+
+- **H2-0 (recon + manifest):** re-derived the 15-file live `events/` keep-list and confirmed all
+  present; built a 371-file deletion manifest grouped into 8 batches (the H-3-retired set, the
+  `_prussia` chain, the chancellor sim, the party-splinter corpus, the presidential-election
+  chain, the Austria/foreign chain, the old coup/civil-war chain, and a final "everything else"
+  remainder); captured the H-6 regression sim's output as the golden baseline to diff every
+  subsequent batch against. Found and fixed a real, previously-invisible gotcha before any
+  deletion happened: **`npm run build` was not actually recompiling.** `dendrynexus make-html`
+  skips recompilation whenever `out/game.json`'s mtime is ≥ the newest mtime among the
+  *remaining* files in `source/` — a check that's blind to deletions, since `git rm` never
+  touches a surviving file's mtime. The first post-deletion `npm run build && npm run smoke`
+  silently reused the stale, pre-deletion `game.json` and reported `BUILD OK` / `SMOKE PASSED`
+  without having recompiled anything. Fixed permanently: `scripts/build.js` now always passes
+  `--force` to `dendrynexus`, closing this for the rest of the phase and for all future work
+  (including outside Area H).
+- **H2-1 (delete the corpus):** deleted all 371 manifest files in a build-driven loop —
+  `git rm` a batch, `npm run build`, and let `getFullyQualifiedId`'s `Couldn't find an id
+  matching "X" in "Y"` errors map the live↔dead boundary one edge at a time (or, once the batches
+  proved to be one tightly interconnected dead subgraph rather than cleanly separable chains,
+  several at a time). Wrote a precise Python target-extractor partway through (distinguishes
+  actual `go-to`/`set-jump`/`call`/menu-choice targets from variable reads inside `if` clauses —
+  several deleted scene basenames, e.g. `lvp_formed`, `left_split`, `return_to_normalcy`,
+  coincide with live `Q` variable names still legitimately read elsewhere) to find every
+  dangling reference across the whole tree in one pass rather than iterating per build error;
+  confirmed zero remained. Two dangling references into the deleted corpus were found in
+  keeper/out-of-scope files and neutralized minimally, staying in each area's lane:
+  `government_affairs/education_science.scene.dry` (Area G, itself already unreachable) and
+  `advisors/woytinsky.scene.dry` (Area I, ditto) each had one dead `go-to` line dropped;
+  `events/election_1928.scene.dry` (a keeper) had 6 dangling references removed from its
+  already-orphaned dead German coalition-menu tree. **Found and closed a real bug beyond what
+  `H_event_corpus.md` flagged:** 7 events gate on genuinely live Spanish vars but were 100%
+  unconverted German content — `left_split`, `centrist_leaders_resign`,
+  `reformist_leaders_resign`, `unions_declare_independence` (+2 variants),
+  `groko_prussia_collapse`, and `return_to_normalcy`. Unlike Phase 1 H-3's 9
+  "reachable-but-German" events (which all turned out to already be dead via a *different*
+  mechanism), these were genuinely reachable and would have shown German prose to a live
+  Spanish playthrough if left in place. Verified: scene count 3219 → 1039; the H-6 sim's output
+  unchanged.
+- **H2-2 (`reichswehr_*` residue):** confirmed the design doc's feared "72-file
+  `reichswehr_*→army_*` rename" was mostly resolved for free by H2-1 (nearly every consumer of
+  the real German-military vars was itself a dead file). Closed the survivors: found and fixed a
+  genuine reachable-content leak — `government_affairs/shuffle_cabinet.scene.dry` (Area G) had
+  **no `view-if` gate at all**, so it was live, and its `@shuffle` branch routed straight into
+  `election_1928.ministries`, deep in the dead German coalition-menu tree. Given this, deleted
+  that entire orphaned tree (`@achievement_check_e` onward, ~2200 lines, flagged-but-kept in
+  Phase 1's H-2) outright after confirming via a full cross-reference check that nothing before
+  the cut point and nothing in any other file depended on it. Removed two small dead-conditional
+  lines from `status.scene.dry`. Left several reichswehr_ residues alone, each for a documented
+  reason: `post_event.scene.dry`'s remaining refs are self-guarded by comparisons against the
+  permanently-undefined `reichswehr_strength`/`reichswehr_loyalty` (provably inert);
+  `game_over.scene.dry`'s two refs sit inside dead achievement-unlock conditions (Area K's
+  territory); `economic_policy.scene.dry`/`foreign_policy.scene.dry` are entire files already
+  gated dead (Area G, matching Phase 1's own precedent); `military_policy.scene.dry`'s and
+  `election_1928.scene.dry`'s `reichswehr_goal[_completed]` are live-but-legacy-named tracking
+  flags (functionally correct regardless of name — cosmetic Area J/L polish, not this stage's
+  job); the kept `reichswehr_minister`/`_minister_party` War-ministry slot is untouched by
+  design. **New finding, flagged not fixed:** `status.scene.dry`'s `@emergency` sub-scene
+  (Government/Party Leadership/Industrial Backing sections) is substantially unconverted German
+  content — the same class of debt as the already-flagged `@polls` section (Area F). Verified:
+  scene count 1039 → 838; H-6 sim unchanged.
+- **H2-3 (`ending_slides.scene.dry`):** rewrote the optional "View ending slides" epilogue
+  screen — the one genuinely reachable German content Phase 1 left flagged and deferred (reached
+  from `game_over.scene.dry` whenever `not total_defeat`, i.e. most endings). The original was 8
+  elaborate alternate-future endings plus subendings, extending speculative fiction decades into
+  a Cold War Germany with dozens of fictional splinter parties. Replaced, per the plan's minimal
+  floor, with four Spanish epilogue slides keyed on the same live outcome flags the primary
+  `game_over.scene.dry` endings use (`@republic_endures`, `@coup_defeated`, `@long_civil_war`,
+  `@republic_falls`). Verified each resolves to exactly one match across all four outcome
+  scenarios; compiled-output scan of the whole file found zero German tokens; H-6 sim unchanged.
+- **H2-4 (the interleaved dead block) — judgment call: deferred, per the plan's own explicit
+  recommendation.** Traced every consumer of the block's outputs (`bvp_r`, `bvp_votes`,
+  `z_minus_bvp_r`, `reichstag_size`, etc.) all the way through: each terminates in already-dead
+  code — the H-5-guarded `post_event.scene.dry` Block A/B, the `rubicon`-gated weekly-bookkeeping
+  block (`rubicon` defaults off), or a pre-1931 date gate. This is a *stronger* confirmation of
+  inertness than Phase 1 H-6 had, but the risk/reward calculus the plan laid out still holds —
+  surgery on code interleaved with the one piece of math (`psoe_r`/`ceda_r`/etc.) the entire
+  election arc depends on isn't worth it for a few fewer inert `NaN`s. No edits made; this is a
+  deliberate, verified deferral, not a skip.
+- **H2-5 (verification sweep + docs):** the headline regression proof — `BUILD OK` + `SMOKE
+  PASSED` (scene count 3219 → 823 across the whole phase); the H-6 end-to-end simulation's
+  output **byte-identical** to the pre-Phase-2 golden baseline, run and diffed after every single
+  batch, not just at the end. A German-token sweep across the *entire remaining tree* (not just
+  the files this phase touched) turned up nothing unexpected outside already-accounted-for
+  territory (Area G/I files, the kept `reichswehr_minister` slot, `credits.scene.dry`'s
+  bibliography/image-attribution citations of real historical sources, `modinfo.scene.dry`'s
+  already-self-flagged "much of the text below still describes the original Weimar setting"
+  about-page). One small fix made during the sweep: `party_affairs/ideology.scene.dry` had a
+  stale comment naming a since-deleted file (`events/schleicher_23.scene.dry`) as the
+  `social_patriot` faction's unlock trigger; updated the comment to reflect the deletion without
+  attempting to design a Spanish replacement trigger (that's a deferred Area H/D content task,
+  same as the comment already said). Compiled-output scan and headless Chromium load both clean.
+
+**New findings from execution, not anticipated by the plan text:**
+1. **The `npm run build` staleness gotcha** (H2-0, above) — a real, previously-undiscovered bug
+   in the build wrapper that would have silently invalidated every verification step in this
+   phase (and any future deletion work) had it not been caught immediately. Fixed permanently.
+2. **7 more reachable-but-German events** (H2-1) beyond Phase 1 H-3's 9 — closed by deletion
+   rather than by gating, since Phase 2's whole mode of operation *is* deletion.
+3. **`shuffle_cabinet.scene.dry`'s ungated route into dead content** (H2-2) — a live Area-G card
+   with no gate at all, silently relying on its destination existing. Now fixed.
+4. **A second, smaller dead-German block interleaved inside `@post_election_1928`'s live math**
+   was already known from Phase 1 H-6; H2-4 added a full consumer trace confirming it, still
+   deferred.
+5. **`status.scene.dry`'s `@emergency` sub-scene** (H2-2) is substantially unconverted German
+   content (chancellor/vice-chancellor/Prussia-Minister-President display, a full "Party
+   Leadership"/"Industrial Backing" section of German party ideology) - flagged, not fixed,
+   out of scope for a `reichswehr_`-focused stage.
+6. **`status_right.scene.dry`'s reachability is unresolved.** It contains a large, entirely
+   unconverted German "camarilla"/presidential-influence panel (President Hindenburg,
+   Schleicher, Oskar von Hindenburg), gated in part on `dnef_existed` (never set true anywhere —
+   meaning its "not dnef_existed" branch, showing "President: Paul von Hindenburg"
+   unconditionally, would be the exact same class of always-true bug H-4 found and fixed in
+   `@no_hitler`, *if this scene is ever actually rendered*). Neither the `.dry` corpus nor the
+   stock dendrynexus template's HTML/JS reference it by id anywhere - but `status.scene.dry`
+   (confirmed live) is *equally* unreferenced by the same search, meaning both are evidently
+   reached via some project-specific template/header-link mechanism this session's tooling
+   (`--dump-dom` only, no scripted clicks) could not conclusively trace. Left untouched rather
+   than risk deleting or editing a possibly-live scene on unverified reachability - flagged here
+   for whoever next has access to interactive browser testing to resolve definitively.
+
+**Deferred / explicitly out of scope for Phase 2 (unchanged, or updated where noted):**
+- `advisors/` (Area I), the untouched `government_affairs/` cards (Area G), `qdisplays`
+  (Area J), assets (Area K) — untouched throughout, per the stay-in-lane guardrail.
+- Renaming the kept `reichswehr_minister`/`_minister_party` War-ministry slot, and the
+  live-but-legacy-named `reichswehr_goal[_completed]` tracking flags — cosmetic, Area J/L.
+- A full Spanish rewrite of `post_event.scene.dry` Block B — only needed for an
+  electoral-takeover ending path the game doesn't have.
+- H2-4's interleaved dead block — deferred, see above.
+- **New:** `status.scene.dry`'s `@emergency` sub-scene and `status_right.scene.dry` in full —
+  both substantially unconverted German content, found during this phase's final sweep, not
+  fixed (see findings 5-6 above).
+- New Spanish flavor/event content — Area G / a later content area, not cleanup.
+
+---
 > ~200 fewer dead files and no German residue on any reachable path. When execution begins, add
 > an "Execution status" section at the top (mirroring `F_new_subsystems.md` / `H_event_corpus.md`)
 > and flip the banner to ✅ as the final stage lands.

@@ -65,9 +65,11 @@ on-departure: ideology = "reformist"; reformist_strength += 8; democratization +
 
 The Prietista wing of the party seeks to preserve the Republic through collaboration with the republican parties, and is most supportive of coalitions with the other pro-Republic forces.
 
-# social_patriot's unlock trigger (currently events/schleicher_23.scene.dry, a
-# German-specific event) is Area H's job to redesign for Spain; this card only
-# makes the option coherent once the flag is set.
+# social_patriot's unlock trigger (originally events/schleicher_23.scene.dry, a
+# German-specific event, deleted in Area H Phase 2's bulk cleanup along with the
+# rest of the dead corpus) has no Spanish replacement yet - designing one is a
+# deferred Area H/D content task; this card only makes the option coherent once
+# the flag is set.
 @socpat
 view-if: social_patriot
 on-arrival: {!
