@@ -143,6 +143,9 @@ Agriculture:
 - @easy_discard
 - @cancel_advisor_action
 
+# Area H2-2: go-to target election_1928.ministries was inside election_1928.scene.dry's
+# dead German coalition-menu tree, deleted in the Phase 2 bulk-cleanup pass. This card
+# had no view-if gate, so it was live/reachable and would have routed into dead German
+# content; dropped the dead go-to, nothing else in this untouched Area G file was changed.
 @shuffle
 on-arrival: coalition_dissent += 1; month_actions += 1
-go-to: election_1928.ministries

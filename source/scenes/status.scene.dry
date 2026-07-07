@@ -119,8 +119,12 @@ Method of governing: Presidential decrees
 [? if chancellor == "Schleicher" or chancellor == "Bredow" or chancellor == "Goerdeler" or chancellor == "Treviranus": [+ chancellor +]'s public popularity: [+ schleicher_approval : schleicher_popularity +]<br> ?]
 [? if chancellor == "Papen": Schleicher's confidence: [+ schleicher_papen_r : confidence +]<br> ?]
 [? if red_general_unlock: [? if chancellor == "Schleicher" or not schleicher_post: Schleicher?][? if chancellor != "Schleicher" and schleicher_post: State?]-<span style="color: #c00000;">**SPD**</span> relations: [+ schleicher_spd_r : schleicher_spd +]<br> ?]
-[? if reichswehr_strength > 100 and chancellor == "Schleicher": Reichswehr: 100 thousand troops.<br> ?]
-[? if reichswehr_strength > 100 and chancellor == "Schleicher": State "Militia": [+ reichswehr_strength - 100 +] thousand troops. ?]
+# Area H2-2: removed two dead lines gated on chancellor == "Schleicher" (never true
+# in Spanish play), the last reichswehr_strength reference in this file. The rest of
+# this @emergency sub-scene (Government/Party Leadership/Industrial Backing below) is
+# substantially unconverted German content - out of scope for this reichswehr_
+# cleanup pass; flagged in docs/planning/H2_bulk_cleanup.md's execution status,
+# same class of debt as the already-flagged @polls section (Area F).
 
 = Government
 
