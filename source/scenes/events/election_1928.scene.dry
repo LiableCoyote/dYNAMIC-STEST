@@ -1538,7 +1538,9 @@ The right will be more active in resisting our rule considering we are going to 
 
 [? if president_ideology == "Right" or president == "Hindenburg": [+ president +] might object to this coalition, and may perform a <i>Reichsexekution</i> on our Prussian government, if we were to become too radical in our actions.?]
 
-- @prussia_election_1928.kpd_goals_prussia: The <span style="color: #700000;">**KPD**</span> presents us with a list of demands.
+# Area H2-1: dead menu option removed (referenced prussia_election_1928, deleted
+# in the Phase 2 bulk-deletion pass). This whole sub-tree is already orphaned
+# dead German content per the H Phase 1 flag above @achievement_check_e.
 
 @popular_front_prussia_groko
 view-if: in_grand_coalition_prussia
@@ -1553,7 +1555,6 @@ The right will be more active in resisting our rule considering we are going to 
 
 [? if president_ideology == "Right" or president == "Hindenburg": [+ president +] might object to this coalition, and may perform a <i>Reichsexekution</i> on our Prussian government, if we were to become too radical in our actions.?]
 
-- @prussia_election_1928.kpd_goals_prussia: The <span style="color: #700000;">**KPD**</span> presents us with a list of demands.
 
 @great_popular_front
 view-if: z_ideology == "Left" and kpd_leader == "Conciliators"
@@ -1606,7 +1607,7 @@ on-arrival: chancellor = nsdap_chancellor; chancellor_party = "NSDAP"
 
 [? if president == "Hindenburg" : President Hindenburg's camarilla ?][? if president != "Hindenburg" and president != "Braun": President [+ president +] ?][? if president == "Braun" : President Braun somehow ?] has decided that [+ nsdap_leader +] must be chancellor [? if president == "Hindenburg": , and the aging president accepts their recommendations. ?][? if president != "Hindenburg" : because it is what the constitution would stipulate. ?]
 
-- @hitler_takes_power: What do we do now?
+# Area H2-1: dead reference removed (target deleted in the Phase 2 bulk-deletion pass); this sub-tree is already orphaned dead German content.
 
 
 @far_right_fail
@@ -1681,7 +1682,7 @@ Immediately, [+ chancellor +] goes to work building a "<span style="color: #750e
 
 In response to [+ chancellor +] being appointed Chancellor, the right-wing forces launches almost immediately launch an attempted coup. Troops of the <span style="color: #3E88B3;">**Stahlhelm**</span> and <span style="color: #7A3C00;">Nazi</span> <span style="color: #7A3C00;">**SA**</span> enter Berlin and immediately begin clashing with our supporters! <span style="color: #808080;">Reactionary</span> officers within the Reichswehr have taken their troops out of the barracks and joined them with the <span style="color: #3E88B3;">**Stahlhelm**</span> to stop the <span style="color: #700000;">**KPD**</span> from taking power. We are forced to be on the same side as the <span style="color: #700000;">**KPD**</span>, whether we want to or not.
 
-- @civil_war
+# Area H2-1: dead reference removed (target deleted in the Phase 2 bulk-deletion pass); this sub-tree is already orphaned dead German content.
 
 
 @left_coalition_resources
@@ -1735,7 +1736,6 @@ We have exited our long standing <span style="color: #000000;">We</span><span st
 
 The right will be more active in resisting our rule considering we are going to rule with the <span style="color: #700000;">**KPD**</span> on both levels of government. The <span style="color: #700000;">**KPD**</span> has provided a list of objectives for us to complete in parallel to our federal policies.
 
-- @prussia_election_1928.kpd_goals_prussia: The <span style="color: #700000;">**KPD**</span> presents us with a list of demands.
 
 @left_front_prussia_groko
 view-if: in_grand_coalition_prussia
@@ -1748,7 +1748,6 @@ We have kicked out the <span style="color: #C0A054;">**DVP**</span> and the othe
 
 The right will be more active in resisting our rule considering we are going to rule with the <span style="color: #700000;">**KPD**</span> on both levels of government. The <span style="color: #700000;">**KPD**</span> has provided a list of objectives for us to complete in parallel to our federal policies.
 
-- @prussia_election_1928.kpd_goals_prussia: The <span style="color: #700000;">**KPD**</span> presents us with a list of demands.
 
 @left_coalition_success
 on-arrival: spd_in_government = 1; in_left_front = 1; chancellor = "Breitscheid"; chancellor_party = "SPD"; coup_progress += 3; capital_strike_progress += 2; coup_progress += 1 if in_left_front_prussia; capital_strike_progress += 1 if in_left_front_prussia; in_popular_front = 0; in_grand_coalition = 0; in_weimar_coalition = 0; kpd_relation += 10; z_relation -= 5; ddp_relation -= 5; dvp_relation -= 10; lvp_relation -= 8; hindenburg_angry = 85
@@ -1781,7 +1780,7 @@ In response to the <span style="color: #700000;">**KPD**</span>'s entrance into 
 
 @march_on_berlin_2
 on-arrival: march_on_berlin_left = 1
-go-to: march_on_berlin
+# Area H2-1: dead reference removed (target deleted in the Phase 2 bulk-deletion pass); this sub-tree is already orphaned dead German content.
 
 @right_coalition
 title: Refuse to form a government, so that a right-wing coalition may be formed.
@@ -2304,7 +2303,7 @@ on-arrival: chancellor = "Hitler"; chancellor_party = "NSDAP"
 
 There is no path to a majority government for now. The scheming around President Hindenburg is leading to only one path - that of Chancellor Adolf Hitler. [? if largest_party == "NSDAP" : Since they are the largest party, it is not exactly contrary to parliamentary procedure, so it is difficult to raise objections solely on procedural grounds. ?] [? if hitler_deported: Despite his earlier deportation, the <span style="color: #7A3C00;">Nazi</span> leaders and their <span style="color: #3E88B3;">reactionary</span> allies have connived for the president to give him German citizenship after all. ?]
 
-- @hitler_takes_power: What now?
+# Area H2-1: dead reference removed (target deleted in the Phase 2 bulk-deletion pass); this sub-tree is already orphaned dead German content.
 
 # if NSDAP is largest party and Hindenburg is president, then Hindenburg appoints Hitler chancellor.
 
@@ -2457,7 +2456,7 @@ The <span style="color: #7A3C00;">far</span>-<span style="color: #3E88B3;">right
 
 Their numbers are bolstered by the many government workers who are against the prospect of a unified <span style="color: #c00000;">Socialist</span> government. Police and soldiers defect to the <span style="color: #7A3C00;">**SA**</span> and <span style="color: #3E88B3;">**Stahlhelm**</span>.
 
-- @civil_war: It is war.
+# Area H2-1: dead reference removed (target deleted in the Phase 2 bulk-deletion pass); this sub-tree is already orphaned dead German content.
 
 
 @emergency_no_confidence
@@ -3541,7 +3540,7 @@ This coalition arrangement is tolerable to all.
 @prussian_coalition_form
 view-if: prussia_negotiations_trigger == 1
 on-arrival: prussia_negotiations_trigger = 0
-go-to: prussian_coalition_formation
+# Area H2-1: dead reference removed (target deleted in the Phase 2 bulk-deletion pass); this sub-tree is already orphaned dead German content.
 
 @drop_labor
 title: Drop the Labor Ministry.

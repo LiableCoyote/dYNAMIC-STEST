@@ -20,7 +20,11 @@ subtitle: Convincing the rest of the party to support the WTB-plan.
 choose-if: advisor_action_timer <= 0 and wtb_adopted == 0 and wtb_concept and black_thursday_seen and ((labor_strength >= center_strength) and (labor_strength >= left_strength)) and wtb_points >= 160
 on-arrival: advisor_action_timer = 6;
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if black_thursday_seen == 0 : We are not currently in an economic crisis. ?][? if wtb_adopted > 0 : We have already adopted the WTB-Plan. ?][? if wtb_points < 160 : The WTB Plan is still being ironed out. ?][? if (labor_strength < center_strength or labor_strength < left_strength): The labor faction is not strong enough. ?]
-go-to: wtb_proposed
+# Area H2-1: go-to target wtb_proposed was deleted in the Phase 2 bulk-
+# deletion pass (dead German content). This card's own top-level gate
+# (woytinsky_advisor) and this branch's choose-if (black_thursday_seen, also
+# gone) were already unreachable; dead go-to dropped here, nothing else in
+# this untouched Area I file was changed.
 
 @carry_out_policy
 title: Carry out the economic plan.
