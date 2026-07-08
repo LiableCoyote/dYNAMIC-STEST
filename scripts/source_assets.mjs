@@ -57,10 +57,26 @@ function isShareAlike(shortName) {
   return /sa/i.test(shortName || '') && /cc/i.test(shortName || '');
 }
 
-async function fetchJson(url) {
-  const res = await fetch(url, { headers: { 'User-Agent': USER_AGENT } });
-  if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
-  return res.json();
+function sleep(ms) {
+  return new Promise((res) => setTimeout(res, ms));
+}
+
+// Wikimedia rate-limits bursty anonymous traffic with 429s; back off and retry
+// rather than treating a transient throttle as a hard "no image found".
+async function fetchJson(url, retries = 4) {
+  for (let attempt = 0; ; attempt++) {
+    const res = await fetch(url, { headers: { 'User-Agent': USER_AGENT } });
+    if (res.ok) return res.json();
+    if (res.status === 429 && attempt < retries) {
+      const retryAfter = Number(res.headers.get('retry-after'));
+      const delay = Number.isFinite(retryAfter) && retryAfter > 0
+        ? retryAfter * 1000
+        : 1000 * 2 ** attempt;
+      await sleep(delay);
+      continue;
+    }
+    throw new Error(`HTTP ${res.status} for ${url}`);
+  }
 }
 
 // Resolves a figure name to a Commons file name via Wikipedia's pageimages API.
@@ -102,9 +118,21 @@ async function fetchImageInfo(fileName) {
   };
 }
 
-async function downloadFile(url, destPath) {
-  const res = await fetch(url, { headers: { 'User-Agent': USER_AGENT } });
-  if (!res.ok) throw new Error(`HTTP ${res.status} downloading ${url}`);
+async function downloadFile(url, destPath, retries = 4) {
+  let res;
+  for (let attempt = 0; ; attempt++) {
+    res = await fetch(url, { headers: { 'User-Agent': USER_AGENT } });
+    if (res.ok) break;
+    if (res.status === 429 && attempt < retries) {
+      const retryAfter = Number(res.headers.get('retry-after'));
+      const delay = Number.isFinite(retryAfter) && retryAfter > 0
+        ? retryAfter * 1000
+        : 1000 * 2 ** attempt;
+      await sleep(delay);
+      continue;
+    }
+    throw new Error(`HTTP ${res.status} downloading ${url}`);
+  }
   const buf = Buffer.from(await res.arrayBuffer());
   fs.mkdirSync(path.dirname(destPath), { recursive: true });
   fs.writeFileSync(destPath, buf);
@@ -139,6 +167,17 @@ function appendCredit({ targetRel, descriptionUrl, licenseShortName, artist, acc
   ensureCreditsFile();
   const line = `${targetRel} | ${descriptionUrl} | ${licenseShortName} | ${artist || 'see source'} | ${accessedDate}\n`;
   fs.appendFileSync(CREDITS_PATH, line);
+}
+
+// Wikimedia sources are a mix of .jpg/.png/.JPG/etc; the manifest's declared
+// target extension is a guess. Correct it to match the real source extension
+// so files never end up mislabeled (e.g. PNG bytes saved as "foo.jpg", which
+// serves with the wrong Content-Type).
+function retarget(target, sourceUrl) {
+  const sourceExt = path.extname(new URL(sourceUrl).pathname).toLowerCase();
+  const declaredExt = path.extname(target).toLowerCase();
+  if (!sourceExt || sourceExt === declaredExt) return target;
+  return target.slice(0, -declaredExt.length) + sourceExt.replace('.jpeg', '.jpg');
 }
 
 async function processEntry(entry, { dryRun }) {
@@ -177,6 +216,9 @@ async function processEntry(entry, { dryRun }) {
     };
   }
 
+  const correctedTarget = retarget(targetRel, info.url);
+  const correctedPath = path.join(OUT_HTML, correctedTarget);
+
   const result = {
     slug, figure, status: dryRun ? 'would-download' : 'downloaded',
     fileName: lead.fileName,
@@ -186,15 +228,16 @@ async function processEntry(entry, { dryRun }) {
     artist: info.artist,
     sourceUrl: info.descriptionUrl,
     downloadUrl: info.url,
-    target: targetRel,
+    target: correctedTarget,
+    retargeted: correctedTarget !== targetRel,
   };
 
   if (!dryRun) {
     try {
-      const bytes = await downloadFile(info.url, targetPath);
+      const bytes = await downloadFile(info.url, correctedPath);
       result.bytes = bytes;
       appendCredit({
-        targetRel,
+        targetRel: correctedTarget,
         descriptionUrl: info.descriptionUrl,
         licenseShortName: info.licenseShortName,
         artist: info.artist,
@@ -229,8 +272,8 @@ async function main() {
     const r = await processEntry(entry, { dryRun });
     results.push(r);
     console.log(r.status + (r.detail ? ` — ${r.detail}` : '') + (r.license ? ` [${r.license}]` : ''));
-    // Be a polite API citizen.
-    await new Promise((res) => setTimeout(res, 200));
+    // Be a polite API citizen — each entry is already 2-3 sequential requests.
+    await sleep(1200);
   }
 
   const byStatus = {};

@@ -1,0 +1,32 @@
+# Image credits
+
+
+## Spanish Republic conversion — assets
+
+file | source | license | attribution | accessed
+---- | ------ | ------- | ----------- | --------
+img/es/leaders/besteiro.jpg | https://commons.wikimedia.org/wiki/File:Juli%C3%A1n_Besteiro_(cropped).jpg | Public domain | Agence de presse Meurisse | 2026-07-08
+img/es/leaders/saborit.png | https://commons.wikimedia.org/wiki/File:Andr%C3%A9s_Saborit_Colomer_(ca_1923)_retrato.png | Public domain | Unknown author Unknown author | 2026-07-08
+img/es/leaders/negrin.png | https://commons.wikimedia.org/wiki/File:Juan_Negr%C3%ADn.png | Public domain | Unknown author Unknown author | 2026-07-08
+img/es/leaders/largo_caballero.jpg | https://commons.wikimedia.org/wiki/File:Francisco_Largo_Caballero.jpg | Public domain | Anonymous Unknown author | 2026-07-08
+img/es/leaders/cordero.png | https://commons.wikimedia.org/wiki/File:Union-General-de-Trabajadores_Manuel_Cordero.png | CC BY 4.0 | UGT | 2026-07-08
+img/es/leaders/de_los_rios.jpg | https://commons.wikimedia.org/wiki/File:Fernando_de_los_R%C3%ADos_(cropped).jpg | Public domain | Agence de presse Meurisse | 2026-07-08
+img/es/leaders/maranon.png | https://commons.wikimedia.org/wiki/File:Gregorio_Mara%C3%B1%C3%B3n_-_retrato.png | Public domain | Unknown author Unknown author | 2026-07-08
+img/es/leaders/llopis.jpg | https://commons.wikimedia.org/wiki/File:Rodolfo_Llopis_1963_(cropped).jpg | CC BY-SA 3.0 nl | Harry Pot | 2026-07-08
+img/es/leaders/zugazagoitia.jpg | https://commons.wikimedia.org/wiki/File:Juli%C3%A1n_Zugazagoitia.jpg | Public domain | Anonymous Unknown author | 2026-07-08
+img/es/leaders/galarza.png | https://commons.wikimedia.org/wiki/File:%C3%81ngel_Galarza.png | Public domain | No consta | 2026-07-08
+img/es/leaders/carrillo.jpg | https://commons.wikimedia.org/wiki/File:Santiago_Carrillo_003.jpg | Public domain | Nemo | 2026-07-08
+img/es/leaders/lejarraga.jpg | https://commons.wikimedia.org/wiki/File:Mar%C3%ADa_Lej%C3%A1rraga-2.jpg | CC BY-SA 4.0 | Unknown author Unknown author | 2026-07-08
+img/es/leaders/blas_cabrera.jpg | https://commons.wikimedia.org/wiki/File:1927,_La_Asamblea_Nacional,_Blas_Cabrera_Felipe.jpg | Public domain | Unknown author Unknown author | 2026-07-08
+img/es/leaders/azana.jpg | https://commons.wikimedia.org/wiki/File:Manuel_Aza%C3%B1a_cropped.jpg | Public domain | Unknown author Unknown author | 2026-07-08
+img/es/leaders/trifon_gomez.jpg | https://commons.wikimedia.org/wiki/File:1918-12-03,_El_F%C3%ADgaro,_Varias_notas_gr%C3%A1ficas_(cropped)_Trif%C3%B3n_G%C3%B3mez.jpg | Public domain | Unknown author Unknown author | 2026-07-08
+img/es/leaders/de_gracia.jpg | https://commons.wikimedia.org/wiki/File:Anastasio_de_Gracia.jpg | CC BY-SA 4.0 | Archivo General de la Administración | 2026-07-08
+img/es/leaders/gonzalez_pena.jpg | https://commons.wikimedia.org/wiki/File:Gonzalez_Penya_Ramon_1.jpg | CC BY-SA 4.0 | Unknown author Unknown author | 2026-07-08
+img/es/leaders/del_rosal.jpg | https://commons.wikimedia.org/wiki/File:Amaro_Rosal.jpg | Attribution | Ministerio de Cultura | 2026-07-08
+img/es/leaders/vidiella.jpg | https://commons.wikimedia.org/wiki/File:Comit%C3%A9_Central_de_Mil%C3%ADcies_Antifeixistes.jpg | CC BY-SA 4.0 | AlbertRA | 2026-07-08
+img/es/leaders/araquistain.jpg | https://commons.wikimedia.org/wiki/File:LuisAraquist%C3%A1in.jpg | Public domain | Agence de presse Mondial Photo-Presse | 2026-07-08
+img/es/leaders/nelken.jpg | https://commons.wikimedia.org/wiki/File:1928-08-04,_Caras_y_Caretas,_Margarita_Nelken_(cropped).jpg | Public domain | Unknown author Unknown author | 2026-07-08
+img/es/leaders/alvarez_del_vayo.jpg | https://commons.wikimedia.org/wiki/File:1927-11-15,_La_Gaceta_Literaria,_%C3%81lvarez_del_Vayo_(cropped).jpg | Public domain | Not stated | 2026-07-08
+img/es/leaders/de_la_torre.jpg | https://commons.wikimedia.org/wiki/File:1918-06-15,_La_Monta%C3%B1a,_Matilde_de_la_Torre_de_Guti%C3%A9rrez_(cropped).jpg | Public domain | Not stated | 2026-07-08
+img/es/leaders/echevarria.jpg | https://commons.wikimedia.org/wiki/File:Toribio_Etxeberria.JPG | Public domain | No machine-readable author provided. Txo assumed (based on copyright claims). | 2026-07-08
+img/es/leaders/prieto.jpg | https://commons.wikimedia.org/wiki/File:Indalecio_Prieto,_1936.jpg | Public domain | Agence de presse Meurisse | 2026-07-08
