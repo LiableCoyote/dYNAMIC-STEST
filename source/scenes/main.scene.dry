@@ -2618,18 +2618,13 @@ is-deck: true
 
 - @rubicon_filler
 
-# Area H Phase 1 (H-3) finding: this gate read spd_in_government/minister_party=="SPD",
-# which are never true in Spanish play, so the deck never appeared. Deliberately NOT
-# retargeted onto psoe_in_government here: government_affairs/economic_policy.scene.dry
-# itself is still entirely unconverted German content (workers_spd, reichswehr_strength,
-# NSDAP, "Germany", etc. throughout - part of Area G's ~37-card backlog per CLAUDE.md).
-# Making this gate pass would surface that unconverted content to the player, which is
-# worse than the deck simply not appearing. Left explicitly off (view-if: 0) pending
-# Area G's conversion of economic_policy.scene.dry, rather than relying on the original
-# gate's dead vars to keep it hidden by accident.
+# Area G (G-2): government_affairs/economic_policy.scene.dry is now converted to
+# live Spanish content (finance_minister_party == "PSOE" and economic_plan > 0),
+# so this deck gate is re-enabled to match. It surfaces once the party has settled
+# on an economic plan via party_affairs/crisis_program.scene.dry (Area E/D content).
 @eco
 title: Economic Policy
-view-if: 0
+view-if: economic_plan > 0
 card-image: img/portraits/SchmidtRobert.jpg
 is-deck: true
 

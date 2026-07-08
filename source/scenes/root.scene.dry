@@ -83,6 +83,11 @@ Q.strike_term_seen = 0;
 Q.labor_affairs_seen = 0;
 Q.working_hours = 0;
 Q.workers_safety = 0;
+Q.works_councils = 0;
+Q.government_salaries_cut = 0;
+Q.industrial_levy = 0;
+Q.economic_democracy = 0;
+Q.cooperatives = 0;
 
 // secret events...
 Q.unions_independent = 0;

@@ -84,6 +84,53 @@
     grep confirmed zero remaining `spd_in_government`/`_minister_party=="SPD"`/`_spd`/
     `_ddp`/`_dvp`/`_lvp`/`_kvp`/`_dnvp`/`_nsdap` tokens in the three files.
 
+- **G-2 (Economic Policy flagship + `@eco`):** ✅ done. Converted
+  `economic_policy.scene.dry` (279 → 232 lines) and `economic_democracy.scene.dry`, then
+  flipped `main.scene.dry:2630`'s `@eco` deck from `view-if: 0` to `view-if: economic_plan
+  > 0`, matching the card's own gate.
+  - **Key recon finding that reshaped this stage:** the WTB/Lautenbach public-works arm
+    (`@economic_plan_dilemma`, `@lautenbach_continuation`, `@lautenbach_wtb`, `@wtb_2`,
+    `@wtb_2_deficit`, `@wtb_continuation`, `@implement_wtb_no_deficit`,
+    `@implement_wtb_deficit` — roughly half the original file) was **already permanently
+    unreachable before Area G touched it**: it's gated on `wtb_adopted`/
+    `lautenbach_adopted`, and a full-codebase grep confirmed neither is ever set to 1
+    anywhere (only read/compared) — dead machinery orphaned by an unconverted advisor
+    path (Area I: Woytinsky/Baade/Aufhauser/Sender/Schumacher). Per the plan's own
+    "drop deferred German-plot machinery with no Spanish home" guidance, this whole arm
+    was deleted rather than reframed — it could never have fired regardless of gate
+    fixes. The two genuinely-reachable arms — the **left/nationalization plan**
+    (`nationalization_adopted`, set by the already-Area-E/D-converted
+    `party_affairs/crisis_program.scene.dry`'s `adopt_left` branch) and the **moderate
+    Prietista job-creation plan** (`moderate_plan_adopted`, same file's `adopt_moderate`
+    branch) — were fully converted: demographic writes retargeted to the class matrix,
+    relations retargeted to `radical_relation`/`izq_rep_relation`/`ceda_relation`/
+    `pce_relation`, `reichswehr_*`/`schleicher_spd`/`z_leader == "Kaiser"`/
+    `kpd_leader == "Conciliators"` German-plot conditionals dropped, `hindenburg_angry`→
+    `president_angry`, the Reichsbanner-strength unlock on the confrontational
+    `empower_workers` branch retargeted to Area F's live `ugt_militia_militancy`. The
+    `austerity` submenu's `industrial_levy` branch (originally gated on
+    `young_plan_ratified`, also confirmed dead the same way) was reframed as a standalone
+    "special levy on capital" always available once black_thursday_seen, dropping the
+    dead gate rather than porting it. `economic_democracy.scene.dry`'s gate fixed to
+    `psoe_in_government and (economic_minister_party == "PSOE" or finance_minister_party
+    == "PSOE") and labor_minister_party == "PSOE"`; its works-councils progression
+    reframed as Spanish factory committees (*comités de fábrica*); dropped the dead
+    `cvp_economy_accepted`/`kpd_leader`/`kpd_ultimatum_timer` conditionals.
+  - **Four more previously-uninitialized write targets found and declared** (same class
+    of bug as G-1's two): `works_councils`, `government_salaries_cut`, `industrial_levy`,
+    `economic_democracy`, and `cooperatives` were all read/written across these two files
+    (and, for `works_councils`, also referenced from the already-converted
+    `agricultural_policy.scene.dry`) but never initialized in `root.scene.dry`. All five
+    now declared alongside the G-1 additions.
+  - **Verify:** `BUILD OK` → `SMOKE PASSED` (scene count dropped 823 → 815 confirming the
+    8 dead WTB sub-scenes were removed cleanly with no dangling `go-to` targets); a
+    standalone Node check confirmed both cards' gates resolve true under the initial
+    cabinet, the `@eco` deck gate is false pre-plan-adoption and true post-adoption, and
+    all 11 exercised branches (moderate + left/nationalize + economic-democracy paths)
+    write only pre-existing keys with zero NaN; grep confirmed zero German-signature
+    tokens (`_spd`, `wtb_`, `lautenbach`, `reichswehr`, `schleicher`, `Germany`,
+    `Weimar`, `Brüning`, `Reichsbank`) remain in either file.
+
 ---
 
 ## Context
