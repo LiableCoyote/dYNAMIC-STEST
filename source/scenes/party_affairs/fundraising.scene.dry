@@ -3,7 +3,7 @@ new-page: true
 view-if: fundraising_timer <= 0
 on-arrival: fundraising_timer = 12
 is-card: true
-card-image: img/poster_2.jpg
+card-image: img/placeholder.jpg
 tags: party_affairs
 
 = Fundraising

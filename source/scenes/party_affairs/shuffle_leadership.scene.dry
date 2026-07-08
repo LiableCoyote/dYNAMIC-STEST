@@ -4,7 +4,7 @@ is-card: true
 tags: party_affairs
 view-if: shuffle_leadership_timer = 0 and difficulty >= 0 and not started
 on-arrival: month_actions += 1; shuffle_leadership_timer = 10;
-card-image: img/vorwarts_2.jpg
+card-image: img/placeholder.jpg
 go-to: rm_main
 
 - @rm_main: Remove advisors
@@ -393,7 +393,7 @@ view-if: n_advisors < 3
 title: Juan Negrín
 subtitle: Juan Negrín is a physiologist-turned-economist, trusted across the party as an honest broker on public finance. {!<br><br>!}[? if difficulty < 0 : Actions - Against Right and Left, Defending Toleration, Fiscal Policy, Economic Democracy ?]
 is-card: true
-card-image: img/portraits/HilferdingRudolf.jpg
+card-image: img/es/leaders/negrin.png
 tags: center_advisor
 view-if: hilferding_advisor = 0 and n_advisors < 3 and centrists_resign = 0
 on-arrival: hilferding_advisor = 1; n_advisors += 1; center_dissent -= 7; center_strength += 5
@@ -405,7 +405,7 @@ Juan Negrín is now an advisor.
 title: Julián Besteiro
 subtitle: Julián Besteiro is the president of the <span style="color: #c00000;">PSOE</span> and the <span style="color: #700000;">UGT</span>, and the leading voice of the party's orthodox-Marxist current. {!<br><br>!}[? if difficulty < 0 : Actions -  Clear the Agenda, Party Discipline, Emergency Fundraising ?]
 is-card: true
-card-image: img/portraits/WelsRudolf.jpg
+card-image: img/es/leaders/besteiro.jpg
 tags: center_advisor
 view-if: wels_advisor = 0 and n_advisors < 3 and centrists_resign = 0
 on-arrival: wels_advisor = 1; n_advisors += 1; center_dissent -= 7; center_strength += 5
@@ -417,7 +417,7 @@ Julián Besteiro is now an advisor.
 title: Andrés Saborit
 subtitle: Andrés Saborit is a veteran deputy and a close ally of Besteiro. {!<br><br>!}[? if difficulty < 0 : Actions - Negotiating with the Coalition, Defending Toleration ?]
 is-card: true
-card-image: img/portraits/MüllerHermann.jpg
+card-image: img/es/leaders/saborit.png
 tags: center_advisor
 view-if: muller_advisor = 0 and muller_dead = 0 and n_advisors < 3 and centrists_resign = 0
 on-arrival: muller_advisor = 1; n_advisors += 1; center_dissent -= 7; center_strength += 5
@@ -429,7 +429,7 @@ Andrés Saborit is now an advisor.
 title: Rodolfo Llopis
 subtitle: Rodolfo Llopis is a moderate educator with wide ties in the Socialist International and a hand in the Republic's foreign work. {!<br><br>!}[? if difficulty < 0 : Actions - International Relations, Foreign Policy, Party Discipline ?]
 is-card: true
-card-image: img/portraits/BreitscheidRudolf.jpg
+card-image: img/es/leaders/llopis.jpg
 view-if: breitscheid_advisor = 0 and n_advisors < 3
 on-arrival: breitscheid_advisor = 1; n_advisors += 1; center_dissent -= 7; center_strength += 5
 go-to: advisor_menu
@@ -444,7 +444,7 @@ Rodolfo Llopis is now an advisor.
 title: Ángel Galarza
 subtitle: Ángel Galarza is the party's authority on public order and internal security. {!<br><br>!}[? if difficulty < 0 : Actions - Public Order in Catalonia, Police Affairs ?]
 is-card: true
-card-image: img/portraits/SeveringCarl.jpg
+card-image: img/es/leaders/galarza.png
 tags: reformist_advisor
 view-if: severing_advisor = 0 and n_advisors < 3
 on-arrival: severing_advisor = 1; n_advisors += 1; reformist_strength += 5; reformist_dissent -= 7
@@ -456,7 +456,7 @@ go-to: advisor_menu
 title: Rafael Vidiella
 subtitle: Rafael Vidiella is a leader of the Catalan socialists and the party's link to the Generalitat. {!<br><br>!}[? if difficulty < 0 : Actions - The Generalitat, Negotiating with the Coalition ?]
 is-card: true
-card-image: img/portraits/BraunOtto.jpg
+card-image: img/es/leaders/vidiella.jpg
 tags: reformist_advisor
 view-if: braun_advisor = 0 and n_advisors < 3
 on-arrival: braun_advisor = 1; n_advisors += 1; reformist_strength += 5; reformist_dissent -= 7
@@ -468,7 +468,7 @@ Rafael Vidiella is now an advisor.
 title: Julia Álvarez Resano
 subtitle: Julia Álvarez Resano is a woman deputy who organizes the party's mutual-aid and welfare work. {!<br><br>!}[? if difficulty < 0 : Actions - Emergency Fundraising, Casas del Pueblo, Organizing Women ?]
 is-card: true
-card-image: img/portraits/JuchaczMarie.jpg
+card-image: img/placeholder.jpg
 view-if: juchacz_advisor = 0 and n_advisors < 3
 on-arrival: juchacz_advisor = 1; n_advisors += 1; reformist_strength += 5; reformist_dissent -= 7
 go-to: advisor_menu
@@ -480,7 +480,7 @@ Julia Álvarez Resano is now an advisor.
 title: Matilde de la Torre
 subtitle: Matilde de la Torre is a writer-deputy who campaigns for women's rights and for broadening the party. {!<br><br>!}[? if difficulty < 0 : Actions - Broaden the Party, Women's Rights ?]
 is-card: true
-card-image: img/portraits/PfülfAntonie.jpg
+card-image: img/es/leaders/de_la_torre.jpg
 view-if: pfulf_advisor = 0 and n_advisors < 3
 on-arrival: pfulf_advisor = 1; n_advisors += 1; reformist_strength += 5; reformist_dissent -= 7
 go-to: advisor_menu
@@ -496,7 +496,7 @@ Matilde de la Torre is now an advisor.
 title: Julio Álvarez del Vayo
 subtitle: Julio Álvarez del Vayo is the party's foremost champion of working-class unity with the <span style="color: #700000;">**PCE**</span>. {!<br><br>!}[? if difficulty < 0 : Actions - Building the Left, Cooperation with the <span style="color: #700000;">**PCE**</span> ?]
 is-card: true
-card-image: img/portraits/LeviPaul.jpg
+card-image: img/es/leaders/alvarez_del_vayo.jpg
 view-if: levi_advisor = 0 and levi_dead = 0 and n_advisors < 3 and left_split = 0
 on-arrival: levi_advisor = 1; n_advisors += 1; left_strength += 5; left_dissent -= 7
 go-to: advisor_menu
@@ -508,7 +508,7 @@ Julio Álvarez del Vayo is now an advisor.
 title: Margarita Nelken
 subtitle: Margarita Nelken is a writer and deputy of the party's left, a fierce advocate for the landless and for working women. {!<br><br>!}[? if difficulty < 0 : Actions - Left-Center Unity, Organizing Women, Against Toleration, Addressing the Economic Crisis ?]
 is-card: true
-card-image: img/portraits/SenderToni.jpg
+card-image: img/es/leaders/nelken.jpg
 view-if: sender_advisor = 0 and n_advisors < 3
 on-arrival: sender_advisor = 1; n_advisors += 1; left_strength += 5; left_dissent -= 4
 go-to: advisor_menu
@@ -520,7 +520,7 @@ Margarita Nelken is now an advisor.
 title: Luis Araquistáin
 subtitle: Luis Araquistáin is the leading intellectual of the Caballerista left and theorist of the party's revolutionary turn. {!<br><br>!}[? if difficulty < 0 : Actions - Building the Left, Cooperation with the <span style="color: #700000;">**PCE**</span>, Against Toleration ?]
 is-card: true
-card-image: img/portraits/RosenfeldKurt.jpg
+card-image: img/es/leaders/araquistain.jpg
 view-if: rosenfeld_advisor = 0 and n_advisors < 3 and left_split = 0
 on-arrival: rosenfeld_advisor = 1; n_advisors += 1; left_strength += 5; left_dissent -= 4
 go-to: advisor_menu
@@ -532,7 +532,7 @@ Luis Araquistáin is now an advisor.
 title: Santiago Carrillo
 subtitle: Santiago Carrillo is the young firebrand who leads the Socialist Youth and a rising voice of the party's revolutionary left. {!<br><br>!}[? if difficulty < 0 : Actions - Rally for Class Struggle, Socialist Youth, Against Toleration ?]
 is-card: true
-card-image: img/portraits/SeydewitzMax.jpg
+card-image: img/es/leaders/carrillo.jpg
 view-if: seydewitz_advisor = 0 and n_advisors < 3 and left_split = 0
 on-arrival: seydewitz_advisor = 1; n_advisors += 1; left_strength += 5; left_dissent -= 4
 go-to: advisor_menu
@@ -544,7 +544,7 @@ Santiago Carrillo is now an advisor.
 title: María Lejárraga
 subtitle: María Lejárraga is a writer, educator, and feminist deputy, a champion of the Republic's secular schools. {!<br><br>!}[? if difficulty < 0 : Actions - Rally for Pacifism, Educational Curriculum, Educational Structure ?]
 is-card: true
-card-image: img/portraits/SiemsenAnna.jpg
+card-image: img/es/leaders/lejarraga.jpg
 view-if: siemsen_advisor = 0 and n_advisors < 3 and left_split = 0
 on-arrival: siemsen_advisor = 1; n_advisors += 1; left_strength += 5; left_dissent -= 4
 go-to: advisor_menu
@@ -560,7 +560,7 @@ María Lejárraga is now an advisor.
 title: Francisco Largo Caballero
 subtitle: Francisco Largo Caballero is the secretary-general of the <span style="color: #700000;">**UGT**</span>, the largest socialist trade-union federation. {!<br><br>!}[? if difficulty < 0 : Actions - Organizing Workers, Addressing the Economic Crisis?]
 is-card: true
-card-image: img/portraits/LeipartTheodor.jpg
+card-image: img/es/leaders/largo_caballero.jpg
 tags: labor_advisor
 view-if: leipart_advisor = 0 and n_advisors < 3 and unions_independent = 0
 on-arrival: leipart_advisor = 1; n_advisors += 1; labor_strength += 5; labor_dissent -= 8
@@ -572,7 +572,7 @@ Francisco Largo Caballero is now an advisor.
 title: Anastasio de Gracia
 subtitle: Anastasio de Gracia is a veteran <span style="color: #700000;">**UGT**</span> organizer among the salaried and professional workers of the cities. {!<br><br>!}[? if difficulty < 0 : Actions - Organizing Salaried Workers, Union-Party Coordination, Addressing the Economic Crisis ?]
 is-card: true
-card-image: img/portraits/AufhäuserSiegfried.jpg
+card-image: img/es/leaders/de_gracia.jpg
 tags: labor_advisor
 view-if: aufhauser_advisor = 0 and n_advisors < 3
 on-arrival: aufhauser_advisor = 1; n_advisors += 1; labor_strength += 5; labor_dissent -= 8
@@ -584,7 +584,7 @@ Anastasio de Gracia is now an advisor.
 title: Manuel Cordero
 subtitle: Manuel Cordero is the party's point man on labour legislation, working closely with the Labour Ministry. {!<br><br>!}[? if difficulty < 0 : Actions - Union-Party Coordination, Labor Rights ?]
 is-card: true
-card-image: img/portraits/WissellRudolf.jpg
+card-image: img/es/leaders/cordero.png
 tags: labor_advisor
 view-if: wissell_advisor = 0 and n_advisors < 3 and unions_independent = 0
 on-arrival: wissell_advisor = 1; n_advisors += 1; labor_strength += 3; labor_dissent -= 4
@@ -597,7 +597,7 @@ Manuel Cordero is now an advisor.
 title: Trifón Gómez
 subtitle: Trifón Gómez is the <span style="color: #700000;">**UGT**</span>'s foremost advocate on economic policy and the public-works plan. {!<br><br>!}[? if difficulty < 0 : Actions - Addressing the Economic Crisis, Carrying Out the Economic Plan ?]
 is-card: true
-card-image: img/portraits/WoytinskyWladimir.jpg
+card-image: img/es/leaders/trifon_gomez.jpg
 tags: labor_advisor
 view-if: woytinsky_advisor = 0 and n_advisors < 3 and unions_independent = 0
 on-arrival: woytinsky_advisor = 1; n_advisors += 1; labor_strength += 3; labor_dissent -= 4
@@ -612,7 +612,7 @@ Trifón Gómez is now an advisor.
 title: Ramón González Peña
 subtitle: Ramón González Peña is the leader of the Asturian miners and a champion of the Alianza Obrera against the fascist right. {!<br><br>!}[? if difficulty < 0 : Actions - Build the <span style="color: #c00000;">Alianza Obrera</span>, Warning About the Fascist Right ?]
 is-card: true
-card-image: img/portraits/MierendorffCarlo.jpg
+card-image: img/es/leaders/gonzalez_pena.jpg
 view-if: mierendorff_advisor = 0 and n_advisors < 3
 on-arrival: mierendorff_advisor = 1; n_advisors += 1; neorevisionist_strength += 5; neorevisionist_dissent -= 7
 go-to: advisor_menu
@@ -624,7 +624,7 @@ Ramón González Peña is now an advisor.
 title: Amaro del Rosal
 subtitle: Amaro del Rosal is a <span style="color: #700000;">**UGT**</span> leader and a driving force behind the workers' militias. {!<br><br>!}[? if difficulty < 0 : Actions - Emergency Fundraising, The UGT Militia, Addressing the Economic Crisis ?]
 is-card: true
-card-image: img/portraits/SchumacherKurt.jpg
+card-image: img/es/leaders/del_rosal.jpg
 tags: neorev_advisor
 view-if: schumacher_advisor = 0 and n_advisors < 3
 on-arrival: schumacher_advisor = 1; n_advisors += 1; neorevisionist_strength += 5; neorevisionist_dissent -= 4
@@ -636,7 +636,7 @@ Amaro del Rosal is now an advisor.
 title: Juan-Simeón Vidarte
 subtitle: Juan-Simeón Vidarte is a deputy secretary of the party executive who keeps a close watch on the officer corps. {!<br><br>!}[? if difficulty < 0 : Actions - Rally for Democracy, Military Affairs, Broadening the Party ?]
 is-card: true
-card-image: img/portraits/LeberJulius.jpg
+card-image: img/placeholder.jpg
 view-if: leber_advisor = 0 and n_advisors < 3
 on-arrival: leber_advisor = 1; n_advisors += 1; neorevisionist_strength += 5; neorevisionist_dissent -= 4
 go-to: advisor_menu
@@ -650,7 +650,7 @@ Juan-Simeón Vidarte is now an advisor.
 title: Toribio Echevarría
 subtitle: Toribio Echevarría is a self-taught worker-intellectual from Eibar who bridges the party to the observant Catholic workers of the north.
 is-card: true
-card-image: img/portraits/wirth.jpg
+card-image: img/es/leaders/echevarria.jpg
 view-if: wirth_advisor = 0 and wirth_spd and n_advisors < 3
 on-arrival: wirth_advisor = 1; n_advisors += 1; neorevisionist_strength += 5; neorevisionist_dissent -= 8
 go-to: advisor_menu
@@ -664,7 +664,7 @@ Toribio Echevarría is now an advisor.
 title: Lucio Martínez Gil
 subtitle: Lucio Martínez Gil is the secretary-general of the FNTT landworkers' federation and the party's voice on the agrarian question. {!<br><br>!}[? if difficulty < 0 : Actions - Agricultural Policy, Rural Campaigning, Addressing the Economic Crisis ?]
 is-card: true
-card-image: img/portraits/BaadeFritz.jpg
+card-image: img/placeholder.jpg
 view-if: baade_advisor = 0 and n_advisors < 3
 on-arrival: baade_advisor = 1; n_advisors += 1
 go-to: advisor_menu
@@ -677,7 +677,7 @@ Lucio Martínez Gil is now an advisor.
 title: Gregorio Marañón
 subtitle: Gregorio Marañón is Spain's most eminent physician and a rare public voice for the rights of sexual minorities. {!<br><br>!}[? if difficulty < 0 : Actions - Sexual Minority Rights, Women's Rights, Science Funding ?]
 is-card: true
-card-image: img/portraits/HirschfeldMagnus.jpg
+card-image: img/es/leaders/maranon.png
 view-if: hirschfeld_advisor = 0 and n_advisors < 3
 on-arrival: hirschfeld_advisor = 1; n_advisors += 1
 go-to: advisor_menu
@@ -690,7 +690,7 @@ Gregorio Marañón is now an advisor.
 title: Fernando de los Ríos
 subtitle: Fernando de los Ríos is a distinguished legal scholar and the party's Minister of Justice. {!<br><br>!}[? if difficulty < 0 : Actions - Judicial Affairs, Constitutional Reform ?]
 is-card: true
-card-image: img/portraits/RadbruchGustav.jpg
+card-image: img/es/leaders/de_los_rios.jpg
 view-if: radbruch_advisor = 0 and n_advisors < 3
 on-arrival: radbruch_advisor = 1; n_advisors += 1
 go-to: advisor_menu
@@ -703,7 +703,7 @@ Fernando de los Ríos is now an advisor.
 title: Julián Zugazagoitia
 subtitle: Julián Zugazagoitia is the editor-in-chief of <span style="color: #c00000;">*El Socialista*</span>, the party's newspaper. {!<br><br>!}[? if difficulty < 0 : Actions - Media, Editorial Line, Cooperation with the <span style="color: #700000;">PCE</span> ?]
 is-card: true
-card-image: img/portraits/StampferFriedrich.jpg
+card-image: img/es/leaders/zugazagoitia.jpg
 view-if: stampfer_advisor = 0 and n_advisors < 3 and not stampfer_killed
 on-arrival: stampfer_advisor = 1; n_advisors += 1
 go-to: advisor_menu

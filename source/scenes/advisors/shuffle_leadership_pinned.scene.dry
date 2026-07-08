@@ -4,6 +4,6 @@ new-page: true
 is-card: true
 is-pinned-card: true
 on-arrival: month_actions += 1; shuffle_leadership_timer = 10;
-card-image: img/vorwarts_2.jpg
+card-image: img/placeholder.jpg
 go-to: shuffle_leadership.rm_main
 

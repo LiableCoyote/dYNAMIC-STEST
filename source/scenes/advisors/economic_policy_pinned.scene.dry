@@ -4,6 +4,6 @@ new-page: true
 is-card: true
 is-pinned-card: true
 on-arrival: month_actions += 1
-card-image: img/portraits/SchmidtRobert.jpg
+card-image: img/es/leaders/prieto.jpg
 go-to: economic_policy
 

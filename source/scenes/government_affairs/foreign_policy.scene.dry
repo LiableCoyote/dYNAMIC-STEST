@@ -4,7 +4,7 @@ is-card: true
 tags: govt_affairs, cabinet
 on-arrival: month_actions += 1; foreign_policy_timer += 8
 view-if: psoe_in_government = 1 and foreign_policy_timer <= 0
-card-image: img/portraits/BreitscheidRudolf.jpg
+card-image: img/es/leaders/llopis.jpg
 go-to: fp_menu
 #subtitle: The Republic's place in a Europe sliding toward fascism.
 

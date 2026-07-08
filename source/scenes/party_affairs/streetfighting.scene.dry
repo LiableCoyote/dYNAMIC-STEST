@@ -3,7 +3,7 @@ new-page: true
 is-card: true
 on-arrival: streetfighting_timer = 6; month_actions += 1; ugt_militia_cost = 2 if ugt_militia_militancy > 0.15 else ugt_militia_cost = 1; ugt_militia_cost = 3 if ugt_militia_militancy > 0.3; strife += 1
 view-if: year >= 1932 and (falange_militia_strength*falange_militia_militancy + requetes_strength*requetes_militancy) >= 80 and streetfighting_timer == 0 and not return_to_normalcy
-card-image: img/blutmai_2.jpg
+card-image: img/es/events/casas_viejas.jpg
 tags: party_affairs; antifascism
 
 = Streetfighting

@@ -3,7 +3,7 @@ new-page: true
 is-card: true
 tags: party_affairs
 view-if: reichsbanner_timer <= 0 and not ugt_militia_banned
-card-image: img/reichsbanner.jpg
+card-image: img/placeholder.jpg
 on-arrival: month_actions += 1; reichsbanner_timer += 6; ugt_militia_cost = 2 if ugt_militia_militancy > 0.15 else ugt_militia_cost = 1; ugt_militia_cost = 3 if ugt_militia_militancy > 0.3
 max-visits: 6
 #subtitle: Paramilitary organizing in defense of the republic.

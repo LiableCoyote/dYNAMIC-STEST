@@ -1,7 +1,7 @@
 title: Sexual and Gender Minorities
 new-page: true
 is-card: true
-card-image: img/hirschfeld.jpg
+card-image: img/es/leaders/maranon.png
 frequency: 25
 max-visits: 3
 view-if: psoe_in_government == 1 and progressive_support >= 30 and homosexual_rights_timer == 0 and homosexual_rights < 3

@@ -3,7 +3,7 @@ new-page: true
 is-card: true
 view-if: psoe_in_government and education_science_timer = 0 and black_thursday_seen = 0
 on-arrival: education_science_timer += 9; month_actions += 1
-card-image: img/portraits/EinsteinAlbert.jpg
+card-image: img/es/leaders/blas_cabrera.jpg
 go-to: ed_menu
 tags: govt_affairs, cabinet
 

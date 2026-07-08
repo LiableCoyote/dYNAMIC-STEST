@@ -6,7 +6,7 @@
 title: Dealing with Toleration
 new-page: true
 is-card: true
-card-image: img/portraits/BrüningHeinrich.jpg
+card-image: img/es/leaders/azana.jpg
 view-if: 0
 on-arrival: dealing_with_toleration_timer += 6; month_actions += 1
 tags: govt_affairs

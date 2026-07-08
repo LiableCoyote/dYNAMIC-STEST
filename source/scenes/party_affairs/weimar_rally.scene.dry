@@ -3,7 +3,7 @@ new-page: true
 is-card: true
 view-if: in_republican_socialist and weimar_rally_timer <= 0 and izq_rep_relation >= 50 and radical_relation >= 40
 on-arrival: month_actions += 1; weimar_rally_timer += 6
-card-image: img/weimar_coalition_3.jpg
+card-image: img/placeholder.jpg
 tags: party_affairs
 
 = Republican Coordination

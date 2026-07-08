@@ -3,7 +3,7 @@ new-page: true
 is-card: true
 view-if: (ceda_r >= 20 or coup_progress >= 3 or radicalization >= 3) and confronting_nazis_timer == 0 and iron_front_formed == 0
 on-arrival: confronting_nazis_seen += 1; confronting_nazis_timer = 5; month_actions += 1;
-card-image: img/iron_front.png
+card-image: img/placeholder.jpg
 tags: party_affairs; antifascism
 
 = Confronting the Authoritarian Right

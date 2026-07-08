@@ -4,7 +4,7 @@ is-card: true
 view-if: justice_minister_party == "PSOE" and constitutional_reform_timer = 0 and judicial_reform >= 4 and neorevisionism and (in_republican_socialist or in_popular_front) and constitutional_reform < 3
 frequency: 25
 on-arrival: month_actions += 1; constitutional_reform_timer += 12; pass_threshold = 0.51; pass_threshold = 0.6 if pro_republic < 65;
-card-image: img/portraits/RadbruchGustav.jpg
+card-image: img/es/leaders/de_los_rios.jpg
 go-to: reforms_menu
 tags: govt_affairs, cabinet
 #subtitle: Major changes to the 1931 Constitution.
