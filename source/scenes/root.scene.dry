@@ -96,6 +96,9 @@ Q.homosexual_rights = 0;
 Q.repealed_1928_code = 0;
 Q.resisted_vagrancy_law = 0;
 Q.trans_rights = 0;
+Q.interior_police_loyalty = 0.4;
+Q.investigate_corruption = 0;
+Q.investigate_far_right = 0;
 
 // secret events...
 Q.unions_independent = 0;
@@ -778,6 +781,7 @@ Q.fiscal_policy_timer = 0;
 Q.foreign_policy_timer = 0;
 Q.judiciary_timer = 0;
 Q.constitutional_reform_timer = 0;
+Q.dealing_with_toleration_timer = 0;
 Q.labor_affairs_timer = 0;
 Q.labor_rights_timer = 0;
 Q.military_policy_timer = 0;

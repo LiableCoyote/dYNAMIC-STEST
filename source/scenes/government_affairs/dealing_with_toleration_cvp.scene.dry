@@ -1,8 +1,13 @@
+# Area G (G-4): retired. The German "toleration" trio collapsed to one Spanish
+# card, government_affairs/dealing_with_toleration.scene.dry (the 1936
+# Caballerista confidence-and-supply mechanic), per G_policy_cards.md's plan.
+# This CVP-splinter variant has no Spanish equivalent worth a second card;
+# left in place, permanently gated off, rather than deleted.
 title: Dealing with Toleration
 new-page: true
 is-card: true
 card-image: img/portraits/BrüningHeinrich.jpg
-view-if: dealing_with_toleration_timer = 0 and spd_toleration and chancellor_party == "Z" and cvp_formed
+view-if: 0
 on-arrival: dealing_with_toleration_timer += 6; month_actions += 1
 tags: govt_affairs
 #subtitle: Despite not being in government, we can still provide support.

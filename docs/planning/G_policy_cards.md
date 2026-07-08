@@ -180,6 +180,68 @@
     exercised branches write only pre-existing keys with zero NaN; grep confirmed zero
     German-signature tokens in all four files.
 
+- **G-4 (internal security, coalition management, toleration):** ✅ done. Converted
+  `police.scene.dry`, `social_welfare.scene.dry`, `coalition_affairs.scene.dry`, and
+  collapsed the toleration trio to one live card.
+  - **`police`** (gate → `psoe_in_government`, since interior is DLR-held, not PSOE)
+    reframed around the Assault Guard/Civil Guard split and the Ministry's real
+    influence-not-control position; kept the loyalty/corruption/far-right-investigation
+    structure, retargeting `sa_strength`-class writes onto Area F's live
+    `falange_militia_strength`.
+  - **`domestic_enemies`** (the G-0 finding — reachable via `police`'s menu despite its
+    own "not a card" header) reimagined entirely around Area F's pre-built militia-ban
+    system: ban/unban/persecute for the Falangist militia, the Carlist Requetés, and the
+    CNT-FAI, using the already-live `falange_militia_*`/`requetes_*`/`cnt_militia_*`/
+    `anarchist_*` axes in place of the dead SA/Stahlhelm/RFB machinery — this turned out
+    to be an unusually clean fit, since Area F had already built the exact three-militia
+    structure the German original assumed. **`deport_hitler`** retired (`view-if: 0` +
+    inline flag) per the plan's G-5 disposition, its menu line dropped from both files.
+  - **`social_welfare`** reframed around the Instituto Nacional de Previsión's pension/
+    maternity/accident-insurance programs (consistent with G-1's `labor_rights` framing
+    that Spain lacked Germany's unemployment-insurance apparatus — a distinct, real
+    welfare domain, no contradiction). Gate → `psoe_in_government`.
+  - **`coalition_affairs`** kept only the safe, self-contained branches
+    (`promise_cuts`→slow land reform, `resources`, `no_change`); the original's
+    `dvp_prussia_2`/`give_up_prussia` (Prussia-state-government-specific, no Spanish
+    equivalent — the excised-Prussia-machinery class already flagged since Area F/H2)
+    and `bring_down`/`elections` (which called `set_next_election_time`, discovered
+    during this stage to be **silently inert** — its own on-arrival guards every branch
+    on comparisons against `time + Q.time_to_election`, and `time_to_election` is never
+    initialized anywhere in the codebase, so every guard evaluates against `NaN` and
+    always fails; the scene runs but changes nothing) were dropped rather than kept as a
+    mechanically-empty promise or fixed by touching the election-timing engine, which is
+    out of Area G's scope. Not touched or "fixed" — flagged here for whoever picks up the
+    election engine next, same as H2-4's precedent of documenting an inert block rather
+    than performing risky surgery on it.
+  - **The toleration trio → one card.** All three original variants
+    (`dealing_with_toleration[.]/_right/_cvp`) were near-duplicates entangled with dead
+    Prussia machinery and a hardcoded `chancellor = "Brüning"` government-collapse
+    branch. Per the plan's own fallback ("if the three variants collapse to one Spanish
+    card, retire the other two"), `dealing_with_toleration.scene.dry` was rewritten as
+    the real 1936 mechanic — PSOE's Caballerista-led executive supporting Azaña's
+    Popular Front cabinet from outside without joining it (gate →
+    `psoe_toleration = 1 and chancellor_party == "IR"`) — with branches to withdraw
+    support, press for faster land reform, press for action against the military
+    conspiracy (a new branch giving this card a genuine tie to the coup-progress/
+    `army_loyalty` endgame axis), improve relations, or hold the course.
+    `dealing_with_toleration_right.scene.dry` and `_cvp.scene.dry` were retired
+    (`view-if: 0` + inline flag, left in place rather than deleted).
+  - **Two more pre-existing uninitialized-variable bugs found and fixed:**
+    `dealing_with_toleration_timer` (same `Q.timers`-array-but-never-`=0` bug class as
+    G-1/G-3's finds) and a cluster of vars read/written by `police`/`domestic_enemies`
+    (`interior_police_loyalty`, `investigate_corruption`, `investigate_far_right`) that
+    were never declared — all now initialized in `root.scene.dry`.
+  - **Verify:** `BUILD OK` → `SMOKE PASSED` after each file (scene count 810 → 804, all
+    Prussia/Brüning-collapse sub-scenes removed cleanly with no dangling `go-to`
+    targets); a standalone Node check confirmed all five gates (including
+    `domestic_enemies`'s no-top-gate reachability via `police`'s menu) resolve true under
+    realistic seeded state and all 22 exercised branches write only pre-existing keys
+    with zero NaN; grep confirmed zero German-signature tokens in narrative/mechanical
+    content across all five files (the one hit, a `BrüningHeinrich.jpg` `card-image`
+    path, is an Area-K asset reference, consistent with Areas D/E/F's precedent of
+    leaving image paths for the asset pass); grep confirmed both retired toleration
+    variants and `deport_hitler` carry `view-if: 0`.
+
 ---
 
 ## Context
