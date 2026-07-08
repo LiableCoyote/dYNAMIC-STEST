@@ -40,7 +40,7 @@ is a bit larger than the folder: it also includes the recruit roster in
 
 ---
 
-> **Session handoff.** 🟡 **IN PROGRESS.** This is the detailed execution plan for
+> **Session handoff.** ✅ **DONE.** This is the detailed execution plan for
 > **Area I** — converting the 28 advisor cards (+ the recruit roster) from Weimar German
 > socialists into Second-Spanish-Republic PSOE figures, reviving the public-works economic
 > plan, and retiring the last German Prussia machinery via a Catalan reimagining. Depth target:
@@ -203,6 +203,30 @@ is a bit larger than the folder: it also includes the recruit roster in
     roster line (the only surviving German tokens are `card-image` asset filenames and the
     cross-file `reichsbanner` scene-id/var, both correctly left per the asset-path and don't-rename-
     scene-ids rules).
+
+- **I-6 (verification sweep + docs):** ✅ done.
+  - **Dead-flag grep** over `advisors/` + `shuffle_leadership.scene.dry`
+    (`spd_in_government`/`spd_toleration`/`_minister_party == "SPD"`/`chancellor_party == "SPD"`/
+    `prussia_leader`/`schleicher_spd`): zero hits.
+  - **Compiled-output German-token scan** of `out/game.json` across all 28 advisor scene-ids
+    (`Germany`/`Weimar`/`Reichstag`/`NSDAP`/`Hindenburg`/`Schleicher`/`Brüning`/`SPD`/`KPD`/
+    `Prussia`/`Reichsbanner`/`Nazis`/`ADGB`/`Vorwärts`/`USPD`/`Menshevik`): zero hits.
+  - **Headless Chromium `--dump-dom` load**: clean (no `Uncaught`/`ReferenceError`/`TypeError`).
+  - **Standalone Node behavioral simulation:** auto-parsed **all 28 advisor files** and exercised
+    **every one of the 95 `on-arrival` effect lines** against seeded real `Q` state (with the
+    dynamically-computed `*_normalized` cells stubbed) — **zero NaN writes**. Confirmed the
+    hire-from-roster round-trip (a `shuffle_leadership` `@add_*` entry sets `X_advisor = 1`, and the
+    card's `view-if: X_advisor = 1` then passes) for a 6-advisor sample, and that the three starters
+    (Besteiro/Saborit/Negrín) are hired at game start.
+  - **Docs:** this section written; banner flipped to ✅; `CLAUDE.md` and the design doc's §I updated.
+
+## Bugs found and fixed along the way (all pre-existing silent-NaN / dead-gate class)
+
+`labor_rights_timer`-class already covered by Areas G; **new in Area I:** `workers_aid` (welfare
+advisor), `kpd_cooperation_seen` (left lawyer's PCE-cooperation guard), and `month_activities` — a
+typo for `month_actions` written by both structural pinned cards and the reshuffle scene, NaN-ing
+every visit — plus the `moderate_economic_plan`-var typo in two economic advisors' unavailable
+subtitles. The dead WTB/public-works economic arm (a G-2 casualty) is **revived** and live.
 
 > **Audience: a Sonnet-class executor working cold.** Read `CLAUDE.md`,
 > `docs/planning/B_state_schema.md`, `docs/planning/D_faction_semantics.md` (the faction

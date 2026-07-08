@@ -195,9 +195,27 @@ These have **no base-game analogue** and are the most design-intensive:
   `status_right.scene.dry`) were found to hold substantial unconverted German content of
   uncertain reachability and left flagged for a pass with interactive browser access.
 
-### I. Advisors / Cabinet — *Size M · Rewrite*
+### I. Advisors / Cabinet — *Size M · Rewrite* — ✅ done
 - Replace all 28 advisors (named German socialists) with Spanish figures: Largo Caballero, Prieto, Besteiro, Negrín, De los Ríos, Araquistáin, Zugazagoitia, etc., each with an advice/action card and stat effects.
 - Preserve the advisor-card and "pinned cabinet" framework.
+- **✅ done** — see `docs/planning/I_advisors.md` for full detail. All 28 advisor cards + the
+  `shuffle_leadership` recruit roster + the two structural pinned cards converted to Spanish
+  figures, preserving the faction tags, the 3-advisor cap, and the initial roster (Besteiro/
+  Saborit/Negrín). Mapping highlights: Fernando de los Ríos→judiciary/constitutional, Gregorio
+  Marañón→sexual-minority/women's rights & science, Julián Zugazagoitia→*El Socialista*/media,
+  Largo Caballero→UGT organizing, Ramón González Peña→the Alianza Obrera militia, Santiago
+  Carrillo→Socialist Youth, and the Prussia-Minister-President advisors reimagined around
+  Catalonia (Vidiella→Generalitat, Galarza→regional public order, Araquistáin→autonomy from the
+  left). **Revived the public-works economic plan** the flagship `economic_policy` card had lost
+  (G-2 deleted it as dead code because nothing set `wtb_adopted`): the labor economist's adoption
+  branch now sets it, and the public-works arm was rebuilt (Prieto's hydraulic/infrastructure
+  works) — verified end-to-end. **Deleted the last 4 German `prussian_affairs*` files**, which G-5
+  had kept alive only because three advisors linked to them. Advisor variable keys and scene
+  filenames kept as opaque German identifiers (renaming would ripple across the roster and the
+  faction bookkeeping for no gain). Found and fixed 4 more pre-existing uninitialized-variable
+  bugs. Verified via dead-flag grep, compiled-output scan, headless load, and a Node sim
+  exercising all 95 advisor `on-arrival` lines with zero NaN. **Out of scope:** advisor
+  `card-image` portraits still point at German figures (Area K).
 
 ### J. Quality Displays & UI Text — *Size M · Partial rewrite*
 - Rewrite the 23 `qdisplay` files. Some are generic (`confidence`, `dissent`, `militancy`, `loyalty`) and only need label tweaks; several are German-named (`schleicher_*`, `hindenburg_*`, `cvp_dnvp_balance`, `nazi_funds`) and need replacement with Spanish analogues (e.g. `army_conspiracy`, `cnt_militancy`, `catalan_relations`).
