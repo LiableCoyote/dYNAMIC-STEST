@@ -19,6 +19,9 @@ const GAME_JSON = path.join(ROOT, 'out', 'game.json');
 const INFO_DRY = path.join(ROOT, 'source', 'info.dry');
 const INDEX_HTML = path.join(ROOT, 'out', 'html', 'index.html');
 const PACKAGE_JSON = path.join(ROOT, 'package.json');
+const OUT_HTML = path.join(ROOT, 'out', 'html');
+const IMG_ES = path.join(OUT_HTML, 'img', 'es');
+const CREDITS_IMAGES = path.join(OUT_HTML, 'credits_images.txt');
 
 const NEW_IFID = '76CDC709-E6BD-46FA-BA29-41E607DBD81A';
 const NEW_TITLE = 'Social Democracy: The Spanish Republic';
@@ -167,6 +170,61 @@ if (root) {
     if (root.includes(needle)) fail(`root.scene.dry still contains ${label}`);
   }
   if (failures.length === 0 || !failures.some(f => f.includes('root.scene.dry'))) ok('root.scene.dry Spanish electoral schema present');
+}
+
+// 6. Area K broken-image-path guard (compiled cardImage/setBg must resolve) ----
+// A repointed card whose target file was never downloaded is a silent, only-
+// visible-in-the-browser failure -- catch it at build time instead.
+if (game && game.scenes) {
+  let brokenImages = 0;
+  const brokenSample = [];
+  const resolvedCache = new Map();
+  const resolves = (imgPath) => {
+    if (resolvedCache.has(imgPath)) return resolvedCache.get(imgPath);
+    const ok2 = fs.existsSync(path.join(OUT_HTML, imgPath));
+    resolvedCache.set(imgPath, ok2);
+    return ok2;
+  };
+  for (const [id, scene] of Object.entries(game.scenes)) {
+    for (const field of ['cardImage', 'setBg']) {
+      const imgPath = scene[field];
+      if (typeof imgPath !== 'string' || !imgPath) continue;
+      if (!resolves(imgPath)) {
+        brokenImages++;
+        if (brokenSample.length < 10) brokenSample.push(`${id}: ${field} -> ${imgPath}`);
+      }
+    }
+  }
+  if (brokenImages > 0) {
+    fail(`${brokenImages} broken image path(s) (card-image/set-bg pointing at a nonexistent file). Examples:\n    ` + brokenSample.join('\n    '));
+  } else {
+    ok(`all compiled card-image/set-bg paths resolve to real files under out/html/`);
+  }
+}
+
+// 7. Area K credits completeness (every img/es/ asset must be credited) ----
+if (fs.existsSync(IMG_ES)) {
+  const credits = fs.existsSync(CREDITS_IMAGES) ? fs.readFileSync(CREDITS_IMAGES, 'utf8') : '';
+  let uncredited = 0;
+  const uncreditedSample = [];
+  const walk = (dir) => {
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const full = path.join(dir, entry.name);
+      if (entry.isDirectory()) { walk(full); continue; }
+      if (entry.name === '.gitkeep' || entry.name === 'README.md') continue;
+      const rel = path.relative(OUT_HTML, full).split(path.sep).join('/');
+      if (!credits.includes(rel + ' |') && !credits.includes(rel + '|')) {
+        uncredited++;
+        if (uncreditedSample.length < 10) uncreditedSample.push(rel);
+      }
+    }
+  };
+  walk(IMG_ES);
+  if (uncredited > 0) {
+    fail(`${uncredited} img/es/ asset(s) with no credits_images.txt line (no provenance, no commit). Examples:\n    ` + uncreditedSample.join('\n    '));
+  } else {
+    ok('every img/es/ asset has a credits_images.txt provenance line');
+  }
 }
 
 // ---- report ------------------------------------------------------------

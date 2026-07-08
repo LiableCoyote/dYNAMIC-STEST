@@ -124,6 +124,25 @@ follow-up); **music is deferred** (audio sourcing is a separate human pass).
   each was rendered and visually confirmed on-subject and (mostly) period-appropriate before being
   kept; `BUILD OK` → `SMOKE PASSED` unaffected.
 
+- **K-4 (repoint + placeholder fallback):** ✅ done. `scripts/k4_repoint.py` applied the mapping in
+  `scripts/k4_repoint_map.txt` across all 71 scene files with a live `card-image:`/`set-bg:`
+  reference (98 lines changed): the 26 sourced named-figure cards now point at their
+  `img/es/leaders/*` file (including the two duplicate-source cases — WelsOtto/WelsRudolf both
+  collapse to `besteiro`, HirschfeldMagnus/`img/hirschfeld.jpg` both collapse to `maranon`);
+  `reichstag_1.jpg`/`reichstag_2.jpg` now point at `cortes_exterior.jpg`; `blutmai_2.jpg` (Berlin
+  street fighting) now points at `casas_viejas.jpg`; `protest.jpg` (a Berlin Lustgarten/Cathedral
+  rally) now points at `asturias_1934.jpg`. Found one map gap while sweeping: `reichsbanner.jpg`
+  (the "UGT Militia" card) wasn't in the original K-3 recon list — added it, confirmed by rendering
+  it that it's the same Berlin-cathedral rally shot as `protest.jpg`, and routed it to the shared
+  placeholder since no dedicated militia photo has been sourced yet. The 3 unsourced Tier-1 figures
+  and ~16 unsourced Tier-2 items now point at `img/placeholder.jpg` rather than a broken or
+  mismatched path. `international.jpg`, the confirmed-generic Tier-3 textures, and the dead retired
+  `red_general.scene.dry` → `schleicher.jpg` reference were left untouched. **Verify:** a standalone
+  sweep confirmed all 37 distinct `card-image:`/`set-bg:` paths in `source/scenes/**` (touched and
+  untouched) resolve to a real file under `out/html/`; the compiled `game.json` was spot-checked to
+  confirm the repointed paths survived the build; headless Chromium load clean (no
+  `Uncaught`/`ReferenceError`/`TypeError`); `BUILD OK` → `SMOKE PASSED` (6 checks).
+
 > **Audience: a Sonnet-class executor working cold.** Read `CLAUDE.md`,
 > `docs/planning/A_engine_build_scaffolding.md` §5 (the asset-path strategy), and
 > `out/html/img/es/README.md` before touching anything. `npm run build && npm run smoke` after
