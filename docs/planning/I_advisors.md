@@ -175,6 +175,35 @@ is a bit larger than the folder: it also includes the recruit roster in
     withdraw-support paths and the Catalan gates) write only pre-existing keys with zero NaN; grep
     confirmed zero German-signature tokens (including `prussia`) across all five files.
 
+- **I-5 (remaining advisors + structural cards + full roster sweep):** ✅ done. Converted the
+  last four advisor cards: `levi`→**Julio Álvarez del Vayo** (PSOE-PCE unity), `pfulf`→**Matilde de
+  la Torre** (women's rights + broadening), `wirth`→**Toribio Echevarría** (the "troll"/Catholic-
+  outreach slot, reframed as a Basque worker-intellectual reaching observant Catholic workers),
+  `schumacher`→**Amaro del Rosal** (UGT, workers' militias → the F-converted `reichsbanner`/"UGT
+  Militia" card). `crispien` confirmed inert (a declaration with no card or roster entry — comment
+  corrected).
+  - **The full roster sweep:** `party_affairs/shuffle_leadership.scene.dry`'s ~19 remaining
+    `@add_*`/`@remove_*` entries (I-1 had done only the 3 starters) converted to the Spanish figure
+    names, descriptions, and action-hint lists via a scripted 131-replacement pass using full-phrase
+    matches (never bare surnames, so the German `card-image` filenames — Area K — stayed intact).
+    Faction descriptors on the remove lines reframed to the Spanish currents (Centrist→Besteirista,
+    Reformist→Prietista, Leftist→Caballerista, Labor→UGT, Neorevisionist→anti-fascist). This closes
+    the atomicity gap: every advisor card and its roster entry now show the same Spanish figure.
+  - **Structural pinned cards:** `economic_policy_pinned.scene.dry`'s dead German gate
+    (`spd_in_government`/`economic_minister_party == "SPD"`…) fixed to the live
+    `psoe_in_government and finance_minister_party == "PSOE" and economic_plan > 0 and
+    black_thursday_seen`, mirroring the `economic_policy` card. `shuffle_leadership_pinned.scene.dry`
+    left as-is (neutral gate).
+  - **One more pre-existing uninitialized-variable bug found and fixed:** `month_activities` (a typo
+    for `month_actions`, the real monthly-action counter) was written by both pinned cards and the
+    reshuffle scene but never declared — three `+= 1` writes that NaN'd every visit. All three
+    corrected to `month_actions`.
+  - **Verify:** `BUILD OK` → `SMOKE PASSED`; Node check confirmed the four cards' branches and the
+    structural gates resolve with zero NaN; grep confirmed zero German names on any player-facing
+    roster line (the only surviving German tokens are `card-image` asset filenames and the
+    cross-file `reichsbanner` scene-id/var, both correctly left per the asset-path and don't-rename-
+    scene-ids rules).
+
 > **Audience: a Sonnet-class executor working cold.** Read `CLAUDE.md`,
 > `docs/planning/B_state_schema.md`, `docs/planning/D_faction_semantics.md` (the faction
 > semantics these advisors sit inside), and **`advisors/cabinet.scene.dry`** (the one already-

@@ -1,13 +1,13 @@
-title: Antonie Pfülf
+title: Matilde de la Torre
 is-pinned-card: true
 tags: advisor, centrist
 card-image: img/portraits/PfülfAntonie.jpg
 view-if: pfulf_advisor = 1
-new-page: true 
+new-page: true
 
-= Antonie Pfülf
+= Matilde de la Torre
 
-Pfülf is a former teacher from <span style="color: #00CCFF;">Bavaria</span> who came from a conservative Catholic family. She is an activist for women's rights and for broadening the support of the <span style="color: #c00000;">**SPD**</span>. 
+De la Torre is a writer and educator from Asturias, a <span style="color: #c00000;">**PSOE**</span> deputy who campaigns for women's rights and for broadening the party's appeal beyond the industrial working class.
 
 - @support_peoples_party
 - @build_peoples_party
@@ -16,27 +16,27 @@ Pfülf is a former teacher from <span style="color: #00CCFF;">Bavaria</span> who
 - @root: Return to main
 
 @support_peoples_party
-title: Build support for a People's Party
-subtitle: Can we expand our party beyond the industrial working class?
+title: Build support for a broad workers' party
+subtitle: Can we expand the party beyond the industrial working class?
 view-if: peoples_party = 0
 choose-if: peoples_party_support <= 4 and advisor_action_timer = 0 and peoples_party = 0
-unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if peoples_party_support > 4: There is already substantial support for a People's Party. ?]
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if peoples_party_support > 4: There is already substantial support for broadening the party. ?]
 on-arrival: advisor_action_timer = 6; peoples_party_support += 1; reformist_strength += 5;
 
-We are building up support for the idea of a People's Party.
+We are building up support for the idea of broadening the party's base.
 
 @build_peoples_party
-title: Building a People's Party
-subtitle: Can we expand our party beyond the industrial working class?
+title: Broadening the party
+subtitle: Can we expand the party beyond the industrial working class?
 view-if: peoples_party = 0
 choose-if: peoples_party_support >= 3 and advisor_action_timer = 0
-unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if peoples_party_support < 3: There is not enough support for this policy within the party. ?]
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if peoples_party_support < 3: There is not enough support for this within the party. ?]
 on-arrival: advisor_action_timer = 6;
 go-to: peoples_party
 
 @campaigning_peoples_party
-title: Campaigning as a People's Party
-subtitle: Campaigning with some of our previously nontraditional demographics.
+title: Campaigning among new demographics
+subtitle: Campaigning among some of our previously nontraditional demographics.
 view-if: peoples_party = 1
 choose-if: advisor_action_timer = 0
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
@@ -47,7 +47,7 @@ go-to: peoples_party_campaigning
 @womens_rights_
 title: Women's rights
 subtitle: Enact policy with regards to women's rights.
-choose-if: advisor_action_timer = 0 and spd_in_government and not cvp_women_accepted
-unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if not spd_in_government : The <span style="color: #c00000;">SPD</span> is not currently in government. ?] [? if cvp_women_accepted : Our coalition agreement stipulates against action toward Women's rights. ?]
+choose-if: advisor_action_timer = 0 and psoe_in_government
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if not psoe_in_government : The <span style="color: #c00000;">PSOE</span> is not currently in government. ?]
 on-arrival: advisor_action_timer = 6; womens_rights_timer -= 10; last_advisor_action = 1
 go-to: womens_rights

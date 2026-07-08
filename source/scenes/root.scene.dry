@@ -1026,7 +1026,7 @@ for (let i = 0; i <= 100; i++) {
 Q.wels_advisor = 1; // Julián Besteiro (was Otto Wels)
 Q.muller_advisor = 1; // Andrés Saborit (was Hermann Müller)
 Q.muller_dead = 0;
-Q.crispien_advisor = 0; // Manuel Cordero (was Arthur Crispien)
+Q.crispien_advisor = 0; // unused (was Arthur Crispien) - no card or roster entry exists
 Q.hilferding_advisor = 1; // Juan Negrín (was Rudolf Hilferding)
 
 // left advisors
