@@ -77,6 +77,13 @@ Q.neorevisionist_dissent = 10;
 Q.social_patriot_strength = 0
 Q.social_patriot_dissent = 0;
 
+// Area G: once-per-term gate for the Labor Affairs card; reset to 0 after each
+// election alongside the other _seen flags in events/election_1928.scene.dry.
+Q.strike_term_seen = 0;
+Q.labor_affairs_seen = 0;
+Q.working_hours = 0;
+Q.workers_safety = 0;
+
 // secret events...
 Q.unions_independent = 0;
 Q.centrists_resign = 0;
@@ -758,6 +765,7 @@ Q.fiscal_policy_timer = 0;
 Q.foreign_policy_timer = 0;
 Q.judiciary_timer = 0;
 Q.labor_affairs_timer = 0;
+Q.labor_rights_timer = 0;
 Q.military_policy_timer = 0;
 Q.police_timer = 0;
 Q.prussian_affairs_timer = 0;

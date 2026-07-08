@@ -1,6 +1,6 @@
 # Plan: Area G — Policy-Card Content
 
-> **Session handoff.** 🔲 **APPROVED — NOT YET STARTED.** This is the detailed execution plan for
+> **Session handoff.** 🟡 **IN PROGRESS.** This is the detailed execution plan for
 > **Area G** — converting the `government_affairs/` policy-card deck from Weimar German content
 > into Second-Spanish-Republic content. Areas B/E/F/H built the engine, the party landscape, the
 > four new subsystems, and the playable spine; they touched exactly **4** of the 38
@@ -21,6 +21,68 @@
 > compile error** — it is a silently-`NaN`-writing effect line (an `undefined += x` on a phantom
 > German var) and a card that leaks German prose because its gate was flipped live before its body
 > was translated. The guardrails below repeat on purpose.
+
+## Execution status
+
+- **G-0 (recon + manifest):** ✅ done. Baseline `npm run build && npm run smoke` confirmed clean
+  (`BUILD OK` → `SMOKE PASSED`) before any edits. Re-grep of the dead-flag signature against
+  `government_affairs/` reproduced the plan's inventory exactly: 25 hits (the 23-card conversion
+  pool + the 4 `prussian_affairs*` dead/superseded, with `domestic_enemies` also hit — see finding
+  below), directory listing confirmed 38 `.scene.dry` files + the stray `blank_4.scene_alt.dry`
+  (39 total). `@eco` (`main.scene.dry:2630-2636`) confirmed `view-if: 0`. The pinned Cabinet gate
+  (`advisors/cabinet.scene.dry:5`) confirmed dead (`in_spd_majority or …chancellor_party = "SPD"…`,
+  none true in Spanish play).
+  - **Correction to the plan's scope table found during recon:** `domestic_enemies.scene.dry` is
+    **not** actually inert. Its own header comment ("`# this is not a card...`") only means it's
+    not drawn by the `#govt_affairs` tag directly (`is-card:`/`tags:`/`new-page:` are all
+    commented out) — but `government_affairs/police.scene.dry` (a live G-4 target once its gate is
+    fixed) menu-links straight into it: `- @domestic_enemies: Investigate or ban our domestic
+    enemies.` and `- @deport_hitler` (police.scene.dry:18-19). Once `police`'s gate goes live,
+    both `domestic_enemies` and `deport_hitler` become reachable through it regardless of their
+    own headers. **Folded into G-4/G-5:** `domestic_enemies` will be reimagined alongside `police`
+    (banning Falangist squads / Carlist Requetés / CNT-FAI direct-action cells, reusing Area F's
+    live `falange_relation`/`monarchist_relation`/`anarchist_strength`/`anarchist_militancy`/
+    `anarchist_insurrection`/`army_loyalty`/`coup_progress` axes instead of the dead SA/Stahlhelm/
+    RFB `*_banned` machinery); `deport_hitler` has no Spanish analogue and will be retired
+    (`view-if: 0` + inline flag) with its menu line removed from both `police` and
+    `domestic_enemies`, per the plan's existing G-5 disposition for it.
+
+- **G-1 (labor & fiscal bloc):** ✅ done. Converted `labor_affairs.scene.dry`,
+  `labor_rights.scene.dry`, `fiscal_policy.scene.dry` — all three gates flipped from dead
+  `spd_in_government=1 and *_minister_party="SPD"` to live `labor_minister_party ==
+  "PSOE"` / `finance_minister_party == "PSOE"`. Reframed: `labor_affairs` as a Catalan
+  textile lockout the new *jurados mixtos* (mixed arbitration boards) must resolve;
+  `labor_rights` as the eight-hour-day enforcement + Asturian mine/factory safety +
+  unemployment-relief sub-flow (explicitly noting in the prose that Spain never had
+  Germany's insurance system — a patchwork of municipal relief committees instead);
+  `fiscal_policy` as Prieto's tax/tariff balancing act, with the tariff branch reframed
+  around smallholder wheat/olive growers vs. Catalan export industry rather than the
+  original reparations-era diplomacy. All demographic writes retargeted to the live
+  class matrix (`industrial_psoe`, `smallholder_psoe`, `urban_middle_psoe`,
+  `unemployed_psoe`, `industrial_pce`, etc.); all relations retargeted
+  (`radical_relation`, `izq_rep_relation`, `ceda_relation`, `pce_relation`,
+  `monarchist_relation`); excised-splinter party-internal knobs (`dvp_right`,
+  `ddp_cohesion`, `lvp_*`, `*_ideology` chains beyond the two that still exist —
+  `ceda_ideology`/`radical_ideology`) and the dead German goal-tracking scaffolding
+  (`labor_goal_spd`, `goal_spd_cancel*`, `pro_labor`, `finance_goal_completed`, etc. —
+  confirmed via `post_event.scene.dry:3843-4043` to be entirely gated behind the
+  never-true `Q.spd_in_government`, i.e. already-inert content debt per
+  `BC_election_engine_execution_plan.md:105`'s "leave them, they're harmless" call) were
+  dropped rather than carried forward or renamed.
+  - **Two real pre-existing bugs found and fixed** (both silent-NaN traps predating
+    Area G): `Q.labor_rights_timer` was listed in the `Q.timers`/`Q.rubicon_timers`
+    decrement arrays but was **never initialized**, so its `<= 0` gate could never
+    resolve true; and `strike_term_seen` (the once-per-parliamentary-term gate on
+    `labor_affairs`, reset every election in `events/election_1928.scene.dry:1198`) was
+    also never initialized at game start. Both now initialized in `root.scene.dry`
+    alongside `labor_affairs_seen`/`working_hours`/`workers_safety` (also newly
+    declared, both previously-uninitialized write targets).
+  - **Verify:** `BUILD OK` → `SMOKE PASSED` after each of the three files; a standalone
+    Node check (seeding real `Q.*` literals from `root.scene.dry`) confirmed all three
+    gates resolve true under the initial Republican-Socialist cabinet and every one of
+    the 18 branches across the three cards writes only pre-existing keys with zero NaN;
+    grep confirmed zero remaining `spd_in_government`/`_minister_party=="SPD"`/`_spd`/
+    `_ddp`/`_dvp`/`_lvp`/`_kvp`/`_dnvp`/`_nsdap` tokens in the three files.
 
 ---
 
