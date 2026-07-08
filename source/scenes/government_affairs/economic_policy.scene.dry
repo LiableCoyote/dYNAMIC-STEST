@@ -14,6 +14,8 @@ The party has already settled on an economic plan. Now, as long as we hold the F
 
 @economic_plan_menu
 
+- @public_works
+- @public_works_deficit
 - @nationalize_1
 - @nationalize_2
 - @moderate_plan
@@ -22,6 +24,34 @@ The party has already settled on an economic plan. Now, as long as we hold the F
 - @root: Do not implement the economic plan.
 - @easy_discard
 - @cancel_advisor_action
+
+# Area I (I-2): the public-works arm, revived. The plan's WTB/public-works path
+# (economic_plan == 1, set once the UGT public-works plan is adopted via the
+# labor-economist advisor's @plan branch) was deleted as dead code in G-2 because
+# nothing set wtb_adopted. Area I restores the adoption path, so this arm is live
+# again - reframed as Prieto's hydraulic/infrastructure public-works program.
+
+@public_works
+title: Fund the public-works program.
+subtitle: -2 budget.
+unavailable-subtitle: -2 budget. [? if budget < 2 : We do not have the necessary budget. ?] [? if unemployed < 8 : Unemployment is low enough that job creation is not necessary. ?]
+view-if: wtb_adopted == 1
+choose-if: budget >= 2 and unemployed >= 8
+on-arrival: budget -= 2; works_program += 1; unemployed -= 4 if unemployed >= 8; unemployed -= 1 if unemployed >= 25; inflation += 2; industrial_psoe += 6*(1-dissent); unemployed_psoe += 8*(1-dissent); landless_psoe += 3*(1-dissent); smallholder_psoe += 2*(1-dissent); coalition_dissent += 1; radical_relation += 2; izq_rep_relation += 3; pce_relation -= 5 if in_popular_front; capital_strike_progress -= 1 if capital_strike_progress > 1; economic_growth += 2.4
+achievement: wirtschaftspolitik
+
+We have opened the taps on the public-works program - the great hydraulic works, the roads, the rail lines. Money begins to circulate through the economy, and unemployment falls as the works absorb landless labourers and the urban jobless alike. Our republican partners take credit for a recovery plan they can defend to the middle class[? if in_popular_front :, though the <span style="color: #700000;">**PCE**</span> dismisses it as propping up a capitalism it would rather see collapse ?].
+
+@public_works_deficit
+title: Fund the public-works program through deficit spending.
+subtitle: We will run a deficit to keep the works going.
+unavailable-subtitle: [? if unemployed < 10 : Unemployment is low enough that we should not run a deficit. ?]
+view-if: wtb_adopted == 1 and budget < 2
+choose-if: unemployed >= 10 and budget >= -3
+on-arrival: budget -= 2; works_program += 1; unemployed -= 4 if unemployed >= 10; inflation += 3; industrial_psoe += 6*(1-dissent); unemployed_psoe += 8*(1-dissent); landless_psoe += 3*(1-dissent); coalition_dissent += 2; radical_relation -= 4; ceda_relation -= 4; capital_strike_progress += 1; pce_relation -= 4 if in_popular_front; economic_growth += 2.8
+achievement: wirtschaftspolitik
+
+We press on with the public works even into deficit. Our republican partners are alarmed at the red ink and the orthodox economists warn of inflation, but the works go on and the jobless are put to work. The propertied classes mutter about fiscal recklessness.
 
 @austerity
 title: Look into potential austerity measures.

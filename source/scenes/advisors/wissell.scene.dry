@@ -1,13 +1,13 @@
-title: Rudolf Wissell
+title: Manuel Cordero
 is-pinned-card: true
 tags: advisor, labor
 card-image: img/portraits/WissellRudolf.jpg
 view-if: wissell_advisor = 1
-new-page: true 
+new-page: true
 
-= Rudolf Wissell
+= Manuel Cordero
 
-Wissell is a labor economist working for the ADGB, the federation of free trade unions, and has been a labor minister on multiple occasions. His priority is to improve conditions for organized workers.
+Cordero is a veteran <span style="color: #700000;">**UGT**</span> and <span style="color: #c00000;">**PSOE**</span> figure and the party's point man on labour legislation, working closely with the Labour Ministry. His priority is to improve conditions for organized workers.
 
 - @labor_rights_
 - @union_unity
@@ -15,9 +15,9 @@ Wissell is a labor economist working for the ADGB, the federation of free trade 
 
 @labor_rights_
 title: Labor Rights
-subtitle: As Labor Minister, Wissell can help set regulations for working conditions.
-choose-if: advisor_action_timer <= 0 and spd_in_government and labor_minister_party = "SPD"
-unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if labor_minister_party != "SPD" : The SPD does not control the Labor Ministry. ?]
+subtitle: With the PSOE holding the Labour Ministry, Cordero can help set regulations for working conditions.
+choose-if: advisor_action_timer <= 0 and psoe_in_government and labor_minister_party = "PSOE"
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if labor_minister_party != "PSOE" : The PSOE does not hold the Labour Ministry. ?]
 on-arrival: advisor_action_timer = 6; labor_rights_timer -= 10; last_advisor_action = 1
 go-to: labor_rights
 
@@ -29,4 +29,4 @@ choose-if: advisor_action_timer <= 0
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
 on-arrival: advisor_action_timer = 6; labor_dissent -= 5; labor_strength += 5
 
-We have reduced tensions with the Labor faction, and increased its strength in the party.
+We have reduced tensions with the UGT wing, and increased its strength in the party.

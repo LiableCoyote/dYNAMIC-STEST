@@ -1,20 +1,19 @@
-title: Theodor Leipart
+title: Francisco Largo Caballero
 is-pinned-card: true
 tags: advisor, labor
 card-image: img/portraits/LeipartTheodor.jpg
 view-if: leipart_advisor = 1
-new-page: true 
+new-page: true
 
-= Theodor Leipart
+= Francisco Largo Caballero
 
-Leipart is a leader of the ADGB, the largest federation of <span style="color: #c00000;">socialist</span> trade unions.
+Largo Caballero is the secretary-general of the <span style="color: #700000;">**UGT**</span>, the largest federation of <span style="color: #c00000;">socialist</span> trade unions, and one of the towering figures of the workers' movement.
 
 - @organizing
 - @depression
-- @schleicher
 - @root: Return to main
 
-# leipart was one of the people who argued for union independence
+# Largo Caballero was one of the people who argued for union independence
 #- @union_unity
 
 @organizing
@@ -22,28 +21,18 @@ title: Organizing workers
 subtitle: Improve our standing among the workers.
 choose-if: advisor_action_timer <= 0
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
-on-arrival: advisor_action_timer = 6; workers_spd += 4*(1-dissent); workers_spd += 3*(1-dissent) if wtb_adopted == 1; labor_strength += 2;
+on-arrival: advisor_action_timer = 6; industrial_psoe += 4*(1-dissent); industrial_psoe += 3*(1-dissent) if wtb_adopted == 1; labor_strength += 2;
 
-We have increased our organizing among the workers.
+We have increased our organizing among the workers through the UGT.
 
 @depression
 title: Addressing the economic crisis
 subtitle: Formulate a plan to get us out of this mess.
 choose-if: advisor_action_timer <= 0 and wtb_adopted = 0 and black_thursday_seen
-unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if black_thursday_seen == 0 : We are not currently in an economic crisis. ?][? if wtb_adopted > 0 : We have already adopted the WTB-Plan. ?]
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if black_thursday_seen == 0 : We are not currently in an economic crisis. ?][? if wtb_adopted > 0 : We have already adopted the public-works plan. ?]
 on-arrival: advisor_action_timer = 6; wtb_support += 2; center_dissent += 10; labor_strength += 5; wtb_points += 15
 
-[? if not wtb_concept: Woytinsky, Tarnow, and Baade, has been working together to draft a plan for getting us out of the depression. Leipart canvasses in favor of this policy throughout the party and the unions. ?][? if wtb_concept: The WTB-plan, named for its primary supporters Woytinsky, Tarnow, and Baade, has been adopted as the unions' plan for getting us out of the depression. Leipart canvasses in favor of this policy throughout the party and the unions. ?]
-
-@schleicher
-title: Negotiating with the Red General
-subtitle: Leipart will attempt to convince the <span style="color: #c00000;">**SPD**</span> to support Schleicher.
-view-if: red_general_unlock and rubicon
-choose-if: advisor_action_timer <= 0
-unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
-on-arrival: advisor_action_timer = 6; red_general_timer -= 4 if not schleicher_spd_adopted; red_general_timer -= 6 if schleicher_spd_adopted; last_advisor_action = 1
-go-to: red_general
-
+[? if not wtb_concept: The UGT's economists have been drafting a public-works plan to pull the country out of the depression. Largo Caballero throws the union's weight behind it throughout the party and the labour movement. ?][? if wtb_concept: The public-works plan has been taken up as the unions' answer to the depression. Largo Caballero throws the UGT's weight behind it throughout the party and the labour movement. ?]
 
 @union_unity
 title: Union-party coordination
@@ -52,4 +41,4 @@ choose-if: advisor_action_timer <= 0
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
 on-arrival: advisor_action_timer = 6; labor_dissent -= 5; labor_strength += 5
 
-We have reduced tensions with the Labor faction, and increased its strength in the party.
+We have reduced tensions with the UGT wing, and increased its strength in the party.

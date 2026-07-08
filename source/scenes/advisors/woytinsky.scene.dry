@@ -1,13 +1,13 @@
-title: Wladimir Woytinsky
+title: Trifón Gómez
 is-pinned-card: true
 tags: advisor, labor
 card-image: img/portraits/WoytinskyWladimir.jpg
 view-if: woytinsky_advisor = 1
-new-page: true 
+new-page: true
 
-= Wladimir Woytinsky
+= Trifón Gómez
 
-Wladimir Woytinsky is a Russian <span style="color: #D50032;">Menshevik</span> in exile, and the chief economist of the <span style="color: #c00000;">socialist</span> trade union federation. His primary idea is to use massive government spending as a way of stimulating demand to extricate us from the depression.
+Trifón Gómez is a leading figure of the <span style="color: #700000;">**UGT**</span> and the union's foremost advocate on economic policy. His central idea is to follow Prieto's lead and use a massive public-works program - roads, railways, and above all the great hydraulic works - to stimulate demand and pull the country out of the depression.
 
 - @plan
 - @carry_out_policy
@@ -15,22 +15,19 @@ Wladimir Woytinsky is a Russian <span style="color: #D50032;">Menshevik</span> i
 - @root: Return to main
 
 @plan
-title: Adopt the WTB-plan!
-subtitle: Convincing the rest of the party to support the WTB-plan.
+title: Adopt the public-works plan!
+subtitle: Convince the rest of the party to back the public-works program.
 choose-if: advisor_action_timer <= 0 and wtb_adopted == 0 and wtb_concept and black_thursday_seen and ((labor_strength >= center_strength) and (labor_strength >= left_strength)) and wtb_points >= 160
-on-arrival: advisor_action_timer = 6;
-unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if black_thursday_seen == 0 : We are not currently in an economic crisis. ?][? if wtb_adopted > 0 : We have already adopted the WTB-Plan. ?][? if wtb_points < 160 : The WTB Plan is still being ironed out. ?][? if (labor_strength < center_strength or labor_strength < left_strength): The labor faction is not strong enough. ?]
-# Area H2-1: go-to target wtb_proposed was deleted in the Phase 2 bulk-
-# deletion pass (dead German content). This card's own top-level gate
-# (woytinsky_advisor) and this branch's choose-if (black_thursday_seen, also
-# gone) were already unreachable; dead go-to dropped here, nothing else in
-# this untouched Area I file was changed.
+on-arrival: advisor_action_timer = 6; wtb_adopted = 1; economic_plan = 1; labor_strength += 5; center_dissent += 5; reformist_dissent -= 5
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if black_thursday_seen == 0 : We are not currently in an economic crisis. ?][? if wtb_adopted > 0 : We have already adopted the public-works plan. ?][? if wtb_points < 160 : The plan is still being ironed out. ?][? if (labor_strength < center_strength or labor_strength < left_strength): The UGT wing is not strong enough. ?]
+
+With enough groundwork laid, we have convinced the party to formally adopt the public-works plan as its answer to the depression. If the <span style="color: #c00000;">**PSOE**</span> holds the Finance Ministry, we can begin putting it into effect.
 
 @carry_out_policy
 title: Carry out the economic plan.
-subtitle: If we are in government, we can carry out a public works program such as the WTB-Plan.
-unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if wtb_adopted == 0 : We have not yet adopted an economic plan. ?][? if works_program >= 2 : We have already started implementing the plan. ?][? if economic_minister_party != "SPD" and finance_minister_party != "SPD" or not spd_in_government : The <span style="color: #c00000;">**SPD**</span> doesn't occupy the Finance or Economic ministry. ?]
-choose-if: advisor_action_timer <= 0 and wtb_adopted and wtb_implemented <= 1 and economic_minister_party == "SPD" or finance_minister_party == "SPD" and spd_in_government
+subtitle: If we are in government, we can carry out the public-works program.
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if wtb_adopted == 0 : We have not yet adopted an economic plan. ?][? if works_program >= 2 : We have already started implementing the plan. ?][? if finance_minister_party != "PSOE" or not psoe_in_government : The <span style="color: #c00000;">**PSOE**</span> does not hold the Finance Ministry. ?]
+choose-if: advisor_action_timer <= 0 and wtb_adopted and works_program <= 1 and finance_minister_party == "PSOE" and psoe_in_government
 on-arrival: advisor_action_timer = 6; economic_policy_timer -= 12
 go-to: economic_policy
 
@@ -39,7 +36,7 @@ go-to: economic_policy
 title: Addressing the economic crisis
 subtitle: Formulate a plan to get us out of the economic crisis.
 choose-if: advisor_action_timer <= 0 and wtb_adopted == 0 and black_thursday_seen == 1
-unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if black_thursday_seen == 0 : We are not currently in an economic crisis. ?][? if wtb_adopted > 0 : We have already adopted the WTB-Plan. ?]
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if black_thursday_seen == 0 : We are not currently in an economic crisis. ?][? if wtb_adopted > 0 : We have already adopted the public-works plan. ?]
 on-arrival: advisor_action_timer = 6; wtb_support += 2; center_dissent += 10; labor_strength += 5; wtb_points += 15
 
-[? if not wtb_concept: Woytinsky, Tarnow, and Baade, has been working together to draft a plan for getting us out of the depression. Woytinsky canvasses in favor of this policy through the <span style="color: #c00000;">**SPD**</span> and the unions. ?][? if wtb_concept: The WTB-plan, named for its primary supporters Woytinsky, Tarnow, and Baade, has been adopted as the unions' plan for getting us out of the depression. Woytinsky canvasses in favor of this policy through the <span style="color: #c00000;">**SPD**</span> and the unions. ?]
+[? if not wtb_concept: The UGT's economists have been working to draft a plan for getting the country out of the depression. Gómez canvasses in favor of a public-works program throughout the <span style="color: #c00000;">**PSOE**</span> and the unions. ?][? if wtb_concept: The public-works plan has been taken up as the unions' answer to the depression. Gómez canvasses in favor of it throughout the <span style="color: #c00000;">**PSOE**</span> and the unions. ?]

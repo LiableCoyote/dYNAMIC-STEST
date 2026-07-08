@@ -80,6 +80,37 @@ is a bit larger than the folder: it also includes the recruit roster in
   action-gates pass under the initial cabinet, and every exercised branch writes only pre-existing
   keys with zero NaN.
 
+- **I-2 (economic chain + WTB/public-works revival):** ✅ done — the load-bearing stage.
+  Converted the economic-chain advisors: `woytinsky`→**Trifón Gómez** (UGT economic-policy
+  advocate), `baade`→**Lucio Martínez Gil** (FNTT landworkers' head, agrarian), `leipart`→
+  **Francisco Largo Caballero** (UGT secretary-general), `wissell`→**Manuel Cordero** (labour
+  legislation), `aufhauser`→**Anastasio de Gracia** (salaried-worker organizer). Sender/Schumacher
+  deferred to their home stages (I-4/I-5) as whole-file conversions rather than split.
+  - **The WTB/public-works revival (the cross-file mechanic):** restored the adoption path deleted
+    across G-2/H2-1. `woytinsky`'s `@plan` branch (a dead end since H2-1 deleted its setter) now
+    sets `wtb_adopted = 1; economic_plan = 1` on arrival, reframed as adopting the UGT public-works
+    plan (Prieto's hydraulic/infrastructure program). Rebuilt the **public-works arm** in
+    `government_affairs/economic_policy.scene.dry` (deleted by G-2 as dead code) as two new Spanish
+    branches — `@public_works` and `@public_works_deficit`, gated `wtb_adopted == 1`, reusing the
+    live `works_program` counter (lower `unemployed`, raise `economic_growth`/`inflation`; the
+    deficit variant when `budget < 2`). The existing `@eco` deck gate (`economic_plan > 0`, set by
+    G-2) and the `economic_policy` view-if already surface the card once any plan is adopted, so no
+    `main.scene.dry` change was needed.
+  - **Repointed the ★ policy links:** `woytinsky`/`@carry_out_policy` and `wissell`/`@labor_rights_`
+    and `baade`/`@agriculture` re-gated to the live Spanish ministers (`finance`/`labor_minister_party
+    == "PSOE"`; `baade` follows how `agricultural_policy` itself gates — on `psoe_in_government`,
+    since agriculture is a coalition-partner ministry); `aufhauser`'s two branches route into the
+    live `crisis_program.support_left`/`support_moderate` sub-scenes. Dropped `leipart`'s dead
+    `@schleicher` ("Red General") branch that pointed at the G-5-retired `red_general` card.
+  - **Fixed a latent bug:** `aufhauser`'s `moderate_economic_plan` `unavailable-subtitle` referenced
+    a nonexistent var `moderate_economic_plan` (should be `moderate_plan_adopted = 1`) — corrected.
+  - **Verify:** `BUILD OK` → `SMOKE PASSED`; a standalone Node **economic-path simulation** drove
+    the full loop (crisis_program builds `wtb_points` to 160 → Gómez `@depression` → `@plan` gate
+    passes → adoption flips `wtb_adopted`/`economic_plan` → `@eco` deck + `economic_policy` both
+    surface → the `public_works` arm fires: `unemployed` 20→16, `works_program` 0→1) with zero NaN
+    across every branch; grep confirmed zero German-signature tokens (only the asset `card-image`
+    path remains, Area K).
+
 > **Audience: a Sonnet-class executor working cold.** Read `CLAUDE.md`,
 > `docs/planning/B_state_schema.md`, `docs/planning/D_faction_semantics.md` (the faction
 > semantics these advisors sit inside), and **`advisors/cabinet.scene.dry`** (the one already-

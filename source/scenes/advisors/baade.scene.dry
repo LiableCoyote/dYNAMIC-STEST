@@ -1,13 +1,13 @@
-title: Fritz Baade
+title: Lucio Martínez Gil
 is-pinned-card: true
 tags: advisor, reformist
 card-image: img/portraits/BaadeFritz.jpg
 view-if: baade_advisor = 1
-new-page: true 
+new-page: true
 
-= Fritz Baade
+= Lucio Martínez Gil
 
-Baade is one of the few agricultural experts in the <span style="color: #c00000;">**SPD**</span>, and an unorthodox economist. [? if land_reform > 0: He currently has considerable support among party factions due to the <span style="color: #c00000;">SPD</span> successfully enacting land reform. ?]
+Martínez Gil is the secretary-general of the <span style="color: #700000;">**FNTT**</span>, the socialist landworkers' federation, and the party's foremost voice on the agrarian question. [? if land_reform > 0: He carries considerable weight across the factions now that the <span style="color: #c00000;">PSOE</span> has pushed real land reform through. ?]
 
 - @agriculture
 - @rural_campaign
@@ -16,27 +16,27 @@ Baade is one of the few agricultural experts in the <span style="color: #c00000;
 
 @agriculture
 title: Agricultural Policy
-subtitle: Baade is the Minister of Agriculture.
-choose-if: advisor_action_timer <= 0 and spd_in_government and agriculture_minister_party == "SPD"
-unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if not spd_in_government : The <span style="color: #c00000;">SPD</span> is not in government. ?][? if agriculture_minister_party != "SPD": The <span style="color: #c00000;">SPD</span> does not have the Agriculture Ministry. ?]
+subtitle: Martínez Gil presses the government to accelerate land reform.
+choose-if: advisor_action_timer <= 0 and psoe_in_government
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if not psoe_in_government : The <span style="color: #c00000;">PSOE</span> is not in government. ?]
 on-arrival: advisor_action_timer = 6; agricultural_policy_timer -= 6; last_advisor_action = 1
 go-to: agricultural_policy
 
 
 @rural_campaign
 title: Rural Campaign
-subtitle: Try to campaign among the rural populace.
+subtitle: Try to campaign among the braceros and the rural poor.
 choose-if: advisor_action_timer == 0 and rural_policy > 0
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if rural_policy == 0 : We have not enacted any rural policies. ?]
-on-arrival: advisor_action_timer = 6; rural_spd += 5*(1-dissent); peoples_party_support += 1
+on-arrival: advisor_action_timer = 6; landless_psoe += 5*(1-dissent); peoples_party_support += 1
 
-We have increased our campaigning among farmers and the rural populace.
+We have increased our campaigning among the landless day-labourers and the rural poor through the FNTT's networks.
 
 @depression
 title: Addressing the economic crisis
 subtitle: Formulate a plan to rescue us from the economic crisis.
 choose-if: advisor_action_timer <= 0 and wtb_adopted = 0 and black_thursday_seen
-unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if black_thursday_seen == 0 : We are not currently in an economic crisis. ?][? if wtb_adopted > 0 : We have already adopted the WTB-Plan. ?]
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if black_thursday_seen == 0 : We are not currently in an economic crisis. ?][? if wtb_adopted > 0 : We have already adopted the public-works plan. ?]
 on-arrival: advisor_action_timer = 6; wtb_support += 2; center_dissent += 10; labor_strength += 5; wtb_points += 15
 
-[? if not wtb_concept: Woytinsky, Tarnow, and Baade, has been working together to draft a plan for getting us out of the depression. Baade canvasses in favor of this plan throughout the party. ?][? if wtb_concept: The WTB-plan, named for its primary supporters Woytinsky, Tarnow, and Baade, has been adopted as the unions' plan for getting us out of the depression. Baade canvasses in favor of this plan throughout the party. ?]
+[? if not wtb_concept: The UGT's economists have been drafting a public-works plan to pull the country out of the depression, and Martínez Gil argues that rural public works - irrigation, roads, reforestation - must be central to it. He canvasses in favor of the plan throughout the party. ?][? if wtb_concept: The public-works plan has been taken up as the unions' answer to the depression, and Martínez Gil presses for rural works to be central to it. He canvasses in favor of it throughout the party. ?]

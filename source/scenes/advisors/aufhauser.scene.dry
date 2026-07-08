@@ -1,13 +1,13 @@
-title: Siegfried Aufhäuser
+title: Anastasio de Gracia
 is-pinned-card: true
 tags: advisor, reformist
 card-image: img/portraits/AufhäuserSiegfried.jpg
 view-if: aufhauser_advisor = 1
-new-page: true 
+new-page: true
 
-= Siegfried Aufhäuser
+= Anastasio de Gracia
 
-Aufhäuser is a leader of the AfA-Bund, the federation of <span style="color: #c00000;">socialist</span> white-collar trade unions.
+De Gracia is a veteran <span style="color: #700000;">**UGT**</span> organizer with a following among the salaried and professional workers of the cities.
 
 - @white_collar
 - @union_unity
@@ -16,13 +16,13 @@ Aufhäuser is a leader of the AfA-Bund, the federation of <span style="color: #c
 - @root: Return to main
 
 @white_collar
-title: Organizing white-collar workers
-subtitle: Improve our standing among the new middle class.
+title: Organizing salaried workers
+subtitle: Improve our standing among the urban middle class.
 choose-if: advisor_action_timer <= 0
-unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?] 
-on-arrival: advisor_action_timer = 6; new_middle_spd += 6*(1-dissent);
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+on-arrival: advisor_action_timer = 6; urban_middle_psoe += 6*(1-dissent);
 
-We have increased our organizing among white-collar workers.
+We have increased our organizing among salaried and professional workers.
 
 @union_unity
 title: Union-party coordination
@@ -31,21 +31,20 @@ choose-if: advisor_action_timer <= 0
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
 on-arrival: advisor_action_timer = 6; labor_dissent -= 10;
 
-We have reduced tensions with the Labor faction.
+We have reduced tensions with the UGT wing.
 
 @crisis
 title: Addressing the economic crisis
-subtitle: Aufhäuser can help support a left-wing economic program.
+subtitle: De Gracia can help support a left-wing economic program.
 choose-if: advisor_action_timer <= 0 and nationalization_adopted == 0 and black_thursday_seen == 1 and nationalization_support <= 5
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if black_thursday_seen == 0 : We are not currently in an economic crisis. ?][? if nationalization_adopted > 0 : We have already adopted the Left plan. ?]
-on-arrival: advisor_action_timer = 6; 
-go-to: crisis_program.support_left 
+on-arrival: advisor_action_timer = 6;
+go-to: crisis_program.support_left
 
 @moderate_economic_plan
 title: Support the reformist economic plan
-subtitle: Aufhäuser can also support a moderate economic plan.
+subtitle: De Gracia can also support a moderate economic plan.
 choose-if: advisor_action_timer = 0 and moderate_plan_adopted = 0 and black_thursday_seen = 1
-unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?] [? if moderate_economic_plan = 0 : We have already adopted the reformist economic plan. ?] [? if black_thursday_seen == 0 : We are not currently in an economic crisis. ?]
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?] [? if moderate_plan_adopted = 1 : We have already adopted the reformist economic plan. ?] [? if black_thursday_seen == 0 : We are not currently in an economic crisis. ?]
 on-arrival: advisor_action_timer = 6
 go-to: crisis_program.support_moderate
-
