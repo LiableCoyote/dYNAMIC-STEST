@@ -137,6 +137,10 @@ Q.pacifism = 0;
 Q.democratization = 0;
 // Support for a communist coalition relative to 1928
 Q.communist_coalition = 0;
+// Area I: the left lawyer's PCE-cooperation action guards on this counter but it was
+// never declared (a pre-existing latent bug: the condition read undefined and the `+= 1`
+// wrote NaN). Now initialized.
+Q.kpd_cooperation_seen = 0;
 // economic_plan: have we adopted *any* economic plan?
 // 1 - WTB plan, 2 - AfA-bund plan, 3 - radical plan (mass nationalization of industries)
 Q.economic_plan = 0;

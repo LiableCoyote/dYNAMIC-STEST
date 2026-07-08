@@ -142,6 +142,39 @@ is a bit larger than the folder: it also includes the recruit roster in
     writes only pre-existing keys with zero NaN and the ministry/coalition gates resolve true under
     the initial cabinet; grep confirmed zero German-signature tokens across all eight files.
 
+- **I-4 (Catalonia reimagining + retire `prussian_affairs`):** ✅ done. Reimagined the five
+  Prussia-coupled advisors around Area F's live Catalan subsystem, per the locked decision:
+  `braun` (Prussia Minister-President)→**Rafael Vidiella** (Catalan socialist leader, the party's
+  link to the Generalitat); `severing` (Interior/security)→**Ángel Galarza** (the PSOE figure who
+  became Interior Minister); `rosenfeld` (left lawyer, Prussia)→**Luis Araquistáin** (the
+  Caballerista theorist); `sender`→**Margarita Nelken** (left woman deputy); `seydewitz` (Socialist
+  Youth)→**Santiago Carrillo** (FJS leader).
+  - **The reimagining:** each `@prussian_bulwark` branch became a live Catalan-autonomy /
+    Generalitat action routing into `government_affairs/catalan_affairs.scene.dry` (Vidiella pushing
+    the Statute, Galarza coordinating regional public order, Araquistáin backing autonomy from the
+    left) — the sub-scene id renamed `@prussian_bulwark`→`@regional_affairs` within each file. The
+    large embedded German Prussia-election blocks (`@new_prussia_election`,
+    `@center_right_coalition_prussia`) in `sender`/`seydewitz` were **deleted**, and their
+    `@against_toleration` branches (plus `rosenfeld`'s) rebuilt around G-4's live 1936
+    `psoe_toleration` withdraw-support mechanic (dropping the dead `in_*_prussia`/`prussia_leader`/
+    `prussian_police_*` machinery and German party relations). Braun's two near-identical
+    coalition branches collapsed to one, retargeted to the live IR/Radical partners; Carrillo's
+    Socialist-Youth militancy retargeted off the undeclared `rb_strength`/`rb_militancy` onto Area
+    F's `ugt_militia_*`.
+  - **Retired the last German Prussia machinery:** with all three advisor `go-to`s repointed to
+    `catalan_affairs` (and the two dead menu lines removed from the already-retired `red_general`),
+    **deleted the 4 `prussian_affairs*.scene.dry` files** — G-5 had kept them alive solely because
+    these advisors referenced them. The green build proves no dangling `go-to` survived (H2's
+    self-checking property). The lone remaining reference is a harmless JS string-equality check in
+    `easy_discard.scene.dry` (`card.id == "prussian_affairs_dvp"`), not a scene reference.
+  - **One more pre-existing uninitialized-variable bug found and fixed:** `kpd_cooperation_seen`
+    (guarded/incremented by the left lawyer's PCE-cooperation action) was never declared — the
+    guard read `undefined` and the `+= 1` wrote NaN. Now initialized in `root.scene.dry`.
+  - **Verify:** `BUILD OK` → `SMOKE PASSED` (scene count dropped by the 4 deleted files with no
+    dangling references); Node check confirmed all reimagined branches (including both `psoe_toleration`
+    withdraw-support paths and the Catalan gates) write only pre-existing keys with zero NaN; grep
+    confirmed zero German-signature tokens (including `prussia`) across all five files.
+
 > **Audience: a Sonnet-class executor working cold.** Read `CLAUDE.md`,
 > `docs/planning/B_state_schema.md`, `docs/planning/D_faction_semantics.md` (the faction
 > semantics these advisors sit inside), and **`advisors/cabinet.scene.dry`** (the one already-

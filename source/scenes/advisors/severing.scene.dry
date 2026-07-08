@@ -1,32 +1,31 @@
-title: Carl Severing
+title: Ángel Galarza
 is-pinned-card: true
 tags: advisor, reformist
 card-image: img/portraits/SeveringCarl.jpg
 view-if: severing_advisor = 1
-new-page: true 
+new-page: true
 
-= Carl Severing
+= Ángel Galarza
 
-Severing has been Interior Minister for both the German Republic and for the state of Prussia, and his priority is using the security services to target the enemies of the republic.
+Galarza is a <span style="color: #c00000;">**PSOE**</span> deputy and the party's authority on public order and internal security. His priority is turning the Republic's police against the enemies plotting its overthrow.
 
-- @prussian_bulwark
+- @regional_affairs
 - @police_affairs
 - @root: Return to main
 
-@prussian_bulwark
-title: Prussian Bulwark
-subtitle: Severing has influence over Prussian politics.
-choose-if: advisor_action_timer <= 0 and spd_prussia = 1
-unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if not spd_prussia : The <span style="color: #c00000;">SPD</span> is not in control of Prussia. ?]
-on-arrival: advisor_action_timer = 6; prussian_affairs_timer -= 6; last_advisor_action = 1
-go-to: prussian_affairs if in_grand_coalition_prussia == 0 and not in_popular_front_prussia and not in_left_front_prussia; prussian_affairs_dvp if in_grand_coalition_prussia == 1; prussian_affairs_left if in_popular_front_prussia or in_left_front_prussia
+@regional_affairs
+title: Public Order in Catalonia
+subtitle: Galarza can coordinate with the Generalitat over public order in Catalonia.
+choose-if: advisor_action_timer <= 0 and psoe_in_government
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if not psoe_in_government : The <span style="color: #c00000;">PSOE</span> is not in government. ?]
+on-arrival: advisor_action_timer = 6; catalan_affairs_timer -= 6; last_advisor_action = 1
+go-to: catalan_affairs
 
 
 @police_affairs
-title: Police affairs 
-subtitle: We can set our police policy. 
-choose-if: advisor_action_timer == 0 and spd_in_government and interior_minister_party == "SPD"
-unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if not spd_in_government : The <span style="color: #c00000;">SPD</span> is not in government. ?][? if interior_minister_party != "SPD": The <span style="color: #c00000;">SPD</span> does not have the Interior ministry. ?]
+title: Police affairs
+subtitle: We can press the government on internal-security policy.
+choose-if: advisor_action_timer == 0 and psoe_in_government
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if not psoe_in_government : The <span style="color: #c00000;">PSOE</span> is not in government. ?]
 on-arrival: advisor_action_timer = 6; police_timer -= 6; last_advisor_action = 1
 go-to: police
-
