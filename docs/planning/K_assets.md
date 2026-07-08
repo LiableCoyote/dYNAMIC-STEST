@@ -54,6 +54,44 @@ follow-up); **music is deferred** (audio sourcing is a separate human pass).
   OK` → `SMOKE PASSED` (no source edits yet); manifest covers all 82 in-scope refs; plan + manifest
   committed.
 
+- **K-1 (sourcing pipeline):** ✅ done. `scripts/source_assets.mjs` resolves a figure's lead image
+  via the Wikipedia pageimages API (es then en), verifies license via Commons
+  `imageinfo`/`extmetadata`, and (outside `--dry-run`) downloads only redistributable licenses
+  while recording provenance to `out/html/credits_images.txt`. Two real bugs found and fixed while
+  building it: (1) Node's native `fetch` doesn't read `HTTP_PROXY`/`HTTPS_PROXY` without
+  `--use-env-proxy` — the script re-execs itself under that flag so plain `node
+  scripts/source_assets.mjs ...` works against this environment's egress proxy; (2) the
+  `extmetadata` `Artist` field's stripped HTML was concatenating words with no space
+  ("AnonymousUnknown author") — fixed by replacing tags with a space before collapsing whitespace.
+  **Verify:** `--dry-run` over Largo Caballero/Prieto/Besteiro (`scripts/test_manifest.json`, later
+  deleted once superseded by the real manifest) reported a real file + a redistributable license
+  each, no download/credits write in dry-run; `BUILD OK` → `SMOKE PASSED` unaffected (tooling
+  only).
+
+- **K-2 (named-figure portraits):** ✅ done for the sourceable set. Built the full 28-figure Tier-1
+  manifest (`scripts/asset_manifest.json`) and ran the pipeline for real. **25 of 28 resolved** to
+  a redistributable-license Commons file (20 Public domain, 4 CC BY-SA, 1 CC BY, 1 Attribution),
+  downloaded to `img/es/leaders/` with real provenance in `credits_images.txt`. **3 have no free
+  lead image on es/en Wikipedia and remain unsourced:** Lucio Martínez Gil (`martinez_gil`),
+  Juan-Simeón Vidarte (`vidarte`), Julia Álvarez Resano (`alvarez_resano`) — these fall back to the
+  shared `img/placeholder.jpg` at K-4 repoint time; flagged here for a future human sourcing pass
+  (obscure UGT/Socialist-Youth figures, plausibly no free-licensed photo exists at all). Two more
+  pipeline bugs found and fixed mid-run: Wikimedia 429-throttles bursty traffic (added
+  `Retry-After`-aware exponential backoff to both the API-fetch and file-download paths, and
+  slowed the inter-entry delay from 200ms to 1200ms); 5 of the 25 downloads were actually PNGs
+  that the manifest had guessed `.jpg` for (`cordero`, `galarza`, `maranon`, `negrin`, `saborit`) —
+  would have served with a wrong `Content-Type`, so the pipeline now derives each file's real
+  extension from the source URL and self-corrects the target path, and the 5 already-downloaded
+  files/manifest entries/credits lines were renamed to match. **5 items are CC BY-SA (share-alike),
+  flagged in the pipeline's own output for human review:** `de_gracia`, `gonzalez_pena`, `llopis`,
+  `vidiella`, `lejarraga`. **One identity caveat:** `vidiella`'s resolved image is a group photo
+  ("Comité Central de Milícies Antifeixistes") rather than a solo portrait — correctly attributed
+  and clearly him, but a weaker card image than the rest; candidate for a later manual swap if a
+  solo portrait surfaces. **Verify:** 25/28 files exist under `img/es/leaders/` with matching
+  `credits_images.txt` lines; `file` confirms every file's real format matches its extension (zero
+  mismatches); spot-checked 6 files as valid JPEG/PNG data; `BUILD OK` → `SMOKE PASSED` unaffected
+  (not yet wired into `source/scenes/**` — that's K-4).
+
 > **Audience: a Sonnet-class executor working cold.** Read `CLAUDE.md`,
 > `docs/planning/A_engine_build_scaffolding.md` §5 (the asset-path strategy), and
 > `out/html/img/es/README.md` before touching anything. `npm run build && npm run smoke` after

@@ -46,7 +46,13 @@ unresolved since H2, not part of the advisor/policy-card system Area K targets).
 | `img/portraits/BrüningHeinrich.jpg` | dealing_with_toleration (+2 retired variants) | Manuel Azaña | `azana` |
 
 29 target files (WelsOtto/WelsRudolf share one; hirschfeld.jpg/HirschfeldMagnus.jpg share one) →
-**27 distinct downloads**.
+**28 distinct figures** (recount at K-2 execution time; the plan's original estimate of 27 was off
+by one).
+
+**K-2 result:** 25/28 sourced with a redistributable-license Commons photo + recorded provenance
+(see `K_assets.md`'s K-2 status). **3 have no free lead image on es/en Wikipedia and fall back to
+`img/placeholder.jpg` at K-4:** `martinez_gil` (Lucio Martínez Gil), `vidarte` (Juan-Simeón
+Vidarte), `alvarez_resano` (Julia Álvarez Resano).
 
 ## Tier 2 — topical/poster/event → `img/es/{events,parties}/<slug>.*` (source if clean PD exists, else placeholder)
 
