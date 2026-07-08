@@ -131,6 +131,55 @@
     tokens (`_spd`, `wtb_`, `lautenbach`, `reichswehr`, `schleicher`, `Germany`,
     `Weimar`, `Brüning`, `Reichsbank`) remain in either file.
 
+- **G-3 (rights & justice bloc):** ✅ done. Converted `judiciary.scene.dry`,
+  `constitutional_reform.scene.dry`, `womens_rights.scene.dry`, `homosexual_rights.scene.dry`.
+  `judiciary` reframed around the Tribunal de Garantías Constitucionales purging
+  monarchist-holdover judges (gate → `justice_minister_party == "PSOE"`).
+  `constitutional_reform` reframed around two real, mechanically-apt 1931-36 debates
+  instead of the original's Bonn-Basic-Law-inspired ideas (its own header comment
+  admitted as much: *"based on the bundesrepublik basic law... not sure if it's totally
+  realistic"*): tempering the 1931 electoral law's *premio de mayoría* (directly relevant
+  given Area C's own election engine already models that law) and curbing President
+  Alcalá-Zamora's Article 81 dissolution power (a real, historically-loaded 1935-36
+  controversy — the Cortes stripped him of the presidency in April 1936 partly over this).
+  The anachronistic third branch (a West German "constructive vote of no confidence",
+  invented decades after this era in either setting) was dropped rather than forced into
+  a Spanish frame; so was the `bundesrepublik`/`Adenauer` German easter-egg ending.
+  `womens_rights` kept its four-branch structure (workplace, family law, welfare,
+  liberalization) but grounded the intro in the real 1931 suffrage fight (Prieto's
+  opposition, women getting the vote in the Constitution) and reframed the abortion
+  branch as general family-planning liberalization contested by the CEDA rather than the
+  Center Party. `homosexual_rights` reframed around real Second Republic legal history —
+  the 1932 Penal Code's actual (quiet) decriminalization of private acts, threatened by
+  the incoming 1933 Ley de Vagos y Maleantes (vagrancy law) — dropping the Röhm-scandal
+  `heuchelei` achievement/branch entirely (no Spanish equivalent).
+  - **A load-bearing new mechanic:** both `womens_rights` and `homosexual_rights`
+    originally gated their most contested branches on `progressive_coalition >= 50`, a
+    var computed in `events/election_1928.scene.dry` — but that computation
+    (`spd_r + kpd_r + ddp_r/lvp_r + sapd_r`) sums three permanently-dead/excised vars
+    (`kpd_r`, `ddp_r`/`lvp_r`, `sapd_r` were never live Spanish keys), making it **always
+    NaN**, and `NaN >= 50` is always false. This is the same "interleaved dead block"
+    `H2_bulk_cleanup.md`'s H2-4 already found and deliberately left alone rather than
+    risk surgery on load-bearing election math. Rather than depend on a value that can
+    never resolve true (which would have silently dead-ended both cards' best content),
+    both files now compute their own self-contained `progressive_support` in a local
+    on-arrival JS block (`psoe_r + pce_r + izq_rep_r*0.5`, threshold 30 — initial value
+    ≈32.5, so reachable from turn one) instead of reading the broken engine-level
+    `progressive_coalition`. `election_1928.scene.dry` itself was not touched.
+  - **One more pre-existing bug found and fixed:** `constitutional_reform_timer` was in
+    the `Q.timers`/`Q.rubicon_timers` arrays but never initialized (same bug class as
+    G-1's `labor_rights_timer`). Also newly declared: `progressive_support`,
+    `abortion_rights`, `womens_work`, `family_law`, `homosexual_rights`,
+    `repealed_1928_code`, `resisted_vagrancy_law`, `trans_rights` — all read/written by
+    these cards but absent from `root.scene.dry`.
+  - **Verify:** `BUILD OK` → `SMOKE PASSED` after each file (scene count 815 → 810,
+    the `@heuchelei` sub-scene and three now-redundant menu branches removed cleanly, no
+    dangling `go-to` targets); a standalone Node check confirmed all four gates resolve
+    true under realistic seeded state (including both `reform_support` JS-block formulas
+    in `constitutional_reform` and the new `progressive_support` formula), all 15
+    exercised branches write only pre-existing keys with zero NaN; grep confirmed zero
+    German-signature tokens in all four files.
+
 ---
 
 ## Context

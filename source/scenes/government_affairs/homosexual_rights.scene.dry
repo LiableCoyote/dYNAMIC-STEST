@@ -1,58 +1,52 @@
-title: Homosexual Rights
+title: Sexual and Gender Minorities
 new-page: true
 is-card: true
 card-image: img/hirschfeld.jpg
 frequency: 25
 max-visits: 3
-view-if: spd_in_government == 1 and (progressive_coalition >= 50) and chancellor_party == "SPD" and homosexual_rights_timer == 0 and homosexual_rights < 3 and not cvp_women_accepted
+view-if: psoe_in_government == 1 and progressive_support >= 30 and homosexual_rights_timer == 0 and homosexual_rights < 3
 on-arrival: homosexual_rights_timer += 11; month_actions += 1
 tags: govt_affairs, cabinet
 
-= <span style="color: red;">Ho</span><span style="color: orange;">m</span><span style="color: yellow;">o</span><span style="color: green;">se</span><span style="color: blue;">xu</span><span style="color: purple;">al</span> Rights
+= Sexual and Gender Minorities
 
-There is a constellation of different groups that have grown up around divergences in gender and sexuality, including <span style="color: red;">ho</span><span style="color: orange;">m</span><span style="color: yellow;">os</span><span style="color: green;">ex</span><span style="color: blue;">ua</span><span style="color: purple;">ls</span>, <span style="color: coral;">les</span><span style="color: linen;">bi</span><span style="color: mediumvioletred;">ans</span>, <span style="color: deepskyblue;">tran</span><span style="color: linen;">sse</span><span style="color: lightpink;">xuals</span>, transvestites, inverts, etc. Our party's policy is to support their right to live freely and free from persecution; Magnus Hirschfeld, the founder of the Institut für Sexualwissenschaft, is a member of our party and a major advocate for <span style="color: red;">ho</span><span style="color: orange;">m</span><span style="color: yellow;">o</span><span style="color: green;">se</span><span style="color: blue;">xu</span><span style="color: purple;">al</span> rights. 
+Unlike the old Penal Code of the dictatorship, the Republic's own 1932 Penal Code no longer criminalizes private homosexual acts between adults - a genuine, if quiet, liberalization. But that decriminalization is fragile: reformist doctors and jurists within the party warn that a new "vagrancy and danger" law being drafted by the Justice Ministry could be used to persecute homosexuals, cross-dressers, and other sexual minorities administratively, without ever needing to charge them with a crime.
 
-- @repeal_175: Repeal Paragraph 175.
-- @reform_183: Reform Paragraph 183.
-- @change_sex: Create a legal process for changing sex.
+- @repeal_1928_code: Formally strike the last provisions of the old Penal Code.
+- @resist_vagrancy_law: Keep sexual minorities out of the new vagrancy law.
+- @change_sex: Create a legal process for individuals to change their legal sex.
 - @return: Do not enact any changes for now.
 - @easy_discard
 - @cancel_advisor_action
 
-# economic growth due to gay tourism, and creating a new economic niche for the gay populace.
-
-@repeal_175
-subtitle: Paragraph 175 currently criminalizes <span style="color: red;">ho</span><span style="color: orange;">m</span><span style="color: yellow;">o</span><span style="color: green;">se</span><span style="color: blue;">xu</span><span style="color: purple;">al</span> acts. We can pass a law to change that.
+@repeal_1928_code
+subtitle: Formally repeal what remains of the old dictatorship's Penal Code provisions criminalizing private acts.
 unavailable-subtitle: We do not have majority support for this policy.
-view-if: repealed_175 == 0
-choose-if: progressive_coalition >= 50 
-on-arrival: repealed_175 = 1; homosexual_rights += 1; z_relation -= 5; kpd_relation += 4*(1-dissent); ddp_relation += 4*(1-dissent); coalition_dissent += 1 if (in_grand_coalition or in_weimar_coalition); catholics_spd -= 4; ddp_left += 1; ddp_cohesion -= 1; economic_growth += 0.1;
-go-to: heuchelei if rohm_explode
+view-if: repealed_1928_code == 0
+choose-if: progressive_support >= 30
+on-arrival: repealed_1928_code = 1; homosexual_rights += 1; ceda_relation -= 5; pce_relation += 4*(1-dissent); izq_rep_relation += 4*(1-dissent); coalition_dissent += 1 if in_republican_socialist or in_popular_front; catholic_psoe -= 4; economic_growth += 0.1;
 
-Together with the progressives in the <span style="color: #700000;">**KPD**</span> and [? if not lvp_formed: <span style="color: #D3C24D;">**[+ ddp_name +]**</span>?][? if lvp_formed: leftist <span style="color: #FFCC00;">**LVP**</span> members?], we have effectively decriminalized <span style="color: red;">ho</span><span style="color: orange;">m</span><span style="color: yellow;">o</span><span style="color: green;">se</span><span style="color: blue;">xu</span><span style="color: purple;">al</span> sex in Germany. Persecution of <span style="color: red;">ho</span><span style="color: orange;">m</span><span style="color: yellow;">o</span><span style="color: green;">se</span><span style="color: blue;">xu</span><span style="color: purple;">al</span> for their private acts will stop, as long as the police are loyal to the republic.
+Together with the <span style="color: #700000;">**PCE**</span> and left-leaning republicans, we have formally struck the last provisions of the old dictatorship's Penal Code that criminalized private acts between adults, entrenching the 1932 code's quiet liberalization against any future reversal.
 
-Of course, conservatives and the <span style="color: #7A3C00;">far</span> <span style="color: #3E88B3;">right</span> accuse us of "degeneracy".
+Predictably, the CEDA and the far right accuse us of "degeneracy."
 
-@heuchelei
-achievement: heuchelei
-
-@reform_183
-subtitle: Paragraph 183 criminalizes public <span style="color: red;">ho</span><span style="color: orange;">m</span><span style="color: yellow;">o</span><span style="color: green;">se</span><span style="color: blue;">xu</span><span style="color: purple;">al</span> displays and cross-dressing. We can change that.
+@resist_vagrancy_law
+subtitle: Keep the incoming vagrancy law from being used against sexual minorities.
 unavailable-subtitle: We do not have majority support for this policy.
-view-if: reformed_183 == 0
-choose-if: progressive_coalition >= 50 
-on-arrival: reformed_183 = 1; homosexual_rights += 1; z_relation -= 5; kpd_relation += 4*(1-dissent); ddp_relation += 4*(1-dissent); coalition_dissent += 1 if (in_grand_coalition or in_weimar_coalition); catholics_spd -= 4; ddp_left += 1; ddp_cohesion -= 1; economic_growth += 0.1;
+view-if: resisted_vagrancy_law == 0
+choose-if: progressive_support >= 30
+on-arrival: resisted_vagrancy_law = 1; homosexual_rights += 1; ceda_relation -= 5; pce_relation += 4*(1-dissent); izq_rep_relation += 4*(1-dissent); coalition_dissent += 1 if in_republican_socialist or in_popular_front; catholic_psoe -= 4; economic_growth += 0.1;
 
-Voting together with the progressives in the <span style="color: #700000;">**KPD**</span> and [? if not lvp_formed: <span style="color: #D3C24D;">**[+ ddp_name +]**</span>?][? if lvp_formed: leftist <span style="color: #FFCC00;">**LVP**</span> members?], we have reformed Paragraph 183 so that it no longer criminalizes public <span style="color: red;">ho</span><span style="color: orange;">mo</span><span style="color: yellow;">se</span><span style="color: green;">xu</span><span style="color: blue;">al</span><span style="color: purple;">ity</span> and <span style="color: deepskyblue;">cross</span>-<span style="color: deeppink;">dressing</span>.
+Voting together with the <span style="color: #700000;">**PCE**</span> and left-leaning republicans, we have amended the draft vagrancy law so that it cannot be turned against homosexuals, cross-dressers, and other sexual minorities as a matter of "social danger."
 
 
 @change_sex
-subtitle: We can create a legal process for individuals to change their sex, making their lives easier.
+subtitle: We can create a legal process for individuals to change their legal sex, making their lives easier.
 unavailable-subtitle: We do not have majority support for this policy.
 view-if: trans_rights == 0
-choose-if: progressive_coalition >= 50
-on-arrival: trans_rights = 1; homosexual_rights += 1; z_relation -= 5; kpd_relation += 4*(1-dissent); ddp_relation += 4*(1-dissent); coalition_dissent += 1 if (in_grand_coalition or in_weimar_coalition); catholics_spd -= 4; ddp_left += 1; ddp_cohesion -= 1; economic_growth += 0.1;
+choose-if: progressive_support >= 30
+on-arrival: trans_rights = 1; homosexual_rights += 1; ceda_relation -= 5; pce_relation += 4*(1-dissent); izq_rep_relation += 4*(1-dissent); coalition_dissent += 1 if in_republican_socialist or in_popular_front; catholic_psoe -= 4; economic_growth += 0.1;
 
-We have passed a bill to allow legal recognition of <span style="color: deepskyblue;">tran</span><span style="color: linen;">sse</span><span style="color: lightpink;">xuals</span> and transvestite individuals as the sex in which they live, and allow them to change their name, dress as they wish without police persecution, and undergo medical treatment.
+We have passed a bill allowing legal recognition of transsexual and transvestite individuals in the sex in which they live, letting them change their legal name, dress as they wish without police persecution, and pursue medical treatment. It is a radical proposal for its time, championed by a handful of reformist doctors and jurists within the party.
 
-Of course, conservatives and the <span style="color: #7A3C00;">far</span> <span style="color: #3E88B3;">right</span> accuse us of "degeneracy".
+Predictably, the CEDA and the far right accuse us of "degeneracy."
