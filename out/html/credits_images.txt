@@ -30,3 +30,7 @@ img/es/leaders/alvarez_del_vayo.jpg | https://commons.wikimedia.org/wiki/File:19
 img/es/leaders/de_la_torre.jpg | https://commons.wikimedia.org/wiki/File:1918-06-15,_La_Monta%C3%B1a,_Matilde_de_la_Torre_de_Guti%C3%A9rrez_(cropped).jpg | Public domain | Not stated | 2026-07-08
 img/es/leaders/echevarria.jpg | https://commons.wikimedia.org/wiki/File:Toribio_Etxeberria.JPG | Public domain | No machine-readable author provided. Txo assumed (based on copyright claims). | 2026-07-08
 img/es/leaders/prieto.jpg | https://commons.wikimedia.org/wiki/File:Indalecio_Prieto,_1936.jpg | Public domain | Agence de presse Meurisse | 2026-07-08
+img/es/events/cortes_exterior.jpg | https://commons.wikimedia.org/wiki/File:Congreso_de_los_Diputados_(Espa%C3%B1a)_17.jpg | CC BY-SA 4.0 | Luis García ( Zaqarbal ) | 2026-07-08
+img/es/events/casas_viejas.jpg | https://commons.wikimedia.org/wiki/File:Casas_Viejas.jpg | Public domain | Unknown author Unknown author | 2026-07-08
+img/es/events/asturias_1934.jpg | https://commons.wikimedia.org/wiki/File:Arrested_workers_during_the_Asturian_Revolution,_1934.jpg | Public domain | Concern Illustrated Daily Courier - Illustration Archive | 2026-07-08
+img/es/events/popular_front_rally.png | https://commons.wikimedia.org/wiki/File:Frente-popular.png | Public domain | La Voz | 2026-07-08

@@ -1,0 +1,6 @@
+[
+  { "slug": "cortes_exterior", "figure": "Palacio de las Cortes", "target": "img/es/events/cortes_exterior.jpg", "category": "event" },
+  { "slug": "casas_viejas", "figure": "Sucesos de Casas Viejas", "target": "img/es/events/casas_viejas.jpg", "category": "event" },
+  { "slug": "asturias_1934", "figure": "Revolución de Asturias de 1934", "target": "img/es/events/asturias_1934.jpg", "category": "event" },
+  { "slug": "popular_front_rally", "figure": "Frente Popular (España)", "target": "img/es/events/popular_front_rally.jpg", "category": "event" }
+]

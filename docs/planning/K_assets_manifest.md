@@ -82,6 +82,20 @@ Vidarte), `alvarez_resano` (Julia Álvarez Resano).
 19 items; several will likely resolve to "keep, it's generic enough" on inspection (guardrail: only
 replace what's actually identifiable as German).
 
+**K-3 result:** visual inspection (not just filename guessing) confirmed `reichstag_1.jpg`,
+`reichstag_2.jpg`, `blutmai_2.jpg`, and `protest.jpg` are unmistakably German (Reichstag eagle
+crest, German banner text, German shop signage, the Berlin Cathedral) and sourced replacements for
+all four: `img/es/events/cortes_exterior.jpg`, `img/es/events/casas_viejas.jpg`,
+`img/es/events/asturias_1934.jpg` (period photos, verified on-subject), plus a bonus find,
+`img/es/events/popular_front_rally.png` (the actual 17 Feb 1936 *La Voz* front page). `international.jpg`
+was inspected and confirmed *not* German-specific (the 1864 First International emblem — PSOE/UGT
+are genuinely descended from it) — reclassified to Tier 3, kept as-is. **The other 15 Tier-2 items
+remain unsourced** (`muller_cabinet`, `iron_front`, `reichsbanner`, `vorwarts_2`/`Vorwaerts_nr_1`,
+`Mann_der_Arbeit`, `Reichstagsfraktion_der_SPD`, `arbeiterbew`, `sangerbund`, `poster_0/1/2`,
+`weimar_coalition_2/3`, `bankrun`) — Wikipedia-pageimage lookup doesn't cleanly resolve
+posters/mastheads/named-cabinet-group-photos; these fall back to `img/placeholder.jpg` at K-4,
+flagged for a future manual Commons-browsing pass.
+
 ## Tier 3 — era-neutral, leave as-is (no sourcing, no repoint)
 
 `img/paper.jpg`, `img/map_2.jpg`, `img/black.jpg`, `img/hourglass.jpg`, `img/flags.jpg`,

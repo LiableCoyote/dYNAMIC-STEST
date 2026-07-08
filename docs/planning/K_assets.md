@@ -92,6 +92,38 @@ follow-up); **music is deferred** (audio sourcing is a separate human pass).
   mismatches); spot-checked 6 files as valid JPEG/PNG data; `BUILD OK` → `SMOKE PASSED` unaffected
   (not yet wired into `source/scenes/**` — that's K-4).
 
+- **K-3 (topical/poster/event images):** partial — the judgment-heavy tier lived up to its
+  billing. First inspected the current German images directly (the `Read` tool renders images)
+  rather than guessing from filenames alone: confirmed `reichstag_1.jpg`/`reichstag_2.jpg` are
+  unmistakably the Reichstag (eagle crest, "Einigkeit und Recht und Freiheit" banner, the building
+  itself), `blutmai_2.jpg`/`protest.jpg` are Berlin street scenes (German shop signage, the Berlin
+  Cathedral in the background) — all confirmed German and in need of replacement. Also confirmed
+  `international.jpg` (the 1864 First International banner/beehive emblem) is not German-specific
+  and historically apt to keep as-is — PSOE/UGT are genuinely First-International-descended.
+  **Sourced 4 strong replacements**, each visually verified before committing:
+  `img/es/events/cortes_exterior.jpg` (Congreso de los Diputados facade — a modern color photo of
+  the actual, correct building; no free period exterior photo surfaced, flagged for a possible
+  later swap), `img/es/events/casas_viejas.jpg` (a real period photo of the 1933 Casas Viejas
+  aftermath), `img/es/events/asturias_1934.jpg` (a real period photo of arrested workers during the
+  1934 Asturias rising), and one unplanned strong find, `img/es/events/popular_front_rally.png` —
+  the actual 17 February 1936 front page of *La Voz* ("ESPAÑA VOTA POR LAS IZQUIERDAS"), naming and
+  photographing Besteiro, Azaña, Álvarez del Vayo, Araquistáin, Largo Caballero, and Jiménez de
+  Asúa as the winning Madrid candidates. **Rejected several bad automated matches caught by visual
+  inspection**, not just license-checked blindly: a "Cortes Constituyentes" search resolved to an
+  SVG election-results chart, not a photo; a Puerta del Sol search and a Banco de España search
+  both resolved to anachronistic modern-day (2010s-era) photos that would visually clash with the
+  game's 1930s B&W imagery; a "PSOE" search resolved to a present-day party-congress logo.
+  **The remaining ~15 Tier-2 items are not yet sourced** (`muller_cabinet`, `iron_front`,
+  `reichsbanner`, `vorwarts_2`/`Vorwaerts_nr_1`, `Mann_der_Arbeit`, `Reichstagsfraktion_der_SPD`,
+  `arbeiterbew`, `sangerbund`, `poster_0/1/2`, `weimar_coalition_2/3`, `bankrun`) — mostly
+  posters/mastheads/named-cabinet group photos that don't resolve cleanly through a
+  Wikipedia-pageimage lookup (Wikipedia doesn't have a dedicated article+lead-image for "a 1930s
+  PSOE poster"; that needs a human browsing Commons categories, out of this pipeline's scope).
+  These fall back to `img/placeholder.jpg` at K-4 and are flagged here for a future manual sourcing
+  pass. **Verify:** 4 files exist under `img/es/events/` with matching `credits_images.txt` lines;
+  each was rendered and visually confirmed on-subject and (mostly) period-appropriate before being
+  kept; `BUILD OK` → `SMOKE PASSED` unaffected.
+
 > **Audience: a Sonnet-class executor working cold.** Read `CLAUDE.md`,
 > `docs/planning/A_engine_build_scaffolding.md` §5 (the asset-path strategy), and
 > `out/html/img/es/README.md` before touching anything. `npm run build && npm run smoke` after
