@@ -1,9 +1,14 @@
+# Area G (G-5): retired per the plan's recommendation. events/coalition_formation.scene.dry
+# (Area H) now drives all government/cabinet changes after each election; a manual
+# cabinet-shuffle card is largely redundant with that live mechanic, and its own
+# routing into the (now-deleted, Area H2) German ministries tree was already dead.
+# Left in place, permanently gated off, rather than deleted.
 title: Shuffle Cabinet
 new-page: true
 is-card: true
 tags: govt_affairs, cabinet
 on-arrival: shuffle_cabinet_timer = 6;
-view-if: spd_in_government == 1 and shuffle_cabinet_timer == 0 and chancellor_party == "SPD" and not in_spd_majority and not in_emergency_government and not in_left_front
+view-if: 0
 card-image: img/muller_cabinet.jpg
 
 Do we wish to shuffle our cabinet? This might upset our current coalition.

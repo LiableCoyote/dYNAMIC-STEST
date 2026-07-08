@@ -2,13 +2,18 @@ title: Cabinet
 is-pinned-card: true
 tags: advisor
 card-image: img/muller_cabinet.jpg
-view-if: in_spd_majority or (in_emergency_government and chancellor_party = "SPD") or (in_left_front and chancellor_party = "SPD")
+# Area G (G-5): revived. The dead German gate (in_spd_majority / SPD-chancellor
+# checks, never true in Spanish play) is replaced with a live check for whether
+# PSOE holds any of its three initial-cabinet portfolios - justice, labor, or
+# finance (root.scene.dry's initial cabinet assignments) - which also stays true
+# if PSOE later gains additional ministries.
+view-if: psoe_in_government and (justice_minister_party == "PSOE" or labor_minister_party == "PSOE" or finance_minister_party == "PSOE")
 on-arrival: last_cabinet_action = 1
 new-page: true 
 
 = Cabinet
 
-With an SPD chancellor and SPD cabinet members, we can direct the affairs of the national government.
+With PSOE ministers holding key portfolios in the government, we can direct the affairs of the national government - even though the PSOE has never held the presidency of the Council of Ministers itself.
 
 - #cabinet
 - @back: Return to main

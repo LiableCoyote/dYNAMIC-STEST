@@ -99,6 +99,18 @@ Q.trans_rights = 0;
 Q.interior_police_loyalty = 0.4;
 Q.investigate_corruption = 0;
 Q.investigate_far_right = 0;
+Q.war_guilt = 0;
+Q.education_science_timer = 0;
+Q.curriculum_timer = 0;
+Q.secularized = 0;
+Q.major_curriculum = 0;
+Q.minor_curriculum = 0;
+Q.public_hs = 0;
+Q.school_boards = 0;
+Q.science_funding = 0;
+Q.applied_research = 0;
+Q.kwg_research = 0;
+Q.medical_research = 0;
 
 // secret events...
 Q.unions_independent = 0;

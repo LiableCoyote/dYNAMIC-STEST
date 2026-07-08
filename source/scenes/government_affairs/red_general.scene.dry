@@ -1,6 +1,11 @@
+# Area G (G-5): retired per the plan's recommendation. This card is entirely about
+# General Schleicher's rise as chancellor - a Weimar-specific plot thread with no
+# Spanish analogue (the rubicon/Schleicher endgame chain it belongs to is superseded
+# by Area H's July-1936-coup endgame). Left in place, permanently gated off, rather
+# than deleted.
 title: Relations with the Red General
 on-arrival: month_actions += 1; red_general_timer += 4 if not schleicher_spd_adopted; red_general_timer += 6 if schleicher_spd_adopted; red_general_timer -= 2 if chancellor == "Schleicher"
-view-if: (rubicon and red_general_unlock and red_general_timer <= 0 and not schleicher_fight) and not schleicher_dead
+view-if: 0
 card-image: img/portraits/schleicher.jpg
 is-card: true
 new-page: true

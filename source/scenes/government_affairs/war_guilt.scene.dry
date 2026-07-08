@@ -1,17 +1,17 @@
-title: War Guilt Inquiry
+title: Responsibilities Commission
 new-page: true
 is-card: true
 tags: govt_affairs
 on-arrival: war_guilt_timer = 6; month_actions += 1
-view-if: spd_in_government = 1 and war_guilt_timer = 0
+view-if: psoe_in_government = 1 and war_guilt_timer = 0
 card-image: img/reichstag_1.jpg
 max-visits: 1
 
-= Reichstag War Guilt Inquiry
+= The Comisión de Responsabilidades
 
-The War Guilt Inquiry has been an intermittent Reichstag committee for investigating the causes of the Great War and the German defeat. So far, it has faced massive resistance from the military establishment[? if president == "Hindenburg":&nbsp;up to President Hindenburg?].
+The Cortes' Commission of Responsibilities has been investigating the causes of the 1921 disaster at Annual, where the Army of Africa suffered a catastrophic defeat that cost thousands of lives, and the culpability of the old monarchy and the Primo de Rivera dictatorship that followed it. So far, it has faced fierce resistance from the officer corps and the monarchist right - up to the exiled King Alfonso XIII himself.
 
-- @restart: Restart the inquiry.
+- @restart: Press the inquiry forward.
 - @root: Do nothing.
 - @easy_discard
 - @cancel_advisor_action
@@ -19,17 +19,17 @@ The War Guilt Inquiry has been an intermittent Reichstag committee for investiga
 @restart
 on-arrival: war_guilt += 1
 
-What is the goal of this tribunal?
+What is the goal of this commission?
 
-- @pure_history: To provide a historical record of the events of the war.
-- @rewrite: To revise the popular German histories and finally put to rest the "stabbed in the back" myth.
+- @pure_history: To provide a historical record of the events at Annual.
+- @rewrite: To fix responsibility on the King and the generals, not the scapegoats they blamed at the time.
 
 @pure_history
-on-arrival: hindenburg_angry -= 5
+on-arrival: president_angry -= 5
 
 The history is being compiled, as it always has been.
 
 @rewrite
-on-arrival: pacifism += 1; nationalism -= 5*(1-dissent); pro_republic += 5*(1-dissent); coup_progress += 1; dvp_left += 1; ddp_left += 0.5; lvp_left += 1; hindenburg_angry += 10
+on-arrival: pacifism += 1; nationalism -= 5*(1-dissent); pro_republic += 5*(1-dissent); coup_progress += 1; izq_rep_relation += 1; president_angry += 10
 
-Destroying the "stabbed in the back" myth, in addition to finally correcting the historical record, would do a great deal to improve our party's reputation. This is why it would be resisted by the military establishment every step of the way.
+Fixing responsibility on Alfonso XIII and the generals who commanded at Annual, rather than the junior officers and colonial troops blamed at the time, would do a great deal to discredit the old order in the public eye. This is precisely why it is resisted by the officer corps at every step.

@@ -242,6 +242,86 @@
     leaving image paths for the asset pass); grep confirmed both retired toleration
     variants and `deport_hitler` carry `view-if: 0`.
 
+- **G-5 (reimaginings, retirements, cleanup, cabinet surface):** ✅ done.
+  - **`war_guilt` → the Comisión de Responsabilidades.** Spain was neutral in WWI, so
+    reimagined around the real 1931-32 parliamentary inquiry into the 1921 Annual
+    disaster and the culpability of Alfonso XIII and the Primo de Rivera dictatorship —
+    almost a direct structural match for the original's "stab in the back" myth framing
+    (revise the official narrative that blamed scapegoats rather than the King and the
+    generals). Gate → `psoe_in_government`.
+  - **`foreign_policy` → substantially trimmed and reframed.** This was the hardest card
+    in the pool: 245 lines, 16 sub-scenes, entirely built around Versailles reparations,
+    a Concordat-with-the-Vatican chain (redundant with Area F's `religious_policy`), a
+    utopian "European Union" chain, Austrian civil war support, and a Soviet-relations/
+    Wittorf-Affair chain — none of which has a faithful 1931-36 Spanish equivalent, and
+    Spain's real foreign policy in this window was comparatively quiet. Recon also found
+    that `party_affairs/international_relations.scene.dry` (already Area-E-converted)
+    already covers PSOE's *party*-level fraternal-socialist outreach to France/Britain
+    and in solidarity with the Austrian SDAPÖ — so duplicating that at the *government*
+    level would be redundant. Rewrote as a lean 4-branch card on real, distinct
+    government-level ground: League of Nations diplomacy, considering formal diplomatic
+    relations with the USSR (Spain never had any, unlike Weimar's Rapallo-era ties),
+    managing tension with Portugal over its harboring of the exiled General Sanjurjo,
+    and monitoring real 1934-vintage Italian/German support for the monarchist and
+    Falangist right (ties into the live `coup_progress`/`falange_relation`/
+    `monarchist_relation` axes). Reused the already-live, already-generic
+    `west_relation`/`east_relation` scalars (confirmed via grep to already carry
+    generic "diplomatic standing" meaning in the already-converted
+    `military_policy.scene.dry` and `international_relations.scene.dry`) rather than
+    declaring new vars. Gate → `psoe_in_government` (foreign is Radical-held).
+  - **`education_science` → the secular-school program.** Reframed around Marcelino
+    Domingo's real ministry: the mass school-building drive, the Misiones Pedagógicas,
+    and Article 26's break with the religious orders' teaching monopoly (distinct from,
+    and complementary to, Area F's broader `religious_policy` card). Kept the full
+    science-funding submenu (retargeted to the real Junta para Ampliación de Estudios /
+    Residencia de Estudiantes) and the full major+minor curriculum system intact — this
+    card earned the "rich" treatment since the source material was genuinely strong.
+    Gate → `psoe_in_government and black_thursday_seen = 0` (dropped the always-false
+    `return_to_normalcy` disjunct — confirmed via grep it is never set to 1 anywhere in
+    the codebase, so the gate's real behavior was always just "before the crisis hits";
+    simplified rather than ported the dead branch).
+  - **Eleven more previously-uninitialized variables found and declared** across these
+    three cards (same bug class as every prior stage): `education_science_timer`,
+    `curriculum_timer`, `secularized`, `major_curriculum`, `minor_curriculum`,
+    `public_hs`, `school_boards`, `science_funding`, `applied_research`, `kwg_research`,
+    `medical_research`, plus `war_guilt` itself (the progress counter).
+  - **Retired (`view-if: 0` + inline flag, left in place):** `shuffle_cabinet` (redundant
+    with Area H's `coalition_formation.scene.dry`, which now drives all cabinet changes)
+    and `red_general` (entirely about General Schleicher's rise — no Spanish analogue,
+    its containing rubicon/Schleicher endgame chain superseded by Area H's July-1936
+    coup endgame). `rubicon_filler` was **not** retired but lightly de-Germanized in
+    place (its `Q.rubicon` gate is confirmed permanently `undefined`/false, so the card
+    and both `main.scene.dry` decks routing to it are already unreachable) — swapped
+    "German people" for "Spanish people" and retargeted its two demographic writes to
+    `industrial_psoe`/`urban_middle_psoe`, matching the plan's "leave or lightly
+    de-German" option, since fixing the actual dead `rubicon` chain is out of scope.
+  - **Deleted:** the 7 `blank*.scene.dry` "Missing Report" Schleicher fillers plus the
+    stray `blank_4.scene_alt.dry` (confirmed via grep to have zero external `go-to`/
+    menu-choice references anywhere in the tree before deletion, per the H2 precedent).
+  - **`prussian_affairs*` — plan revised, kept rather than deleted.** Recon found real
+    dangling-reference risk the plan didn't anticipate: `government_affairs/red_general`
+    (itself retired this stage, but still compiled and reference-checked) and three
+    **Area I advisor files** (`advisors/rosenfeld.scene.dry`, `severing.scene.dry`,
+    `braun.scene.dry` — all unconverted, out of Area G's scope) all still `go-to` the 4
+    `prussian_affairs*` scene IDs. Deleting them would have broken the build against
+    files Area G isn't supposed to touch. Left in place, unconverted, still flagged
+    superseded — a corrected disposition from the plan's original "recommend delete."
+  - **Revived the pinned Cabinet surface:** `advisors/cabinet.scene.dry`'s dead gate
+    (`in_spd_majority or …chancellor_party = "SPD"…`, never true) replaced with
+    `psoe_in_government and (justice_minister_party == "PSOE" or labor_minister_party
+    == "PSOE" or finance_minister_party == "PSOE")` — true from turn one under the
+    initial cabinet, and stays live if PSOE's portfolios change later. Reworded its one
+    line of German prose.
+  - **Verify:** `BUILD OK` → `SMOKE PASSED` after every file/deletion (scene count
+    804 → 788 → 774 across the stage's edits, all cleanly with no dangling `go-to`
+    targets — confirming both the deletions and the `foreign_policy`/`education_science`
+    trims removed only genuinely-orphaned sub-scenes); a standalone Node check confirmed
+    all four live gates (`war_guilt`, `foreign_policy`, `education_science`,
+    `advisors/cabinet`) resolve true under the initial cabinet and all 15 exercised
+    branches write only pre-existing keys with zero NaN; confirmed both retired cards
+    carry `view-if: 0` and the `blank*` directory listing is clean; grep confirmed zero
+    German-signature tokens across all four touched/reimagined files.
+
 ---
 
 ## Context

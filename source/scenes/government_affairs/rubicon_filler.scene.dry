@@ -1,10 +1,15 @@
+# Area G (G-5): confirmed permanently unreachable - Q.rubicon is never initialized
+# anywhere in root.scene.dry, so this gate (and the two @time/@time_2 decks in
+# main.scene.dry that route here) can never resolve true. Lightly de-Germanized
+# rather than left with dead-flag/German-demographic references, since fixing the
+# actual rubicon/Schleicher endgame chain that would revive this card is out of
+# Area G's scope (superseded by Area H's July-1936-coup endgame).
 title: Biding our Time
 on-arrival: month_actions += 1
 view-if: rubicon
 card-image: img/hourglass.jpg
 is-card: true
 new-page: true
-go-to: blank if schleicher_spd_influence >= 6
 
 = Biding our Time
 
@@ -33,11 +38,11 @@ We have reduced dissent across all factions.
 subtitle: We must defend our creation.
 on-arrival: pro_republic += 2
 
-In a few years time, the German people will thank us.
+In a few years time, the Spanish people will thank us.
 
 @protest
 subtitle: The [+ chancellor +] cabinet must not be allowed to stand.
 view-if: papen_post_2
-on-arrival: pro_republic -= 2; workers_spd += 1; new_middle_spd += 1
+on-arrival: pro_republic -= 2; industrial_psoe += 1; urban_middle_psoe += 1
 
 Labor has taken to the streets.
