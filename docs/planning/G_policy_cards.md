@@ -1,6 +1,6 @@
 # Plan: Area G — Policy-Card Content
 
-> **Session handoff.** 🟡 **IN PROGRESS.** This is the detailed execution plan for
+> **Session handoff.** ✅ **DONE.** This is the detailed execution plan for
 > **Area G** — converting the `government_affairs/` policy-card deck from Weimar German content
 > into Second-Spanish-Republic content. Areas B/E/F/H built the engine, the party landscape, the
 > four new subsystems, and the playable spine; they touched exactly **4** of the 38
@@ -321,6 +321,41 @@
     branches write only pre-existing keys with zero NaN; confirmed both retired cards
     carry `view-if: 0` and the `blank*` directory listing is clean; grep confirmed zero
     German-signature tokens across all four touched/reimagined files.
+
+- **G-6 (verification sweep + docs):** ✅ done.
+  - **Dead-flag grep sweep** over `government_affairs/` + `main.scene.dry` +
+    `advisors/cabinet.scene.dry`: 9 files still match the dead-flag signature
+    (`spd_in_government`/`spd_toleration`/`_minister_party == "SPD"`/
+    `chancellor_party == "SPD"`), all expected and none live: the 4 kept-superseded
+    `prussian_affairs*` files (see G-5's corrected disposition), the 4 cards retired
+    this area (`red_general`, `shuffle_cabinet`, `dealing_with_toleration_right`,
+    `dealing_with_toleration_cvp` — all `view-if: 0`), and `main.scene.dry`'s flavor-
+    trigger block (pre-existing, explicitly out of Area G's scope, already flagged
+    inert by Area H). Zero hits on any live, reachable card.
+  - **Compiled-output scan** of `out/game.json` across all 17 converted/reimagined
+    scene ids for German tokens (`Germany`, `Weimar`, `Reichstag`, `NSDAP`,
+    `Hindenburg`, `Schleicher`, `Brüning`, `WTB`, `Young Plan`, `Versailles`,
+    `Reichswehr`, `SPD`, `KPD`): one hit, `dealing_with_toleration`'s
+    `BrüningHeinrich.jpg` `card-image` path — an Area-K asset reference, not
+    narrative/mechanical content, consistent with precedent.
+  - **Headless Chromium `--dump-dom` load**: zero `Uncaught`/`ReferenceError`/
+    `TypeError`.
+  - **Standalone Node end-to-end sweep**: seeded real `Q.*` literals from
+    `root.scene.dry`; confirmed all 17 converted/reimagined cards' gates (plus the
+    pinned `advisors/cabinet` card and the `@eco` deck, both open and closed states)
+    resolve correctly under the initial Republican-Socialist cabinet, and
+    `dealing_with_toleration`'s gate resolves true under a simulated 1936 Popular
+    Front toleration state; 4 directional spot-checks confirmed (a labor card raises
+    `industrial_psoe`; a public-works choice lowers `unemployed`; a militia ban lowers
+    `falange_militia_strength`; a tax choice raises `budget`).
+  - **The load-bearing assertion, confirmed:** opening the Government Affairs deck
+    (`time >= 6`, PSOE in the Republican-Socialist government) now surfaces real
+    Spanish policy cards across labor, fiscal, judicial, rights, security, and
+    coalition-management domains; the Economic Policy deck opens once the party
+    adopts an economic plan via `crisis_program.scene.dry`; no card shows German
+    prose, and no card writes `NaN`.
+  - **Docs:** this section written; `CLAUDE.md` and
+    `docs/spanish_republic_conversion_design.md`'s §G updated in the same commit.
 
 ---
 

@@ -132,10 +132,38 @@ These have **no base-game analogue** and are the most design-intensive:
 4. **Church–military–Africa axis:** anticlericalism (church burnings 1931), the Sanjurjada (1932), the Africanista officer corps, and the accreting July-1936 conspiracy as the end-state clock. ✅ first increment done — `government_affairs/military_policy.scene.dry` rewritten around Azaña's reforms vs. the Africanista faction (wiring `africa_army`); `government_affairs/religious_policy.scene.dry` added (wiring `church_relation`/`clerical_conflict`); `events/sanjurjada_1932.scene.dry` stubs the August-1932 rising on the existing `coup_progress` counter shape. 🔲 the July-1936 endgame trigger itself is explicitly **not** built — a one-paragraph spec is in `F_new_subsystems.md` for Area H, which also owns the 53-file `coup_progress` event chain and the outstanding `reichswehr_*→army_*` rename across ~71 files beyond the one Area F touched.
 - **Recommendation:** plan each of the four as a **separate** detailed pass; each is comparable to a mid-size base-game system. *(Followed — see the F-1 through F-5 stage breakdown in the plan doc.)*
 
-### G. Government Affairs (policy card deck) — *Size L · Rewrite*
+### G. Government Affairs (policy card deck) — *Size L · Rewrite* — ✅ done
 - Rework the 37 `government_affairs` cards to Spanish policy space: land reform, church-state separation, Catalan statute, military reform (Azaña's), public order law, education (lay schools), labor (jurados mixtos).
 - Preserve the card/action-economy structure (`is-card`, `month_actions`, timers, `view-if` gating) — that framework is reusable.
 - **Depends on:** B, F.
+- **✅ done** — see `docs/planning/G_policy_cards.md` for full detail. Converted the ~20
+  live-but-German cards Areas B/E/F/H hadn't touched: `labor_affairs`/`labor_rights`/
+  `fiscal_policy` (jurados mixtos, the eight-hour day, Prieto's tax policy); the
+  `economic_policy` flagship + `economic_democracy` (recon found the original's WTB/
+  public-works arm — roughly half the file — was already permanently dead code, orphaned
+  by an unconverted Area I advisor chain, so it was dropped rather than reframed; the
+  reachable left-nationalization and moderate-Prietista arms were fully converted), then
+  re-enabled the `@eco` deck Area H had left gated off pending this; `judiciary`/
+  `constitutional_reform` (reframed around the 1931 electoral law's *premio de mayoría*
+  and curbing Alcalá-Zamora's Article 81 dissolution power — real, mechanically-apt 1935-36
+  history, not the original's anachronistic West German Basic Law borrowings)/
+  `womens_rights`/`homosexual_rights` (the Republic's real 1932 Penal Code decriminalization
+  vs. the 1933 vagrancy law); `police`/`domestic_enemies` (reimagined onto Area F's
+  pre-built Falangist-militia/Requetés/CNT-FAI ban system — an unusually clean fit)/
+  `social_welfare`/`coalition_affairs`/the toleration trio (three near-duplicate cards
+  collapsed to one, reframed as the real 1936 Caballerista confidence-and-supply
+  arrangement with Azaña's government); `war_guilt`→the Comisión de Responsabilidades
+  (the 1921 Annual disaster inquiry); `foreign_policy` (trimmed 16→4 branches after recon
+  found most of the original was non-portable Versailles/Vatican/Austria content or
+  redundant with the already-converted `party_affairs/international_relations.scene.dry`);
+  `education_science`→Marcelino Domingo's real school-building program and the Misiones
+  Pedagógicas. Retired 4 cards with no Spanish analogue and deleted 7 dead filler files.
+  Found and fixed 26 previously-uninitialized-variable bugs along the way (the same
+  silent-NaN class Area B originally flagged). Verified via grep sweeps, a compiled-output
+  scan, headless load, and a standalone Node end-to-end sweep across all 17 converted
+  cards. **Found but explicitly out of scope:** the Area I advisor chain that would revive
+  the dropped WTB arm; a silently-inert election-timing utility scene surfaced while
+  trimming `coalition_affairs`.
 
 ### H. Event Content (the bulk) — *Size XL · Rewrite*
 - The 378 event scenes are the largest single body of work. They must be **replaced**, not translated, because they encode specific German event chains.
