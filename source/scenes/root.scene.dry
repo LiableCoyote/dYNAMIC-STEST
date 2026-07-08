@@ -1013,12 +1013,14 @@ for (let i = 0; i <= 100; i++) {
 }
 
 // all the initial advisors are centrists.
-Q.wels_advisor = 1; // Otto Wels
-Q.muller_advisor = 1; // Hermann Müller
+// Area I: advisor keys kept as opaque German identifiers (renaming them would ripple
+// across shuffle_leadership.scene.dry + post_event faction bookkeeping for zero gain);
+// only the displayed figure changes. Comments track the Spanish figure each now represents.
+Q.wels_advisor = 1; // Julián Besteiro (was Otto Wels)
+Q.muller_advisor = 1; // Andrés Saborit (was Hermann Müller)
 Q.muller_dead = 0;
-// okay I know Arthur Crispien was a leader irl but i couldn't find much interesting about him...
-Q.crispien_advisor = 0; // Arthur Crispien
-Q.hilferding_advisor = 1; // Rudolf Hilferding
+Q.crispien_advisor = 0; // Manuel Cordero (was Arthur Crispien)
+Q.hilferding_advisor = 1; // Juan Negrín (was Rudolf Hilferding)
 
 // left advisors
 Q.sender_advisor = 0; // Toni Sender

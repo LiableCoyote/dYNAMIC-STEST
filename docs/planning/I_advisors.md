@@ -58,6 +58,28 @@ is a bit larger than the folder: it also includes the recruit roster in
   revives. Figure-mapping table locked (see below; refinable per-figure during execution). Plan
   persisted to `docs/planning/I_advisors.md`.
 
+- **I-1 (foundation + the 3 starting advisors):** ✅ done. Converted the three advisors hired at
+  game start (live from turn 1): `wels`→**Julián Besteiro** (PSOE/UGT president, the centrist/
+  Besteirista figurehead), `muller`→**Andrés Saborit** (veteran Besteirista, the coalition-
+  negotiator card), `hilferding`→**Juan Negrín** (physiologist-turned-economist — a nice parallel
+  to Hilferding the doctor-turned-economist; carries the ★ `fiscal_policy`/`economic_democracy`
+  go-tos). Each card converted together with both its `shuffle_leadership.scene.dry` roster
+  entries (the `@add_*` and `@remove_*` pairs) per the atomicity rule, plus the `root.scene.dry:
+  1016-1056` declaration comments (keys kept German, comments now track the Spanish figure, with
+  a header note explaining why the keys aren't renamed). Retargeted: `muller`'s coalition action
+  now raises the live `izq_rep_relation`/`radical_relation` (the real Republican-Socialist
+  partners) instead of the German `z`/`ddp`/`dvp`; `hilferding`'s two ministry go-tos re-gated to
+  `finance_minister_party == "PSOE"` etc. with the dead `cvp_economy_accepted` clause dropped;
+  all `spd_toleration`→`psoe_toleration`, `spd_in_government`→`psoe_in_government`,
+  `workers_spd`/`unemployed_spd`→`industrial_psoe`/`unemployed_psoe`. Kept the engine-generic
+  `advisor_action_timer`/`emergency_used` machinery and `wels`'s difficulty-gated easter-egg JS
+  branches (prose de-Germanized). The `@snap_election` branches (gated `chancellor == "<figure>"`)
+  are coherently inert in Spanish play — PSOE never holds the premiership — kept for structural
+  parity with the figure name updated. **Verify:** `BUILD OK` → `SMOKE PASSED`; Node check
+  confirmed all three cards' gates resolve true from the initial roster, `hilferding`'s ministry
+  action-gates pass under the initial cabinet, and every exercised branch writes only pre-existing
+  keys with zero NaN.
+
 > **Audience: a Sonnet-class executor working cold.** Read `CLAUDE.md`,
 > `docs/planning/B_state_schema.md`, `docs/planning/D_faction_semantics.md` (the faction
 > semantics these advisors sit inside), and **`advisors/cabinet.scene.dry`** (the one already-

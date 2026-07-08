@@ -83,31 +83,31 @@ tags: remove_advisor
 
 
 @remove_hilferding
-title: Remove Hilferding
+title: Remove Negrín
 view-if: hilferding_advisor = 1
 on-arrival: hilferding_advisor = 0; center_dissent += 10; n_advisors -= 1
 tags: remove_advisor
 go-to: rm_main_menu
 
-Hilferding has been removed as an advisor. The Centrist faction disapproves.
+Negrín has been removed as an advisor. The Besteirista faction disapproves.
 
 @remove_wels
-title: Remove Wels
+title: Remove Besteiro
 view-if: wels_advisor = 1
 tags: remove_advisor
 on-arrival: wels_advisor = 0; center_dissent += 10; n_advisors -= 1
 go-to: rm_main_menu
 
-Wels has been removed as an advisor. The Centrist faction disapproves.
+Besteiro has been removed as an advisor. The Besteirista faction disapproves.
 
 @remove_muller
-title: Remove Müller
+title: Remove Saborit
 view-if: muller_advisor = 1
 tags: remove_advisor
 on-arrival: muller_advisor = 0; center_dissent += 10; n_advisors -= 1
 go-to: rm_main_menu
 
-Müller has been removed as an advisor. The Centrist faction disapproves.
+Saborit has been removed as an advisor. The Besteirista faction disapproves.
 
 
 @remove_breitscheid
@@ -390,8 +390,8 @@ view-if: n_advisors < 3
 - #nonfactional_advisor
 
 @add_hilferding
-title: Rudolf Hilferding
-subtitle: Rudolf Hilferding is an economist and one of our chief Marxist theoreticians. {!<br><br>!}[? if difficulty < 0 : Actions - Against Right and Left, Defending Toleration, Fiscal Policy, Economic Democracy ?]
+title: Juan Negrín
+subtitle: Juan Negrín is a physiologist-turned-economist, trusted across the party as an honest broker on public finance. {!<br><br>!}[? if difficulty < 0 : Actions - Against Right and Left, Defending Toleration, Fiscal Policy, Economic Democracy ?]
 is-card: true
 card-image: img/portraits/HilferdingRudolf.jpg
 tags: center_advisor
@@ -399,11 +399,11 @@ view-if: hilferding_advisor = 0 and n_advisors < 3 and centrists_resign = 0
 on-arrival: hilferding_advisor = 1; n_advisors += 1; center_dissent -= 7; center_strength += 5
 go-to: advisor_menu
 
-Rudolf Hilferding is now an advisor.
+Juan Negrín is now an advisor.
 
 @add_wels
-title: Otto Wels
-subtitle: Otto Wels is a long-time party organizer and member of the leadership, serving under Friedrich Ebert. {!<br><br>!}[? if difficulty < 0 : Actions -  Clear the Agenda, Party Discipline, Emergency Fundraising ?]
+title: Julián Besteiro
+subtitle: Julián Besteiro is the president of the <span style="color: #c00000;">PSOE</span> and the <span style="color: #700000;">UGT</span>, and the leading voice of the party's orthodox-Marxist current. {!<br><br>!}[? if difficulty < 0 : Actions -  Clear the Agenda, Party Discipline, Emergency Fundraising ?]
 is-card: true
 card-image: img/portraits/WelsRudolf.jpg
 tags: center_advisor
@@ -411,11 +411,11 @@ view-if: wels_advisor = 0 and n_advisors < 3 and centrists_resign = 0
 on-arrival: wels_advisor = 1; n_advisors += 1; center_dissent -= 7; center_strength += 5
 go-to: advisor_menu
 
-Otto Wels is now an advisor.
+Julián Besteiro is now an advisor.
 
 @add_muller
-title: Hermann Müller
-subtitle: Hermann Müller is the last <span style="color: #c00000;">Social Democratic</span> Chancellor. {!<br><br>!}[? if difficulty < 0 : Actions - Negotiating with the Coalition, Defending Toleration ?]
+title: Andrés Saborit
+subtitle: Andrés Saborit is a veteran deputy and a close ally of Besteiro. {!<br><br>!}[? if difficulty < 0 : Actions - Negotiating with the Coalition, Defending Toleration ?]
 is-card: true
 card-image: img/portraits/MüllerHermann.jpg
 tags: center_advisor
@@ -423,7 +423,7 @@ view-if: muller_advisor = 0 and muller_dead = 0 and n_advisors < 3 and centrists
 on-arrival: muller_advisor = 1; n_advisors += 1; center_dissent -= 7; center_strength += 5
 go-to: advisor_menu
 
-Hermann Müller is now an advisor.
+Andrés Saborit is now an advisor.
 
 @add_breitscheid
 title: Rudolf Breitscheid

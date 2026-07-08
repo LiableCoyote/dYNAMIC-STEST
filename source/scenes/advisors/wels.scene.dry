@@ -1,13 +1,13 @@
-title: Otto Wels
+title: Julián Besteiro
 is-pinned-card: true
 tags: advisor, centrist
 card-image: img/portraits/WelsOtto.jpg
 view-if: wels_advisor = 1
 new-page: true
 
-= Otto Wels
+= Julián Besteiro
 
-Wels is the long-time chairman of the <span style="color: #c00000;">**SPD**</span>. He is a gifted organizer and a member of the centrist faction.
+Besteiro is the president of the <span style="color: #c00000;">**PSOE**</span> and the <span style="color: #700000;">**UGT**</span>, and the leading voice of the party's orthodox-Marxist current. A gifted organizer and parliamentarian, he counsels patience: the crisis of capitalism will run its course, and the party's task is to build the workers' consciousness, not to gamble on premature adventures.
 
 - @clear_agenda
 - @party_discipline
@@ -48,14 +48,14 @@ view-if: difficulty < 1
 subtitle: An emergency infusion of resources.
 choose-if: advisor_action_timer = 0
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
-on-arrival: advisor_action_timer = 6; emergency_used += 1; resources += 2; workers_spd -= 2 if emergency_used > 1; labor_dissent += 5 if emergency_used > 1; unemployed_spd -= 2 if emergency_used > 1; workers_spd -= 2 if emergency_used > 2; unemployed_spd -= 2 if emergency_used > 2; labor_dissent += 5 if emergency_used > 2; labor_dissent += 5 if emergency_used > 2
+on-arrival: advisor_action_timer = 6; emergency_used += 1; industrial_psoe -= 2 if emergency_used > 1; labor_dissent += 5 if emergency_used > 1; unemployed_psoe -= 2 if emergency_used > 1; industrial_psoe -= 2 if emergency_used > 2; unemployed_psoe -= 2 if emergency_used > 2; labor_dissent += 5 if emergency_used > 2; labor_dissent += 5 if emergency_used > 2; resources += 2
 
-[? if emergency_used <= 1: Wels has leveraged his position as party chairman to pull in donations and arrange quick loans. ?][? if emergency_used > 1 and emergency_used < 3: Discontent is brewing among the <span style="color: #c00000;">**SPD**</span>'s rank and file due to our persistent attempts at begging for money. ?][? if emergency_used > 2: We’re really scraping the barrel now—committed members are pressured into selling their valuables, while many others leave in frustration. ?]
+[? if emergency_used <= 1: Besteiro has leveraged his standing in the party and the union to pull in donations and arrange quick loans. ?][? if emergency_used > 1 and emergency_used < 3: Discontent is brewing among the <span style="color: #c00000;">**PSOE**</span>'s rank and file over our persistent appeals for money. ?][? if emergency_used > 2: We're really scraping the barrel now—committed members are pressured into selling their valuables, while many others leave in frustration. ?]
 
 We have gained +2 resources.
 
 @money_printer
-title: Print a SPDillion dollars.
+title: Print a PSOEillion pesetas.
 view-if: achievement_moly and ((difficulty == -1 and not dynamic_mode) or difficulty == 0)
 subtitle: This may have inflationary effects.
 choose-if: advisor_action_timer = 0
@@ -69,7 +69,7 @@ title: Toggle Stimulation.
 view-if: achievement_moly
 on-arrival: {!
 if (Q.stimulation) {
-    Q.stimulation = 0; 
+    Q.stimulation = 0;
 } else {
     Q.stimulation = 1;
 }
@@ -80,8 +80,8 @@ Ok.
 @snap_election
 title: Snap Election
 subtitle: Call a snap election.
-unavailable-subtitle: [? if chancellor != "Wels" and president != "Wels" : Wels must be Chancellor or President. ?][? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
-choose-if: advisor_action_timer == 0 and (chancellor == "Wels" or president == "Wels")
+unavailable-subtitle: [? if chancellor != "Besteiro" and president != "Besteiro" : Besteiro must head the government or hold the presidency. ?][? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+choose-if: advisor_action_timer == 0 and (chancellor == "Besteiro" or president == "Besteiro")
 on-arrival: advisor_action_timer = 6; time_to_election = 3
 call: set_next_election_time
 
