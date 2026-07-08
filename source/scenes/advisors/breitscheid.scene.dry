@@ -1,13 +1,13 @@
-title: Rudolf Breitscheid
-is-pinned-card: true 
+title: Rodolfo Llopis
+is-pinned-card: true
 tags: advisor, centrist
 card-image: img/portraits/BreitscheidRudolf.jpg
 new-page: true
 view-if: breitscheid_advisor = 1
 
-= Rudolf Breitscheid
+= Rodolfo Llopis
 
-Breitscheid is a long-time <span style="color: #c00000;">**SPD**</span> leader, who was at one time part of the anti-war <span style="color: #D47B9B;">**USPD**</span>. He came from a working-class family, but has a doctorate degree and started his political career as a liberal.
+Llopis is a schoolteacher-turned-<span style="color: #c00000;">**PSOE**</span> administrator, a moderate with wide connections in the Socialist International and a hand in the Republic's education and foreign work.
 
 - @breitscheid_international
 - @breitscheid_foreign
@@ -17,7 +17,7 @@ Breitscheid is a long-time <span style="color: #c00000;">**SPD**</span> leader, 
 
 @breitscheid_international
 title: International Party Relations
-subtitle: Breitscheid is one of our contacts with international <span style="color: #c00000;">socialist</span> parties.
+subtitle: Llopis is one of our contacts with the fraternal <span style="color: #c00000;">socialist</span> parties abroad.
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
 choose-if: advisor_action_timer == 0
 on-arrival: advisor_action_timer = 6; international_relations_timer -= 12; last_advisor_action = 1
@@ -25,9 +25,9 @@ go-to: international_relations
 
 @breitscheid_foreign
 title: Foreign Policy
-subtitle: As Foreign Minister, Breitscheid can set our foreign policy.
-unavailable-subtitle: [? if not spd_in_government: The <span style="color: #c00000;">SPD</span> is not in government. ?] [? if foreign_minister_party != "SPD" : The <span style="color: #c00000;">SPD</span> does not control the Foreign Ministry. ?][? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
-choose-if: advisor_action_timer == 0 and spd_in_government and foreign_minister_party == "SPD"
+subtitle: Llopis can press the PSOE's line on foreign affairs from within the coalition.
+unavailable-subtitle: [? if not psoe_in_government: The <span style="color: #c00000;">PSOE</span> is not in government. ?][? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+choose-if: advisor_action_timer == 0 and psoe_in_government
 on-arrival: advisor_action_timer = 6; foreign_policy_timer -= 8; last_advisor_action = 1
 go-to: foreign_policy
 
@@ -45,8 +45,8 @@ We have enforced party discipline to reduce dissent across all factions.
 @snap_election
 title: Snap Election
 subtitle: Call a snap election.
-unavailable-subtitle: [? if chancellor != "Breitscheid" : Breitscheid must be Chancellor. ?][? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
-choose-if: advisor_action_timer == 0 and chancellor == "Breitscheid"
+unavailable-subtitle: [? if chancellor != "Llopis" : Llopis must head the government. ?][? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+choose-if: advisor_action_timer == 0 and chancellor == "Llopis"
 on-arrival: advisor_action_timer = 6; next_election_time = time + 3 if next_election_time > time+3; next_election_month = month + 3 if next_election_time >= time + 3; next_election_year = year if next_election_time >= time+3; next_election_year += 1 if next_election_month > 12; next_election_month -= 12 if next_election_month > 12;
 
 We have called for new elections, set for [+ next_election_month : month +] [+ next_election_year +].

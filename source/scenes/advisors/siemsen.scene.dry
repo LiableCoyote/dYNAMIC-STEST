@@ -1,13 +1,13 @@
-title: Anna Siemsen
+title: María Lejárraga
 is-pinned-card: true
 tags: advisor, left
 card-image: img/portraits/SiemsenAnna.jpg
 view-if: siemsen_advisor = 1
-new-page: true 
+new-page: true
 
-= Anna Siemsen
+= María Lejárraga
 
-Anna Siemsen is an educational reform advocate and pacifist, who was one of the few German women to receive a PhD in the pre-war period. She was a former member of the <span style="color: #D47B9B;">**USPD**</span>.
+María Lejárraga is a writer, educator, and feminist, one of the <span style="color: #c00000;">**PSOE**</span>'s women deputies. She is a champion of the Republic's secular education program and an internationalist opposed to militarism.
 
 - @campaign_pacifism
 - @structure_
@@ -25,15 +25,15 @@ go-to: rally.pacifism
 
 @curriculum_
 title: Change the educational curriculum.
-choose-if: advisor_action_timer = 0 and spd_in_government and chancellor_party = "SPD" and (prussia_leader == "Braun" or prussia_leader == "Rosenfeld") and curriculum_timer = 0
-unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if not spd_in_government : The <span style="color: #c00000;">SPD</span> is not currently in government. ?][? if chancellor_party != "SPD": The <span style="color: #c00000;">SPD</span> must control the chancellorship. ?][? if prussia_leader != "Braun" and prussia_leader != "Rosenfeld": The <span style="color: #c00000;">SPD</span> must control the Prussian Minister-President position. ?][? if curriculum_timer > 0 : It is too early to change the curriculum again. ?]
+choose-if: advisor_action_timer = 0 and psoe_in_government and curriculum_timer = 0 and black_thursday_seen = 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if not psoe_in_government : The <span style="color: #c00000;">PSOE</span> is not currently in government. ?][? if curriculum_timer > 0 : It is too early to change the curriculum again. ?][? if black_thursday_seen : The economic crisis leaves no room for curriculum reform. ?]
 on-arrival: advisor_action_timer = 6; last_advisor_action = 1
 go-to: education_science.curriculum
 
 
 @structure_
 title: Change the structure and funding of education.
-choose-if: advisor_action_timer = 0 and spd_in_government and chancellor_party = "SPD" and (prussia_leader == "Braun" or prussia_leader == "Rosenfeld")
-unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if not spd_in_government : The <span style="color: #c00000;">SPD</span> is not currently in government. ?][? if chancellor_party != "SPD": The <span style="color: #c00000;">SPD</span> must control the chancellorship. ?][? if prussia_leader != "Braun" and prussia_leader != "Rosenfeld": The <span style="color: #c00000;">SPD</span> must control the Prussian Minister-President position. ?]
+choose-if: advisor_action_timer = 0 and psoe_in_government and black_thursday_seen = 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if not psoe_in_government : The <span style="color: #c00000;">PSOE</span> is not currently in government. ?][? if black_thursday_seen : The economic crisis leaves no room for education reform. ?]
 on-arrival: advisor_action_timer = 6; last_advisor_action = 1
 go-to: education_science.structure

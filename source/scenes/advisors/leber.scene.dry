@@ -1,13 +1,13 @@
-title: Julius Leber
+title: Juan-Simeón Vidarte
 is-pinned-card: true
 tags: advisor, neorevisionist
 card-image: img/portraits/LeberJulius.jpg
 view-if: leber_advisor = 1
-new-page: true 
+new-page: true
 
-= Julius Leber
+= Juan-Simeón Vidarte
 
-Leber is a former army officer who turned against the military leaders of the Kapp Putsch in 1920, helping us put down the army's attempted coup. He is in favor of expanded democracy and building a broad popular base for the <span style="color: #c00000;">**SPD**</span>.
+Vidarte is a deputy secretary of the <span style="color: #c00000;">**PSOE**</span> executive, a lawyer who keeps a close watch on the officer corps and public order. He favors defending the Republic by broadening the party's base well beyond the industrial working class.
 
 - @democratic_rally
 - @military_affairs
@@ -18,43 +18,43 @@ Leber is a former army officer who turned against the military leaders of the Ka
 
 @democratic_rally
 title: Rally for democracy
-subtitle: Rally our party and the German people to defend democracy and freedom.
-choose-if: advisor_action_timer == 0 
+subtitle: Rally our party and the Spanish people to defend the Republic and its freedoms.
+choose-if: advisor_action_timer == 0
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
-on-arrival: advisor_action_timer = 6; pro_republic += 5; democratization += 1; neorevisionist_strength += 5; reformist_strength += 3; workers_spd += 4*(1-dissent) if democratization >= 4; new_middle_spd += 3*(1-dissent) if democratization >= 4
+on-arrival: advisor_action_timer = 6; pro_republic += 5; democratization += 1; neorevisionist_strength += 5; reformist_strength += 3; industrial_psoe += 4*(1-dissent) if democratization >= 4; urban_middle_psoe += 3*(1-dissent) if democratization >= 4
 
-Leber helps us to rally the people in defense of democracy.
+Vidarte helps us rally the people in defense of the Republic.
 
 @military_affairs
 title: Military affairs
-subtitle: We can set our military policy.
-choose-if: advisor_action_timer == 0 and spd_in_government and reichswehr_minister_party == "SPD"
-unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if not spd_in_government : The <span style="color: #c00000;">SPD</span> is not in government. ?][? if reichswehr_minister_party != "SPD": The <span style="color: #c00000;">SPD</span> does not have the Reichswehr ministry. ?]
-on-arrival: advisor_action_timer = 6; last_advisor_action = 1
+subtitle: We can press the PSOE's line on military reform from within the coalition.
+choose-if: advisor_action_timer == 0 and psoe_in_government
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if not psoe_in_government : The <span style="color: #c00000;">PSOE</span> is not in government. ?]
+on-arrival: advisor_action_timer = 6; military_policy_timer -= 6; last_advisor_action = 1
 go-to: military_policy
 
 @support_peoples_party
-title: Build support for a People's Party
-subtitle: Can we expand our party beyond the industrial working class?
+title: Build support for a broad workers' party
+subtitle: Can we expand the party beyond the industrial working class?
 view-if: peoples_party = 0
 choose-if: peoples_party_support <= 4 and advisor_action_timer = 0 and peoples_party == 0
-unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if peoples_party_support > 4: There is already substantial support for a People's Party. ?]
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if peoples_party_support > 4: There is already substantial support for broadening the party. ?]
 on-arrival: advisor_action_timer = 6; peoples_party_support += 1
 
-We are building up support for the idea of a People's Party.
+We are building up support for the idea of broadening the party's base.
 
 @build_peoples_party
-title: Building a People's Party
-subtitle: Can we expand our party beyond the industrial working class?
+title: Broadening the party
+subtitle: Can we expand the party beyond the industrial working class?
 view-if: peoples_party == 0
 choose-if: peoples_party_support >= 3 and advisor_action_timer = 0
-unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if peoples_party_support < 3: There is not enough support for this policy within the party. ?]
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if peoples_party_support < 3: There is not enough support for this within the party. ?]
 on-arrival: advisor_action_timer = 6; last_advisor_action = 1
 go-to: peoples_party
 
 @campaigning_peoples_party
-title: Campaigning as a People's Party
-subtitle: Campaigning with some of our previously nontraditional demographics.
+title: Campaigning among new demographics
+subtitle: Campaigning among some of our previously nontraditional demographics.
 view-if: peoples_party = 1
 choose-if: advisor_action_timer = 0
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]

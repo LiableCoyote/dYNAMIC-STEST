@@ -111,6 +111,37 @@ is a bit larger than the folder: it also includes the recruit roster in
     across every branch; grep confirmed zero German-signature tokens (only the asset `card-image`
     path remains, Area K).
 
+- **I-3 (policy-linked advisors):** ✅ done. Converted the eight advisors that route into
+  already-converted Area G/F policy cards: `radbruch`→**Fernando de los Ríos** (the real 1931
+  Justice Minister → `judiciary`/`constitutional_reform`), `hirschfeld`→**Gregorio Marañón**
+  (endocrinologist → `homosexual_rights`/`womens_rights`/`education_science.increase_science`),
+  `breitscheid`→**Rodolfo Llopis** (moderate educator-internationalist → `international_relations`/
+  `foreign_policy`), `leber`→**Juan-Simeón Vidarte** (PSOE executive, public-order/military watch →
+  `military_policy` + the People's-Party broadening chain), `stampfer`→**Julián Zugazagoitia**
+  (editor of *El Socialista* → `media` + the editorial-line/PCE-cooperation actions),
+  `juchacz`→**Julia Álvarez Resano** (woman deputy → welfare/women's organizing),
+  `mierendorff`→**Ramón González Peña** (Asturian miners' leader → the Alianza Obrera / worker-
+  militia buildup, `confronting_nazis.iron_front`), `siemsen`→**María Lejárraga** (feminist educator
+  → `rally.pacifism` + `education_science.curriculum`/`.structure`).
+  - **Gate/link repointing:** all minister/coalition gates moved to the live Spanish forms
+    (`justice_minister_party == "PSOE"`, etc.); where a card's own gate had changed in Area G/F,
+    the advisor was matched to it (Marañón's `homosexual_rights` action uses G-3's live
+    `progressive_support >= 30` computed var, not the dead `progressive_coalition >= 50`;
+    Llopis's/`leber`'s/`siemsen`'s foreign/military/education actions gate on `psoe_in_government`,
+    matching that those cards are reachable via PSOE's coalition influence rather than a PSOE-held
+    ministry; siemsen's education gates dropped the dead `prussia_leader`/`chancellor_party=="SPD"`
+    clauses). All demographic writes retargeted to the class matrix; `kpd_relation`→`pce_relation`;
+    `Iron Front`/`Reichsbanner` → `Alianza Obrera` / UGT militia (`rb_strength`/`rb_militancy`,
+    which are **undeclared** and would have NaN'd, retargeted to Area F's live `ugt_militia_strength`/
+    `ugt_militia_militancy`; `nsdap_workers`→`industrial_falange`; `workers_spd_normalized`→the live
+    `industrial_psoe_normalized`); dropped `leipart`-style dead German-plot branches where present.
+  - **One more pre-existing uninitialized-variable bug found and fixed:** `workers_aid` (written by
+    the welfare advisor's mutual-aid action) was never declared — now initialized in `root.scene.dry`.
+  - **Verify:** `BUILD OK` → `SMOKE PASSED` (all ~16 `go-to` targets across the eight cards resolve —
+    the build hard-errors on a dangling reference); Node check confirmed every effect-bearing branch
+    writes only pre-existing keys with zero NaN and the ministry/coalition gates resolve true under
+    the initial cabinet; grep confirmed zero German-signature tokens across all eight files.
+
 > **Audience: a Sonnet-class executor working cold.** Read `CLAUDE.md`,
 > `docs/planning/B_state_schema.md`, `docs/planning/D_faction_semantics.md` (the faction
 > semantics these advisors sit inside), and **`advisors/cabinet.scene.dry`** (the one already-

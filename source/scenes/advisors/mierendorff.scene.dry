@@ -1,4 +1,4 @@
-title: Carlo Mierendorff
+title: Ramón González Peña
 is-pinned-card: true
 tags: advisor
 card-image: img/portraits/MierendorffCarlo.jpg
@@ -6,9 +6,9 @@ view-if: mierendorff_advisor = 1
 new-page: true
 #face-image: img/portraits/MierendorffCarlo.jpg
 
-= Carlo Mierendorff
+= Ramón González Peña
 
-Carlo Mierendorff is the founder of the neo-revisionist ideological tendency, and supports both democratic reforms and extra-parliamentary action to combat the <span style="color: #7A3C00;">Nazis</span> and <span style="color: #808080;">authoritarian</span> parties. He is from a middle-class, academic background, and is one of our youngest leaders.
+González Peña is the leader of the Asturian miners' union and a champion of the <span style="color: #c00000;">Alianza Obrera</span> - a united front of workers' organizations to meet the fascist and authoritarian right in the streets as well as at the ballot box.
 
 - @iron_front_buildup
 - @form_iron_front
@@ -16,28 +16,28 @@ Carlo Mierendorff is the founder of the neo-revisionist ideological tendency, an
 - @root: Return to main
 
 @iron_front_buildup
-title: Build up the <span style="color: #c00000;">Iron</span> <span style="color: #1A1A1A;">Front</span>
-subtitle: Increase our propaganda measures to recruit more members into the Reichsbanner. 
+title: Build up the <span style="color: #c00000;">Alianza Obrera</span>
+subtitle: Step up recruitment into the worker militias.
 choose-if: advisor_action_timer == 0 and iron_front_formed
-unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if iron_front_formed == 0 : The <span style="color: #c00000;">Iron</span> <span style="color: #1A1A1A;">Front</span> has not yet been formed. ?]
-on-arrival: advisor_action_timer = 6; rb_strength += 200*(workers_spd_normalized / 100);
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if iron_front_formed == 0 : The <span style="color: #c00000;">Alianza Obrera</span> has not yet been formed. ?]
+on-arrival: advisor_action_timer = 6; ugt_militia_strength += 200*(industrial_psoe_normalized / 100);
 
-We have recruited more members into the Reichsbanner.
+We have recruited more workers into the militias of the Alianza Obrera.
 
 
 @form_iron_front
-title: Forming the <span style="color: #c00000;">Iron</span> <span style="color: #1A1A1A;">Front</span>
+title: Forming the <span style="color: #c00000;">Alianza Obrera</span>
 choose-if: advisor_action_timer == 0 and iron_front_formed == 0 and nazi_urgency >= 2
-unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if iron_front_formed : The <span style="color: #c00000;">Iron</span> <span style="color: #1A1A1A;">Front</span> has already been formed. ?][? if nazi_urgency < 2 : The party does not yet see the danger of the <span style="color: #7A3C00;">Nazis</span>. ?]
-on-arrival: advisor_action_timer = 6; rb_strength += 50; nazi_urgency += 1
-go-to: confronting_nazis.iron_front 
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if iron_front_formed : The <span style="color: #c00000;">Alianza Obrera</span> has already been formed. ?][? if nazi_urgency < 2 : The party does not yet see the danger of the fascist right. ?]
+on-arrival: advisor_action_timer = 6; ugt_militia_strength += 50; nazi_urgency += 1
+go-to: confronting_nazis.iron_front
 
 
 @nazi_urgency
-title: Warning about the <span style="color: #7A3C00;">Nazis</span>
-subtitle: By warning the party about the <span style="color: #7A3C00;">Nazis</span>, we can spur our members to action.
+title: Warning about the fascist right
+subtitle: By warning the party about the fascist danger, we can spur our members to action.
 choose-if: advisor_action_timer == 0
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
-on-arrival: advisor_action_timer = 6; nazi_urgency += 1; rb_militancy += 0.01 if not rb_explode; nsdap_workers -= 4*(1-dissent);
+on-arrival: advisor_action_timer = 6; nazi_urgency += 1; ugt_militia_militancy += 0.01; industrial_falange -= 4*(1-dissent);
 
-We have begun a propaganda campaign to warn our members away from the <span style="color: #7A3C00;">Nazis</span>.
+We have begun a campaign to warn our members away from the false appeals of the far right.
