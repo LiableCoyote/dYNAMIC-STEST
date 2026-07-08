@@ -23,7 +23,8 @@ It is a **standalone build**, not a mod. Decisions already locked: standalone (n
 8. `docs/planning/H2_bulk_cleanup.md` — Area H Phase 2 (the bulk cleanup), done. Same live-status pattern; the ~371-file dead German corpus is deleted, the tree is ~75% smaller.
 9. `docs/planning/G_policy_cards.md` — Area G (policy-card content), done. Same live-status pattern; the `government_affairs/` deck is now real Spanish policy content end to end.
 10. `docs/planning/I_advisors.md` — Area I (advisors), done. Same live-status pattern; the 28 advisor cards + the recruit roster are real Spanish figures, the public-works economic plan is revived, and the last German Prussia machinery is gone.
-11. `docs/planning/A_engine_build_scaffolding.md` — build/CI/naming/asset scaffolding (Area A, done).
+11. `docs/planning/K_assets.md` — Area K (image assets), functionally done, pending human art review. Same live-status pattern; 25/28 named-figure portraits + 4 topical/event images sourced from Wikimedia Commons with verified provenance, every live card-image/set-bg reference repointed, two new build-time guards (broken-path, credits-completeness) added to `smoke.js`.
+12. `docs/planning/A_engine_build_scaffolding.md` — build/CI/naming/asset scaffolding (Area A, done).
 
 ## Build & verify (do this after every change)
 
@@ -114,38 +115,63 @@ date, not narrative flags); others were genuinely inert. Verify, don't guess.
 - **Area H Phase 2 (the bulk cleanup):** ✅ done — **371 dead German scene files physically deleted** (493 → 122 total scene files; `events/` 386 → 15). Deleted the entire dead corpus (the Prussia chain, the Brüning/Papen/Schleicher chancellor sim, the party-splinter corpus, the presidential-election chain, the Austria/foreign chain, the old German coup/civil-war chain, and the ~2200-line dead German coalition-menu tree that Phase 1 had left orphaned-but-kept inside `election_1928.scene.dry`) via a build-driven loop — `dendrynexus`'s reference resolution hard-errors on any dangling `go-to`/`call`/menu-choice target, so deletion was self-checking. **Found and fixed a real, previously-hidden build bug along the way:** `dendrynexus make-html` was silently skipping recompilation after deletions (its staleness check only looks at *surviving* files' mtimes, which `git rm` never touches) — `npm run build` was reporting `BUILD OK` without having recompiled anything; `scripts/build.js` now always passes `--force`. Converted the one remaining reachable German screen, `ending_slides.scene.dry`, to four Spanish epilogue slides. Found and closed 7 more "reachable-but-German" events beyond Phase 1 H-3's 9 (genuinely live gates, 100% unconverted content — `left_split`, `centrist_leaders_resign`, `reformist_leaders_resign`, `unions_declare_independence`+2, `groko_prussia_collapse`, `return_to_normalcy`), plus one live Area-G card (`shuffle_cabinet.scene.dry`) that had no gate at all and routed straight into the now-deleted German ministries tree. The interleaved dead block inside `@post_election_1928`'s live seat math was deliberately left deferred (its inertness was more thoroughly re-verified, but surgery on code interleaved with the load-bearing election math isn't worth the risk for a few fewer inert `NaN`s). Verified throughout with the H-6 end-to-end regression simulation, re-run after **every single deletion batch** — its output is byte-identical before and after the whole phase, proving the game plays exactly the same. **Found but explicitly out of scope, flagged in `H2_bulk_cleanup.md`:** `status.scene.dry`'s `@emergency` sub-scene (Government/Party Leadership/Industrial Backing display) is substantially unconverted German content, same class as the already-flagged `@polls`; `status_right.scene.dry` contains a large unconverted German "camarilla" panel whose reachability could not be conclusively determined without interactive browser testing (this session's tooling is `--dump-dom`-only) — left untouched rather than risk deleting/editing a possibly-live scene.
 - **Area G (policy-card content):** ✅ done — the `government_affairs/` deck (38 files) is now real Spanish content end to end. Converted 20 live-but-German cards across six stages (G-0 recon → G-5 reimaginings/cleanup): `labor_affairs`/`labor_rights`/`fiscal_policy` (the *jurados mixtos*, the eight-hour day, Prieto's tax/tariff policy); the `economic_policy` flagship (279→232 lines — recon found its WTB/Lautenbach public-works arm, roughly half the file, was already permanently unreachable dead code orphaned by an unconverted Area I advisor path, so it was deleted rather than reframed; the two genuinely-reachable arms, left-nationalization and the moderate Prietista plan, were fully converted) + `economic_democracy`, then re-enabled the `@eco` deck Area H had left gated off pending this; `judiciary`/`constitutional_reform` (reframed around the 1931 electoral law's *premio de mayoría* and curbing Alcalá-Zamora's Article 81 dissolution power, not the original's anachronistic Bonn-Basic-Law borrowings)/`womens_rights`/`homosexual_rights`; `police`/`domestic_enemies` (an unusually clean fit onto Area F's pre-built Falangist-militia/Requetés/CNT-FAI ban system)/`social_welfare`/`coalition_affairs`/the toleration trio (collapsed 3→1 card, reframed as the real 1936 Caballerista confidence-and-supply arrangement); `war_guilt`→the Comisión de Responsabilidades (the 1921 Annual disaster inquiry), `foreign_policy` (the hardest card in the pool — trimmed from 16 to 4 sub-branches after recon found most of the original was either non-portable Versailles/Vatican/Austria content or redundant with already-converted party-level content), `education_science`→Marcelino Domingo's real school-building program. Retired 4 cards with no Spanish analogue (`deport_hitler`, `red_general`, `shuffle_cabinet`, plus one toleration variant) and deleted 7 dead `blank*` filler files + a stray mis-extensioned duplicate; revived the pinned Cabinet advisor card's dead gate. **Found and fixed 26 previously-uninitialized-variable bugs** (same silent-NaN class as Area B's original finds) along the way — see `G_policy_cards.md`'s per-stage status for the full list. **Found but explicitly out of scope, flagged in `G_policy_cards.md`:** `coalition_affairs.scene.dry`'s dropped `bring_down`/election-trigger branch called a utility scene (`set_next_election_time`) that turns out to be silently inert (guards on a never-initialized `time_to_election`); the 4 `prussian_affairs*` files were kept rather than deleted as originally planned, since three out-of-scope Area I advisor files still reference them.
 - **Area I (advisors):** ✅ done — all 28 advisor cards (+ the `shuffle_leadership` recruit roster + the two structural pinned cards) are now real Second-Republic PSOE figures. Mapped the German socialists onto Spanish counterparts preserving the faction tags and the 3-advisor cap (starters: Besteiro/Saborit/Negrín; plus Largo Caballero, Prieto-era figures, Fernando de los Ríos→justice, Gregorio Marañón→rights/science, Zugazagoitia→*El Socialista*, González Peña→Alianza Obrera, Santiago Carrillo→Socialist Youth, etc.). **Revived the public-works economic plan** (the WTB arm G-2 deleted as dead code): the labor economist's `@plan` branch now sets `wtb_adopted`/`economic_plan = 1`, and `economic_policy.scene.dry`'s public-works arm (Prieto's hydraulic/infrastructure works) was rebuilt — verified end-to-end (crisis_program → adopt → economic_policy arm → `@eco` deck). **Reimagined the Prussia-coupled advisors around Catalonia** (Braun→Vidiella/Generalitat, Severing→Galarza, Rosenfeld→Araquistáin, +the Sender/Seydewitz Prussia blocks), repointed their `go-to`s to `catalan_affairs`, and **deleted the 4 `prussian_affairs*` files** G-5 had kept alive solely for these references. Advisor variable *keys* and scene *filenames* kept as opaque German identifiers (renaming would ripple across the roster + `post_event` faction bookkeeping for zero gain — same call as Area B/scene-IDs). **Found and fixed 4 more previously-uninitialized-variable bugs** (`workers_aid`, `kpd_cooperation_seen`, `month_activities`→`month_actions` ×3, plus a `moderate_economic_plan`-var typo). Verified via dead-flag grep, a compiled-output scan, headless load, and a Node sim exercising all 95 advisor `on-arrival` lines (zero NaN) + a hire-from-roster round-trip. **Out of scope, left per precedent:** advisor `card-image` portraits still point at German figures (Area K); a harmless dead JS string-check in `easy_discard.scene.dry`.
-- **Areas J–M:** 🔲 not started. **J** = qdisplay/UI (already has flagged findings waiting: the `nsdap_r`-class dead qdisplay ids and the `hindenburg_angry` id used across 83 files); **K** = assets (every converted Area D/E/F/G/I card still points at German `card-image` portraits — none renamed, per established precedent of leaving asset paths for this pass); **L** = localization; **M** = balancing.
+- **Area K (assets):** 🟡 functionally done, pending human art review — 25 of 28 Tier-1
+  named-figure portraits + 4 Tier-2 topical/event images sourced from Wikimedia Commons
+  with machine-verified provenance (`scripts/source_assets.mjs`, resolves a figure's lead
+  image via the Wikipedia pageimages API and verifies license via Commons `imageinfo`);
+  every live `card-image:`/`set-bg:` reference across 71 scene files repointed from German
+  paths onto `img/es/` or the shared placeholder (`scripts/k4_repoint.py`) — zero broken
+  paths, zero known German-identifiable imagery on any live card. Visual inspection (not
+  just filename-matching) caught and replaced the worst offenders: the Reichstag chamber
+  and building, a 1929 Berlin street-fighting photo, and a Berlin rally at the Lustgarten/
+  Cathedral, swapped for the Congreso de los Diputados facade and real period photos of
+  Casas Viejas (1933) and the Asturias rising (1934); a bonus find, the actual 17 Feb 1936
+  *La Voz* Popular-Front-victory front page, is sourced but not yet wired to a card. Two
+  new `smoke.js` guards (broken-image-path, credits-completeness) make both failure modes
+  permanent regressions — both were proven to actually fire before being trusted. **Left
+  for a human:** identity/subject sign-off on the 29 sourced files; 5 CC BY-SA
+  (share-alike) sources needing a license-obligation check; 3 named figures and ~16
+  topical/poster items with no free Wikipedia image (Commons-category browsing, not a
+  pageimage lookup, would be needed); one portrait (`vidiella`) is a group photo, not a
+  solo shot. Achievements (the 123-icon `game_over` gallery) and music remain deferred, as
+  planned. Full punch list in `K_assets.md`'s K-6 status entry.
+- **Areas J, L, M:** 🔲 not started. **J** = qdisplay/UI (already has flagged findings
+  waiting: the `nsdap_r`-class dead qdisplay ids and the `hindenburg_angry` id used across
+  83 files); **L** = localization; **M** = balancing.
 
 ## How to continue (recommended next step)
 
 **The game is end-to-end playable, the dead German corpus is gone, the Government Affairs
-policy-card deck is real Spanish content, and the advisor roster is real Spanish figures**
-(April 1931 → three elections → July 1936 coup → one of four Spanish endings, tree ~75%
-smaller with no known German content on any confirmed-reachable path, including now the
-~20 `government_affairs` cards and all 28 advisors). What remains is Areas J–M and a few
-flagged loose ends:
+policy-card deck is real Spanish content, the advisor roster is real Spanish figures, and
+the bulk of the imagery now matches the words** (April 1931 → three elections → July 1936
+coup → one of four Spanish endings, tree ~75% smaller with no known German content on any
+confirmed-reachable path — text or image). What remains is Areas J/L/M, Area K's human-
+review punch list, and a few flagged loose ends:
 
-1. **Area J (qdisplay/UI)** or **Area K (assets)** — the natural next areas, both bounded
-   and lower-risk. **J** already has flagged findings waiting (the `nsdap_r`-class dead
-   qdisplay ids; the `hindenburg_angry` id used across 83 files). **K** is the asset pass:
-   every converted D/E/F/G/I card still points at German `card-image` portraits (e.g. the
-   advisor cards show `WelsOtto.jpg` for Besteiro) — a mechanical rename/reart pass.
-2. **Two reachability-uncertain screens flagged in `H2_bulk_cleanup.md`:**
+1. **Area K's human-review punch list** (see `K_assets.md`'s K-6 entry) — the lowest-risk
+   next step since it's judgment, not engineering: sign off on the 29 sourced files'
+   identity/subject match, decide on the 5 CC BY-SA share-alike sources, and (optionally)
+   hand-source the ~19 items still on the placeholder via Commons-category browsing rather
+   than the pageimage-lookup pipeline.
+2. **Area J (qdisplay/UI)** — the natural next *engineering* area, bounded and lower-risk.
+   Already has flagged findings waiting (the `nsdap_r`-class dead qdisplay ids; the
+   `hindenburg_angry` id used across 83 files).
+3. **Two reachability-uncertain screens flagged in `H2_bulk_cleanup.md`:**
    `status.scene.dry`'s `@emergency` sub-scene and `status_right.scene.dry` both contain
    substantial unconverted German content. `status_right.scene.dry` in particular needs
    someone with interactive browser access (this session could only `--dump-dom` a static
    page) to determine whether it's actually reachable before deciding whether to convert,
    gate, or delete it.
-3. **The interleaved dead block in `@post_election_1928`** (`H2_bulk_cleanup.md`'s H2-4) —
+4. **The interleaved dead block in `@post_election_1928`** (`H2_bulk_cleanup.md`'s H2-4) —
    confirmed inert but deliberately left alone; only worth touching if someone wants to do
    the careful numerical-equivalence-guarded surgery the plan describes.
-4. **`coalition_affairs.scene.dry`'s dropped election-trigger branch** (`G_policy_cards.md`'s
+5. **`coalition_affairs.scene.dry`'s dropped election-trigger branch** (`G_policy_cards.md`'s
    G-5 finding) — `set_next_election_time.scene.dry` is silently inert (guards on a
    never-initialized `time_to_election`); flagged for whoever next touches the election-
    timing engine, not fixed by Area G since it's out of scope.
-5. **Areas J–M** (qdisplay/UI, assets, localization, balancing) — not started; J already
-   has flagged findings waiting (the `nsdap_r`-class dead qdisplay ids, the
-   `hindenburg_angry` id across 83 files).
+6. **Areas J, L, M** (qdisplay/UI, localization, balancing) — not started; J already has
+   flagged findings waiting (the `nsdap_r`-class dead qdisplay ids, the `hindenburg_angry`
+   id across 83 files).
 
 **Working rules for whoever continues:** follow `B_state_schema.md` as law; `build`
 + `smoke` after every change and never trust a green smoke without a preceding

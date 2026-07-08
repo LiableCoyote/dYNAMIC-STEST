@@ -23,15 +23,13 @@ follow-up); **music is deferred** (audio sourcing is a separate human pass).
 
 ---
 
-> **Session handoff.** 🟡 **IN PROGRESS.** Detailed execution plan for **Area K**
-> (image assets). Converts the German portrait/poster imagery to license-clean Spanish imagery by
-> sourcing public-domain / CC files from Wikimedia Commons with recorded provenance, repointing
-> every `card-image:`/`set-bg:`/`<img>` reference onto the `img/es/` scheme, and gating everything
-> behind a credits requirement and a broken-path build check. **Prerequisite (blocking):** the
-> environment network policy must allow outbound HTTPS to `commons.wikimedia.org`,
-> `upload.wikimedia.org`, and `*.wikipedia.org` — verify with the K-0 probe before doing anything
-> else; if it still 403s, **stop and report** (do not proceed with fabricated/placeholder-only
-> art unless the user re-scopes).
+> **Session handoff.** 🟡 **DONE, PENDING HUMAN ART REVIEW.** Area K (image assets) is
+> functionally complete: no card points at a broken image path, no German-identifiable imagery
+> remains on any live card, and every sourced file carries machine-verified Commons provenance.
+> What's outstanding is human judgment, not engineering: 5 CC BY-SA (share-alike) sources want a
+> license-obligation sanity check, `vidiella`'s portrait is a group photo rather than a solo shot,
+> and ~19 items (3 named figures, ~16 topical/poster items) have no free image and sit on the
+> shared placeholder pending a human Commons-browsing pass. See K-6 below for the full punch list.
 
 ## Execution status
 
@@ -142,6 +140,53 @@ follow-up); **music is deferred** (audio sourcing is a separate human pass).
   untouched) resolve to a real file under `out/html/`; the compiled `game.json` was spot-checked to
   confirm the repointed paths survived the build; headless Chromium load clean (no
   `Uncaught`/`ReferenceError`/`TypeError`); `BUILD OK` → `SMOKE PASSED` (6 checks).
+
+- **K-5 (broken-path guard + credits completeness):** ✅ done. Added two checks to
+  `scripts/smoke.js`: one scans every scene's compiled `cardImage`/`setBg` field and fails if the
+  path doesn't resolve to a real file under `out/html/`; the other scans every file under
+  `out/html/img/es/` and fails if it has no matching provenance line in `credits_images.txt`
+  (turning the README's "no provenance, no commit" rule into an enforced check, not just a
+  documented one). **Proved both guards actually catch failures before trusting them:** repointed
+  `wels.scene.dry` at a nonexistent file and confirmed smoke failed with the exact broken path
+  named; added an uncredited file under `img/es/leaders/` and confirmed smoke failed with that
+  file named; reverted both and confirmed a clean `SMOKE PASSED` (8 checks). **Verify:** guard
+  false-positive/false-negative tested in both directions; headless Chromium load still clean;
+  `BUILD OK` → `SMOKE PASSED` (8 checks) on the real, unmodified tree.
+
+- **K-6 (docs + human-review handoff):** this entry. **What Area K shipped:** 25 of 28 Tier-1
+  named-figure portraits and 4 Tier-2 topical/event images sourced from Wikimedia Commons with
+  machine-verified provenance in `credits_images.txt`; every live `card-image:`/`set-bg:`
+  reference across 71 scene files repointed onto `img/es/` or the shared placeholder — zero broken
+  paths, zero known German-identifiable imagery left on any live card; two new build-time guards
+  (K-5) make both failure modes permanent regressions, not one-time fixes. **What still needs a
+  human, in priority order:**
+  1. **Identity/subject sign-off** on the 25 sourced portraits and 4 event images — the pipeline
+     picked the Wikipedia-designated lead image per figure/subject and this session cross-checked
+     filenames and rendered a sample, but no one has done a systematic side-by-side "is this really
+     them" pass across all 29 files.
+  2. **5 CC BY-SA (share-alike) sources** — `de_gracia`, `gonzalez_pena`, `llopis`, `vidiella`,
+     `lejarraga`, plus the Tier-2 `cortes_exterior.jpg` — carry a share-alike obligation on
+     downstream reuse; confirm the project's own licensing (MIT code, CC-sourced art) is fine with
+     that mix, or swap for a Public Domain alternative if not.
+  3. **3 unsourced Tier-1 figures** (Lucio Martínez Gil, Juan-Simeón Vidarte, Julia Álvarez Resano)
+     — no free lead image on es/en Wikipedia; still on the shared placeholder. Try a manual Commons
+     category search (regional/UGT archives sometimes have images Wikipedia's infobox doesn't
+     surface) or accept the placeholder as permanent for these three.
+  4. **~16 unsourced Tier-2 items** (`muller_cabinet`, `iron_front`, `reichsbanner`,
+     `vorwarts_2`/`Vorwaerts_nr_1`, `Mann_der_Arbeit`, `Reichstagsfraktion_der_SPD`, `arbeiterbew`,
+     `sangerbund`, `poster_0/1/2`, `weimar_coalition_2/3`, `bankrun`) — posters, mastheads, and a
+     named-cabinet group photo that don't resolve through a Wikipedia-pageimage lookup. Needs a
+     human browsing Commons categories (e.g. Category:Spanish Civil War posters, UGT/PSOE archive
+     collections) rather than more pipeline runs.
+  5. **`vidiella`'s portrait is a group photo**, not a solo shot — correctly attributed and clearly
+     him, but weaker than the rest; swap if a solo portrait surfaces.
+  6. **Optional cleanup:** the legacy German image files under `img/portraits/`, `img/*.jpg` etc.
+     are still present (nothing deletes them) — harmless dead weight now that nothing references
+     them, but a `git rm` pass is available once someone wants to reclaim the space.
+  **Deferred, unchanged from the original plan:** achievements (the 123-icon `game_over` gallery)
+  and music. **Verify:** all of K-0 through K-5's individual verify steps; this document's banner
+  reflects the true state (🟡, not ✅, until 1–2 above get a human pass); `CLAUDE.md` and the design
+  doc's §K updated to match.
 
 > **Audience: a Sonnet-class executor working cold.** Read `CLAUDE.md`,
 > `docs/planning/A_engine_build_scaffolding.md` §5 (the asset-path strategy), and

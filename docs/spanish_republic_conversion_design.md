@@ -221,11 +221,31 @@ These have **no base-game analogue** and are the most design-intensive:
 - Rewrite the 23 `qdisplay` files. Some are generic (`confidence`, `dissent`, `militancy`, `loyalty`) and only need label tweaks; several are German-named (`schleicher_*`, `hindenburg_*`, `cvp_dnvp_balance`, `nazi_funds`) and need replacement with Spanish analogues (e.g. `army_conspiracy`, `cnt_militancy`, `catalan_relations`).
 - Audit `status.scene.dry` / `status_right.scene.dry` for hard-coded German labels.
 
-### K. Assets: Images & Music — *Size L · Replace*
+### K. Assets: Images & Music — *Size L · Replace* — 🟡 images done, pending human review; music deferred
 - Source ~**385** period-appropriate, **license-clean** Spanish images (party posters, figures, photographs) to replace `out/html/img`, respecting the existing `credits_images.txt` model. Public-domain / CC sources and clear attribution required.
 - Curate a Spanish/republican music set to replace `out/html/music` (e.g. *Himno de Riego*, *A las Barricadas*, UGT/PSOE anthems) with attention to licensing.
 - Achievements: the `img/achievement/*` set and achievement definitions are German-themed and need Spanish redesign.
 - **Note:** assets are the most license-sensitive area; flag for human review, don't auto-generate historical claims of provenance.
+- **🟡 images functionally done** — see `docs/planning/K_assets.md` for full detail. Built
+  `scripts/source_assets.mjs`, a pipeline that resolves a figure/subject's lead image via the
+  Wikipedia pageimages API and verifies its license via Commons `imageinfo`/`extmetadata`,
+  downloading and recording real provenance only for redistributable licenses (never fabricated,
+  matching this section's own "flag for human review" note). Sourced 25 of 28 named-figure
+  portraits and 4 topical/event images with verified provenance; repointed all 98 live
+  `card-image:`/`set-bg:` references across 71 scene files onto `img/es/` or the shared
+  placeholder — zero broken paths, zero known German-identifiable imagery on any live card.
+  Visual inspection (not just filename-matching) confirmed and replaced the worst offenders — the
+  Reichstag chamber and building, a 1929 Berlin street-fighting photo, a Berlin rally at the
+  Lustgarten/Cathedral — with the Congreso de los Diputados facade and real period photos of
+  Casas Viejas (1933) and the Asturias rising (1934); also correctly *kept* the 1864 First
+  International emblem as historically apt rather than German-specific. Added two build-time
+  guards to `smoke.js` (broken-image-path, credits-completeness) so both failure modes are
+  permanent regressions, each proven to actually fire before being trusted. **Left for a human:**
+  identity/subject sign-off on the 29 sourced files; 5 CC BY-SA (share-alike) sources needing a
+  license-obligation check; 3 named figures and ~16 topical/poster items with no free Wikipedia
+  image (needs Commons-category browsing, not a pageimage lookup); one portrait (Vidiella) is a
+  group photo, not a solo shot. **Achievements and music remain fully deferred**, as originally
+  scoped, to dedicated follow-ups.
 
 ### L. Localization, Naming & Flavor Consistency — *Size M · Rewrite*
 - A global pass for tone/terminology: Spanish names, diacritics, party colors, date formats, and removing residual German strings (grep for `spd|nsdap|reichstag|hindenburg|schleicher|prussia` etc. across `source/`).
