@@ -7,7 +7,7 @@ new-page: true
 
 = Luis Araquistáin
 
-Araquistáin is the leading intellectual of the Caballerista left, editor of *Leviatán* and theorist of the party's revolutionary turn. He favors a united front with the <span style="color: #700000;">**PCE**</span> and a course of class struggle for the <span style="color: #c00000;">**PSOE**</span>.
+Araquistáin is the leading intellectual of the Caballerista left, editor of *Leviatán* and theorist of the party's revolutionary turn. He favors a united front with the <span style="color: #8a0303;">**PCE**</span> and a course of class struggle for the <span style="color: #c00000;">**PSOE**</span>.
 
 - @building_the_left
 - @kpd_cooperation
@@ -26,13 +26,13 @@ on-arrival: advisor_action_timer = 6; left_strength += 6; left_dissent -= 8; ref
 We have increased the strength of the Caballerista left within the <span style="color: #c00000;">**PSOE**</span>.
 
 @kpd_cooperation
-title: Cooperation with the <span style="color: #700000;">**PCE**</span>
-subtitle: Push the party to be more friendly towards the <span style="color: #700000;">**PCE**</span>.
+title: Cooperation with the <span style="color: #8a0303;">**PCE**</span>
+subtitle: Push the party to be more friendly towards the <span style="color: #8a0303;">**PCE**</span>.
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
 choose-if: advisor_action_timer = 0
 on-arrival: advisor_action_timer = 6; left_strength += 5; pce_relation += 4*(1-dissent); reformist_dissent += 2; communist_coalition += 1 if kpd_cooperation_seen <= 1; kpd_cooperation_seen += 1
 
-Araquistáin argues tirelessly for a united front of the working-class parties; this opens some connections with the <span style="color: #700000;">**PCE**</span>.
+Araquistáin argues tirelessly for a united front of the working-class parties; this opens some connections with the <span style="color: #8a0303;">**PCE**</span>.
 
 @regional_affairs
 title: Catalan Self-Government

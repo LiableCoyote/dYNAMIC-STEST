@@ -35,7 +35,7 @@ view-if: electoral_threshold = 0
 
 The 1931 electoral law's majority premium has produced landslide swings at every election so far - the same law that gave the Republican-Socialist coalition 63% of seats in 1931 could hand the CEDA-Radical bloc an equally lopsided majority next time. Some argue this makes for strong governments; others argue it makes for wild, destabilizing swings that discredit parliamentary government itself.
 
-Smaller and more evenly-matched parties tend to favor tempering the premium. [? if pce_relation > 50 and pce_normalized >= 0.1 : Perhaps surprisingly, the <span style="color: #700000;">**PCE**</span> supports this reform, hoping a fairer system might finally win it seats of its own. ?]
+Smaller and more evenly-matched parties tend to favor tempering the premium. [? if pce_relation > 50 and pce_normalized >= 0.1 : Perhaps surprisingly, the <span style="color: #8a0303;">**PCE**</span> supports this reform, hoping a fairer system might finally win it seats of its own. ?]
 
 The Caballerista left of our own party is more skeptical, fearing that a more proportional system might weaken a future Popular Front's ability to govern decisively.
 
@@ -64,7 +64,7 @@ view-if: presidential_powers = 0
 
 Article 81 grants the President sweeping power to dissolve the Cortes - a power Alcalá-Zamora has already shown he is willing to use for his own political ends. We can support a reform requiring the President to justify a second dissolution within the same term to a special Cortes commission, closing the door on the kind of arbitrary dissolution that could otherwise let a hostile President simply keep calling elections until he gets the Cortes he wants.
 
-The <span style="color: #700000;">**PCE**</span> and most republicans favor this reform. [? if radical_relation > 55 : The Radical Party, wary of Alcalá-Zamora's unpredictability, is also inclined to support it. ?][? if radical_relation <= 55 : The Radical Party is unconvinced, wary of anything that might weaken the presidency as an institution. ?] The CEDA and the monarchist right oppose any reduction of presidential authority that might come at their own expense should they ever hold the office.
+The <span style="color: #8a0303;">**PCE**</span> and most republicans favor this reform. [? if radical_relation > 55 : The Radical Party, wary of Alcalá-Zamora's unpredictability, is also inclined to support it. ?][? if radical_relation <= 55 : The Radical Party is unconvinced, wary of anything that might weaken the presidency as an institution. ?] The CEDA and the monarchist right oppose any reduction of presidential authority that might come at their own expense should they ever hold the office.
 
 - @presidential_powers_2: Call a constitutional referendum to pass the reform!
 - @reforms_menu: See other reform options.

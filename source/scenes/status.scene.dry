@@ -198,7 +198,7 @@ if (Q.left_force >= Q.right_force && Q.left_force >= Q.cnt_force && Q.left_force
 
 <h4><span style="color: #003755;">Authoritarian right</span> strength: [+ right_force_pct +]%</h4>
 
-<span style="color: #7A3C00;">**Falange**</span>/<span style="color: #2E3B6E;">**Requetés**</span>: [+ right_force_pct +]%
+<span style="color: #14322a;">**Falange**</span>/<span style="color: #2E3B6E;">**Requetés**</span>: [+ right_force_pct +]%
 
 <h4><span style="color: #333333;">**CNT-FAI**</span> strength: [+ cnt_force_pct +]%</h4>
 

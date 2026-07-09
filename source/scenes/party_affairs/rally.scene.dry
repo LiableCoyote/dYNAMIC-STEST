@@ -9,7 +9,7 @@ go-to: main_rally; sa_disrupt if falange_militia_strength*falange_militia_milita
 
 @sa_disrupt
 
-The <span style="color: #7A3C00;">**Falange**</span> has disrupted our rally! Their street squads are preventing us from meeting.
+The <span style="color: #14322a;">**Falange**</span> has disrupted our rally! Their street squads are preventing us from meeting.
 
 - @police_protect: Call the Guardia de Asalto to protect our rally.
 - @rb_protect: Use the militia to protect our rally.
@@ -28,7 +28,7 @@ The Guardia de Asalto successfully protected our rally, so it can go ahead as us
 @police_protect_lose
 on-arrival: industrial_falange += 3; strife += 1
 
-Unfortunately, the Guardia de Asalto were unable or unwilling to hold back the <span style="color: #7A3C00;">**Falange**</span> mob. The <span style="color: #7A3C00;">Falangists</span> have won this show of strength.
+Unfortunately, the Guardia de Asalto were unable or unwilling to hold back the <span style="color: #14322a;">**Falange**</span> mob. The <span style="color: #14322a;">Falangists</span> have won this show of strength.
 
 @rb_protect
 on-arrival: rb_success = ugt_militia_strength*ugt_militia_militancy - falange_militia_strength*falange_militia_militancy; strife += 1
@@ -37,12 +37,12 @@ go-to: rb_protect_win if rb_success >= 0; rb_protect_lose if rb_success < 0
 @rb_protect_win
 go-to: main_rally
 
-The militia has successfully protected our rally against the <span style="color: #7A3C00;">**Falange**</span>! Our meeting can go ahead as usual.
+The militia has successfully protected our rally against the <span style="color: #14322a;">**Falange**</span>! Our meeting can go ahead as usual.
 
 @rb_protect_lose
 on-arrival: industrial_falange += 3; ugt_militia_strength -= 50
 
-Unfortunately, the militia was not able to hold back the <span style="color: #7A3C00;">**Falange**</span> mob. The <span style="color: #7A3C00;">Falangists</span> have won this show of strength.
+Unfortunately, the militia was not able to hold back the <span style="color: #14322a;">**Falange**</span> mob. The <span style="color: #14322a;">Falangists</span> have won this show of strength.
 
 @both_protect
 choose-if: asalto_training > 0
@@ -53,17 +53,17 @@ go-to: both_protect_win if rb_success >= 0; both_protect_lose if rb_success < 0
 @both_protect_win
 go-to: main_rally
 
-The Guardia de Asalto and the militia have successfully protected our rally against the <span style="color: #7A3C00;">**Falange**</span>! Our meeting can go ahead as usual.
+The Guardia de Asalto and the militia have successfully protected our rally against the <span style="color: #14322a;">**Falange**</span>! Our meeting can go ahead as usual.
 
 @both_protect_lose
 on-arrival: industrial_falange += 3; ugt_militia_strength -= 50
 
-Unfortunately, the Guardia de Asalto and the militia were not able to hold back the <span style="color: #7A3C00;">**Falange**</span> mob. The <span style="color: #7A3C00;">Falangists</span> have won this show of strength.
+Unfortunately, the Guardia de Asalto and the militia were not able to hold back the <span style="color: #14322a;">**Falange**</span> mob. The <span style="color: #14322a;">Falangists</span> have won this show of strength.
 
 @cancel
 on-arrival: industrial_falange += 3;
 
-The <span style="color: #7A3C00;">**Falange**</span> have won this show of strength.
+The <span style="color: #14322a;">**Falange**</span> have won this show of strength.
 
 @main_rally
 
@@ -71,7 +71,7 @@ Mass rallies are a common feature of <span style="color: #c00000;">socialist</sp
 
 - @class_struggle: The class struggle of the proletariat against the bourgeoisie.
 - @welfare: Sozialpolitik - the maintenance and expansion of social welfare programs.
-- @democracy: Expanding our nascent democracy and defending it against <span style="color: #808080;">dictatorship</span> and <span style="color: #7A3C00;">fascism</span>.
+- @democracy: Expanding our nascent democracy and defending it against <span style="color: #808080;">dictatorship</span> and <span style="color: #14322a;">fascism</span>.
 - @pacifism: Opposing war, nationalism, and militarism at all costs.
 - @wtb: Support the WTB plan!
 - @local: A mixture of various local and national concerns that resonate most with the audience.

@@ -54,7 +54,7 @@ choose-if: resources >= 1
 unavailable-subtitle: Not enough resources.
 on-arrival: resources -= 1; pce_relation += 5*(1-dissent); communist_coalition += 1 if comintern_seen == 0; comintern_seen += 1
 
-The <span style="color: #8B0000;">Stalinists</span> of the <span style="color: #700000;">**PCE**</span> insist on calling us "<span style="color: #c00000;">social</span> fascists", suggesting that we <span style="color: #c00000;">socialists</span> are as bad or worse than actual fascists. Needless to say, this is not good for our relationship with the <span style="color: #700000;">communists</span>. By observing the <span style="color: #D50000;">Comintern</span>, we can better understand the <span style="color: #700000;">**PCE**</span>, enabling us to potentially improve relations, or counter them if it may come to that.
+The <span style="color: #8B0000;">Stalinists</span> of the <span style="color: #8a0303;">**PCE**</span> insist on calling us "<span style="color: #c00000;">social</span> fascists", suggesting that we <span style="color: #c00000;">socialists</span> are as bad or worse than actual fascists. Needless to say, this is not good for our relationship with the <span style="color: #700000;">communists</span>. By observing the <span style="color: #D50000;">Comintern</span>, we can better understand the <span style="color: #8a0303;">**PCE**</span>, enabling us to potentially improve relations, or counter them if it may come to that.
 
 @america
 subtitle: -1 resources

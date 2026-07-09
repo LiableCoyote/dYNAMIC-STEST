@@ -40,7 +40,7 @@ Spain has never established formal diplomatic relations with Moscow - a legacy o
 @soviet_yes
 on-arrival: soviet_relation += 3; pce_relation += 5*(1-dissent); radical_relation -= 6; ceda_relation -= 10; monarchist_relation -= 5; president_angry += 10
 
-We have established formal diplomatic relations with the Soviet Union. The <span style="color: #700000;">**PCE**</span> is pleased, if suspicious of our motives. The CEDA and the monarchist right treat it as confirmation of everything they have always said about the Republic.
+We have established formal diplomatic relations with the Soviet Union. The <span style="color: #8a0303;">**PCE**</span> is pleased, if suspicious of our motives. The CEDA and the monarchist right treat it as confirmation of everything they have always said about the Republic.
 
 @soviet_no
 

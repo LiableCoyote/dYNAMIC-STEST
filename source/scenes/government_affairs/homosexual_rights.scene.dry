@@ -26,7 +26,7 @@ view-if: repealed_1928_code == 0
 choose-if: progressive_support >= 30
 on-arrival: repealed_1928_code = 1; homosexual_rights += 1; ceda_relation -= 5; pce_relation += 4*(1-dissent); izq_rep_relation += 4*(1-dissent); coalition_dissent += 1 if in_republican_socialist or in_popular_front; catholic_psoe -= 4; economic_growth += 0.1;
 
-Together with the <span style="color: #700000;">**PCE**</span> and left-leaning republicans, we have formally struck the last provisions of the old dictatorship's Penal Code that criminalized private acts between adults, entrenching the 1932 code's quiet liberalization against any future reversal.
+Together with the <span style="color: #8a0303;">**PCE**</span> and left-leaning republicans, we have formally struck the last provisions of the old dictatorship's Penal Code that criminalized private acts between adults, entrenching the 1932 code's quiet liberalization against any future reversal.
 
 Predictably, the CEDA and the far right accuse us of "degeneracy."
 
@@ -37,7 +37,7 @@ view-if: resisted_vagrancy_law == 0
 choose-if: progressive_support >= 30
 on-arrival: resisted_vagrancy_law = 1; homosexual_rights += 1; ceda_relation -= 5; pce_relation += 4*(1-dissent); izq_rep_relation += 4*(1-dissent); coalition_dissent += 1 if in_republican_socialist or in_popular_front; catholic_psoe -= 4; economic_growth += 0.1;
 
-Voting together with the <span style="color: #700000;">**PCE**</span> and left-leaning republicans, we have amended the draft vagrancy law so that it cannot be turned against homosexuals, cross-dressers, and other sexual minorities as a matter of "social danger."
+Voting together with the <span style="color: #8a0303;">**PCE**</span> and left-leaning republicans, we have amended the draft vagrancy law so that it cannot be turned against homosexuals, cross-dressers, and other sexual minorities as a matter of "social danger."
 
 
 @change_sex

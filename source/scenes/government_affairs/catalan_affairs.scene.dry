@@ -25,7 +25,7 @@ choose-if: budget >= 1
 unavailable-subtitle: Not enough resources.
 on-arrival: budget -= 1; catalan_autonomy += 1; izq_rep_relation += 5*(1-dissent); ceda_relation -= 3; radical_relation -= 2; left_dissent += 3
 
-We back full ratification of the Catalan Statute of Autonomy. The <span style="color: #4a7d3a;">**Republican Left**</span>, closely tied to Catalan republicanism, is grateful for our support. The <span style="color: #003755;">**CEDA**</span> and centralist elements of the <span style="color: #d9a441;">Radical Party</span> denounce it as the breakup of Spain.
+We back full ratification of the Catalan Statute of Autonomy. The <span style="color: #7B2D8E;">**Republican Left**</span>, closely tied to Catalan republicanism, is grateful for our support. The <span style="color: #0087DC;">**CEDA**</span> and centralist elements of the <span style="color: #E8B23A;">Radical Party</span> denounce it as the breakup of Spain.
 
 @basque_statute
 subtitle: -1 budget
@@ -46,4 +46,4 @@ Using the Generalitat's own public-order powers, we move to ban whichever militi
 @centralize
 on-arrival: catalan_autonomy -= 1 if catalan_autonomy >= 1; radical_relation += 3; ceda_relation += 2; izq_rep_relation -= 5*(1-dissent); left_dissent += 2
 
-We resist further devolution, arguing the Republic cannot afford to fragment its authority while the authoritarian right still threatens it. This pleases centralists among the <span style="color: #d9a441;">Radicals</span> and the <span style="color: #003755;">**CEDA**</span>, but strains our alliance with the <span style="color: #4a7d3a;">**Republican Left**</span>.
+We resist further devolution, arguing the Republic cannot afford to fragment its authority while the authoritarian right still threatens it. This pleases centralists among the <span style="color: #E8B23A;">Radicals</span> and the <span style="color: #0087DC;">**CEDA**</span>, but strains our alliance with the <span style="color: #7B2D8E;">**Republican Left**</span>.

@@ -62,7 +62,7 @@ Spain has never had anything like Germany's unemployment insurance system — wh
 subtitle: The workers will regard this as a betrayal.
 on-arrival: industrial_psoe -= 0.12*industrial_psoe; unemployed_psoe -= 0.2*unemployed_psoe; industrial_pce += 5; unemployed_pce += 5; left_dissent += 15; center_dissent += 10; labor_dissent += 15; reformist_dissent += 5; welfare -= 2; budget += 1; unemployed += 3; pro_republic -= 4; pce_relation -= 8; inflation -= 2; unemployment_insurance_threshold = unemployed; unemployment_insurance_timer = 10; economic_growth -= 0.2
 
-For budgetary reasons, we have cut relief spending. Our reasons for fiscal discipline are alien to the workers, and they are furious at our betrayal, as are a good portion of our own membership across the party's factions. Our loss is the <span style="color: #700000;">**PCE**</span>'s gain.
+For budgetary reasons, we have cut relief spending. Our reasons for fiscal discipline are alien to the workers, and they are furious at our betrayal, as are a good portion of our own membership across the party's factions. Our loss is the <span style="color: #8a0303;">**PCE**</span>'s gain.
 
 @increase_employers
 subtitle: Employers are strongly against this. [? if in_republican_socialist : The Radical Party will likely take this badly. ?]

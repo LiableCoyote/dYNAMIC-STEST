@@ -12,7 +12,7 @@ The Judiciary is one of the most <span style="color: #808080;">reactionary</span
 
 [? if judicial_reform <= 0 : There is great demand in our membership for a purge of the judiciary, though this may bring us into collision with our republican coalition partners, who are wary of anything that smells of arbitrary power. ?]
 [? if judicial_reform == 1 : We have started down the path of judicial reform through the new Tribunal de Garantías Constitucionales. While some of the most reactionary and biased judges have been replaced, many still remain. More should be done. ?]
-[? if judicial_reform >= 2 : We have substantially reformed the judiciary. At the very least, the courts will no longer actively obstruct our attempts to prosecute crimes committed by the <span style="color: #7A3C00;">far</span> <span style="color: #3E88B3;">right</span>. ?]
+[? if judicial_reform >= 2 : We have substantially reformed the judiciary. At the very least, the courts will no longer actively obstruct our attempts to prosecute crimes committed by the <span style="color: #14322a;">far</span> <span style="color: #3E88B3;">right</span>. ?]
 
 - @reform: Carry out a substantial purge of the judiciary.
 - @minor_reforms: Carry out minor judicial reforms.

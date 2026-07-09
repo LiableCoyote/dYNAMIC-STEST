@@ -21,7 +21,7 @@ choose-if: advisor_action_timer <= 0 and (psoe_in_government or in_republican_so
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if not (psoe_in_government or in_republican_socialist or in_popular_front) : The <span style="color: #c00000;">PSOE</span> is not in a governing coalition. ?]
 on-arrival: advisor_action_timer = 6; coalition_dissent -= 1 if psoe_in_government = 1 and coalition_dissent > 0; izq_rep_relation += 5; radical_relation += 2; izq_rep_relation += 2 if catalan_autonomy >= 1
 
-We have smoothed our relations with <span style="color: #4a7d3a;">**Republican Left**</span> and the Catalan republicans, and reduced tensions within the coalition.
+We have smoothed our relations with <span style="color: #7B2D8E;">**Republican Left**</span> and the Catalan republicans, and reduced tensions within the coalition.
 
 @regional_affairs
 title: The Generalitat

@@ -7,7 +7,7 @@ new-page: true
 
 = Julián Zugazagoitia
 
-Julián Zugazagoitia is the editor-in-chief of <span style="color: #c00000;">*El Socialista*</span>, the party's newspaper, and a <span style="color: #c00000;">**PSOE**</span> deputy. A close ally of Prieto, he uses the paper to argue for defending the Republic - including, when the danger is greatest, cooperation with the <span style="color: #700000;">**PCE**</span>.
+Julián Zugazagoitia is the editor-in-chief of <span style="color: #c00000;">*El Socialista*</span>, the party's newspaper, and a <span style="color: #c00000;">**PSOE**</span> deputy. A close ally of Prieto, he uses the paper to argue for defending the Republic - including, when the danger is greatest, cooperation with the <span style="color: #8a0303;">**PCE**</span>.
 
 - @media_
 - @faction_support_
@@ -66,10 +66,10 @@ on-arrival: neorevisionist_dissent -= 8; neorevisionist_strength += 8; editorial
 *El Socialista* prints editorials in support of anti-fascist mobilization.
 
 @kpd_cooperation
-title: Cooperation with the <span style="color: #700000;">**PCE**</span>
-subtitle: Could we build closer ties with the <span style="color: #700000;">**PCE**</span>?
+title: Cooperation with the <span style="color: #8a0303;">**PCE**</span>
+subtitle: Could we build closer ties with the <span style="color: #8a0303;">**PCE**</span>?
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
 choose-if: advisor_action_timer = 0
 on-arrival: advisor_action_timer = 6; left_strength += 2; pce_relation += 4*(1-dissent); reformist_dissent += 2
 
-Zugazagoitia works towards closer ties with the <span style="color: #700000;">**PCE**</span> through our media.
+Zugazagoitia works towards closer ties with the <span style="color: #8a0303;">**PCE**</span> through our media.

@@ -8,7 +8,7 @@ tags: party_affairs; antifascism
 
 = Confronting the Authoritarian Right
 
-The <span style="color: #003755;">**CEDA**</span>'s strength is gaining, as shown by their recent election results, and the monarchist and <span style="color: #7A3C00;">Falange</span> militias grow bolder in the streets. This threatens to plunge the Republic once again into crisis.
+The <span style="color: #0087DC;">**CEDA**</span>'s strength is gaining, as shown by their recent election results, and the monarchist and <span style="color: #14322a;">Falange</span> militias grow bolder in the streets. This threatens to plunge the Republic once again into crisis.
 
 Many in our party are calling for urgent action. The anti-fascist mobilization current has formed specifically around this cause. But many in all factions of the party are calling for action.
 
@@ -20,7 +20,7 @@ Many in our party are calling for urgent action. The anti-fascist mobilization c
 @not_a_big_deal
 on-arrival: nazi_urgency -= 1; left_dissent += 5; neorevisionist_dissent += 15
 
-The <span style="color: #003755;">**CEDA**</span> and its allies are just another conservative movement that will pass sooner or later; we do not need to build a specific policy to combat them.
+The <span style="color: #0087DC;">**CEDA**</span> and its allies are just another conservative movement that will pass sooner or later; we do not need to build a specific policy to combat them.
 
 @economic_crisis
 title: We must address the economic crisis first.
@@ -45,7 +45,7 @@ The authoritarian threat can no longer be ignored. We must build a new organizat
 What does this alliance stand for?
 
 - @unity: Unity, discipline, and mobilization of the working class.
-- @anti: Opposition to <span style="color: #003755;">clerical reaction</span>, <span style="color: #7A3C00;">fascism</span>, and <span style="color: #808080;">monarchism</span>.
+- @anti: Opposition to <span style="color: #003755;">clerical reaction</span>, <span style="color: #14322a;">fascism</span>, and <span style="color: #808080;">monarchism</span>.
 - @orgs: The <span style="color: #c00000;">**PSOE**</span>, the <span style="color: #700000;">**UGT**</span>, and the militia, united.
 - @all: All of the above.
 

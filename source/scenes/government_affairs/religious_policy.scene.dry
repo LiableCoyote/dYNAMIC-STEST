@@ -9,7 +9,7 @@ card-image: img/placeholder.jpg
 
 = The Church Question
 
-The Republic was born amid church burnings in May 1931, and the Constitution's secularizing articles - ending state salaries for clergy, expelling the Jesuits, secularizing education - have made the Catholic Church one of the Republic's most determined enemies. The <span style="color: #003755;">**CEDA**</span> has built its mass base substantially on defense of the Church. How should we handle religious policy?
+The Republic was born amid church burnings in May 1931, and the Constitution's secularizing articles - ending state salaries for clergy, expelling the Jesuits, secularizing education - have made the Catholic Church one of the Republic's most determined enemies. The <span style="color: #0087DC;">**CEDA**</span> has built its mass base substantially on defense of the Church. How should we handle religious policy?
 
 [? if church_relation < 10 : The hierarchy now regards us as an openly hostile power. ?][? if church_relation >= 10 and church_relation < 20 : Relations with the Church remain badly strained. ?][? if church_relation >= 20 : The Church hierarchy, while wary, has not yet written off all possibility of coexistence. ?]
 
@@ -27,7 +27,7 @@ choose-if: budget >= 1
 unavailable-subtitle: We do not have the budget.
 on-arrival: budget -= 1; clerical_conflict += 1; church_relation -= 5; ceda_relation -= 5; left_strength += 3; left_dissent -= 3; democratization += 1
 
-We press ahead with building secular schools to replace the religious orders' near-monopoly on education. The Caballerista left and Besteiristas are pleased; the <span style="color: #003755;">**CEDA**</span> denounces us as persecutors of the faith, and the Church hierarchy grows more implacably hostile.
+We press ahead with building secular schools to replace the religious orders' near-monopoly on education. The Caballerista left and Besteiristas are pleased; the <span style="color: #0087DC;">**CEDA**</span> denounces us as persecutors of the faith, and the Church hierarchy grows more implacably hostile.
 
 @moderate
 on-arrival: church_relation += 3*(1-dissent); clerical_conflict -= 1 if clerical_conflict >= 1; reformist_dissent -= 2; left_dissent += 2
@@ -46,4 +46,4 @@ choose-if: clerical_conflict >= 1
 unavailable-subtitle: There has been no notable anticlerical violence to respond to yet.
 on-arrival: church_relation -= 4*(1-dissent); clerical_conflict += 1; left_strength += 2; ceda_relation -= 3
 
-We decline to spend political capital defending an institution most of our base regards as an enemy of the Republic. The Church hierarchy and the <span style="color: #003755;">**CEDA**</span> take our silence as confirmation of our hostility.
+We decline to spend political capital defending an institution most of our base regards as an enemy of the Republic. The Church hierarchy and the <span style="color: #0087DC;">**CEDA**</span> take our silence as confirmation of our hostility.

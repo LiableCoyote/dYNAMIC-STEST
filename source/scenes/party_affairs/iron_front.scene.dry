@@ -13,7 +13,7 @@ The <span style="color: #c00000;">**Alianza Obrera**</span> (Workers' Alliance) 
 
 [? if industrial_psoe < 45 or industrial_psoe < industrial_falange or industrial_psoe < industrial_pce : Unfortunately, the Alianza's effectiveness is dragged down by the <span style="color: #c00000;">**PSOE**</span>'s unpopularity, as it is no longer the dominant party among the workers. Many militia members have left, and many workers are not interested. ?]
 
-- @defense: Rally for defense against the <span style="color: #003755;">CEDA</span>/<span style="color: #7A3C00;">Falange</span> right with the militia.
+- @defense: Rally for defense against the <span style="color: #0087DC;">CEDA</span>/<span style="color: #14322a;">Falange</span> right with the militia.
 - @pacifism: Rally for pacifism, against militarism and colonial war.
 - @republic: Rally to save the democratic republic against <span style="color: #808080;">dictatorship</span>.
 - @easy_discard
@@ -23,9 +23,9 @@ subtitle: -[+ ugt_militia_cost +] resources
 choose-if: resources >= ugt_militia_cost
 on-arrival: resources -= ugt_militia_cost; ugt_militia_strength += 50; ugt_militia_militancy += 0.05; ceda_relation -= 3 if strife < 5; izq_rep_relation -= 3 if strife < 5
 
-The Alianza Obrera rallies for the militant defense of the republic against the <span style="color: #003755;">CEDA</span>/<span style="color: #7A3C00;">Falange</span> right, strengthening the militia.
+The Alianza Obrera rallies for the militant defense of the republic against the <span style="color: #0087DC;">CEDA</span>/<span style="color: #14322a;">Falange</span> right, strengthening the militia.
 
-[? if strife < 5: The <span style="color: #4a7d3a;">**Republican Left**</span> decries the militarization of the Alianza, uneasy about its growing independence. ?][? if strife >= 5: Seeing the strife that has filled Spain's streets, the <span style="color: #4a7d3a;">**Republican Left**</span> and <span style="color: #d9a441;">Radicals</span> seem to be convinced that it is necessary, and mute their criticisms. ?]
+[? if strife < 5: The <span style="color: #7B2D8E;">**Republican Left**</span> decries the militarization of the Alianza, uneasy about its growing independence. ?][? if strife >= 5: Seeing the strife that has filled Spain's streets, the <span style="color: #7B2D8E;">**Republican Left**</span> and <span style="color: #E8B23A;">Radicals</span> seem to be convinced that it is necessary, and mute their criticisms. ?]
 
 @pacifism
 on-arrival: pacifism += 1; nationalism -= 5 if pacifism >= 3; industrial_psoe += 5*(1-dissent) if pacifism >= 4; unemployed_psoe += 4*(1-dissent) if pacifism >= 4; urban_middle_psoe += 4*(1-dissent) if pacifism >= 4

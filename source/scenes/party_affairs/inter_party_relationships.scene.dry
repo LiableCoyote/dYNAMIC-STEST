@@ -9,14 +9,14 @@ card-image: img/placeholder.jpg
 
 = Inter-Party Relationships
 
-The <span style="color: #c00000;">**PSOE**</span> cannot govern by itself. [? if in_republican_socialist: Since April 1931, our governments have rested on the Republican-Socialist coalition with Azaña's <span style="color: #4a7d3a;">**Republican Left**</span> and Lerroux's <span style="color: #d9a441;">Radical Party</span>. ?][? if in_radical_ceda: Since 1933, government has passed to the <span style="color: #d9a441;">Radicals</span> and the <span style="color: #003755;">**CEDA**</span>, and we sit in opposition. ?][? if in_popular_front: Since February 1936, we govern again as part of the Popular Front, alongside the <span style="color: #4a7d3a;">**Republican Left**</span> and the <span style="color: #700000;">**PCE**</span>. ?] We can build ties with the other parties of the Republic, or perhaps stand alone for now.
+The <span style="color: #c00000;">**PSOE**</span> cannot govern by itself. [? if in_republican_socialist: Since April 1931, our governments have rested on the Republican-Socialist coalition with Azaña's <span style="color: #7B2D8E;">**Republican Left**</span> and Lerroux's <span style="color: #E8B23A;">Radical Party</span>. ?][? if in_radical_ceda: Since 1933, government has passed to the <span style="color: #E8B23A;">Radicals</span> and the <span style="color: #0087DC;">**CEDA**</span>, and we sit in opposition. ?][? if in_popular_front: Since February 1936, we govern again as part of the Popular Front, alongside the <span style="color: #7B2D8E;">**Republican Left**</span> and the <span style="color: #8a0303;">**PCE**</span>. ?] We can build ties with the other parties of the Republic, or perhaps stand alone for now.
 
-- @izq_rep: Strengthen our bonds with Azaña's <span style="color: #4a7d3a;">**Republican Left**</span>.
-- @radical: Reach out to Lerroux's <span style="color: #d9a441;">Radical Party</span>.
-- @ceda: Attempt dialogue with Gil-Robles and the <span style="color: #003755;">**CEDA**</span>.
-- @pce: Work towards repairing relations with the <span style="color: #700000;">**PCE**</span>.
+- @izq_rep: Strengthen our bonds with Azaña's <span style="color: #7B2D8E;">**Republican Left**</span>.
+- @radical: Reach out to Lerroux's <span style="color: #E8B23A;">Radical Party</span>.
+- @ceda: Attempt dialogue with Gil-Robles and the <span style="color: #0087DC;">**CEDA**</span>.
+- @pce: Work towards repairing relations with the <span style="color: #8a0303;">**PCE**</span>.
 - @monarchist: Keep watch on the monarchist right.
-- @falange: Establish contact with the <span style="color: #7A3C00;">Falange</span>.
+- @falange: Establish contact with the <span style="color: #14322a;">Falange</span>.
 - @psoe_alone: The <span style="color: #c00000;">**PSOE**</span> can stand alone for now.
 - @easy_discard
 
@@ -31,7 +31,7 @@ go-to: izq_rep_coalition if in_republican_socialist; izq_rep_popular_front if in
 @izq_rep_coalition
 on-arrival: izq_rep_relation += 8*(1 - dissent); reformist_dissent -= 3
 
-Governing together in the Republican-Socialist coalition, improving relations with the <span style="color: #4a7d3a;">**Republican Left**</span> comes naturally. The Prietistas, who champion this alliance, are pleased.
+Governing together in the Republican-Socialist coalition, improving relations with the <span style="color: #7B2D8E;">**Republican Left**</span> comes naturally. The Prietistas, who champion this alliance, are pleased.
 
 @izq_rep_popular_front
 on-arrival: izq_rep_relation += 8*(1 - dissent); reformist_dissent -= 3; left_dissent -= 2
@@ -41,7 +41,7 @@ As partners in the Popular Front, our ties with Azaña's party are as close as t
 @izq_rep_op
 on-arrival: izq_rep_relation += 5*(1 - dissent)
 
-Though we do not currently share government, the <span style="color: #4a7d3a;">**Republican Left**</span> remains our most natural ally in the defense of the Republic.
+Though we do not currently share government, the <span style="color: #7B2D8E;">**Republican Left**</span> remains our most natural ally in the defense of the Republic.
 
 @radical
 subtitle: -1 resources
@@ -53,17 +53,17 @@ go-to: radical_coalition if in_republican_socialist; radical_ceda_era if in_radi
 @radical_coalition
 on-arrival: radical_relation += 6*(1 - dissent)
 
-As uneasy partners in the same governing coalition, cooperating with Lerroux's <span style="color: #d9a441;">Radicals</span> requires patience, but is not impossible.
+As uneasy partners in the same governing coalition, cooperating with Lerroux's <span style="color: #E8B23A;">Radicals</span> requires patience, but is not impossible.
 
 @radical_ceda_era
 on-arrival: radical_relation += 4*(1 - dissent); left_dissent += 3
 
-Now governing with the <span style="color: #003755;">**CEDA**</span>, the <span style="color: #d9a441;">Radicals</span> are wary of our overtures, and even raising the subject draws grumbling from the Caballerista left.
+Now governing with the <span style="color: #0087DC;">**CEDA**</span>, the <span style="color: #E8B23A;">Radicals</span> are wary of our overtures, and even raising the subject draws grumbling from the Caballerista left.
 
 @radical_op
 on-arrival: radical_relation += 5*(1 - dissent)
 
-The <span style="color: #d9a441;">Radical Party</span>'s political weathervane could point in many directions; it is worth keeping the door open.
+The <span style="color: #E8B23A;">Radical Party</span>'s political weathervane could point in many directions; it is worth keeping the door open.
 
 @ceda
 subtitle: -1 resources
@@ -75,12 +75,12 @@ go-to: ceda_gov if in_radical_ceda; ceda_op if not in_radical_ceda
 @ceda_gov
 on-arrival: ceda_relation += 5*(1 - dissent); reformist_dissent += 3
 
-With the <span style="color: #003755;">**CEDA**</span> now in government, any overture is treated with suspicion on both sides, and even raising the subject unsettles our own reformists.
+With the <span style="color: #0087DC;">**CEDA**</span> now in government, any overture is treated with suspicion on both sides, and even raising the subject unsettles our own reformists.
 
 @ceda_op
 on-arrival: ceda_relation += 4*(1 - dissent)
 
-Gil-Robles and the <span style="color: #003755;">**CEDA**</span> regard us as class enemies; building even minimal goodwill is slow going.
+Gil-Robles and the <span style="color: #0087DC;">**CEDA**</span> regard us as class enemies; building even minimal goodwill is slow going.
 
 @pce
 subtitle: -1 resources
@@ -92,12 +92,12 @@ go-to: pce_alliance if in_workers_alliance or in_popular_front; pce_sectarian if
 @pce_sectarian
 on-arrival: pce_relation += 4*(1 - dissent); reformist_dissent += 2
 
-The <span style="color: #700000;">**PCE**</span> leadership, following the Comintern's "class against class" line, dismisses us as reformists propping up bourgeois rule and brands us "social fascists." Still, some contact is made at the grassroots and local level.
+The <span style="color: #8a0303;">**PCE**</span> leadership, following the Comintern's "class against class" line, dismisses us as reformists propping up bourgeois rule and brands us "social fascists." Still, some contact is made at the grassroots and local level.
 
 @pce_alliance
 on-arrival: pce_relation += 8*(1 - dissent); communist_coalition += 1 if communist_coalition == 0
 
-As partners in the common front against the right, the <span style="color: #700000;">**PCE**</span> is far more amenable to us than in years past.
+As partners in the common front against the right, the <span style="color: #8a0303;">**PCE**</span> is far more amenable to us than in years past.
 
 @monarchist
 subtitle: -1 resources
@@ -113,7 +113,7 @@ choose-if: resources >= 1
 unavailable-subtitle: Not enough resources.
 on-arrival: resources -= 1; falange_relation += 2*(1 - dissent); left_dissent += 10; center_dissent += 5
 
-There is little to be gained from reaching out to Primo de Rivera's <span style="color: #7A3C00;">Falange</span> — a small but violent movement with no interest in parliamentary politics. The attempt itself scandalizes much of the party.
+There is little to be gained from reaching out to Primo de Rivera's <span style="color: #14322a;">Falange</span> — a small but violent movement with no interest in parliamentary politics. The attempt itself scandalizes much of the party.
 
 @psoe_alone
 

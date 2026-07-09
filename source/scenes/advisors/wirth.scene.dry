@@ -27,12 +27,12 @@ Echevarría helps us rally the people in defense of the Republic.
 
 @catholics_rally
 title: Reaching Catholic workers
-subtitle: A worker from a pious town, Echevarría is unusually effective at winning observant workers away from the <span style="color: #003755;">**CEDA**</span>.
+subtitle: A worker from a pious town, Echevarría is unusually effective at winning observant workers away from the <span style="color: #0087DC;">**CEDA**</span>.
 choose-if: advisor_action_timer == 0
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
 on-arrival: advisor_action_timer = 6; pro_republic += 4; catholic_psoe += 8*(1-dissent)
 
-Echevarría helps us win observant working-class Catholics away from the conservative <span style="color: #003755;">**CEDA**</span>, on the strength of bread-and-butter appeals rather than the religious question.
+Echevarría helps us win observant working-class Catholics away from the conservative <span style="color: #0087DC;">**CEDA**</span>, on the strength of bread-and-butter appeals rather than the religious question.
 
 @support_peoples_party
 title: Build support for a broad workers' party

@@ -21,7 +21,7 @@ choose-if: advisor_action_timer <= 0 and psoe_in_government = 1
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if not psoe_in_government: The <span style="color: #c00000;">PSOE</span> is not in government. ?]
 on-arrival: advisor_action_timer = 6; coalition_dissent -= 1 if psoe_in_government = 1 and coalition_dissent > 0; izq_rep_relation += 4; radical_relation += 3
 
-We have smoothed relations with our republican coalition partners in <span style="color: #4a7d3a;">**Republican Left**</span> and the <span style="color: #d9a441;">Radical Party</span>, and reduced tensions within the coalition.
+We have smoothed relations with our republican coalition partners in <span style="color: #7B2D8E;">**Republican Left**</span> and the <span style="color: #E8B23A;">Radical Party</span>, and reduced tensions within the coalition.
 
 
 @toleration

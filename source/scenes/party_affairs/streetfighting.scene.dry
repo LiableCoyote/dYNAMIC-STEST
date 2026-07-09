@@ -8,7 +8,7 @@ tags: party_affairs; antifascism
 
 = Streetfighting
 
-Battles rage on the streets between the <span style="color: #7A3C00;">**Falange**</span>, the monarchist <span style="color: #2E3B6E;">**Requetés**</span>, the anarcho-syndicalist <span style="color: #333333;">**CNT**</span>, and our own <span style="color: #700000;">**UGT Militia**</span>. In some parts of the country, conditions are nearing civil war levels, as dozens of people are killed each month.
+Battles rage on the streets between the <span style="color: #14322a;">**Falange**</span>, the monarchist <span style="color: #2E3B6E;">**Requetés**</span>, the anarcho-syndicalist <span style="color: #333333;">**CNT**</span>, and our own <span style="color: #700000;">**UGT Militia**</span>. In some parts of the country, conditions are nearing civil war levels, as dozens of people are killed each month.
 
 We must do something to protect the workers against these predations.
 
@@ -24,7 +24,7 @@ view-if: ugt_militia_militancy > 0.15 and ugt_militia_militancy < 0.5
 on-arrival: ugt_militia_militancy += 0.1; falange_militia_strength += 40; ugt_militia_strength -= 100;
 max-visits: 1
 
-Many militia members are not ready for actual fighting, and thus quit. However, the remainder are toughened as a result. Our confrontations also provide ample recruiting material for the <span style="color: #7A3C00;">**Falange**</span>.
+Many militia members are not ready for actual fighting, and thus quit. However, the remainder are toughened as a result. Our confrontations also provide ample recruiting material for the <span style="color: #14322a;">**Falange**</span>.
 
 @arm_rb
 subtitle: -[+ ugt_militia_cost +] resource
@@ -34,7 +34,7 @@ on-arrival: resources -= ugt_militia_cost; ugt_militia_militancy += 0.06; ugt_mi
 
 We have increased training and purchased more armaments for the militia.
 
-[? if strife < 5: The <span style="color: #4a7d3a;">**Republican Left**</span> decries the militarization of the militia. ?][? if strife >= 5: Seeing the strife that has filled Spain's streets, the <span style="color: #4a7d3a;">**Republican Left**</span> and <span style="color: #d9a441;">Radicals</span> seem convinced that it is necessary, and mute their criticisms. ?]
+[? if strife < 5: The <span style="color: #7B2D8E;">**Republican Left**</span> decries the militarization of the militia. ?][? if strife >= 5: Seeing the strife that has filled Spain's streets, the <span style="color: #7B2D8E;">**Republican Left**</span> and <span style="color: #E8B23A;">Radicals</span> seem convinced that it is necessary, and mute their criticisms. ?]
 
 @if_training
 view-if: iron_front_formed == 1

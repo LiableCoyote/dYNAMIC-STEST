@@ -494,7 +494,7 @@ Matilde de la Torre is now an advisor.
 
 @add_levi
 title: Julio Álvarez del Vayo
-subtitle: Julio Álvarez del Vayo is the party's foremost champion of working-class unity with the <span style="color: #700000;">**PCE**</span>. {!<br><br>!}[? if difficulty < 0 : Actions - Building the Left, Cooperation with the <span style="color: #700000;">**PCE**</span> ?]
+subtitle: Julio Álvarez del Vayo is the party's foremost champion of working-class unity with the <span style="color: #8a0303;">**PCE**</span>. {!<br><br>!}[? if difficulty < 0 : Actions - Building the Left, Cooperation with the <span style="color: #8a0303;">**PCE**</span> ?]
 is-card: true
 card-image: img/es/leaders/alvarez_del_vayo.jpg
 view-if: levi_advisor = 0 and levi_dead = 0 and n_advisors < 3 and left_split = 0
@@ -518,7 +518,7 @@ Margarita Nelken is now an advisor.
 
 @add_rosenfeld
 title: Luis Araquistáin
-subtitle: Luis Araquistáin is the leading intellectual of the Caballerista left and theorist of the party's revolutionary turn. {!<br><br>!}[? if difficulty < 0 : Actions - Building the Left, Cooperation with the <span style="color: #700000;">**PCE**</span>, Against Toleration ?]
+subtitle: Luis Araquistáin is the leading intellectual of the Caballerista left and theorist of the party's revolutionary turn. {!<br><br>!}[? if difficulty < 0 : Actions - Building the Left, Cooperation with the <span style="color: #8a0303;">**PCE**</span>, Against Toleration ?]
 is-card: true
 card-image: img/es/leaders/araquistain.jpg
 view-if: rosenfeld_advisor = 0 and n_advisors < 3 and left_split = 0
@@ -701,7 +701,7 @@ Fernando de los Ríos is now an advisor.
 
 @add_stampfer
 title: Julián Zugazagoitia
-subtitle: Julián Zugazagoitia is the editor-in-chief of <span style="color: #c00000;">*El Socialista*</span>, the party's newspaper. {!<br><br>!}[? if difficulty < 0 : Actions - Media, Editorial Line, Cooperation with the <span style="color: #700000;">PCE</span> ?]
+subtitle: Julián Zugazagoitia is the editor-in-chief of <span style="color: #c00000;">*El Socialista*</span>, the party's newspaper. {!<br><br>!}[? if difficulty < 0 : Actions - Media, Editorial Line, Cooperation with the <span style="color: #8a0303;">PCE</span> ?]
 is-card: true
 card-image: img/es/leaders/zugazagoitia.jpg
 view-if: stampfer_advisor = 0 and n_advisors < 3 and not stampfer_killed

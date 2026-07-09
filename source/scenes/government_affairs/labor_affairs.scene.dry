@@ -27,7 +27,7 @@ Backing labor is always popular with the <span style="color: #c00000;">**UGT**</
 subtitle: Popular among employers, much less so among the workers.
 on-arrival: labor_dissent += 8; industrial_psoe -= 3; coalition_dissent -= 1 if coalition_dissent > 0; radical_relation += 5; ceda_relation += 5; izq_rep_relation += 4; industrial_pce += 3; pce_relation -= 8; capital_strike_progress -= 1 if capital_strike_progress > 1; capital_strike_progress -= 1 if capital_strike_progress > 8; strike_term_seen += 1
 
-The Caballerista wing of the party is furious at suspending the board's own ruling against the workers, and the <span style="color: #700000;">**PCE**</span> and the anarchist <span style="color: #b35900;">**CNT**</span> are quick to say they told the workers so.
+The Caballerista wing of the party is furious at suspending the board's own ruling against the workers, and the <span style="color: #8a0303;">**PCE**</span> and the anarchist <span style="color: #b35900;">**CNT**</span> are quick to say they told the workers so.
 
 @balance
 subtitle: Both sides need to share the burden of the current crisis.

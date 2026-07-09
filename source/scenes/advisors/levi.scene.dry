@@ -7,7 +7,7 @@ new-page: true
 
 = Julio Álvarez del Vayo
 
-Álvarez del Vayo is a journalist and diplomat of the party's left, the foremost champion of working-class unity with the <span style="color: #700000;">**PCE**</span> - though he insists any alliance be on equal terms, not a surrender to Moscow's line.
+Álvarez del Vayo is a journalist and diplomat of the party's left, the foremost champion of working-class unity with the <span style="color: #8a0303;">**PCE**</span> - though he insists any alliance be on equal terms, not a surrender to Moscow's line.
 
 - @building_the_left
 - @kpd_cooperation
@@ -23,10 +23,10 @@ on-arrival: advisor_action_timer = 6; left_strength += 10; left_dissent -= 8; re
 We have increased the strength of the Caballerista left within the <span style="color: #c00000;">**PSOE**</span>. This raised concern among the Prietista reformists.
 
 @kpd_cooperation
-title: Cooperation with the <span style="color: #700000;">**PCE**</span>
-subtitle: Any alliance between the parties requires compromise from the <span style="color: #700000;">**PCE**</span> as well as the <span style="color: #c00000;">**PSOE**</span>.
+title: Cooperation with the <span style="color: #8a0303;">**PCE**</span>
+subtitle: Any alliance between the parties requires compromise from the <span style="color: #8a0303;">**PCE**</span> as well as the <span style="color: #c00000;">**PSOE**</span>.
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
 choose-if: advisor_action_timer = 0
 on-arrival: advisor_action_timer = 6; left_strength += 5; pce_relation += 6*(1-dissent); reformist_dissent += 3; communist_coalition += 1 if kpd_cooperation_seen <= 1; kpd_cooperation_seen += 1
 
-Álvarez del Vayo reaches out to the <span style="color: #700000;">**PCE**</span> to build a united front on terms of equality. Some concessions are extracted.
+Álvarez del Vayo reaches out to the <span style="color: #8a0303;">**PCE**</span> to build a united front on terms of equality. Some concessions are extracted.

@@ -28,9 +28,9 @@ unavailable-subtitle: Not enough resources ([+ ugt_militia_cost +] needed).
 subtitle: -[+ ugt_militia_cost +] resources
 on-arrival: resources -= ugt_militia_cost; ugt_militia_strength += 100; ugt_militia_militancy += 0.05; left_strength += 2; left_dissent -= 2; reformist_dissent += 5; industrial_psoe += 2*(1-dissent); unemployed_psoe += 2*(1-dissent); ceda_relation -= 3 if strife < 5; izq_rep_relation -= 3 if strife < 5
 
-Some in our party decry the increasing militarization of the UGT Militia. They say it risks provoking the <span style="color: #003755;">**CEDA**</span>'s own paramilitary sympathies, or alienating our republican allies. On the other hand, more militant workers are being lured to our organization, away from the <span style="color: #333333;">**CNT**</span>.
+Some in our party decry the increasing militarization of the UGT Militia. They say it risks provoking the <span style="color: #0087DC;">**CEDA**</span>'s own paramilitary sympathies, or alienating our republican allies. On the other hand, more militant workers are being lured to our organization, away from the <span style="color: #333333;">**CNT**</span>.
 
-[? if strife < 5: The <span style="color: #4a7d3a;">**Republican Left**</span> is uneasy about the militarization of the UGT Militia. ?][? if strife >= 5: Seeing the strife that has filled Spain's streets, the <span style="color: #4a7d3a;">**Republican Left**</span> and <span style="color: #d9a441;">Radicals</span> seem convinced that it is necessary, and mute their criticisms. ?]
+[? if strife < 5: The <span style="color: #7B2D8E;">**Republican Left**</span> is uneasy about the militarization of the UGT Militia. ?][? if strife >= 5: Seeing the strife that has filled Spain's streets, the <span style="color: #7B2D8E;">**Republican Left**</span> and <span style="color: #E8B23A;">Radicals</span> seem convinced that it is necessary, and mute their criticisms. ?]
 
 
 @militant_2
@@ -51,7 +51,7 @@ The UGT Militia is already serving the purpose it needs to serve. There is no re
 subtitle: +1 resources
 on-arrival: resources += 1; ugt_militia_strength -= 100; ugt_militia_militancy -= 0.05; left_strength -= 2; left_dissent -= 2; industrial_pce += 2; unemployed_pce += 2
 
-Cutting resources to the militia causes a drop in the membership, and leads some would-be members to join the <span style="color: #700000;">**PCE**</span> instead.
+Cutting resources to the militia causes a drop in the membership, and leads some would-be members to join the <span style="color: #8a0303;">**PCE**</span> instead.
 
 
 @women_militia

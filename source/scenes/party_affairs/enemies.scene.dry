@@ -13,34 +13,34 @@ In our media and campaign materials, who should we consider as our main opponent
 
 [? if enemies != 0 : Previously, we had considered the [+ enemies +] as our prior enemies. Is a change of direction necessary? ?]
 
-- @extremes: Both anti-Republican extremes - the <span style="color: #700000;">**PCE**</span> and the anarchists on one side, the <span style="color: #003755;">**CEDA**</span>, monarchists, and <span style="color: #7A3C00;">**Falange**</span> on the other.
-- @far_right: The authoritarian right - the <span style="color: #003755;">**CEDA**</span>, the monarchists, and the <span style="color: #7A3C00;">**Falange**</span>.
-- @falange_alone: The <span style="color: #7A3C00;">**Falange**</span> alone.
-- @pce_alone: The <span style="color: #700000;">**PCE**</span>.
-- @bourgeois_republicans: The republican parties - the <span style="color: #4a7d3a;">**Republican Left**</span> and the <span style="color: #d9a441;">Radical Party</span>.
+- @extremes: Both anti-Republican extremes - the <span style="color: #8a0303;">**PCE**</span> and the anarchists on one side, the <span style="color: #0087DC;">**CEDA**</span>, monarchists, and <span style="color: #14322a;">**Falange**</span> on the other.
+- @far_right: The authoritarian right - the <span style="color: #0087DC;">**CEDA**</span>, the monarchists, and the <span style="color: #14322a;">**Falange**</span>.
+- @falange_alone: The <span style="color: #14322a;">**Falange**</span> alone.
+- @pce_alone: The <span style="color: #8a0303;">**PCE**</span>.
+- @bourgeois_republicans: The republican parties - the <span style="color: #7B2D8E;">**Republican Left**</span> and the <span style="color: #E8B23A;">Radical Party</span>.
 - @easy_discard
 
 @extremes
 on-arrival: enemies = "anti-Republican extremes"; center_strength += 5; reformist_strength += 5; left_dissent += 5; industrial_pce -= 1.5; industrial_falange -= 2; industrial_monarchist -= 1; unemployed_pce -= 2; unemployed_falange -= 2; pce_relation -= 10
 
-Attacking both the revolutionary left and the authoritarian right is popular among the Besteiristas and Prietistas, who see the defense of the Republic as a two-front struggle. The Caballerista left is unhappy, preferring to reserve our fire for the bourgeois and authoritarian right alone. This will also make any future rapprochement with the <span style="color: #700000;">**PCE**</span> more difficult.
+Attacking both the revolutionary left and the authoritarian right is popular among the Besteiristas and Prietistas, who see the defense of the Republic as a two-front struggle. The Caballerista left is unhappy, preferring to reserve our fire for the bourgeois and authoritarian right alone. This will also make any future rapprochement with the <span style="color: #8a0303;">**PCE**</span> more difficult.
 
 @far_right
 on-arrival: enemies = "the authoritarian right"; left_strength += 5; left_dissent -= 5; industrial_falange -= 3; unemployed_falange -= 3; industrial_ceda -= 2; industrial_monarchist -= 1
 
-Attacking the <span style="color: #003755;">**CEDA**</span>, the monarchists, and the <span style="color: #7A3C00;">**Falange**</span> together is popular across the party, though some on the left consider it not enough - they would rather also break decisively with the republican centre. Our rhetoric against the authoritarian right raises tensions with any republican coalition partners who prefer conciliation.
+Attacking the <span style="color: #0087DC;">**CEDA**</span>, the monarchists, and the <span style="color: #14322a;">**Falange**</span> together is popular across the party, though some on the left consider it not enough - they would rather also break decisively with the republican centre. Our rhetoric against the authoritarian right raises tensions with any republican coalition partners who prefer conciliation.
 
 @falange_alone
 on-arrival: enemies = "the Falange"; neorevisionist_strength += 5; nazi_urgency += 1; industrial_falange -= 4; unemployed_falange -= 4; industrial_falange += 8 if falange_r < 8; unemployed_falange += 8 if falange_r < 8
 
-[? if nazi_urgency == 0 or falange_r < 10: The <span style="color: #7A3C00;">**Falange**</span> is a tiny movement right now, with more bark than bite. Many in our party are questioning our choices. [? if falange_r < 8: Worse still, giving them too much attention might only end up helping them. ?] ?][? if nazi_urgency > 0 and falange_r >= 10 : The <span style="color: #7A3C00;">Falange</span> has become the most urgent problem for us to deal with. ?]
+[? if nazi_urgency == 0 or falange_r < 10: The <span style="color: #14322a;">**Falange**</span> is a tiny movement right now, with more bark than bite. Many in our party are questioning our choices. [? if falange_r < 8: Worse still, giving them too much attention might only end up helping them. ?] ?][? if nazi_urgency > 0 and falange_r >= 10 : The <span style="color: #14322a;">Falange</span> has become the most urgent problem for us to deal with. ?]
 
 @pce_alone
 on-arrival: enemies = "the PCE"; reformist_strength += 5; left_dissent += 8; reformist_dissent -= 5; pce_relation -= 15; radical_relation += 5; izq_rep_relation += 3; ceda_relation += 5; industrial_pce -= 3; unemployed_pce -= 4
 
-Attacking the <span style="color: #700000;">**PCE**</span> is supported by all but the most left-wing Caballeristas, and wins us some measure of approval among the republican and bourgeois parties. However, if we are to reconcile with the <span style="color: #700000;">**PCE**</span> against the common right-wing threat, this may not be the best choice.
+Attacking the <span style="color: #8a0303;">**PCE**</span> is supported by all but the most left-wing Caballeristas, and wins us some measure of approval among the republican and bourgeois parties. However, if we are to reconcile with the <span style="color: #8a0303;">**PCE**</span> against the common right-wing threat, this may not be the best choice.
 
 @bourgeois_republicans
 on-arrival: enemies = "the republican parties"; left_strength += 8; left_dissent -= 5; radical_relation -= 5; izq_rep_relation -= 5; pce_relation += 5; reformist_dissent += 8; industrial_radical -= 3; urban_middle_radical -= 2; industrial_izq_rep -= 1; coalition_dissent += 1
 
-Our anti-bourgeois rhetoric is popular among the left, but may make it harder to build the coalitions with the <span style="color: #4a7d3a;">**Republican Left**</span> and the <span style="color: #d9a441;">Radicals</span> that are necessary for government.
+Our anti-bourgeois rhetoric is popular among the left, but may make it harder to build the coalitions with the <span style="color: #7B2D8E;">**Republican Left**</span> and the <span style="color: #E8B23A;">Radicals</span> that are necessary for government.

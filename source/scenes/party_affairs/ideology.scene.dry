@@ -14,7 +14,7 @@ The <span style="color: #c00000;">**PSOE**</span> is torn between many different
 
 [? if ideology != 0 : We have previously chosen a [+ ideology +] ideology. Changing it will likely have drawbacks. ?]
 
-- @class_struggle: Largo Caballero's course of revolutionary class struggle and a worker alliance with the <span style="color: #700000;">**PCE**</span> are our primary goals.
+- @class_struggle: Largo Caballero's course of revolutionary class struggle and a worker alliance with the <span style="color: #8a0303;">**PCE**</span> are our primary goals.
 - @centrist: Julián Besteiro's orthodox Marxism remains the best way to resolve our internal contradictions.
 - @labor: We should work with the <span style="color: #700000;">**UGT**</span> to improve the lives of organized workers.
 - @reform: Following Indalecio Prieto, we should collaborate with the republicans, strengthen democracy, and expand the party's electorate.
@@ -30,7 +30,7 @@ if (Q.ideology && Q.ideology != "left") {
 go-to: changed if changed = 1
 on-departure: ideology = "left"; left_strength += 8; communist_coalition += 1; left_dissent -= 5; reformist_dissent += 5; ceda_relation -= 3; radical_relation -= 5; izq_rep_relation -= 3; nationalization_support += 1; pce_relation += 3
 
-The Caballerista left of the party supports a course of class struggle, and potentially a worker alliance with the <span style="color: #700000;">**PCE**</span>.
+The Caballerista left of the party supports a course of class struggle, and potentially a worker alliance with the <span style="color: #8a0303;">**PCE**</span>.
 
 @centrist
 on-arrival: {!

@@ -24,7 +24,7 @@ choose-if: budget >= 1
 unavailable-subtitle: We do not have the budget.
 on-arrival: budget -= 1; coalition_dissent -= 1 if coalition_dissent > 0; army_loyalty += 0.07 if army_loyalty < 1; army_strength += 20; left_dissent += 5; pce_coalition_dissent += 1; west_relation -= 1; east_relation -= 1; radical_relation += 4; izq_rep_relation += 2; army_goal_psoe += 1; president_angry -= 10; economic_growth += 0.1
 
-The officer corps and the <span style="color: #d9a441;">Radical Party</span> are pleasantly surprised that we would increase military funding. Our membership tends to be anti-militarist, and is less enthused.
+The officer corps and the <span style="color: #E8B23A;">Radical Party</span> are pleasantly surprised that we would increase military funding. Our membership tends to be anti-militarist, and is less enthused.
 
 @decrease_funding
 subtitle: +1 budget
@@ -32,9 +32,9 @@ unavailable-subtitle: There is nothing left to cut.
 choose-if: army_strength > 0
 on-arrival: budget += 1; coalition_dissent += 1 if in_republican_socialist == 1; radical_relation -= 8; izq_rep_relation -= 4; ceda_relation -= 4; army_militancy -= 1; army_strength -= 20; falange_militia_strength += 15; requetes_strength += 5; falange_militia_militancy += 0.05; army_loyalty -= 0.05 if army_loyalty > 0; coup_progress += 1; coup_progress += 1 if army_loyalty < 0.2; coup_progress += 1 if army_loyalty < 0.1; coup_progress += 1 if army_loyalty <= 0; africa_army += 1; reichswehr_goal_completed = 1; army_goal_psoe += 1; president_angry += 10; economic_growth -= 0.1
 
-The military has fewer guns and fewer soldiers. There is no hint of a coup yet, but we do not know where the line will be drawn. The <span style="color: #d9a441;">Radicals</span> and <span style="color: #003755;">**CEDA**</span> are committed to the military and deeply opposed to our budget cuts.
+The military has fewer guns and fewer soldiers. There is no hint of a coup yet, but we do not know where the line will be drawn. The <span style="color: #E8B23A;">Radicals</span> and <span style="color: #0087DC;">**CEDA**</span> are committed to the military and deeply opposed to our budget cuts.
 
-Many demobilized soldiers and reservists have joined the right-wing militias such as the <span style="color: #2E3B6E;">**Requetés**</span> and <span style="color: #7A3C00;">**Falange**</span>, and weapons are missing from our stockpiles.
+Many demobilized soldiers and reservists have joined the right-wing militias such as the <span style="color: #2E3B6E;">**Requetés**</span> and <span style="color: #14322a;">**Falange**</span>, and weapons are missing from our stockpiles.
 
 @reform
 subtitle: -1 budget
@@ -44,4 +44,4 @@ on-arrival: coalition_dissent += 1 if in_republican_socialist == 1; army_loyalty
 
 Our efforts are at least somewhat successful; we have changed the recruiting and promotion patterns so that officers loyal to the Republic can advance, hopefully changing the culture of the officer corps. We have also retired more of the Africanista officers who resent civilian rule.
 
-The <span style="color: #d9a441;">Radicals</span> and <span style="color: #003755;">**CEDA**</span> are committed to the military and deeply suspicious of our efforts to reform it, and the retired Africanista officers - Sanjurjo, Mola, Franco, and others - grow more openly disloyal.
+The <span style="color: #E8B23A;">Radicals</span> and <span style="color: #0087DC;">**CEDA**</span> are committed to the military and deeply suspicious of our efforts to reform it, and the retired Africanista officers - Sanjurjo, Mola, Franco, and others - grow more openly disloyal.

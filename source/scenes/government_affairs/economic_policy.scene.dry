@@ -40,7 +40,7 @@ choose-if: budget >= 2 and unemployed >= 8
 on-arrival: budget -= 2; works_program += 1; unemployed -= 4 if unemployed >= 8; unemployed -= 1 if unemployed >= 25; inflation += 2; industrial_psoe += 6*(1-dissent); unemployed_psoe += 8*(1-dissent); landless_psoe += 3*(1-dissent); smallholder_psoe += 2*(1-dissent); coalition_dissent += 1; radical_relation += 2; izq_rep_relation += 3; pce_relation -= 5 if in_popular_front; capital_strike_progress -= 1 if capital_strike_progress > 1; economic_growth += 2.4
 achievement: wirtschaftspolitik
 
-We have opened the taps on the public-works program - the great hydraulic works, the roads, the rail lines. Money begins to circulate through the economy, and unemployment falls as the works absorb landless labourers and the urban jobless alike. Our republican partners take credit for a recovery plan they can defend to the middle class[? if in_popular_front :, though the <span style="color: #700000;">**PCE**</span> dismisses it as propping up a capitalism it would rather see collapse ?].
+We have opened the taps on the public-works program - the great hydraulic works, the roads, the rail lines. Money begins to circulate through the economy, and unemployment falls as the works absorb landless labourers and the urban jobless alike. Our republican partners take credit for a recovery plan they can defend to the middle class[? if in_popular_front :, though the <span style="color: #8a0303;">**PCE**</span> dismisses it as propping up a capitalism it would rather see collapse ?].
 
 @public_works_deficit
 title: Fund the public-works program through deficit spending.
@@ -178,7 +178,7 @@ achievement: wirtschaftspolitik
 
 [? if unemployed < 10 : Unemployment is low enough that the plan does not seem to have its intended effect. ?]
 
-[? if in_popular_front: The <span style="color: #700000;">**PCE**</span> opposes the plan, seeing it as a rescue of capitalism rather than a step toward real <span style="color: #9b0000;">socialism</span>. ?]
+[? if in_popular_front: The <span style="color: #8a0303;">**PCE**</span> opposes the plan, seeing it as a rescue of capitalism rather than a step toward real <span style="color: #9b0000;">socialism</span>. ?]
 
 @moderate_plan_limited_budget
 title: Partially implement the Prietista job-creation plan, at a lower cost.
@@ -197,4 +197,4 @@ achievement: wirtschaftspolitik
 
 [? if unemployed < 10 : Unemployment is low enough that the plan does not seem to have its intended effect. ?]
 
-[? if in_popular_front: The <span style="color: #700000;">**PCE**</span> opposes the plan, seeing it as a rescue of capitalism rather than a step toward real <span style="color: #9b0000;">socialism</span>. ?]
+[? if in_popular_front: The <span style="color: #8a0303;">**PCE**</span> opposes the plan, seeing it as a rescue of capitalism rather than a step toward real <span style="color: #9b0000;">socialism</span>. ?]

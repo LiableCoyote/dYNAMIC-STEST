@@ -186,15 +186,15 @@ go-to: menu
 
 **Demographic Groups**
 
-**Industrial Workers**: The urban proletariat - factory workers, miners, and dockworkers, concentrated in Madrid, Barcelona, the Basque Country, and Asturias. Most support either the <span style="color: #c00000;">**PSOE**</span> and the <span style="color: #700000;">**UGT**</span>, or the anarcho-syndicalist <span style="color: #333333;">**CNT**</span>, with a smaller but growing <span style="color: #700000;">**PCE**</span> following. Roughly a quarter of the population.
+**Industrial Workers**: The urban proletariat - factory workers, miners, and dockworkers, concentrated in Madrid, Barcelona, the Basque Country, and Asturias. Most support either the <span style="color: #c00000;">**PSOE**</span> and the <span style="color: #700000;">**UGT**</span>, or the anarcho-syndicalist <span style="color: #333333;">**CNT**</span>, with a smaller but growing <span style="color: #8a0303;">**PCE**</span> following. Roughly a quarter of the population.
 
-**Smallholders**: Small farmers, independent artisans, and shopkeepers, concentrated in the conservative Catholic north and centre (Old Castile, Navarre). They tend to be conservative and are the strongest rural base for the <span style="color: #003755;">**CEDA**</span> and the monarchists. 10-15% of the population.
+**Smallholders**: Small farmers, independent artisans, and shopkeepers, concentrated in the conservative Catholic north and centre (Old Castile, Navarre). They tend to be conservative and are the strongest rural base for the <span style="color: #0087DC;">**CEDA**</span> and the monarchists. 10-15% of the population.
 
-**Urban Middle Class**: White-collar workers, professionals, and civil servants. This is the base of republican liberalism - the <span style="color: #4a7d3a;">**Republican Left**</span> and the <span style="color: #d9a441;">Radical Party</span>. 10-15% of the population.
+**Urban Middle Class**: White-collar workers, professionals, and civil servants. This is the base of republican liberalism - the <span style="color: #7B2D8E;">**Republican Left**</span> and the <span style="color: #E8B23A;">Radical Party</span>. 10-15% of the population.
 
 **Landless Laborers**: The *braceros* - landless day laborers on the great estates (*latifundios*) of Andalusia and Extremadura. Among the poorest and most radicalized groups in Spain, they are the <span style="color: #c00000;">**PSOE**</span>'s strongest rural base, though many are drawn instead to <span style="color: #333333;">**CNT**</span> anarchism and its promise of land seizure. 20-25% of the population.
 
-**Practicing Catholics** cut across class lines and are the single largest bloc aligned with the <span style="color: #003755;">**CEDA**</span>, whose Catholic-authoritarian politics and defense of the Church give it a following well beyond the smallholder and landowning classes. Roughly 30% of the population identify as devout, churchgoing Catholics, concentrated in the north and centre.
+**Practicing Catholics** cut across class lines and are the single largest bloc aligned with the <span style="color: #0087DC;">**CEDA**</span>, whose Catholic-authoritarian politics and defense of the Church give it a following well beyond the smallholder and landowning classes. Roughly 30% of the population identify as devout, churchgoing Catholics, concentrated in the north and centre.
 
 
 @public_opinion
@@ -330,19 +330,19 @@ go-to: menu
 
 <span style="color: #c00000;">**PSOE**</span> - *Partido Socialista Obrero Español* (Spanish Socialist Workers' Party) - this is us. We are a socialist and democratic party of the working class, founded in 1879 and closely tied to the <span style="color: #700000;">**UGT**</span> trade union. We are among the foremost defenders of the Republic we helped found in 1931.
 
-<span style="color: #4a7d3a;">**Republican Left**</span> - *Izquierda Republicana* - Manuel Azaña's party of the progressive, secular, republican middle class - lawyers, teachers, and professionals. Anti-clerical and reformist rather than socialist, they are our closest and most natural ally, and our senior partner in the Republican-Socialist coalition and later the Popular Front.
+<span style="color: #7B2D8E;">**Republican Left**</span> - *Izquierda Republicana* - Manuel Azaña's party of the progressive, secular, republican middle class - lawyers, teachers, and professionals. Anti-clerical and reformist rather than socialist, they are our closest and most natural ally, and our senior partner in the Republican-Socialist coalition and later the Popular Front.
 
 Current relations: [+ izq_rep_relation : relationships +]
 
-<span style="color: #d9a441;">**Radical Party**</span> - *Partido Republicano Radical* - Alejandro Lerroux's party, nominally republican and once anti-clerical, but increasingly a vehicle for pragmatic office-holding and conservative accommodation. Governed with us in 1931-33, then swung right into coalition with the <span style="color: #003755;">**CEDA**</span>.
+<span style="color: #E8B23A;">**Radical Party**</span> - *Partido Republicano Radical* - Alejandro Lerroux's party, nominally republican and once anti-clerical, but increasingly a vehicle for pragmatic office-holding and conservative accommodation. Governed with us in 1931-33, then swung right into coalition with the <span style="color: #0087DC;">**CEDA**</span>.
 
 Current relations: [+ radical_relation : relationships +]
 
-<span style="color: #003755;">**CEDA**</span> - *Confederación Española de Derechas Autónomas* (Spanish Confederation of the Autonomous Right) - Gil-Robles's mass Catholic-authoritarian party, formed in 1933 from Catholic and agrarian groups. Ambiguous about the Republic itself, it draws on smallholders, devout Catholics, and landowners, and its youth movement openly admires Italian and German fascism.
+<span style="color: #0087DC;">**CEDA**</span> - *Confederación Española de Derechas Autónomas* (Spanish Confederation of the Autonomous Right) - Gil-Robles's mass Catholic-authoritarian party, formed in 1933 from Catholic and agrarian groups. Ambiguous about the Republic itself, it draws on smallholders, devout Catholics, and landowners, and its youth movement openly admires Italian and German fascism.
 
 Current relations: [+ ceda_relation : relationships +]
 
-<span style="color: #700000;">**PCE**</span> - *Partido Comunista de España* (Communist Party of Spain) - a small Marxist-Leninist party following the Comintern line, historically hostile to us as rivals for the workers' loyalty, but increasingly open to a common front against the authoritarian right as the decade wears on.
+<span style="color: #8a0303;">**PCE**</span> - *Partido Comunista de España* (Communist Party of Spain) - a small Marxist-Leninist party following the Comintern line, historically hostile to us as rivals for the workers' loyalty, but increasingly open to a common front against the authoritarian right as the decade wears on.
 
 Current relations: [+ pce_relation : relationships +]
 
@@ -350,7 +350,7 @@ Current relations: [+ pce_relation : relationships +]
 
 Current relations: [+ monarchist_relation : relationships +]
 
-<span style="color: #7A3C00;">**Falange**</span> - *Falange Española* - José Antonio Primo de Rivera's small fascist movement, fusing nationalism, corporatism, and paramilitary violence. Electorally negligible so far, but its street violence and appeal to junior officers make it a growing threat.
+<span style="color: #14322a;">**Falange**</span> - *Falange Española* - José Antonio Primo de Rivera's small fascist movement, fusing nationalism, corporatism, and paramilitary violence. Electorally negligible so far, but its street violence and appeal to junior officers make it a growing threat.
 
 Current relations: [+ falange_relation : relationships +]
 
@@ -415,7 +415,7 @@ Overall dissent: [+ dissent_percent : dissent +]
 
 **Caballeristas (Left)**
 
-Followers of Francisco Largo Caballero, the "Spanish Lenin." Many favor closer cooperation with the <span style="color: #700000;">**PCE**</span> and the anarcho-syndicalist unions, and some support extra-parliamentary action to defend the working class.
+Followers of Francisco Largo Caballero, the "Spanish Lenin." Many favor closer cooperation with the <span style="color: #8a0303;">**PCE**</span> and the anarcho-syndicalist unions, and some support extra-parliamentary action to defend the working class.
 
 Strength: [+ left_strength : strength +]
 
