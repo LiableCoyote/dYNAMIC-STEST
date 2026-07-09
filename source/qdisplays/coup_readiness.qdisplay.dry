@@ -1,0 +1,8 @@
+
+# conspiracy / coup readiness (coup fires at coup_progress >= 10)
+
+(..2) <span style="color: #66BB6A;">dormant</span>
+(2..5) <span style="color: #FFD54F;">stirring</span>
+(5..8) <span style="color: #FFB74D;">advanced</span>
+(8..10) <span style="color: #F0884D;">imminent</span>
+(10..) <span style="color: #d42f2f;">breaking</span>
