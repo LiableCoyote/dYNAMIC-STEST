@@ -23,8 +23,9 @@ It is a **standalone build**, not a mod. Decisions already locked: standalone (n
 8. `docs/planning/H2_bulk_cleanup.md` — Area H Phase 2 (the bulk cleanup), done. Same live-status pattern; the ~371-file dead German corpus is deleted, the tree is ~75% smaller.
 9. `docs/planning/G_policy_cards.md` — Area G (policy-card content), done. Same live-status pattern; the `government_affairs/` deck is now real Spanish policy content end to end.
 10. `docs/planning/I_advisors.md` — Area I (advisors), done. Same live-status pattern; the 28 advisor cards + the recruit roster are real Spanish figures, the public-works economic plan is revived, and the last German Prussia machinery is gone.
-11. `docs/planning/K_assets.md` — Area K (image assets), functionally done, pending human art review. Same live-status pattern; 25/28 named-figure portraits + 4 topical/event images sourced from Wikimedia Commons with verified provenance, every live card-image/set-bg reference repointed, two new build-time guards (broken-path, credits-completeness) added to `smoke.js`.
-12. `docs/planning/A_engine_build_scaffolding.md` — build/CI/naming/asset scaffolding (Area A, done).
+11. `docs/planning/K_assets.md` — Area K (image assets), functionally done, pending human art review. Same live-status pattern; 25/28 named-figure portraits + 8 topical/event images sourced from Wikimedia Commons with verified provenance, every live card-image/set-bg reference repointed, two new build-time guards (broken-path, credits-completeness) added to `smoke.js`.
+12. `docs/planning/J_qdisplays_ui.md` — Area J (quality displays & UI text), done. Same live-status pattern; the qdisplay set is now 12 files (all generic/Spanish, zero German names), the status "Politics"/"Polls" tabs read the live Spanish party/demographic model, and the German presidential "camarilla" is now the Spanish 1936 military conspiracy.
+13. `docs/planning/A_engine_build_scaffolding.md` — build/CI/naming/asset scaffolding (Area A, done).
 
 ## Build & verify (do this after every change)
 
@@ -143,43 +144,53 @@ date, not narrative flags); others were genuinely inert. Verify, don't guess.
   constraint for 1930s-era named-artist work, not a search gap; one portrait (`vidiella`) is
   a group photo, not a solo shot. Achievements (the 123-icon `game_over` gallery) and music
   remain deferred, as planned. Full punch list in `K_assets.md`'s K-6/K-7 status entries.
-- **Areas J, L, M:** 🔲 not started. **J** = qdisplay/UI (already has flagged findings
-  waiting: the `nsdap_r`-class dead qdisplay ids and the `hindenburg_angry` id used across
-  83 files); **L** = localization; **M** = balancing.
+- **Area J (qdisplay/UI):** ✅ done — the qdisplay set is now 12 files, all generic or Spanish,
+  zero German names (renamed `hindenburg_angry`→`president_approval`, added `coup_readiness`,
+  deleted 11 dead/orphaned German defs). **Reachability of the two H2-flagged screens was fully
+  determined** from the hardcoded `index.html` tab bar: the "Emergency Status" tab is `display:none`
+  and dead (deleted `status.scene.dry`'s `@emergency` sub-scene + its button); the "Politics",
+  "Polls", and "Scheming" tabs are all live/visible. Converted the live German content accordingly:
+  the Politics tab's German-splinter "Party Leadership"/"Industrial Backing" rosters → a Spanish
+  7-party roster; the Polls tab's German demographic table → the live Spanish class×party matrix
+  (`<class>_<party>_display`, computed by `post_event.scene.dry:175`'s concatenation loop); and the
+  whole "Scheming" camarilla → the **Spanish 1936 military conspiracy** (Mola/Sanjurjo/Franco/Goded/
+  Queipo + Calvo Sotelo/Falange/Requetés), driven by live Area-F coup vars (`coup_progress` via the
+  new `coup_readiness` display, `africa_army`, `army_loyalty`), retitled "Conspiracy". Corrected the
+  stale "83 files" figure (`hindenburg_angry` was 2 live qdisplay call-sites, not 83). **Found but
+  out of scope, flagged in `J_qdisplays_ui.md`:** `library.scene.dry`'s `@government`/
+  `@weimar_timeline` are still German narrative prose (a content-area task, not J's qdisplay/UI
+  lane); the Conspiracy page's general portraits are text-only pending an Area-K asset pass.
+- **Areas L, M:** 🔲 not started. **L** = localization; **M** = balancing.
 
 ## How to continue (recommended next step)
 
 **The game is end-to-end playable, the dead German corpus is gone, the Government Affairs
-policy-card deck is real Spanish content, the advisor roster is real Spanish figures, and
-the bulk of the imagery now matches the words** (April 1931 → three elections → July 1936
-coup → one of four Spanish endings, tree ~75% smaller with no known German content on any
-confirmed-reachable path — text or image). What remains is Areas J/L/M, Area K's human-
-review punch list, and a few flagged loose ends:
+policy-card deck is real Spanish content, the advisor roster is real Spanish figures, the
+bulk of the imagery matches the words, and the qdisplay/UI layer is on Spanish content**
+(April 1931 → three elections → July 1936 coup → one of four Spanish endings, tree ~75%
+smaller with no known German content on any confirmed-reachable path — text, image, or UI).
+What remains is Areas L/M, Area K's human-review punch list, and a few flagged loose ends:
 
-1. **Area K's human-review punch list** (see `K_assets.md`'s K-6 entry) — the lowest-risk
-   next step since it's judgment, not engineering: sign off on the 29 sourced files'
-   identity/subject match, decide on the 5 CC BY-SA share-alike sources, and (optionally)
-   hand-source the ~19 items still on the placeholder via Commons-category browsing rather
-   than the pageimage-lookup pipeline.
-2. **Area J (qdisplay/UI)** — the natural next *engineering* area, bounded and lower-risk.
-   Already has flagged findings waiting (the `nsdap_r`-class dead qdisplay ids; the
-   `hindenburg_angry` id used across 83 files).
-3. **Two reachability-uncertain screens flagged in `H2_bulk_cleanup.md`:**
-   `status.scene.dry`'s `@emergency` sub-scene and `status_right.scene.dry` both contain
-   substantial unconverted German content. `status_right.scene.dry` in particular needs
-   someone with interactive browser access (this session could only `--dump-dom` a static
-   page) to determine whether it's actually reachable before deciding whether to convert,
-   gate, or delete it.
-4. **The interleaved dead block in `@post_election_1928`** (`H2_bulk_cleanup.md`'s H2-4) —
+1. **`library.scene.dry`'s `@government` + `@weimar_timeline`** (flagged in `J_qdisplays_ui.md`) —
+   the most glaring remaining German *narrative prose* on a live screen: a Weimar-constitution
+   explainer and a 1918–1933 German history timeline. Converting them (the 1931 Spanish
+   Constitution's system; a 1931–1936 Republic timeline) is a bounded content task — closer to
+   Area E/H work than qdisplay/UI, which is why Area J left it. **Recommended next step.**
+2. **Area K's human-review punch list** (see `K_assets.md`'s K-6/K-7 entries) — judgment, not
+   engineering: sign off on the sourced files' identity/subject match, decide on the CC BY-SA
+   share-alike sources, and optionally hand-source the items still on the placeholder (including
+   the Conspiracy page's general portraits, which Area J left text-only) via Commons-category
+   browsing.
+3. **The interleaved dead block in `@post_election_1928`** (`H2_bulk_cleanup.md`'s H2-4) —
    confirmed inert but deliberately left alone; only worth touching if someone wants to do
    the careful numerical-equivalence-guarded surgery the plan describes.
-5. **`coalition_affairs.scene.dry`'s dropped election-trigger branch** (`G_policy_cards.md`'s
+4. **`coalition_affairs.scene.dry`'s dropped election-trigger branch** (`G_policy_cards.md`'s
    G-5 finding) — `set_next_election_time.scene.dry` is silently inert (guards on a
    never-initialized `time_to_election`); flagged for whoever next touches the election-
    timing engine, not fixed by Area G since it's out of scope.
-6. **Areas J, L, M** (qdisplay/UI, localization, balancing) — not started; J already has
-   flagged findings waiting (the `nsdap_r`-class dead qdisplay ids, the `hindenburg_angry`
-   id across 83 files).
+5. **Areas L, M** (localization, balancing) — not started. **L** = a full localization pass
+   (Area J did UI-text *correctness*, not translation); **M** = re-tuning every numeric
+   threshold (election baselines, the coup/insurrection clocks, faction drift).
 
 **Working rules for whoever continues:** follow `B_state_schema.md` as law; `build`
 + `smoke` after every change and never trust a green smoke without a preceding
