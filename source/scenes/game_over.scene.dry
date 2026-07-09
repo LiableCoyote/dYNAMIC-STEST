@@ -373,7 +373,6 @@ this.achieve('game_completed');
 
 - #endings
 - @ending_slides: View ending slides.
-- @modinfo.paths: View completed paths.
 - @end_game: End game.
 
 
