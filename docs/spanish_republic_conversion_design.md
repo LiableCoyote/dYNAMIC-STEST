@@ -253,9 +253,10 @@ These have **no base-game analogue** and are the most design-intensive:
   named-artist work, not a search gap; one portrait (Vidiella) is a group photo, not a solo shot.
   **Achievements and music remain fully deferred**, as originally scoped, to dedicated follow-ups.
 
-### L. Localization, Naming & Flavor Consistency — *Size M · Rewrite*
+### L. Localization, Naming & Flavor Consistency — *Size M · Rewrite* — ✅ done
 - A global pass for tone/terminology: Spanish names, diacritics, party colors, date formats, and removing residual German strings (grep for `spd|nsdap|reichstag|hindenburg|schleicher|prussia` etc. across `source/`).
 - Decide language policy: English narration with Spanish proper nouns (matches base game's English-with-German style) vs. a Spanish localization (larger scope — recommend English-first).
+- **✅ done** — see `docs/planning/L_localization.md` for full detail. Language policy resolved as **English-with-Spanish-nouns** (already applied by every content area; L confirmed and applied it, no re-translation). Recon found the residual German was small: a raw grep hit ~35 files but almost all were out-of-scope (kept variable/scene-ID keys, dead JS blocks, or legitimate foreign-country references). Converted the one live centrepiece — `library.scene.dry`'s `@government` (→ the 1931 Spanish Constitution's system) and `@weimar_timeline` (→ a PSOE road-to-the-Republic timeline); rewrote the German "Mod Info" root-menu page into a compact Spanish "About" page (keeping Autumn Chen's attribution); `git rm`'d the five `view-if: 0` retired German cards; and harmonized party colours to the status-HUD palette via a span-text-keyed transform (162 spans / 37 files, collision-safe for the UGT's shared `#700000`). Every German token that remains is intentional — kept keys, dead code, legitimate foreign references, or base-game attribution — enumerated in the L doc's ledger.
 
 ### M. Balancing, Playtesting & QA — *Size L · New/Ongoing*
 - Re-tune every numeric threshold: election baselines, coup/insurrection clocks, faction drift rates, the end-state (July 1936) trigger conditions.

@@ -25,7 +25,8 @@ It is a **standalone build**, not a mod. Decisions already locked: standalone (n
 10. `docs/planning/I_advisors.md` — Area I (advisors), done. Same live-status pattern; the 28 advisor cards + the recruit roster are real Spanish figures, the public-works economic plan is revived, and the last German Prussia machinery is gone.
 11. `docs/planning/K_assets.md` — Area K (image assets), functionally done, pending human art review. Same live-status pattern; 25/28 named-figure portraits + 8 topical/event images sourced from Wikimedia Commons with verified provenance, every live card-image/set-bg reference repointed, two new build-time guards (broken-path, credits-completeness) added to `smoke.js`.
 12. `docs/planning/J_qdisplays_ui.md` — Area J (quality displays & UI text), done. Same live-status pattern; the qdisplay set is now 12 files (all generic/Spanish, zero German names), the status "Politics"/"Polls" tabs read the live Spanish party/demographic model, and the German presidential "camarilla" is now the Spanish 1936 military conspiracy.
-13. `docs/planning/A_engine_build_scaffolding.md` — build/CI/naming/asset scaffolding (Area A, done).
+13. `docs/planning/L_localization.md` — Area L (localization / naming / flavor consistency), done. Same live-status pattern; the library's German constitutional/history prose is now Spanish, the German "Mod Info" page is a Spanish "About", five dead retired German cards are deleted, and party colours are harmonized to one palette.
+14. `docs/planning/A_engine_build_scaffolding.md` — build/CI/naming/asset scaffolding (Area A, done).
 
 ## Build & verify (do this after every change)
 
@@ -160,22 +161,35 @@ date, not narrative flags); others were genuinely inert. Verify, don't guess.
   out of scope, flagged in `J_qdisplays_ui.md`:** `library.scene.dry`'s `@government`/
   `@weimar_timeline` are still German narrative prose (a content-area task, not J's qdisplay/UI
   lane); the Conspiracy page's general portraits are text-only pending an Area-K asset pass.
-- **Areas L, M:** 🔲 not started. **L** = localization; **M** = balancing.
+- **Area L (localization/naming/flavor):** ✅ done — the final German-string cleanup. Converted the
+  library's last live German prose (`@government` → the 1931 Spanish Constitution's system;
+  `@weimar_timeline` → a PSOE road-to-the-Republic timeline); rewrote the German "Mod Info" root-menu
+  page (a 484-line Weimar-mod FAQ/party-paths-flowchart/changelog) into a compact Spanish "About"
+  page keeping Autumn Chen's attribution; `git rm`'d the five `view-if: 0` retired German cards
+  (`red_general`, `deport_hitler`, `shuffle_cabinet`, the two dead toleration variants); and
+  harmonized party colours to the status-HUD palette (a span-text-keyed transform that only recolours
+  exact party-name spans, so the UGT's shared `#700000` and generic spans stay put — 162 spans across
+  37 files, plus clearing the last NSDAP-brown `#7A3C00` from live fascism references). Language
+  policy is English-with-Spanish-nouns (already settled; L applied it, did not translate). **Every
+  German token that remains is intentional** — kept var/scene-ID keys, dead JS blocks, legitimate
+  foreign-country references (`foreign_policy`/`labor_rights`), or base-game attribution — enumerated
+  in `L_localization.md`'s ledger.
+- **Area M:** 🔲 not started. **M** = balancing.
 
 ## How to continue (recommended next step)
 
 **The game is end-to-end playable, the dead German corpus is gone, the Government Affairs
 policy-card deck is real Spanish content, the advisor roster is real Spanish figures, the
-bulk of the imagery matches the words, and the qdisplay/UI layer is on Spanish content**
-(April 1931 → three elections → July 1936 coup → one of four Spanish endings, tree ~75%
-smaller with no known German content on any confirmed-reachable path — text, image, or UI).
-What remains is Areas L/M, Area K's human-review punch list, and a few flagged loose ends:
+bulk of the imagery matches the words, the qdisplay/UI layer is on Spanish content, and the
+final German-string cleanup is done** (April 1931 → three elections → July 1936 coup → one
+of four Spanish endings, tree ~75% smaller with no known German content on any
+confirmed-reachable path — text, image, or UI). **Area M (balancing) is the last unstarted
+area.** What remains:
 
-1. **`library.scene.dry`'s `@government` + `@weimar_timeline`** (flagged in `J_qdisplays_ui.md`) —
-   the most glaring remaining German *narrative prose* on a live screen: a Weimar-constitution
-   explainer and a 1918–1933 German history timeline. Converting them (the 1931 Spanish
-   Constitution's system; a 1931–1936 Republic timeline) is a bounded content task — closer to
-   Area E/H work than qdisplay/UI, which is why Area J left it. **Recommended next step.**
+1. **Area M (balancing)** — the last area: re-tune every numeric threshold (election baselines,
+   the coup/insurrection clocks, faction-drift rates, the July-1936 trigger conditions) and verify
+   the win/lose/branch conditions play out as intended. Needs standalone-simulation-driven tuning,
+   not just "it compiles."
 2. **Area K's human-review punch list** (see `K_assets.md`'s K-6/K-7 entries) — judgment, not
    engineering: sign off on the sourced files' identity/subject match, decide on the CC BY-SA
    share-alike sources, and optionally hand-source the items still on the placeholder (including
@@ -188,9 +202,6 @@ What remains is Areas L/M, Area K's human-review punch list, and a few flagged l
    G-5 finding) — `set_next_election_time.scene.dry` is silently inert (guards on a
    never-initialized `time_to_election`); flagged for whoever next touches the election-
    timing engine, not fixed by Area G since it's out of scope.
-5. **Areas L, M** (localization, balancing) — not started. **L** = a full localization pass
-   (Area J did UI-text *correctness*, not translation); **M** = re-tuning every numeric
-   threshold (election baselines, the coup/insurrection clocks, faction drift).
 
 **Working rules for whoever continues:** follow `B_state_schema.md` as law; `build`
 + `smoke` after every change and never trust a green smoke without a preceding
