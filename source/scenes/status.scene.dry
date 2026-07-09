@@ -50,7 +50,7 @@ Catalan government (Generalitat): [? if psoe_catalonia : in government - ?]
 
 [? if psoe_in_government and not in_psoe_majority and not in_workers_alliance : Coalition dissent: [+ coalition_dissent : coalition_dissent +] ?]
 
-[? if psoe_in_government : President's approval: [+ president_angry : hindenburg_angry +] ?]
+[? if psoe_in_government : President's approval: [+ president_angry : president_approval +] ?]
 
 [? if psoe_in_government and (in_workers_alliance or in_popular_front): <span style="color: #8a0303;">**PCE**</span> coalition dissent: [+ pce_coalition_dissent : coalition_dissent +] ?]
 
