@@ -26,10 +26,12 @@ follow-up); **music is deferred** (audio sourcing is a separate human pass).
 > **Session handoff.** 🟡 **DONE, PENDING HUMAN ART REVIEW.** Area K (image assets) is
 > functionally complete: no card points at a broken image path, no German-identifiable imagery
 > remains on any live card, and every sourced file carries machine-verified Commons provenance.
-> What's outstanding is human judgment, not engineering: 5 CC BY-SA (share-alike) sources want a
-> license-obligation sanity check, `vidiella`'s portrait is a group photo rather than a solo shot,
-> and ~19 items (3 named figures, ~16 topical/poster items) have no free image and sit on the
-> shared placeholder pending a human Commons-browsing pass. See K-6 below for the full punch list.
+> K-7 extended the pipeline with a Commons-search fallback (for subjects with no Wikipedia article)
+> and sourced 4 more Tier-2 items, bringing the total to 29 of 46 named-figure/topical images
+> sourced. What's outstanding is human judgment, not engineering: 5 CC BY-SA (share-alike) sources
+> want a license-obligation sanity check, `vidiella`'s portrait is a group photo rather than a solo
+> shot, and ~14 items (3 named figures, ~11 topical/poster items) have no free image and stay on
+> the shared placeholder after a genuine search — see K-6/K-7 below for the full punch list.
 
 ## Execution status
 
@@ -169,15 +171,17 @@ follow-up); **music is deferred** (audio sourcing is a separate human pass).
      downstream reuse; confirm the project's own licensing (MIT code, CC-sourced art) is fine with
      that mix, or swap for a Public Domain alternative if not.
   3. **3 unsourced Tier-1 figures** (Lucio Martínez Gil, Juan-Simeón Vidarte, Julia Álvarez Resano)
-     — no free lead image on es/en Wikipedia; still on the shared placeholder. Try a manual Commons
-     category search (regional/UGT archives sometimes have images Wikipedia's infobox doesn't
-     surface) or accept the placeholder as permanent for these three.
-  4. **~16 unsourced Tier-2 items** (`muller_cabinet`, `iron_front`, `reichsbanner`,
-     `vorwarts_2`/`Vorwaerts_nr_1`, `Mann_der_Arbeit`, `Reichstagsfraktion_der_SPD`, `arbeiterbew`,
-     `sangerbund`, `poster_0/1/2`, `weimar_coalition_2/3`, `bankrun`) — posters, mastheads, and a
-     named-cabinet group photo that don't resolve through a Wikipedia-pageimage lookup. Needs a
-     human browsing Commons categories (e.g. Category:Spanish Civil War posters, UGT/PSOE archive
-     collections) rather than more pipeline runs.
+     — no free lead image on es/en Wikipedia *or* Commons (K-7 confirmed via direct Commons search,
+     zero hits for all three); still on the shared placeholder. These are genuinely likely to have
+     no free-licensed photo at all — accept the placeholder as permanent unless a human turns up
+     something in an offline/non-Wikimedia archive.
+  4. **~11 still-unsourced Tier-2 items** (`iron_front`, `reichsbanner`, `Reichstagsfraktion_der_SPD`,
+     `arbeiterbew`, `poster_0/1/2`, `weimar_coalition_2/3`, `bankrun`) — K-7 searched all of these
+     via Commons and found nothing usable (mostly irrelevant archive PDFs); posters and militia
+     photography in particular are genuinely copyright-constrained for this era (Spain's life+70/80
+     term means most named-artist 1930s poster art isn't free yet). Needs a human browsing Commons
+     categories directly (e.g. Category:Political posters of Spain) or accepting placeholders as
+     permanent for this cluster.
   5. **`vidiella`'s portrait is a group photo**, not a solo shot — correctly attributed and clearly
      him, but weaker than the rest; swap if a solo portrait surfaces.
   6. **Optional cleanup:** the legacy German image files under `img/portraits/`, `img/*.jpg` etc.
@@ -187,6 +191,49 @@ follow-up); **music is deferred** (audio sourcing is a separate human pass).
   and music. **Verify:** all of K-0 through K-5's individual verify steps; this document's banner
   reflects the true state (🟡, not ✅, until 1–2 above get a human pass); `CLAUDE.md` and the design
   doc's §K updated to match.
+
+- **K-7 (extend sourcing via Commons search):** ✅ done — pushed past the Wikipedia-pageimage
+  ceiling K-6 flagged. Extended `scripts/source_assets.mjs` with `searchCommons(query, limit)` (the
+  Commons File-namespace search API) and a `--search=<query>` CLI mode that prints license-checked
+  candidates (subject, license, raw image URL, description URL) without downloading — pure
+  discovery, so every candidate could be visually inspected (via the `Read` tool, same discipline
+  as K-3) before anything was committed. Also added `commonsFile` as an alternative to `figure` in
+  manifest entries, so a specific Commons file chosen by search+review downloads through the exact
+  same license-gate/provenance/extension-correction machinery as a Wikipedia-pageimage figure —
+  one pipeline of record, not a parallel one. Ran ~15 targeted searches across the K-6 punch list
+  (named figures, cabinet/parliamentary-group photos, militia/rally photos, posters, mastheads,
+  bank-crisis photos) and **found 4 genuinely strong matches**, all visually verified before
+  download: `img/es/parties/el_socialista.jpg` (the actual 12 March 1886 first issue of *El
+  Socialista*, CC0 — now the `Vorwaerts_nr_1`/main-deck party-affairs icon *and* the `sangerbund`/
+  media-card image), `img/es/parties/casa_pueblo.jpg` (a 1908 press photo of the real Casa del
+  Pueblo de Madrid building, Public domain — now the `vorwarts_2`/recruit-roster structural-card
+  image), `img/es/parties/pablo_iglesias_casa_pueblo.jpg` (Pablo Iglesias addressing a crowd at the
+  Casa del Pueblo's inauguration, CC BY 4.0 — now the `Mann_der_Arbeit`/party-organizations image),
+  and `img/es/events/figuras_1931_votando.png` (a 1931 press-photo composite of Alcalá-Zamora,
+  Besteiro, Largo Caballero, Azaña, and other named figures voting in the Constituent elections,
+  Public domain — now the `muller_cabinet` cabinet/coalition-affairs image, used across 3 cards).
+  **Confirmed a real gap in the naive repoint approach**: since K-4 had already repointed these 5
+  German paths to the shared `img/placeholder.jpg`, the `.dry` files no longer contained the
+  *original* German path strings `k4_repoint_map.txt` keys off — re-running `k4_repoint.py`
+  wholesale would have found zero matches (and correctly errored) rather than silently doing
+  nothing. Fixed by identifying the exact file+line for each of the 8 live `card-image:` references
+  (3 for `muller_cabinet`, 2 for `vorwarts_2`, 1 each for `Vorwaerts_nr_1`/`sangerbund`/
+  `Mann_der_Arbeit`) from the original pre-K-4 recon and editing each in place directly — the
+  repoint map file itself was still updated as documentation of record, but the actual `.dry` edits
+  used exact-location `Edit` calls rather than a blind string-replace, since several unrelated
+  lines (the 3 unsourced named figures) also currently read the identical `img/placeholder.jpg`
+  text and must not be touched. **Also confirmed by direct search that the 3 unsourced Tier-1
+  figures genuinely have zero Commons coverage** (0 results each for Martínez Gil, Vidarte, Álvarez
+  Resano) — not a search-term problem, there's simply no free-licensed image of them anywhere on
+  Wikimedia. The remaining ~11 Tier-2 items (posters, militia photography, the PSOE parliamentary-
+  group photo, bank-crisis photography) were searched with 1-2 query variants each and came back
+  empty or irrelevant (mostly unrelated archive PDFs matching on stray keywords) — consistent with
+  the pre-stated copyright-honesty expectation that named-artist 1930s poster art is unlikely to be
+  free yet under Spain's life+70/80 copyright term. **Verify:** all 4 downloaded files spot-checked
+  as valid JPEG/PNG with `file`; all 4 credited in `credits_images.txt` with real Commons
+  provenance; all 8 live `card-image:` references confirmed pointing at the new files (placeholder
+  count dropped from 31 to 23 lines, exactly the expected 8); `BUILD OK` → `SMOKE PASSED` (8
+  checks, both K-5 guards green); headless Chromium load clean.
 
 > **Audience: a Sonnet-class executor working cold.** Read `CLAUDE.md`,
 > `docs/planning/A_engine_build_scaffolding.md` §5 (the asset-path strategy), and

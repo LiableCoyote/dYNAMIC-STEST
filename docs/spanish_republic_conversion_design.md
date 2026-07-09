@@ -228,24 +228,29 @@ These have **no base-game analogue** and are the most design-intensive:
 - **Note:** assets are the most license-sensitive area; flag for human review, don't auto-generate historical claims of provenance.
 - **🟡 images functionally done** — see `docs/planning/K_assets.md` for full detail. Built
   `scripts/source_assets.mjs`, a pipeline that resolves a figure/subject's lead image via the
-  Wikipedia pageimages API and verifies its license via Commons `imageinfo`/`extmetadata`,
-  downloading and recording real provenance only for redistributable licenses (never fabricated,
-  matching this section's own "flag for human review" note). Sourced 25 of 28 named-figure
-  portraits and 4 topical/event images with verified provenance; repointed all 98 live
-  `card-image:`/`set-bg:` references across 71 scene files onto `img/es/` or the shared
-  placeholder — zero broken paths, zero known German-identifiable imagery on any live card.
-  Visual inspection (not just filename-matching) confirmed and replaced the worst offenders — the
-  Reichstag chamber and building, a 1929 Berlin street-fighting photo, a Berlin rally at the
-  Lustgarten/Cathedral — with the Congreso de los Diputados facade and real period photos of
-  Casas Viejas (1933) and the Asturias rising (1934); also correctly *kept* the 1864 First
-  International emblem as historically apt rather than German-specific. Added two build-time
-  guards to `smoke.js` (broken-image-path, credits-completeness) so both failure modes are
-  permanent regressions, each proven to actually fire before being trusted. **Left for a human:**
-  identity/subject sign-off on the 29 sourced files; 5 CC BY-SA (share-alike) sources needing a
-  license-obligation check; 3 named figures and ~16 topical/poster items with no free Wikipedia
-  image (needs Commons-category browsing, not a pageimage lookup); one portrait (Vidiella) is a
-  group photo, not a solo shot. **Achievements and music remain fully deferred**, as originally
-  scoped, to dedicated follow-ups.
+  Wikipedia pageimages API — or, once extended (K-7), a free-text Commons File-namespace search for
+  subjects with no Wikipedia article — and verifies its license via Commons `imageinfo`/
+  `extmetadata`, downloading and recording real provenance only for redistributable licenses (never
+  fabricated, matching this section's own "flag for human review" note). Sourced 25 of 28
+  named-figure portraits and 8 topical/event images with verified provenance; repointed all live
+  `card-image:`/`set-bg:` references across scene files onto `img/es/` or the shared placeholder —
+  zero broken paths, zero known German-identifiable imagery on any live card. Visual inspection
+  (not just filename-matching) confirmed and replaced the worst offenders — the Reichstag chamber
+  and building, a 1929 Berlin street-fighting photo, a Berlin rally at the Lustgarten/Cathedral —
+  with the Congreso de los Diputados facade and real period photos of Casas Viejas (1933) and the
+  Asturias rising (1934); the Commons-search extension then found real period-photo replacements
+  for the Council-of-Ministers card, the party-HQ/masthead cards (the actual 1908 Casa del Pueblo
+  de Madrid building, the actual 1886 first issue of *El Socialista*, Pablo Iglesias addressing a
+  crowd at its inauguration), and correctly *kept* the 1864 First International emblem as
+  historically apt rather than German-specific. Added two build-time guards to `smoke.js`
+  (broken-image-path, credits-completeness) so both failure modes are permanent regressions, each
+  proven to actually fire before being trusted. **Left for a human:** identity/subject sign-off on
+  the sourced files; 5 CC BY-SA (share-alike) sources needing a license-obligation check; 3 named
+  figures confirmed via direct Commons search to have no free image anywhere on Wikimedia; ~11
+  topical/poster items (posters, militia photography, a parliamentary-group photo) that stayed
+  empty after a genuine search — likely a real Spanish copyright-term constraint for 1930s
+  named-artist work, not a search gap; one portrait (Vidiella) is a group photo, not a solo shot.
+  **Achievements and music remain fully deferred**, as originally scoped, to dedicated follow-ups.
 
 ### L. Localization, Naming & Flavor Consistency — *Size M · Rewrite*
 - A global pass for tone/terminology: Spanish names, diacritics, party colors, date formats, and removing residual German strings (grep for `spd|nsdap|reichstag|hindenburg|schleicher|prussia` etc. across `source/`).

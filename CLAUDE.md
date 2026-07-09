@@ -116,25 +116,33 @@ date, not narrative flags); others were genuinely inert. Verify, don't guess.
 - **Area G (policy-card content):** ✅ done — the `government_affairs/` deck (38 files) is now real Spanish content end to end. Converted 20 live-but-German cards across six stages (G-0 recon → G-5 reimaginings/cleanup): `labor_affairs`/`labor_rights`/`fiscal_policy` (the *jurados mixtos*, the eight-hour day, Prieto's tax/tariff policy); the `economic_policy` flagship (279→232 lines — recon found its WTB/Lautenbach public-works arm, roughly half the file, was already permanently unreachable dead code orphaned by an unconverted Area I advisor path, so it was deleted rather than reframed; the two genuinely-reachable arms, left-nationalization and the moderate Prietista plan, were fully converted) + `economic_democracy`, then re-enabled the `@eco` deck Area H had left gated off pending this; `judiciary`/`constitutional_reform` (reframed around the 1931 electoral law's *premio de mayoría* and curbing Alcalá-Zamora's Article 81 dissolution power, not the original's anachronistic Bonn-Basic-Law borrowings)/`womens_rights`/`homosexual_rights`; `police`/`domestic_enemies` (an unusually clean fit onto Area F's pre-built Falangist-militia/Requetés/CNT-FAI ban system)/`social_welfare`/`coalition_affairs`/the toleration trio (collapsed 3→1 card, reframed as the real 1936 Caballerista confidence-and-supply arrangement); `war_guilt`→the Comisión de Responsabilidades (the 1921 Annual disaster inquiry), `foreign_policy` (the hardest card in the pool — trimmed from 16 to 4 sub-branches after recon found most of the original was either non-portable Versailles/Vatican/Austria content or redundant with already-converted party-level content), `education_science`→Marcelino Domingo's real school-building program. Retired 4 cards with no Spanish analogue (`deport_hitler`, `red_general`, `shuffle_cabinet`, plus one toleration variant) and deleted 7 dead `blank*` filler files + a stray mis-extensioned duplicate; revived the pinned Cabinet advisor card's dead gate. **Found and fixed 26 previously-uninitialized-variable bugs** (same silent-NaN class as Area B's original finds) along the way — see `G_policy_cards.md`'s per-stage status for the full list. **Found but explicitly out of scope, flagged in `G_policy_cards.md`:** `coalition_affairs.scene.dry`'s dropped `bring_down`/election-trigger branch called a utility scene (`set_next_election_time`) that turns out to be silently inert (guards on a never-initialized `time_to_election`); the 4 `prussian_affairs*` files were kept rather than deleted as originally planned, since three out-of-scope Area I advisor files still reference them.
 - **Area I (advisors):** ✅ done — all 28 advisor cards (+ the `shuffle_leadership` recruit roster + the two structural pinned cards) are now real Second-Republic PSOE figures. Mapped the German socialists onto Spanish counterparts preserving the faction tags and the 3-advisor cap (starters: Besteiro/Saborit/Negrín; plus Largo Caballero, Prieto-era figures, Fernando de los Ríos→justice, Gregorio Marañón→rights/science, Zugazagoitia→*El Socialista*, González Peña→Alianza Obrera, Santiago Carrillo→Socialist Youth, etc.). **Revived the public-works economic plan** (the WTB arm G-2 deleted as dead code): the labor economist's `@plan` branch now sets `wtb_adopted`/`economic_plan = 1`, and `economic_policy.scene.dry`'s public-works arm (Prieto's hydraulic/infrastructure works) was rebuilt — verified end-to-end (crisis_program → adopt → economic_policy arm → `@eco` deck). **Reimagined the Prussia-coupled advisors around Catalonia** (Braun→Vidiella/Generalitat, Severing→Galarza, Rosenfeld→Araquistáin, +the Sender/Seydewitz Prussia blocks), repointed their `go-to`s to `catalan_affairs`, and **deleted the 4 `prussian_affairs*` files** G-5 had kept alive solely for these references. Advisor variable *keys* and scene *filenames* kept as opaque German identifiers (renaming would ripple across the roster + `post_event` faction bookkeeping for zero gain — same call as Area B/scene-IDs). **Found and fixed 4 more previously-uninitialized-variable bugs** (`workers_aid`, `kpd_cooperation_seen`, `month_activities`→`month_actions` ×3, plus a `moderate_economic_plan`-var typo). Verified via dead-flag grep, a compiled-output scan, headless load, and a Node sim exercising all 95 advisor `on-arrival` lines (zero NaN) + a hire-from-roster round-trip. **Out of scope, left per precedent:** advisor `card-image` portraits still point at German figures (Area K); a harmless dead JS string-check in `easy_discard.scene.dry`.
 - **Area K (assets):** 🟡 functionally done, pending human art review — 25 of 28 Tier-1
-  named-figure portraits + 4 Tier-2 topical/event images sourced from Wikimedia Commons
+  named-figure portraits + 8 Tier-2 topical/event images sourced from Wikimedia Commons
   with machine-verified provenance (`scripts/source_assets.mjs`, resolves a figure's lead
-  image via the Wikipedia pageimages API and verifies license via Commons `imageinfo`);
-  every live `card-image:`/`set-bg:` reference across 71 scene files repointed from German
-  paths onto `img/es/` or the shared placeholder (`scripts/k4_repoint.py`) — zero broken
-  paths, zero known German-identifiable imagery on any live card. Visual inspection (not
-  just filename-matching) caught and replaced the worst offenders: the Reichstag chamber
-  and building, a 1929 Berlin street-fighting photo, and a Berlin rally at the Lustgarten/
-  Cathedral, swapped for the Congreso de los Diputados facade and real period photos of
-  Casas Viejas (1933) and the Asturias rising (1934); a bonus find, the actual 17 Feb 1936
-  *La Voz* Popular-Front-victory front page, is sourced but not yet wired to a card. Two
-  new `smoke.js` guards (broken-image-path, credits-completeness) make both failure modes
-  permanent regressions — both were proven to actually fire before being trusted. **Left
-  for a human:** identity/subject sign-off on the 29 sourced files; 5 CC BY-SA
-  (share-alike) sources needing a license-obligation check; 3 named figures and ~16
-  topical/poster items with no free Wikipedia image (Commons-category browsing, not a
-  pageimage lookup, would be needed); one portrait (`vidiella`) is a group photo, not a
-  solo shot. Achievements (the 123-icon `game_over` gallery) and music remain deferred, as
-  planned. Full punch list in `K_assets.md`'s K-6 status entry.
+  image via the Wikipedia pageimages API, or — via K-7's Commons-search extension — a
+  free-text Commons File-namespace search for subjects with no Wikipedia article; verifies
+  license via Commons `imageinfo` either way); every live `card-image:`/`set-bg:` reference
+  across 71 scene files repointed from German paths onto `img/es/` or the shared placeholder
+  — zero broken paths, zero known German-identifiable imagery on any live card. Visual
+  inspection (not just filename-matching) caught and replaced the worst offenders: the
+  Reichstag chamber and building, a 1929 Berlin street-fighting photo, and a Berlin rally at
+  the Lustgarten/Cathedral, swapped for the Congreso de los Diputados facade and real period
+  photos of Casas Viejas (1933) and the Asturias rising (1934); K-7 then found real
+  period-photo replacements for the Council-of-Ministers card (a genuine 1931
+  Constituent-election press photo of Alcalá-Zamora/Besteiro/Largo Caballero/Azaña), the
+  party HQ and masthead cards (the actual 1908 Casa del Pueblo de Madrid building, the
+  actual 1886 first issue of *El Socialista*, and Pablo Iglesias addressing a crowd at its
+  inauguration). The actual 17 Feb 1936 *La Voz* Popular-Front-victory front page is sourced
+  but still not wired to any card. Two `smoke.js` guards (broken-image-path,
+  credits-completeness) make both failure modes permanent regressions — both were proven to
+  actually fire before being trusted. **Left for a human:** identity/subject sign-off on the
+  29 sourced files; 5 CC BY-SA (share-alike) sources needing a license-obligation check; 3
+  named figures confirmed to have zero free image anywhere on Wikimedia (not just no
+  Wikipedia article — K-7 directly Commons-searched and found nothing); ~11 topical/poster
+  items (posters, militia photography, a parliamentary-group photo, bank-crisis photography)
+  that stayed empty after a genuine Commons search — likely a real Spanish copyright-term
+  constraint for 1930s-era named-artist work, not a search gap; one portrait (`vidiella`) is
+  a group photo, not a solo shot. Achievements (the 123-icon `game_over` gallery) and music
+  remain deferred, as planned. Full punch list in `K_assets.md`'s K-6/K-7 status entries.
 - **Areas J, L, M:** 🔲 not started. **J** = qdisplay/UI (already has flagged findings
   waiting: the `nsdap_r`-class dead qdisplay ids and the `hindenburg_angry` id used across
   83 files); **L** = localization; **M** = balancing.

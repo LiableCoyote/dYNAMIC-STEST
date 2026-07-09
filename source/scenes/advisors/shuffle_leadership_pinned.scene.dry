@@ -4,6 +4,6 @@ new-page: true
 is-card: true
 is-pinned-card: true
 on-arrival: month_actions += 1; shuffle_leadership_timer = 10;
-card-image: img/placeholder.jpg
+card-image: img/es/parties/casa_pueblo.jpg
 go-to: shuffle_leadership.rm_main
 

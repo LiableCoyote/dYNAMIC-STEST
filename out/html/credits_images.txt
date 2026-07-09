@@ -34,3 +34,7 @@ img/es/events/cortes_exterior.jpg | https://commons.wikimedia.org/wiki/File:Cong
 img/es/events/casas_viejas.jpg | https://commons.wikimedia.org/wiki/File:Casas_Viejas.jpg | Public domain | Unknown author Unknown author | 2026-07-08
 img/es/events/asturias_1934.jpg | https://commons.wikimedia.org/wiki/File:Arrested_workers_during_the_Asturian_Revolution,_1934.jpg | Public domain | Concern Illustrated Daily Courier - Illustration Archive | 2026-07-08
 img/es/events/popular_front_rally.png | https://commons.wikimedia.org/wiki/File:Frente-popular.png | Public domain | La Voz | 2026-07-08
+img/es/parties/el_socialista.jpg | https://commons.wikimedia.org/wiki/File:El_Socialista,_primer_n%C3%BAmero,_12-3-1886.jpg | CC0 | Fundación Pablo Iglesias | 2026-07-09
+img/es/parties/casa_pueblo.jpg | https://commons.wikimedia.org/wiki/File:1908-11-26,_Nuevo_Mundo,_La_Casa_del_Pueblo,_de_Madrid_(cropped).jpg | Public domain | Antonio Portela | 2026-07-09
+img/es/parties/pablo_iglesias_casa_pueblo.jpg | https://commons.wikimedia.org/wiki/File:Pablo_Iglesias_en_la_inauguraci%C3%B3n_de_la_Casa_del_Pueblo_de_Madrid.jpg | CC BY 4.0 | Juan José Morato Caldeiro | 2026-07-09
+img/es/events/figuras_1931_votando.png | https://commons.wikimedia.org/wiki/File:Principales_figuras_pol%C3%ADticas_de_1931_votando_en_las_Elecciones_Constituyentes.png | Public domain | Mundo Gráfico | 2026-07-09

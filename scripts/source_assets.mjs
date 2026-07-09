@@ -5,10 +5,18 @@
 // records real provenance to out/html/credits_images.txt.
 //
 // Usage:
-//   node scripts/source_assets.mjs --manifest scripts/asset_manifest.json [--dry-run] [--only=slug1,slug2]
+//   node scripts/source_assets.mjs --manifest=scripts/asset_manifest.json [--dry-run] [--only=slug1,slug2]
+//   node scripts/source_assets.mjs --search="<query>" [--limit=N]
 //
-// The manifest is a JSON array of { slug, figure, target, category } entries.
-// "target" is relative to out/html/, e.g. "img/es/leaders/besteiro.jpg".
+// The manifest is a JSON array of { slug, figure, target, category } entries,
+// where "figure" (a Wikipedia article title) can be replaced with
+// "commonsFile" (an exact known "File:X.jpg" title, discovered via --search
+// for subjects with no dedicated Wikipedia article/pageimage). "target" is
+// relative to out/html/, e.g. "img/es/leaders/besteiro.jpg".
+//
+// --search is discovery-only: it prints license-checked Commons File-namespace
+// search candidates (subject, license, raw image URL) but never downloads —
+// visually inspect the printed image URL before committing to a commonsFile.
 
 import fs from 'node:fs';
 import path from 'node:path';
@@ -96,6 +104,19 @@ async function resolveLeadImage(figureName) {
   return null;
 }
 
+// Searches Commons directly (namespace 6 = File) for subjects that have no
+// dedicated Wikipedia article and thus no pageimage — posters, mastheads,
+// group photos. Returns bare "File:X.jpg"-style titles ranked by relevance;
+// callers must still run fetchImageInfo + a license check + visual review
+// before trusting a hit (Commons search is far noisier than an article's
+// canonical pageimage).
+async function searchCommons(query, limit = 10) {
+  const url = `https://commons.wikimedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(query)}&srnamespace=6&srlimit=${limit}&format=json`;
+  const data = await fetchJson(url);
+  const hits = data?.query?.search || [];
+  return hits.map((h) => h.title.replace(/^File:/, ''));
+}
+
 // Fetches Commons imageinfo/extmetadata for a file name (e.g. "Foo_Bar.jpg").
 async function fetchImageInfo(fileName) {
   const url = `https://commons.wikimedia.org/w/api.php?action=query&titles=${encodeURIComponent('File:' + fileName)}&prop=imageinfo&iiprop=url|extmetadata&format=json`;
@@ -181,36 +202,44 @@ function retarget(target, sourceUrl) {
 }
 
 async function processEntry(entry, { dryRun }) {
-  const { slug, figure, target } = entry;
+  const { slug, figure, commonsFile, target } = entry;
+  const label = figure || commonsFile;
   const targetPath = path.join(OUT_HTML, target);
   const targetRel = target;
 
   if (fs.existsSync(targetPath) && alreadyCredited(targetRel)) {
-    return { slug, figure, status: 'skip-exists' };
+    return { slug, figure: label, status: 'skip-exists' };
   }
 
+  // Two ways to name the source image: a Wikipedia article title (resolved to
+  // its pageimage) for named figures, or a known Commons "File:X.jpg" title
+  // directly (for subjects found via searchCommons, which have no article).
   let lead;
-  try {
-    lead = await resolveLeadImage(figure);
-  } catch (e) {
-    return { slug, figure, status: 'error', detail: `resolve failed: ${e.message}` };
-  }
-  if (!lead) {
-    return { slug, figure, status: 'no-image', detail: 'no lead image found on es/en Wikipedia' };
+  if (commonsFile) {
+    lead = { lang: 'commons-direct', fileName: commonsFile };
+  } else {
+    try {
+      lead = await resolveLeadImage(figure);
+    } catch (e) {
+      return { slug, figure: label, status: 'error', detail: `resolve failed: ${e.message}` };
+    }
+    if (!lead) {
+      return { slug, figure: label, status: 'no-image', detail: 'no lead image found on es/en Wikipedia' };
+    }
   }
 
   let info;
   try {
     info = await fetchImageInfo(lead.fileName);
   } catch (e) {
-    return { slug, figure, status: 'error', detail: `imageinfo failed: ${e.message}` };
+    return { slug, figure: label, status: 'error', detail: `imageinfo failed: ${e.message}` };
   }
   if (!info || !info.url) {
-    return { slug, figure, status: 'no-metadata', detail: `File:${lead.fileName} has no imageinfo` };
+    return { slug, figure: label, status: 'no-metadata', detail: `File:${lead.fileName} has no imageinfo` };
   }
   if (!isAcceptedLicense(info.licenseShortName)) {
     return {
-      slug, figure, status: 'rejected-license',
+      slug, figure: label, status: 'rejected-license',
       detail: `File:${lead.fileName} license "${info.licenseShortName}" not redistributable`,
       candidateUrl: info.descriptionUrl,
     };
@@ -220,7 +249,7 @@ async function processEntry(entry, { dryRun }) {
   const correctedPath = path.join(OUT_HTML, correctedTarget);
 
   const result = {
-    slug, figure, status: dryRun ? 'would-download' : 'downloaded',
+    slug, figure: label, status: dryRun ? 'would-download' : 'downloaded',
     fileName: lead.fileName,
     wikiLang: lead.lang,
     license: info.licenseShortName,
@@ -244,10 +273,39 @@ async function processEntry(entry, { dryRun }) {
         accessedDate: new Date().toISOString().slice(0, 10),
       });
     } catch (e) {
-      return { slug, figure, status: 'error', detail: `download failed: ${e.message}` };
+      return { slug, figure: label, status: 'error', detail: `download failed: ${e.message}` };
     }
   }
   return result;
+}
+
+// Discovery-only runner for --search: prints license-checked candidates for a
+// free-text Commons query but never downloads or writes credits. Use this to
+// find candidates for subjects with no Wikipedia article (posters, mastheads,
+// group photos), then visually inspect the printed `image:` URL before adding
+// a `commonsFile` entry to a manifest.
+async function runSearch(query, limit) {
+  const fileNames = await searchCommons(query, limit);
+  console.log(`${fileNames.length} candidate(s) for "${query}" (File namespace):\n`);
+  for (const [i, fileName] of fileNames.entries()) {
+    let info;
+    try {
+      info = await fetchImageInfo(fileName);
+    } catch (e) {
+      console.log(`  ${i + 1}. [error] File:${fileName} — ${e.message}\n`);
+      continue;
+    }
+    if (!info) {
+      console.log(`  ${i + 1}. [no metadata] File:${fileName}\n`);
+      continue;
+    }
+    const accepted = isAcceptedLicense(info.licenseShortName);
+    console.log(`  ${i + 1}. ${accepted ? 'ACCEPT-license' : 'REJECT-license'}  File:${fileName}`);
+    console.log(`     license: ${info.licenseShortName || '(none)'}${isShareAlike(info.licenseShortName) ? ' [share-alike]' : ''}`);
+    console.log(`     image:   ${info.url}`);
+    console.log(`     page:    ${info.descriptionUrl}\n`);
+    await sleep(600);
+  }
 }
 
 async function main() {
@@ -257,8 +315,16 @@ async function main() {
   const onlyArg = args.find((a) => a.startsWith('--only='));
   const only = onlyArg ? new Set(onlyArg.split('=')[1].split(',')) : null;
 
+  const searchArg = args.find((a) => a.startsWith('--search='));
+  if (searchArg) {
+    const limitArg = args.find((a) => a.startsWith('--limit='));
+    await runSearch(searchArg.slice('--search='.length), limitArg ? Number(limitArg.split('=')[1]) : 10);
+    return;
+  }
+
   if (!manifestArg) {
     console.error('Usage: node scripts/source_assets.mjs --manifest=<path.json> [--dry-run] [--only=slug1,slug2]');
+    console.error('   or: node scripts/source_assets.mjs --search=<query> [--limit=N]');
     process.exit(1);
   }
   const manifestPath = path.resolve(REPO_ROOT, manifestArg.split('=')[1]);
@@ -268,7 +334,7 @@ async function main() {
 
   const results = [];
   for (const entry of entries) {
-    process.stdout.write(`  ${entry.slug} (${entry.figure})... `);
+    process.stdout.write(`  ${entry.slug} (${entry.figure || entry.commonsFile})... `);
     const r = await processEntry(entry, { dryRun });
     results.push(r);
     console.log(r.status + (r.detail ? ` — ${r.detail}` : '') + (r.license ? ` [${r.license}]` : ''));

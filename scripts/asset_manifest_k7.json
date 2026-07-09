@@ -1,0 +1,6 @@
+[
+  { "slug": "el_socialista", "commonsFile": "El Socialista, primer número, 12-3-1886.jpg", "target": "img/es/parties/el_socialista.jpg", "category": "party" },
+  { "slug": "casa_pueblo", "commonsFile": "1908-11-26, Nuevo Mundo, La Casa del Pueblo, de Madrid (cropped).jpg", "target": "img/es/parties/casa_pueblo.jpg", "category": "party" },
+  { "slug": "pablo_iglesias_casa_pueblo", "commonsFile": "Pablo Iglesias en la inauguración de la Casa del Pueblo de Madrid.jpg", "target": "img/es/parties/pablo_iglesias_casa_pueblo.jpg", "category": "party" },
+  { "slug": "figuras_1931_votando", "commonsFile": "Principales figuras políticas de 1931 votando en las Elecciones Constituyentes.png", "target": "img/es/events/figuras_1931_votando.png", "category": "event" }
+]

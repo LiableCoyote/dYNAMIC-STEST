@@ -89,12 +89,24 @@ all four: `img/es/events/cortes_exterior.jpg`, `img/es/events/casas_viejas.jpg`,
 `img/es/events/asturias_1934.jpg` (period photos, verified on-subject), plus a bonus find,
 `img/es/events/popular_front_rally.png` (the actual 17 Feb 1936 *La Voz* front page). `international.jpg`
 was inspected and confirmed *not* German-specific (the 1864 First International emblem — PSOE/UGT
-are genuinely descended from it) — reclassified to Tier 3, kept as-is. **The other 15 Tier-2 items
-remain unsourced** (`muller_cabinet`, `iron_front`, `reichsbanner`, `vorwarts_2`/`Vorwaerts_nr_1`,
-`Mann_der_Arbeit`, `Reichstagsfraktion_der_SPD`, `arbeiterbew`, `sangerbund`, `poster_0/1/2`,
-`weimar_coalition_2/3`, `bankrun`) — Wikipedia-pageimage lookup doesn't cleanly resolve
-posters/mastheads/named-cabinet-group-photos; these fall back to `img/placeholder.jpg` at K-4,
-flagged for a future manual Commons-browsing pass.
+are genuinely descended from it) — reclassified to Tier 3, kept as-is.
+
+**K-7 result:** extended sourcing beyond the Wikipedia-pageimage ceiling using a Commons
+File-namespace search (`scripts/source_assets.mjs --search=<query>`). Sourced 4 more: `muller_cabinet`
+→ `img/es/events/figuras_1931_votando.png` (a real 1931 press-photo composite of Alcalá-Zamora,
+Besteiro, Largo Caballero, and Azaña voting in the Constituent elections); `vorwarts_2` →
+`img/es/parties/casa_pueblo.jpg` (a 1908 photo of the real Casa del Pueblo de Madrid building);
+`Vorwaerts_nr_1`/`sangerbund` → `img/es/parties/el_socialista.jpg` (the actual 12 March 1886 first
+issue of *El Socialista*); `Mann_der_Arbeit` → `img/es/parties/pablo_iglesias_casa_pueblo.jpg`
+(Pablo Iglesias addressing a crowd at the Casa del Pueblo's inauguration). **The remaining ~11
+Tier-2 items stay unsourced after a genuine search attempt** (`iron_front`, `reichsbanner`,
+`Reichstagsfraktion_der_SPD`, `arbeiterbew`, `poster_0/1/2`, `weimar_coalition_2/3`, `bankrun`) —
+Commons searches for these returned only irrelevant archive material; poster/militia-photography
+copyright for this era is a real constraint (Spain's life+70/80 copyright term), not just a search
+gap. All 3 unsourced Tier-1 figures were also re-checked directly via Commons search and confirmed
+to have zero coverage (not a search-term problem — no free image exists on Wikimedia for any of
+them). These fall back to `img/placeholder.jpg`, flagged for a human with access to offline/
+non-Wikimedia archives rather than more pipeline runs.
 
 ## Tier 3 — era-neutral, leave as-is (no sourcing, no repoint)
 

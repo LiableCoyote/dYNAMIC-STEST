@@ -28,8 +28,8 @@ img/portraits/SchmidtRobert.jpg|img/es/leaders/prieto.jpg
 img/portraits/EinsteinAlbert.jpg|img/es/leaders/blas_cabrera.jpg
 img/portraits/BrüningHeinrich.jpg|img/es/leaders/azana.jpg
 img/hirschfeld.jpg|img/es/leaders/maranon.png
-img/muller_cabinet.jpg|img/placeholder.jpg
-img/vorwarts_2.jpg|img/placeholder.jpg
+img/muller_cabinet.jpg|img/es/events/figuras_1931_votando.png
+img/vorwarts_2.jpg|img/es/parties/casa_pueblo.jpg
 img/poster_0.jpg|img/placeholder.jpg
 img/poster_1.png|img/placeholder.jpg
 img/poster_2.jpg|img/placeholder.jpg
@@ -39,11 +39,11 @@ img/iron_front.png|img/placeholder.jpg
 img/bankrun.jpg|img/placeholder.jpg
 img/arbeiterbew.jpg|img/placeholder.jpg
 img/weimar_coalition_2.jpg|img/placeholder.jpg
-img/sangerbund.jpg|img/placeholder.jpg
+img/sangerbund.jpg|img/es/parties/el_socialista.jpg
 img/Reichstagsfraktion_der_SPD.jpg|img/placeholder.jpg
-img/Mann_der_Arbeit.jpg|img/placeholder.jpg
+img/Mann_der_Arbeit.jpg|img/es/parties/pablo_iglesias_casa_pueblo.jpg
 img/protest.jpg|img/es/events/asturias_1934.jpg
 img/blutmai_2.jpg|img/es/events/casas_viejas.jpg
 img/weimar_coalition_3.jpg|img/placeholder.jpg
-img/Vorwaerts_nr_1.png|img/placeholder.jpg
+img/Vorwaerts_nr_1.png|img/es/parties/el_socialista.jpg
 img/reichsbanner.jpg|img/placeholder.jpg
