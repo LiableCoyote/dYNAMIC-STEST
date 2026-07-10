@@ -367,32 +367,11 @@ this.achieve('game_completed');
 
 = End
 
-[? if (chancellor == nsdap_chancellor or president == "Hitler" or president == "Göring" or president == "Frick") and not republic_victory: <iframe src="https://en.wikipedia.org/wiki/The_Holocaust" height="800 " width="545" style=" margin-left: -20px; border: 1px solid #000; "></iframe> ?]
-
 @eg_menu
 
 - #endings
 - @ending_slides: View ending slides.
 - @end_game: End game.
-
-
-@hitler_wins
-view-if: (chancellor == nsdap_chancellor or president == "Hitler" or president == "Göring" or president == "Frick") and (total_defeat==1 or civil_war_seen == 0)
-title: Adolf Hitler is in undisputed control over Germany.
-tags: endings
-go-to: eg_menu
-
-Adolf Hitler is in undisputed control over Germany. The <span style="color: #c00000;">**SPD**</span>, along with all of the democratic forces, have failed.
-
-[? if civil_war_seen == 1 : At the very least, we fought back. Perhaps our resistance will be celebrated in an impossible-to-forsee future. ?]
-
-@war_against_hitler
-view-if: (chancellor == nsdap_chancellor or president == "Hitler" or president == "Göring" or president == "Frick") and (long_war == 1)
-title: Adolf Hitler is in power, but we are fighting to stop him.
-tags: endings
-go-to: eg_menu
-
-Adolf Hitler has taken power in Germany. However, we have rallied the democratic forces of the country against him, and are fighting back. The outcome of this war is uncertain.
 
 
 # Area H Phase 1 (H-4): repurposed as the Spanish "Republic endures" ending. The
@@ -411,15 +390,6 @@ go-to: eg_menu
 [? if coup_progress >= 7 : The plotting of the authoritarian right and the disloyal officer corps never quite comes together into an open rising - Sanjurjo, Mola, and the Africanista generals bide their time, but July 1936 passes without a coup. The Republic has survived its most dangerous hour, though the men who might have overthrown it have not gone away. ?][? if coup_progress < 7 : The Republic reaches July 1936 without ever coming close to a military rising. Whatever else can be said of these five years, the Second Republic has endured. ?]
 
 [? if in_popular_front : The Popular Front government continues its work, for however long its uneasy coalition can hold together. ?][? if in_radical_ceda : The Radical-CEDA government continues to govern, the PSOE still in opposition. ?][? if in_republican_socialist : The Republican-Socialist coalition continues its reform program. ?]
-
-@nsdap_win
-view-if: chancellor == "Goebbels" or chancellor == "Göring" or president == "Göring" or president == "Frick"
-title: Despite the deportation of Hitler, the <span style="color: #7A3C00;">Nazis</span> have still taken power...
-tags: endings
-go-to: eg_menu
-
-<p>Despite the deportation of Hitler, the <span style="color: #7A3C00;">**NSDAP**</span> has somehow still wormed its way into power.</p> [? if long_war == 1 : We are fighting them for control of Germany. ?]
-
 
 @civil_war_won
 title: The rising has failed.
@@ -447,90 +417,6 @@ Neither the rising nor the Republic's defense of it has proven decisive. Spain h
 
 [? if is_favorable == 0 : The balance of forces is not favorable for the Republic. ?][? if west_relation >= 2 : The Republic's cause has sympathizers in France and Britain, but their governments are reluctant to intervene directly. ?][? if soviet_relation >= 2 : The Soviet Union has begun sending aid to the Republic, though its price may be steep. ?]
 
-
-@braun_victorious
-title: Otto Braun victorious
-view-if: president == "Braun"
-tags: endings
-go-to: eg_menu
-
-Otto Braun has been elected as President of Germany. He had never desired to be the most powerful man in Germany, but now he is.
-
-@rosenfeld_victorious
-title: Kurt Rosenfeld victorious
-view-if: president == "Rosenfeld"
-tags: endings
-go-to: eg_menu
-
-Kurt Rosenfeld has been elected as President of Germany. He had never desired to be the most powerful man in Germany, but together with the <span style="color: #700000;">**KPD**</span>, we are in for a <span style="color: #9B0000;">socialist</span> future.
-
-@president_schumacher
-title: Kurt Schumacher victorious
-view-if: president == "Schumacher"
-tags: endings
-go-to: eg_menu
-
-Kurt Schumacher has been elected as President of Germany. As a young and ambitious <span style="color: #c00000;">**SPD**</span> member, he will be shaping Germany for years to come.
-
-@president_grzesinski
-title: Albert Grzesinski victorious
-view-if: president == "Grzesinski"
-tags: endings
-go-to: eg_menu
-
-Albert Grzesinski has been elected President of Germany. As a young and ambitious <span style="color: #c00000;">**SPD**</span> member, he will be shaping Germany for years to come.
-
-@president_wels
-title: Otto Wels victorious
-view-if: president == "Wels"
-tags: endings
-go-to: eg_menu
-
-Otto Wels has been elected President of Germany. What a long journey it has been for the <span style="color: #c00000;">**SPD**</span>'s chairman through the Republic. He will be shaping Germany for years to come.
-
-@president_juchacz
-title: Marie Juchacz is President
-view-if: president == "Juchacz"
-tags: endings
-go-to: eg_menu
-
-Marie Juchacz has been elected as President of Germany. She is the first woman to be elected as the head of state of any republic, and will contribute to shaping Germany for years to come.
-
-@president_einstein
-title: Albert Einstein is President
-view-if: president == "Einstein"
-tags: endings
-go-to: eg_menu
-
-Albert Einstein, possibly the most famous scientist in the world, has been elected as President of Germany. As a German <span style="color: #005EB8;">Jew</span> and a pacifist, he is the repudiation of everything the <span style="color: #7A3C00;">Nazis</span> stood for, and a symbol of a new German Republic that has moved beyond its checkered past.
-
-
-
-@spd_victorious
-title: <span style="color: #c00000;">**SPD**</span> still in government
-view-if: spd_in_government == 1 and chancellor_party == "SPD" and total_defeat == 0 and long_war == 0 and not schleicher_spd
-tags: endings
-go-to: eg_menu
-
-The <span style="color: #c00000;">**SPD**</span> is still in government, under Chancellor [+ chancellor +]. Given the circumstances, this is a substantial accomplishment.
-
-@spd_victorious_2
-title: The <span style="color: #c00000;">**SPD**</span> is victorious?
-view-if: total_defeat == 0 and long_war == 0 and schleicher_spd and wtb_implemented
-tags: endings
-go-to: eg_menu
-
-We were forced to strike a deal with Kurt von Schleicher, abandoning our pacifist and anti-militarist roots. With his reputation as a schemer, he could betray us at any moment.
-
-Was it really worth it?
-
-@communist_victory
-title: <span style="color: #700000;">**Communist**</span> victory
-view-if: chancellor_party == "KPD" or president == "Thälmann" and total_defeat == 0 and long_war == 0
-tags: endings
-go-to: eg_menu
-
-The <span style="color: #700000;">**KPD**</span> has won power in Germany, with our assistance. They will try to remake Germany in the <span style="color: #750e0e;">Soviet</span> image. How much they succeed is yet to be determined.
 
 @works_program
 title: Works program enacted!
@@ -560,28 +446,28 @@ Unemployment levels have fallen substantially! This is a success of our economic
 
 @unemployment_high
 title: Unemployment is still too high.
-view-if: unemployed >= 15 and (chancellor != "Hitler" and president != "Hitler") and (total_defeat == 0) and long_war == 0
+view-if: unemployed >= 15 and (total_defeat == 0) and long_war == 0
 tags: endings
 go-to: eg_menu
 
-Unemployment is still at dangerously high levels. Even though Hitler is not in power, the situation is ripe for instability and extremism.
+Unemployment is still at dangerously high levels. The Republic survived the coup, but mass joblessness leaves the situation ripe for instability and extremism.
 
 
 @emergency_government
-title: <span style="color: #c00000;">**SPD**</span> ruling in an emergency government.
+title: <span style="color: #c00000;">**PSOE**</span> ruling in an emergency government.
 view-if: in_emergency_government == 1
 tags: endings
 go-to: eg_menu
 
-The <span style="color: #c00000;">**SPD**</span> is ruling as part of an emergency minority government, led by President [+ president +] and Chancellor [+ chancellor +]. This is a temporary and unstable arrangement, leaving the door open to further <span style="color: #808080;">authoritarianism</span>.
+The <span style="color: #c00000;">**PSOE**</span> is ruling as part of an emergency minority government, led by President [+ president +] and Prime Minister [+ chancellor +]. This is a temporary and unstable arrangement, leaving the door open to further <span style="color: #808080;">authoritarianism</span>.
 
 @peoples_party_achieved
-title: The <span style="color: #c00000;">**SPD**</span> is a "People's Party".
+title: The <span style="color: #c00000;">**PSOE**</span> is a "People's Party".
 view-if: peoples_party == 1
 tags: endings
 go-to: eg_menu
 
-The <span style="color: #c00000;">**SPD**</span> has been declared a "People's Party", representing all of the people, not just the working class. This policy has many supporters and detractors, and what will become of the party is still unclear.
+The <span style="color: #c00000;">**PSOE**</span> has broadened beyond its *obrerista* roots into a "People's Party", claiming to represent all of the people and not just the working class. This turn has many supporters and detractors, and what will become of the party is still unclear.
 
 @nationalization_achieved
 title: Socialization of the economy has commenced.
@@ -599,13 +485,6 @@ go-to: eg_menu
 
 Works councils now have substantially greater influence, giving workers democratic control over their economic lives.
 
-@european_union
-title: There is now a <span style="color: #001489;">European</span> <span style="color: #FFDD00;">Union</span>!
-view-if: eu = 1
-tags: endings
-go-to: eg_menu
-
-We have helped to form a <span style="color: #001489;">European</span> <span style="color: #FFDD00;">Union</span> to bring peace and prosperity to the continent. Time will tell how effective it will be.
 
 @achievements
 title: Achievements
