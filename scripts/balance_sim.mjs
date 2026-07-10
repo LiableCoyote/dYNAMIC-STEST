@@ -113,9 +113,14 @@ const PROFILES = {
       if (Q.army_loyalty < 0.5) Q.army_loyalty += 0.004;
       if (month % 3 === 0) { Q.izq_rep_relation = (Q.izq_rep_relation || 0) + 2; Q.pro_republic = (Q.pro_republic || 0) + 1; }
       Q.ugt_militia_strength += 8;
+      // adopt the UGT public-works plan early (via the labor-economist advisor path)
+      if (month === 2) { Q.wtb_adopted = 1; Q.economic_plan = 1; }
       // a broadening electoral strategy: campaign among the urban middle class and
       // smallholders (the Prietista appeal beyond the industrial base)
       if (month % 6 === 0) { runOnArrival(Q, 'campaigning.new_middle'); runOnArrival(Q, 'campaigning.old_middle'); }
+      // Prieto's public-works program: the reformist economic lever (real card;
+      // funds hydraulic/infrastructure works -> falling unemployment)
+      if (month % 5 === 0 && (Q.budget || 0) >= 2) runOnArrival(Q, 'economic_policy.public_works');
     },
   },
   // Defensive/loyalist: the deliberate coup-averting counter-play. Keeps the army
