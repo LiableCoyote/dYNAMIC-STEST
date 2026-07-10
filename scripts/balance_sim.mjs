@@ -41,6 +41,43 @@ function viewIf(Q, id) {
   try { return !!new Function('Q', viewIfCode(id))(Q); }
   catch (e) { return false; }
 }
+function onDepartureCode(id) {
+  const sc = S[id];
+  if (!sc || !sc.onDeparture) return '';
+  return sc.onDeparture.map((x) => x.$code || '').join('\n');
+}
+function runOnDeparture(Q, id) {
+  const code = onDepartureCode(id);
+  if (!code.trim()) return;
+  try { new Function('Q', code)(Q); }
+  catch (e) { if (process.env.SIM_DEBUG) console.error(`onDeparture ${id}: ${e.message}`); }
+}
+
+// Run the full live election pipeline the way the game does: election_1928's
+// on-arrival (which now seeds the historical bloc config, M-2) -> election_algorithm
+// (class->party vote math + CNT abstention) -> post_election_1928's on-arrival (the
+// bloc-list seat adjustment) -> election_1928's on-departure (advance the calendar).
+// Returns the final per-party seat shares (<party>_r).
+const PARTIES = ['psoe', 'pce', 'ceda', 'izq_rep', 'radical', 'monarchist', 'falange', 'other'];
+function runElection(Q) {
+  // post_election_1928's dead German block has leftover console.log/console.error
+  // debug prints (z_minus_bvp_votes, etc.) -- silence them so the dashboard stays
+  // readable. They are harmless (dead code operating on excised German vars).
+  const log = console.log, err = console.error;
+  if (!process.env.SIM_DEBUG) { console.log = () => {}; console.error = () => {}; }
+  runOnArrival(Q, 'election_1928');
+  runOnArrival(Q, 'election_algorithm');
+  runOnArrival(Q, 'election_1928.post_election_1928');
+  console.log = log; console.error = err;
+  const r = {}; for (const p of PARTIES) r[p] = Math.round((Q[p + '_r'] || 0) * 10) / 10;
+  r.year = Q.year;
+  r.repsoc = Math.round((r.psoe + r.izq_rep + r.radical) * 10) / 10;
+  r.radceda = Math.round((r.radical + r.ceda) * 10) / 10;
+  r.popfront = Math.round((r.psoe + r.pce + r.izq_rep) * 10) / 10;
+  r.natbloc = Math.round((r.ceda + r.monarchist + r.falange) * 10) / 10;
+  runOnDeparture(Q, 'election_1928');
+  return r;
+}
 
 // --- difficulty start blocks (root.1928_*) ---------------------------------
 const DIFFICULTY = {
@@ -64,6 +101,9 @@ const PROFILES = {
       // antagonize the CNT toward insurrection/abstention (trips casas_viejas)
       if ((Q.anarchist_militancy || 0) < 0.9) Q.anarchist_militancy = (Q.anarchist_militancy || 0) + 0.03;
       if (month % 4 === 0) Q.pce_relation = (Q.pce_relation || 0) + 2;
+      // a working-class electoral strategy: campaign among workers + unemployed
+      // (real card onArrivals -> moves the class->party matrix that feeds elections)
+      if (month % 6 === 0) { runOnArrival(Q, 'campaigning.workers'); runOnArrival(Q, 'campaigning.unemployed'); }
     },
   },
   // Reformist moderate: defends the Republic, keeps the army as loyal as it can,
@@ -73,6 +113,9 @@ const PROFILES = {
       if (Q.army_loyalty < 0.5) Q.army_loyalty += 0.004;
       if (month % 3 === 0) { Q.izq_rep_relation = (Q.izq_rep_relation || 0) + 2; Q.pro_republic = (Q.pro_republic || 0) + 1; }
       Q.ugt_militia_strength += 8;
+      // a broadening electoral strategy: campaign among the urban middle class and
+      // smallholders (the Prietista appeal beyond the industrial base)
+      if (month % 6 === 0) { runOnArrival(Q, 'campaigning.new_middle'); runOnArrival(Q, 'campaigning.old_middle'); }
     },
   },
   // Passive baseline: takes no actions; measures the raw drift + event clock.
@@ -86,15 +129,23 @@ const ESCALATION = [
   'sanjurjada_1932', 'casas_viejas', 'asturias_rising',
   'popular_front_victory_shock', 'spring_1936_breakdown', 'calvo_sotelo_assassination',
 ];
-// The historical coalition arc (republican-socialist -> radical-CEDA -> popular
-// front) sets the in_* flags that gate the 1934/1936 escalation events. The
-// escalation chain depends on this narrative path; the harness follows the
-// historical timeline so the coup clock can be measured. Keyed by {year,month}.
-const COALITION_TIMELINE = [
-  { year: 1931, month: 4, scene: 'coalition_formation.rs_1931_confirm' },
-  { year: 1933, month: 12, scene: 'coalition_formation.radical_ceda_accept' },
-  { year: 1936, month: 2, scene: 'coalition_formation.pf_join' },
-];
+// The historical coalition arc sets the in_* flags that gate the 1934/1936
+// escalation events. In live play coalition_formation is reached via go-to
+// immediately after post_election_1928 -- crucially, post_election_1928's dead
+// German "reset government" block (election_1928.scene.dry:1180) zeroes the live
+// Spanish in_popular_front / in_emergency_government / in_minority_government
+// flags, and coalition_formation re-sets them in the same interaction. So the
+// harness must fire the coalition transition RIGHT AFTER each election, not on a
+// separate date, or the reset sticks and gates out spring_1936_breakdown /
+// calvo_sotelo_assassination. Keyed by the election year that just resolved; the
+// 1936 choice is the Prieto/Caballero split (both set in_popular_front=1).
+function postElectionCoalition(profileName, electionYear) {
+  if (electionYear <= 1931) return 'coalition_formation.rs_1931_confirm';
+  if (electionYear <= 1933) return 'coalition_formation.radical_ceda_accept';
+  return profileName === 'revolutionary'
+    ? 'coalition_formation.pf_tolerate'   // Caballerista: confidence-and-supply
+    : 'coalition_formation.pf_join';      // Prietista: join the cabinet
+}
 
 function simulate(profileName, difficultyName) {
   const Q = {};
@@ -105,6 +156,7 @@ function simulate(profileName, difficultyName) {
   const profile = PROFILES[profileName];
   const visited = new Set();
   const snapshots = [];
+  const elections = [];
 
   // step months April 1931 (t=0) through July 1936
   for (let t = 0; t < 64; t++) {
@@ -113,29 +165,32 @@ function simulate(profileName, difficultyName) {
     Q.month = (total % 12) + 1;
     Q.time = t + 1;
 
-    // 0. historical coalition transitions (unlock the escalation chain)
-    for (const c of COALITION_TIMELINE) {
-      if (Q.year === c.year && Q.month === c.month && !visited.has(c.scene)) {
-        runOnArrival(Q, c.scene); visited.add(c.scene);
-      }
-    }
     // 1. yearly economic/faction tick (once per year, at its January-ish window)
     for (const y of YEARLY) {
       if (Q.year === Number(y) && !visited.has('yr' + y) && viewIf(Q, y)) {
         runOnArrival(Q, y); visited.add('yr' + y);
       }
     }
-    // 2. date-gated escalation events (max-visits 1)
+    // 2. scheduled Cortes election (1931 / 1933 / 1936), then -- as live play does
+    //    via post_election_1928's go-to -- the coalition-formation transition,
+    //    which re-sets the in_* flags the escalation events gate on.
+    if (viewIf(Q, 'election_1928') && (Q.next_election_year || 0) < 9999) {
+      const electionYear = Q.next_election_year;
+      elections.push(runElection(Q));
+      runOnArrival(Q, postElectionCoalition(profileName, electionYear));
+    }
+    // 3. date-gated escalation events (max-visits 1) -- checked after the election
+    //    so they see the freshly-formed coalition's flags this month.
     for (const ev of ESCALATION) {
       if (!visited.has(ev) && viewIf(Q, ev)) { runOnArrival(Q, ev); visited.add(ev); }
     }
-    // 3. strategy profile's monthly actions
+    // 4. strategy profile's monthly actions
     profile.monthly(Q, t);
 
     // snapshot at each July (year boundary marker) for the dashboard
     if (Q.month === 7) snapshots.push(snapshot(Q));
 
-    // 4. coup trigger check (July 1936)
+    // 5. coup trigger check (July 1936)
     if (Q.year === 1936 && Q.month >= 7 && ((Q.coup_progress || 0) >= 10 || (Q.army_loyalty || 0) <= 0.1)) {
       Q.army_choices = 3; // simulate the player having tried approaches
       runOnArrival(Q, 'july_1936_coup.resolve');
@@ -147,7 +202,7 @@ function simulate(profileName, difficultyName) {
     : Q.long_war ? 'long_war'
     : Q.total_defeat ? 'total_defeat'
     : 'coup_averted';
-  return { Q, ending, snapshots };
+  return { Q, ending, snapshots, elections };
 }
 
 function snapshot(Q) {
@@ -161,8 +216,21 @@ function snapshot(Q) {
   };
 }
 
-function report(profileName, difficultyName, { Q, ending, snapshots }, verbose) {
+function winner(e) {
+  const cands = { 'Republican-Socialist': e.repsoc, 'Radical-CEDA': e.radceda, 'Popular Front': e.popfront, 'National Bloc': e.natbloc };
+  return Object.entries(cands).sort((a, b) => b[1] - a[1])[0];
+}
+function reportElections(elections) {
+  if (!elections.length) { console.log('elections: (none fired)'); return; }
+  for (const e of elections) {
+    const [wname, wval] = winner(e);
+    console.log(`  ${e.year} election: PSOE ${e.psoe} PCE ${e.pce} CEDA ${e.ceda} IR ${e.izq_rep} PRR ${e.radical} Mon ${e.monarchist} Fal ${e.falange} | blocs RepSoc ${e.repsoc} RadCeda ${e.radceda} PopFront ${e.popfront} NatBloc ${e.natbloc}  => ${wname} (${wval})`);
+  }
+}
+
+function report(profileName, difficultyName, { Q, ending, snapshots, elections }, verbose) {
   console.log(`\n=== ${profileName} / ${difficultyName} -> ENDING: ${ending.toUpperCase()} ===`);
+  reportElections(elections);
   console.log(`coup_progress=${Math.round(Q.coup_progress||0)}  army_loyalty=${(Q.army_loyalty||0).toFixed(2)}  africa_army=${Math.round(Q.africa_army||0)}`);
   if (Q.total_power !== undefined)
     console.log(`coup forces: Republic ${Math.round(Q.total_power)} vs Rebels ${Math.round(Q.enemy_power)} (ratio ${(Q.total_power/Q.enemy_power).toFixed(2)})`);

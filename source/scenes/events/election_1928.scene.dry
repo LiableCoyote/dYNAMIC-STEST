@@ -3,7 +3,37 @@ new-page: true
 tags: event
 priority: -2
 view-if: (year = next_election_year and month >= next_election_month and (next_election_week == week or not rubicon)) or (year > next_election_year)
-on-arrival: election_boycott = 0
+on-arrival: {!
+Q.election_boycott = 0;
+
+// Area M-2 (live election calibration): seed the historical electoral-bloc
+// configuration for the election being held. The 1933 majoritarian bloc-list
+// law (C-3) is the dominant lever in the seat pipeline -- coalesced lists get
+// the seat bonus, solo lists the penalty -- so scripting who is coalesced in
+// each election is what reproduces the historical arc (verified against the
+// C-6 calibration harness): 1931 the broad Republican-Socialist coalition
+// sweeps; 1933 the right coalesces (Radical-CEDA + monarchists) while the left
+// runs divided and is crushed; 1936 the left reunites on the Popular Front list
+// while the right runs comparatively divided. The class->party matrix and the
+// CNT electoral stance stay player-driven, so campaigning/policy and CNT
+// management still perturb the vote shares within each election's bloc frame.
+// Keyed on next_election_year, which still holds the CURRENT election's year at
+// on-arrival (on-departure advances it below).
+if (Q.next_election_year <= 1931) {
+    // 1931 constituent Cortes: Republican-Socialist-Radical conjunction.
+    Q.psoe_in_bloc = 1; Q.pce_in_bloc = 0; Q.ceda_in_bloc = 0; Q.izq_rep_in_bloc = 1;
+    Q.radical_in_bloc = 1; Q.monarchist_in_bloc = 0; Q.falange_in_bloc = 0; Q.other_in_bloc = 0;
+} else if (Q.next_election_year <= 1933) {
+    // 1933: the CEDA-Radical-monarchist right coalesces; the left runs solo.
+    Q.psoe_in_bloc = 0; Q.pce_in_bloc = 0; Q.ceda_in_bloc = 1; Q.izq_rep_in_bloc = 0;
+    Q.radical_in_bloc = 1; Q.monarchist_in_bloc = 1; Q.falange_in_bloc = 0; Q.other_in_bloc = 0;
+} else {
+    // 1936: the Popular Front (PSOE + PCE + Republican Left) reunites; the right
+    // ran divided (the Radicals had collapsed after Straperlo).
+    Q.psoe_in_bloc = 1; Q.pce_in_bloc = 1; Q.ceda_in_bloc = 0; Q.izq_rep_in_bloc = 1;
+    Q.radical_in_bloc = 0; Q.monarchist_in_bloc = 0; Q.falange_in_bloc = 0; Q.other_in_bloc = 0;
+}
+!}
 on-departure: {!
 // Spanish Republic election calendar: 1931 (constituent) -> 1933 -> 1936, then the
 // game is heading toward the July-1936 coup end-state (no further scheduled election).
