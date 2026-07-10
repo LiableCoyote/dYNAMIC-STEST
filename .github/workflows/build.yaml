@@ -35,16 +35,17 @@ jobs:
       - name: Smoke test
         run: npm run smoke
       - name: Upload Pages artifact
-        # Only bother producing the deploy artifact for main.
-        if: github.ref == 'refs/heads/main'
+        # Produce the deploy artifact for main and for the active conversion branch
+        # (the project lives on the feature branch, unmerged, so it hosts from there).
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/claude/dynamic-social-democracy-feasibility-k9y82t'
         uses: actions/upload-pages-artifact@v3
         with:
           path: 'out/html'
 
-  # Deploys the artifact from build; main only.
+  # Deploys the artifact from build; main or the active conversion branch.
   deploy:
     needs: build
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/claude/dynamic-social-democracy-feasibility-k9y82t'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
