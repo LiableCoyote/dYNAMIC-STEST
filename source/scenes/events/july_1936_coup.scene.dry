@@ -64,7 +64,13 @@ if (Q.general_strike_called) { Q.total_power += 150; }
 Q.enemy_power = 0;
 Q.enemy_power += Q.falange_militia_strength * Q.falange_militia_militancy;
 Q.enemy_power += Q.requetes_strength * Q.requetes_militancy;
-Q.enemy_power += Q.africa_army * 15 * 0.9;
+// Area M-4: the Army of Africa (Franco's colonial veterans) was the decisive
+// rebel force -- per-unit far more effective than the peninsular conscript army.
+// The original 15x weight left a large africa_army barely mattering against a
+// modest militia; 35x makes letting the Moroccan army grow (sanjurjada, an
+// un-purged officer corps) a genuine path to defeat, without touching the
+// historical-path outcomes (where africa_army stays small).
+Q.enemy_power += Q.africa_army * 35 * 0.9;
 Q.enemy_power += Q.army_strength * (1 - Q.army_loyalty) * Q.army_militancy;
 Q.enemy_power += Q.guardia_civil_strength * (1 - Q.guardia_civil_loyalty) * Q.guardia_civil_militancy;
 
