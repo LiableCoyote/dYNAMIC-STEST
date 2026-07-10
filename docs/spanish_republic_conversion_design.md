@@ -258,10 +258,11 @@ These have **no base-game analogue** and are the most design-intensive:
 - Decide language policy: English narration with Spanish proper nouns (matches base game's English-with-German style) vs. a Spanish localization (larger scope — recommend English-first).
 - **✅ done** — see `docs/planning/L_localization.md` for full detail. Language policy resolved as **English-with-Spanish-nouns** (already applied by every content area; L confirmed and applied it, no re-translation). Recon found the residual German was small: a raw grep hit ~35 files but almost all were out-of-scope (kept variable/scene-ID keys, dead JS blocks, or legitimate foreign-country references). Converted the one live centrepiece — `library.scene.dry`'s `@government` (→ the 1931 Spanish Constitution's system) and `@weimar_timeline` (→ a PSOE road-to-the-Republic timeline); rewrote the German "Mod Info" root-menu page into a compact Spanish "About" page (keeping Autumn Chen's attribution); `git rm`'d the five `view-if: 0` retired German cards; and harmonized party colours to the status-HUD palette via a span-text-keyed transform (162 spans / 37 files, collision-safe for the UGT's shared `#700000`). Every German token that remains is intentional — kept keys, dead code, legitimate foreign references, or base-game attribution — enumerated in the L doc's ledger.
 
-### M. Balancing, Playtesting & QA — *Size L · New/Ongoing*
-- Re-tune every numeric threshold: election baselines, coup/insurrection clocks, faction drift rates, the end-state (July 1936) trigger conditions.
-- Define win/lose/branch conditions analogous to the base game's endings (avert the coup? a different civil war? a stable Popular Front? PSOE-led republic?).
-- Regression: ensure `dendrynexus make-html` stays green and core loops (turn → action → event → election → end) are reachable throughout the build.
+### M. Balancing, Playtesting & QA — *Size L · New/Ongoing* — ✅ done (simulation-driven), see [`planning/M_balancing.md`](planning/M_balancing.md)
+- Re-tune every numeric threshold: election baselines, coup/insurrection clocks, faction drift rates, the end-state (July 1936) trigger conditions. **Done** by simulation: built `scripts/balance_sim.mjs` (a faithful harness running the game's real compiled logic), seeded the historical electoral-bloc config per election year so the live arc reproduces 1931 Republican-Socialist → 1933 Radical-CEDA → 1936 Popular Front, calibrated the CNT-abstention coefficient (0.3→0.7) and the Army-of-Africa force weight (15x→35x), and clamped an army_loyalty runaway.
+- Define win/lose/branch conditions analogous to the base game's endings. **Done:** the four Spanish endings — avert the coup (`@no_hitler`), win the rising (`@civil_war_won`), a long civil war (`@long_war`), a swift defeat (`@civil_war_lost`) — are all reachable, mutually exclusive, and correlate with player choices (verified across four strategy profiles); the dead German ending residue is purged.
+- Regression: `BUILD OK` → `SMOKE PASSED` (8) and a clean headless load held throughout. Core loop (turn → action → event → election → coup → end) reachable.
+- **The standing remainder is human playtesting** (feel/fairness/pacing), which a headless session cannot do — enumerated as a punch list in `planning/M_balancing.md`.
 
 ---
 
@@ -304,6 +305,6 @@ These have **no base-game analogue** and are the most design-intensive:
 | J. Quality displays/UI | M | Partial | — |
 | K. Assets (img+music) | L | Replace | (parallel) |
 | L. Localization/naming | M | Rewrite | — |
-| M. Balancing/QA | L | New | (continuous) |
+| M. Balancing/QA | L | New | ✅ done (sim-driven; human playtesting ongoing) |
 
 **Bottom line:** *Feasible and structurally well-suited* — the SPD-in-a-dying-republic framework is close to ideal for the PSOE story — **but it is a full total conversion**: reuse the engine and most mechanical systems, rebuild the entire content layer, and design four Spain-specific subsystems from scratch.

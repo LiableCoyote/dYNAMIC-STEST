@@ -27,6 +27,9 @@ It is a **standalone build**, not a mod. Decisions already locked: standalone (n
 12. `docs/planning/J_qdisplays_ui.md` — Area J (quality displays & UI text), done. Same live-status pattern; the qdisplay set is now 12 files (all generic/Spanish, zero German names), the status "Politics"/"Polls" tabs read the live Spanish party/demographic model, and the German presidential "camarilla" is now the Spanish 1936 military conspiracy.
 13. `docs/planning/L_localization.md` — Area L (localization / naming / flavor consistency), done. Same live-status pattern; the library's German constitutional/history prose is now Spanish, the German "Mod Info" page is a Spanish "About", five dead retired German cards are deleted, and party colours are harmonized to one palette.
 14. `docs/planning/A_engine_build_scaffolding.md` — build/CI/naming/asset scaffolding (Area A, done).
+15. `docs/planning/M_balancing.md` — Area M (balancing), done. The simulation-driven calibration
+    pass: the `scripts/balance_sim.mjs` harness, the live election-arc calibration, the
+    coup/insurrection/force tuning, the endings cleanup, and the human-playtesting punch list.
 
 ## Build & verify (do this after every change)
 
@@ -174,34 +177,58 @@ date, not narrative flags); others were genuinely inert. Verify, don't guess.
   German token that remains is intentional** — kept var/scene-ID keys, dead JS blocks, legitimate
   foreign-country references (`foreign_policy`/`labor_rights`), or base-game attribution — enumerated
   in `L_localization.md`'s ledger.
-- **Area M:** 🔲 not started. **M** = balancing.
+- **Area M (balancing):** ✅ done — the finale, simulation-driven calibration. Built
+  `scripts/balance_sim.mjs`, a **faithful** Node harness that runs the game's *real* compiled
+  `$code` (boot→3 elections→escalations→coup→ending) across four strategy profiles × four
+  difficulties. **Calibrated the live election arc** (the C-8 handoff): seeded the historical
+  electoral-bloc configuration per election year in `election_1928` on-arrival so the verified arc
+  (1931 Republican-Socialist sweep → 1933 Radical-CEDA → 1936 Popular Front, PSOE largest) plays out
+  live — the bloc-list law is the dominant seat lever, the matrix + CNT stance stay player-driven.
+  **Tuned the clocks/force math:** the CNT-abstention coefficient 0.3→0.7 (a visible-but-subordinate
+  1933 lever); clamped an army_loyalty runaway (a 0–1 fraction that hit 2.09, corrupting the coup
+  math) in two unguarded writers; strengthened the Army-of-Africa force term 15x→35x so a grown
+  Moroccan army is a real path to defeat. **Verified** all four coup outcomes reachable and
+  correlated with play (revolutionary→republic_victory, moderate→long_war, passive→total_defeat,
+  defensive→coup_averted), coup fires on the historical path (progress 12) but averts under sustained
+  counter-play (3), no faction/economic metric runs away. **Endings cleanup:** purged the dead German
+  ending residue from `game_over.scene.dry` (Holocaust `<iframe>`, `@nsdap_win`, `@braun_victorious`,
+  the six `@president_*`, `@spd_victorious`/`_2`, `@communist_victory`, `@european_union`) and fixed
+  SPD→PSOE / Hitler prose leaks in the live-var-gated achievement slides. **Found but left per
+  precedent:** the dead German monthly economic block (`post_event.scene.dry` L815–884) is confirmed
+  inert, left documented (H2-4 precedent); `post_event` can't run headless (`dendryUI`), so the
+  harness under-counts difficulty's dissent-dampening — flagged in `M_balancing.md`'s punch list
+  along with the human-playtesting judgments a simulation can't make.
 
 ## How to continue (recommended next step)
 
-**The game is end-to-end playable, the dead German corpus is gone, the Government Affairs
-policy-card deck is real Spanish content, the advisor roster is real Spanish figures, the
-bulk of the imagery matches the words, the qdisplay/UI layer is on Spanish content, and the
-final German-string cleanup is done** (April 1931 → three elections → July 1936 coup → one
-of four Spanish endings, tree ~75% smaller with no known German content on any
-confirmed-reachable path — text, image, or UI). **Area M (balancing) is the last unstarted
-area.** What remains:
+**All areas A–M are complete.** The game is end-to-end playable, the dead German corpus is gone,
+the Government Affairs policy-card deck is real Spanish content, the advisor roster is real Spanish
+figures, the bulk of the imagery matches the words, the qdisplay/UI layer is on Spanish content, the
+final German-string cleanup is done, **and the balancing pass is calibrated** (April 1931 → three
+elections reproducing the historical arc → July 1936 coup → one of four Spanish endings, tree ~75%
+smaller with no known German content on any confirmed-reachable path — text, image, or UI; the
+election/coup/force numbers calibrated by simulation via `scripts/balance_sim.mjs`). **What remains
+is human judgment, not engineering:**
 
-1. **Area M (balancing)** — the last area: re-tune every numeric threshold (election baselines,
-   the coup/insurrection clocks, faction-drift rates, the July-1936 trigger conditions) and verify
-   the win/lose/branch conditions play out as intended. Needs standalone-simulation-driven tuning,
-   not just "it compiles."
-2. **Area K's human-review punch list** (see `K_assets.md`'s K-6/K-7 entries) — judgment, not
-   engineering: sign off on the sourced files' identity/subject match, decide on the CC BY-SA
-   share-alike sources, and optionally hand-source the items still on the placeholder (including
-   the Conspiracy page's general portraits, which Area J left text-only) via Commons-category
-   browsing.
-3. **The interleaved dead block in `@post_election_1928`** (`H2_bulk_cleanup.md`'s H2-4) —
-   confirmed inert but deliberately left alone; only worth touching if someone wants to do
-   the careful numerical-equivalence-guarded surgery the plan describes.
+1. **Human playtesting** (see `M_balancing.md`'s punch list) — the feel/fairness/pacing judgments a
+   headless simulation cannot make: is the militia the right amount of "win button," does averting
+   the coup feel satisfying, does "hard" feel like a different game, is the depression's economic
+   pacing right. The measured calibration is done; actual play sessions are the standing remainder.
+2. **Area K's human-review punch list** (see `K_assets.md`'s K-6/K-7 entries) — sign off on the
+   sourced files' identity/subject match, decide on the CC BY-SA share-alike sources, and optionally
+   hand-source the items still on the placeholder (including the Conspiracy page's general portraits,
+   which Area J left text-only) via Commons-category browsing.
+3. **The interleaved dead block in `@post_election_1928`** (`H2_bulk_cleanup.md`'s H2-4) and **the
+   dead German monthly economic block** (`post_event.scene.dry` L815–884, `M_balancing.md`) —
+   both confirmed inert and deliberately left alone; only worth touching for the careful
+   numerical-equivalence-guarded surgery the plans describe.
 4. **`coalition_affairs.scene.dry`'s dropped election-trigger branch** (`G_policy_cards.md`'s
    G-5 finding) — `set_next_election_time.scene.dry` is silently inert (guards on a
    never-initialized `time_to_election`); flagged for whoever next touches the election-
    timing engine, not fixed by Area G since it's out of scope.
+5. **Optional content enhancement** — give the player agency over PSOE's *own* electoral-bloc
+   membership in 1933/1936 (currently a scripted historical backdrop that reproduces the arc). A
+   content/mechanism task, not number-tuning; flagged in `M_balancing.md`.
 
 **Working rules for whoever continues:** follow `B_state_schema.md` as law; `build`
 + `smoke` after every change and never trust a green smoke without a preceding
