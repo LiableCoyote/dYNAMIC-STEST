@@ -54,7 +54,7 @@ unavailable-subtitle: [? if army_loyalty >= 0.7 : The army's loyalty does not cu
 go-to: conspiracy_success if izq_rep_relation >= 40; conspiracy_failure if izq_rep_relation < 40
 
 @conspiracy_success
-on-arrival: army_loyalty += 0.05; coup_progress -= 2 if coup_progress >= 2; izq_rep_relation -= 2; monarchist_relation -= 5; falange_relation -= 5
+on-arrival: army_loyalty += 0.05 if army_loyalty < 1; coup_progress -= 2 if coup_progress >= 2; izq_rep_relation -= 2; monarchist_relation -= 5; falange_relation -= 5
 
 Azaña's government agrees to reassign several of the more openly disloyal generals to remote postings - Franco to the Canary Islands, Mola to Pamplona, Goded to the Balearics. It is a cautious half-measure, but it disrupts the conspirators' coordination for the moment.
 

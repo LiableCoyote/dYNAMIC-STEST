@@ -118,6 +118,26 @@ const PROFILES = {
       if (month % 6 === 0) { runOnArrival(Q, 'campaigning.new_middle'); runOnArrival(Q, 'campaigning.old_middle'); }
     },
   },
+  // Defensive/loyalist: the deliberate coup-averting counter-play. Keeps the army
+  // funded and loyal, bans and persecutes the Falangist/Carlist militias to shave
+  // the coup clock, works against the conspiracy, and keeps the CNT on-side. This
+  // is the hard alternate-history line -- can sustained counter-play hold
+  // coup_progress below the trigger?
+  defensive: {
+    monthly(Q, month) {
+      Q.ugt_militia_strength += 12;
+      if ((Q.anarchist_militancy || 0) > 0.1) Q.anarchist_militancy -= 0.02; // keep CNT calm
+      Q.anarchist_electoral_stance = 1;
+      if (month % 2 === 0) {
+        runOnArrival(Q, 'military_policy.increase_funding');       // army_loyalty +0.07
+        runOnArrival(Q, 'dealing_with_toleration.conspiracy_success'); // loyalty +0.05, coup -2
+      }
+      if (month % 3 === 0) {
+        runOnArrival(Q, 'domestic_enemies.persecute_falange');    // coup -2 if >=4
+        runOnArrival(Q, 'domestic_enemies.persecute_requetes');   // coup -1 if >=4
+      }
+    },
+  },
   // Passive baseline: takes no actions; measures the raw drift + event clock.
   passive: { monthly() {} },
 };

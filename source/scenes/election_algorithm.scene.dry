@@ -21,9 +21,16 @@ for (var c of Q.classes) {
 // among the classes where it's strongest (industrial, landless) drops -- shrinking
 // those classes' weight in the overall electorate and indirectly favoring parties
 // strong elsewhere. When it calls for participation (1931, 1936), no penalty.
+// Area M-3: the coefficient (a C-4 placeholder) is calibrated to 0.7 -- with
+// anarchist_strength ~35 that is a ~25% turnout drop in the CNT-strong industrial
+// and landless classes when abstention is called, a realistic hit that makes CNT
+// management a visible electoral lever. It stays deliberately subordinate to the
+// 1933 bloc-list law, which is the primary determinant of that election by design
+// (the CNT's larger weight is elsewhere: it trips casas_viejas / the coup clock and
+// feeds the CNT militia in the July-1936 force math).
 var abstention_factor = 1;
 if (!Q.anarchist_electoral_stance) {
-    abstention_factor = 1 - (0.3 * Q.anarchist_strength / 100);
+    abstention_factor = 1 - (0.7 * Q.anarchist_strength / 100);
 }
 function classTurnoutWeight(c) {
     return (c === 'industrial' || c === 'landless') ? Q[c] * abstention_factor : Q[c];
