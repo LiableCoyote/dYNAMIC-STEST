@@ -4,7 +4,7 @@ view-if: year <= 1933 and enemies_timer <= 0
 on-arrival: month_actions += 1; enemies_timer = 18
 max-visits: 3
 is-card: true
-card-image: img/placeholder.jpg
+card-image: img/es/leaders/jose_antonio.jpg
 tags: party_affairs
 
 = Choosing our enemies

@@ -38,3 +38,8 @@ img/es/parties/el_socialista.jpg | https://commons.wikimedia.org/wiki/File:El_So
 img/es/parties/casa_pueblo.jpg | https://commons.wikimedia.org/wiki/File:1908-11-26,_Nuevo_Mundo,_La_Casa_del_Pueblo,_de_Madrid_(cropped).jpg | Public domain | Antonio Portela | 2026-07-09
 img/es/parties/pablo_iglesias_casa_pueblo.jpg | https://commons.wikimedia.org/wiki/File:Pablo_Iglesias_en_la_inauguraci%C3%B3n_de_la_Casa_del_Pueblo_de_Madrid.jpg | CC BY 4.0 | Juan José Morato Caldeiro | 2026-07-09
 img/es/events/figuras_1931_votando.png | https://commons.wikimedia.org/wiki/File:Principales_figuras_pol%C3%ADticas_de_1931_votando_en_las_Elecciones_Constituyentes.png | Public domain | Mundo Gráfico | 2026-07-09
+img/es/leaders/jose_antonio.jpg | https://commons.wikimedia.org/wiki/File:Jos%C3%A9_Antonio_Primo_de_Rivera.jpg | CC0 | Unknown author Unknown author | 2026-07-20
+img/es/leaders/marcelino_domingo.jpg | https://commons.wikimedia.org/wiki/File:Marcelino_Domingo.JPG | Public domain | Unknown author Unknown author | 2026-07-20
+img/es/leaders/macia.jpg | https://commons.wikimedia.org/wiki/File:Francesc_Maci%C3%A0_i_Lluss%C3%A0_-_1907.jpg | Public domain | Unknown author Unknown author | 2026-07-20
+img/es/events/elections_1933.jpg | https://commons.wikimedia.org/wiki/File:1933_elections,_Spain.jpg | Public domain | Walther Reuter | 2026-07-20
+img/es/leaders/masquelet.png | https://commons.wikimedia.org/wiki/File:General_Masquelet.png | CC BY-SA 4.0 | Guarca76 | 2026-07-20

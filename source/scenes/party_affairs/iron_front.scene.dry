@@ -3,7 +3,7 @@ new-page: true
 is-card: true
 view-if: iron_front_formed == 1 and iron_front_timer = 0
 on-arrival: iron_front_timer = 7; month_actions += 1; ugt_militia_cost = 2 if ugt_militia_militancy > 0.15 else ugt_militia_cost = 1; ugt_militia_cost = 3 if ugt_militia_militancy > 0.3
-card-image: img/placeholder.jpg
+card-image: img/es/events/asturias_1934.jpg
 frequency: 200
 tags: party_affairs, antifascism
 

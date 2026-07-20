@@ -4,7 +4,7 @@ view-if: inter_party_relationships_timer <= 0
 tags: party_affairs
 is-card: true
 on-arrival: month_actions += 1; inter_party_relationships_timer = 6;
-card-image: img/placeholder.jpg
+card-image: img/es/events/elections_1933.jpg
 #subtitle: Building relations with the other political parties of the Republic.
 
 = Inter-Party Relationships

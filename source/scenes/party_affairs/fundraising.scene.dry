@@ -3,7 +3,7 @@ new-page: true
 view-if: fundraising_timer <= 0
 on-arrival: fundraising_timer = 12
 is-card: true
-card-image: img/placeholder.jpg
+card-image: img/es/parties/el_socialista.jpg
 tags: party_affairs
 
 = Fundraising

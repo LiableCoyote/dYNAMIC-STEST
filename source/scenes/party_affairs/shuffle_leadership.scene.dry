@@ -468,7 +468,7 @@ Rafael Vidiella is now an advisor.
 title: Julia Álvarez Resano
 subtitle: Julia Álvarez Resano is a woman deputy who organizes the party's mutual-aid and welfare work. {!<br><br>!}[? if difficulty < 0 : Actions - Emergency Fundraising, Casas del Pueblo, Organizing Women ?]
 is-card: true
-card-image: img/placeholder.jpg
+card-image: img/es/parties/pablo_iglesias_casa_pueblo.jpg
 view-if: juchacz_advisor = 0 and n_advisors < 3
 on-arrival: juchacz_advisor = 1; n_advisors += 1; reformist_strength += 5; reformist_dissent -= 7
 go-to: advisor_menu
@@ -636,7 +636,7 @@ Amaro del Rosal is now an advisor.
 title: Juan-Simeón Vidarte
 subtitle: Juan-Simeón Vidarte is a deputy secretary of the party executive who keeps a close watch on the officer corps. {!<br><br>!}[? if difficulty < 0 : Actions - Rally for Democracy, Military Affairs, Broadening the Party ?]
 is-card: true
-card-image: img/placeholder.jpg
+card-image: img/es/parties/pablo_iglesias_casa_pueblo.jpg
 view-if: leber_advisor = 0 and n_advisors < 3
 on-arrival: leber_advisor = 1; n_advisors += 1; neorevisionist_strength += 5; neorevisionist_dissent -= 4
 go-to: advisor_menu
@@ -664,7 +664,7 @@ Toribio Echevarría is now an advisor.
 title: Lucio Martínez Gil
 subtitle: Lucio Martínez Gil is the secretary-general of the FNTT landworkers' federation and the party's voice on the agrarian question. {!<br><br>!}[? if difficulty < 0 : Actions - Agricultural Policy, Rural Campaigning, Addressing the Economic Crisis ?]
 is-card: true
-card-image: img/placeholder.jpg
+card-image: img/es/parties/pablo_iglesias_casa_pueblo.jpg
 view-if: baade_advisor = 0 and n_advisors < 3
 on-arrival: baade_advisor = 1; n_advisors += 1
 go-to: advisor_menu

@@ -4,7 +4,7 @@ is-card: true
 tags: party_affairs
 view-if: cnt_relations_timer <= 0
 on-arrival: month_actions += 1; cnt_relations_timer = 6
-card-image: img/placeholder.jpg
+card-image: img/es/events/casas_viejas.jpg
 #subtitle: The anarcho-syndicalist movement - too large to ignore, impossible to recruit.
 
 = The CNT-FAI
