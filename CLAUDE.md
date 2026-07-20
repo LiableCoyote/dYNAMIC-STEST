@@ -30,6 +30,9 @@ It is a **standalone build**, not a mod. Decisions already locked: standalone (n
 15. `docs/planning/M_balancing.md` — Area M (balancing), done. The simulation-driven calibration
     pass: the `scripts/balance_sim.mjs` harness, the live election-arc calibration, the
     coup/insurrection/force tuning, the endings cleanup, and the human-playtesting punch list.
+16. `docs/planning/N_content_depth.md` — Area N (content depth), done. 11 new historically-grounded
+    mid-game events (1931–1936) populating the sparse middle years; the M calibration is untouched
+    (harness-verified arc + coup outcomes).
 
 ## Build & verify (do this after every change)
 
@@ -204,6 +207,16 @@ date, not narrative flags); others were genuinely inert. Verify, don't guess.
   inert, left documented (H2-4 precedent); `post_event` can't run headless (`dendryUI`), so the
   harness under-counts difficulty's dissent-dampening — flagged in `M_balancing.md`'s punch list
   along with the human-playtesting judgments a simulation can't make.
+
+- **Area N (content depth):** ✅ done — a post-M content pass adding **11 new mid-game events**
+  (`events/` 15 → 26) to populate the sparse 1931–1935 middle years: the convent burnings, the 1931
+  Constitution fight, the Catalan Statute, the Agrarian Reform Law, the Falange's founding, women's
+  suffrage, the Catalan revolt + the October repression, the Straperlo scandal, the Prieto–Caballero
+  rift, and Azaña's move to the presidency. All choiceless narrative beats (the proven
+  `sanjurjada`/`casas_viejas` pattern) with reactive `[? if … ?]` prose and `on-arrival` effects on
+  existing state axes only — **no new mechanics/vars, and the M calibration is untouched** (the
+  harness confirms the historical election arc and all four coup outcomes unchanged, coup still
+  avertable, zero NaN). Details in `docs/planning/N_content_depth.md`.
 
 ## How to continue (recommended next step)
 
