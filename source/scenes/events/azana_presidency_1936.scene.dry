@@ -1,0 +1,15 @@
+title: Azaña to the Presidency
+subtitle: The Republic's ablest man is kicked upstairs
+tags: event
+view-if: year = 1936 and month >= 4 and month <= 6 and in_popular_front = 1
+priority: 1
+max-visits: 1
+on-arrival: president = "Azaña"; izq_rep_relation += 2; pro_republic += 1; coup_progress += 1; reformist_dissent += 2
+
+= Azaña to the Presidency
+
+The Popular Front majority deposes Niceto Alcalá-Zamora - punishing him for the dissolutions of 1935 - and elevates Manuel Azaña to the Presidency of the Republic. It is meant as an honour and a safeguard: the Republic's most capable statesman installed above the fray.
+
+In practice it removes him from the fray. Azaña leaves the premiership for the ceremonial palace of the Pardo, and the government passes to lesser men - Casares Quiroga, able but ailing - just as the crisis deepens. Prieto is blocked from the premiership by his own party's Caballerista wing, so the one figure who might have built a strong government of order is kept out.
+
+[? if coup_progress >= 8 : The generals note, with satisfaction, that the Republic has just weakened its own hand at the worst possible moment. ?] The spring of 1936 slides toward its violent summer with no firm hand on the tiller.
