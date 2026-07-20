@@ -1,0 +1,15 @@
+title: The Burning of the Convents
+subtitle: Anticlerical riots sweep the cities
+tags: event
+view-if: year = 1931 and month >= 5 and month <= 8
+priority: 2
+max-visits: 1
+on-arrival: clerical_conflict += 1; church_relation -= 4; catholic_psoe -= 3; coup_progress += 1; radicalization += 1; pro_republic -= 2*(1-dissent)
+
+= The Burning of the Convents
+
+Only weeks after the Republic was proclaimed, mobs across Madrid, Málaga, Valencia and the Andalusian towns set fire to convents, churches and religious schools. The immediate spark was a monarchist provocation, but the anger behind it is decades deep - the Church stood with the old order, the landlords and the dictatorship, and much of the urban working class has waited a long time for this.
+
+Prime Minister Azaña utters the phrase that will follow him for years: that all the convents of Madrid are not worth the life of a single Republican. The <span style="color: #0087DC;">**CEDA**</span> and the monarchists seize on the disorder as proof that the Republic means godless chaos, and quietly more officers begin to listen to them.
+
+[? if church_relation <= 0 : For the <span style="color: #c00000;">**PSOE**</span>, caught between a base that cheers the flames and a Republic that must be seen to govern, there is no clean position to take. ?][? if church_relation > 0 : We have tried to keep the Church on civil terms with the Republic; these fires make that work very much harder. ?]

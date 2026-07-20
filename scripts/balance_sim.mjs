@@ -153,6 +153,13 @@ const YEARLY = ['1931', '1932', '1933', '1934', '1935', '1936'];
 const ESCALATION = [
   'sanjurjada_1932', 'casas_viejas', 'asturias_rising',
   'popular_front_victory_shock', 'spring_1936_breakdown', 'calvo_sotelo_assassination',
+  // Area N mid-game flavor events (date-gated, max-visits 1) -- fired the same way
+  // so the harness accounts for any state/coup nudges they add.
+  'convent_burnings_1931', 'constitution_1931',
+  'catalan_statute_1932', 'agrarian_reform_law_1932',
+  'falange_founding_1933', 'womens_vote_1933',
+  'catalan_revolt_1934', 'october_repression_1934',
+  'straperlo_1935', 'prieto_caballero_rift', 'azana_presidency_1936',
 ];
 // The historical coalition arc sets the in_* flags that gate the 1934/1936
 // escalation events. In live play coalition_formation is reached via go-to

@@ -1,0 +1,15 @@
+title: The Constitution of 1931
+subtitle: Article 26, Article 44, and the price of a republic
+tags: event
+view-if: year = 1931 and month >= 11
+priority: 2
+max-visits: 1
+on-arrival: democratization += 1; church_relation -= 3; clerical_conflict += 1; catholic_psoe -= 2; izq_rep_relation += 3; pro_republic += 4*(1-dissent); reformist_dissent += 3
+
+= The Constitution of 1931
+
+The Constituent Cortes has written the most democratic constitution in Spanish history: universal suffrage including women, a single-chamber parliament, regional autonomy, no established religion. But two articles cut deepest. **Article 26** strips the Church of state funding, bars the religious orders from teaching, and dissolves the Jesuits - a settling of accounts that the Catholic world will never forgive. **Article 44** allows the nationalization of property, written in with <span style="color: #c00000;">**PSOE**</span> votes over the objections of the moderate republicans.
+
+Niceto Alcalá-Zamora, the Catholic president of the Council, resigns rather than sign the religious articles, and Azaña takes his place as Prime Minister - though Alcalá-Zamora will return as President of the Republic. We have written our convictions into the Republic's founding law.
+
+[? if in_republican_socialist : Our republican partners swallowed Article 44 for the sake of the coalition; they will not forget that they did. ?] The cost is a Catholic Spain that now regards the Republic as an enemy of the faith - and a reservoir of grievance the <span style="color: #0087DC;">**CEDA**</span> will spend the next four years filling.
