@@ -1,0 +1,15 @@
+title: The Founding of the Falange
+subtitle: A Spanish fascism takes the stage
+tags: event
+view-if: year = 1933 and month >= 10
+priority: 2
+max-visits: 1
+on-arrival: falange_militia_strength += 15; falange_relation -= 3; radicalization += 1; urban_middle_falange += 1
+
+= The Founding of the Falange
+
+At the Teatro de la Comedia in Madrid, José Antonio Primo de Rivera - son of the late dictator - launches Falange Española, soon merged with Ledesma and Redondo's JONS. Its language is new to Spain: the nation as destiny, the party as a "movement", violence as poetry, contempt for the "old politics" of both left and right.
+
+For now the Falange is tiny, a few thousand students and gunmen, dismissed by the CEDA as romantics and by us as an irrelevance. But it brings something the Spanish right has lacked - a squadron of street-fighters who *want* the confrontation, who will trade shootings with the <span style="color: #700000;">**UGT**</span> and <span style="color: #8a0303;">**PCE**</span> militias in the years ahead and give the generals their shock troops when the time comes.
+
+[? if falange_militia_strength >= 50 : The pistol and the blackjack are becoming ordinary instruments of Spanish politics. ?]

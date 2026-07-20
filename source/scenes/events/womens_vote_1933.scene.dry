@@ -1,0 +1,15 @@
+title: Votes for Women
+subtitle: Clara Campoamor wins the franchise - and the left fears it
+tags: event
+view-if: year = 1933 and month >= 5 and month <= 10
+priority: 1
+max-visits: 1
+on-arrival: democratization += 1; catholic_ceda += 2; reformist_dissent += 2; urban_middle_psoe += 1
+
+= Votes for Women
+
+The Constitution granted it, but the Cortes fought over it to the last: for the first time, Spanish women will vote in a general election. Clara Campoamor of the Radicals carried the fight almost alone - and, bitterly, against much of the left. Victoria Kent and others argued that Spanish women, still under the Church's influence, would deliver their votes to the right and sink the Republic that enfranchised them.
+
+Campoamor answered that a republic which denied half its people the vote out of fear was no republic at all. She won. Whether the fear was justified will be tested at the ballot box within months.
+
+[? if catholic_psoe < 10 : Our own strategists share Kent's worry - the parish and the confessional reach women the <span style="color: #c00000;">**PSOE**</span> has barely touched. ?] For the <span style="color: #c00000;">**PSOE**</span>, the lesson is plain: a workers' party that speaks only to the workshop and the union hall has ceded the home, the parish and half the electorate to its enemies.
