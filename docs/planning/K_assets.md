@@ -429,3 +429,38 @@ final build+smoke+headless green.
   green; not required for Area K to be "done."
 - **If the egress probe (K-0) still 403s** — Area K cannot run; report to the user rather than
   shipping a placeholder-only build (unless the user re-scopes to the placeholder-only path).
+
+---
+
+## Polish Pass P (post-M art completion) — the 23 placeholders retired
+
+> **Status.** ✅ **DONE.** A post-M pass triggered by first live playtesting ("remove placeholders,
+> we need flavor and feel"). Every one of the 23 cards that still fell back to the gray
+> `img/placeholder.jpg` now shows in-world art; `grep -rl img/placeholder.jpg source/scenes/` is
+> empty. Both smoke guards stay green.
+
+**5 new license-verified Wikimedia images sourced** (via the same `scripts/source_assets.mjs`
+pipeline, `commonsFile` entries, visually inspected before use):
+- `leaders/jose_antonio.jpg` (José Antonio Primo de Rivera, CC0) → `party_affairs/enemies`.
+- `leaders/marcelino_domingo.jpg` (Agriculture minister, PD) → `government_affairs/agricultural_policy`.
+- `leaders/macia.jpg` (Francesc Macià, PD) → `government_affairs/catalan_affairs`.
+- `leaders/masquelet.png` (Gen. Masquelet, CC BY-SA 4.0 — share-alike, flagged) → `government_affairs/military_policy`.
+- `events/elections_1933.jpg` (women voting, 1933, PD) → `party_affairs/inter_party_relationships`.
+
+**Rejected:** `Quema de conventos (1931)` turned out to be an infographic *map*, not a scene photo —
+deleted; the Church-question card uses the Congreso fallback instead.
+
+**Remaining placeholder cards routed to thematically-matched existing art** (no new sourcing — reuse):
+Asturias-1934 → `iron_front` (Alianza Obrera) + `reichsbanner` (UGT militia); Casas Viejas →
+`cnt_relations`; the Popular-Front rally → `confronting_nazis` + `weimar_rally`; 1931 voting →
+`peoples_party`; *El Socialista* → `ideology` + `fundraising`; the Casa del Pueblo / Pablo Iglesias →
+`party_disunity`, `shuffle_leadership`, and the **3 figures with no free portrait** (Vidarte,
+Martínez Gil, Álvarez Resano — the `leber`/`baade`/`juchacz` scenes); the Congreso façade →
+`social_welfare`, `religious_policy`, `crisis_program` (generic institutional fallback).
+
+**Light flavor polish (P-3):** enabled 9 written-but-commented card subtitles and added 3 new ones.
+
+**Still for a human:** the `masquelet` CC BY-SA 4.0 share-alike obligation; whether the generic
+Congreso fallback on `religious_policy`/`social_welfare`/`crisis_program` is worth replacing with a
+hand-sourced church / breadline / bank-run photo (none was freely licensed on Commons at pass time);
+the Macià portrait is a decorative 1907 oval, not a Republic-era shot.

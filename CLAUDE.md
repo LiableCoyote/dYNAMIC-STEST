@@ -148,6 +148,12 @@ date, not narrative flags); others were genuinely inert. Verify, don't guess.
   constraint for 1930s-era named-artist work, not a search gap; one portrait (`vidiella`) is
   a group photo, not a solo shot. Achievements (the 123-icon `game_over` gallery) and music
   remain deferred, as planned. Full punch list in `K_assets.md`'s K-6/K-7 status entries.
+  **Polish Pass P (post-M, after first live playtesting):** the 23 cards that still fell back to the
+  gray `img/placeholder.jpg` are all retired — 5 new sourced images (José Antonio, Marcelino Domingo,
+  Macià, Masquelet, the 1933 women-voting photo) plus thematically-matched existing art (Asturias→
+  Alianza Obrera, Casas Viejas→CNT, the Casa del Pueblo/Pablo Iglesias→the 3 no-free-photo figures);
+  `grep -rl img/placeholder.jpg source/scenes/` is now empty. Plus a light flavor pass (enabled 9
+  commented card subtitles, added 3). See `K_assets.md`'s "Polish Pass P" entry.
 - **Area J (qdisplay/UI):** ✅ done — the qdisplay set is now 12 files, all generic or Spanish,
   zero German names (renamed `hindenburg_angry`→`president_approval`, added `coup_readiness`,
   deleted 11 dead/orphaned German defs). **Reachability of the two H2-flagged screens was fully
