@@ -1,8 +1,8 @@
 # Area N — Content Depth: Mid-Game Event Corpus
 
-> **Status.** ✅ **DONE.** The sparse middle years now have historical texture. Eleven new
-> date-gated events populate 1931–1936 alongside the existing coup-escalation chain, taking the
-> `events/` corpus from 15 → 26 files. Every one is a pure-narrative beat (the proven
+> **Status.** ✅ **DONE** (two batches). The sparse middle years now have historical texture.
+> Nineteen new date-gated events populate 1931–1936 alongside the existing coup-escalation chain,
+> taking the `events/` corpus from 15 → 34 files. Every one is a pure-narrative beat (the proven
 > `sanjurjada`/`casas_viejas` pattern) with reactive `[? if … ?]` prose and `on-arrival` effects on
 > existing state axes only. **The M calibration is untouched:** the harness confirms the historical
 > election arc and all four coup outcomes are unchanged, coup stays avertable, zero NaN.
@@ -54,6 +54,19 @@ and consistent with the corpus.
 | `straperlo_1935` | 1935, Sep+ | radical_relation−15, ceda_relation−, pro_republic− |
 | `prieto_caballero_rift` | 1935, May–Aug | left_dissent+, reformist_dissent+, radicalization+ |
 | `azana_presidency_1936` | 1936, Apr–Jun, in_popular_front | president="Azaña", izq_rep_relation+, coup+1 |
+| `jesuits_dissolved_1932` | 1932, Jan–May | church_relation−, clerical_conflict+, democratization+ |
+| `misiones_pedagogicas` | 1932, Jun+ | democratization+, pro_republic+, urban_middle_psoe+ |
+| `ceda_founded_1933` | 1933, Mar–Aug | ceda_relation−, catholic_ceda+, radicalization+ |
+| `ceda_enters_government_1934` | 1934, Sep–Oct, in_radical_ceda | left_dissent+4, coup+1, pro_republic− |
+| `franco_chief_of_staff_1935` | 1935, May+ | coup+1, army_loyalty−, africa_army+ |
+| `popular_front_pact_1936` | 1936, Jan | izq_rep_relation+, pce_relation+, left_dissent− |
+| `prisoner_amnesty_1936` | 1936, Feb–Apr, in_popular_front | left_dissent−, pro_republic+, radicalization− |
+| `land_seizures_1936` | 1936, Mar–Jun, in_popular_front | land_reform+, landless_psoe+, coup+1 |
+
+**Batch 2 note:** the second batch (the CEDA's rise, the Jesuit dissolution, the Pedagogical
+Missions, Franco's promotion, and the 1936 pact/amnesty/land-seizure arc) takes the corpus to 34;
+the harness confirms the arc and all four coup outcomes still hold (coup 18 on the historical path,
+still avertable at 3, zero NaN).
 
 ## Verification
 
