@@ -1,0 +1,15 @@
+title: The Dissolution of the Jesuits
+subtitle: Article 26 becomes law
+tags: event
+view-if: year = 1932 and month >= 1 and month <= 5
+priority: 1
+max-visits: 1
+on-arrival: church_relation -= 3; clerical_conflict += 1; catholic_psoe -= 2; democratization += 1; ceda_relation -= 2
+
+= The Dissolution of the Jesuits
+
+The government carries out Article 26: the Society of Jesus is dissolved and its property seized by the state, the religious orders barred from teaching, the state's payment of the clergy set to end. To the anticlerical left it is justice four centuries overdue - the breaking of a Church that owned the schools, the estates, and the conscience of Spain.
+
+To Catholic Spain it is persecution, plain and simple, and it hands the emerging Catholic party a cause that needs no explaining in any village with a parish. Divorce and civil marriage follow; the culture war over the soul of the nation is now the central fault line of the Republic.
+
+[? if catholic_psoe <= 5 : In the Catholic north and the small towns, the <span style="color: #c00000;">**PSOE**</span> is now simply the party that closed the convent school - and it is a hard thing to run against. ?]

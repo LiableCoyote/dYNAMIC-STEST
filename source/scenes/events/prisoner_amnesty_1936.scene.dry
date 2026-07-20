@@ -1,0 +1,15 @@
+title: The Amnesty
+subtitle: The prisoners of October come home
+tags: event
+view-if: year = 1936 and month >= 2 and month <= 4 and in_popular_front = 1
+priority: 2
+max-visits: 1
+on-arrival: left_dissent -= 3; pro_republic += 2; radicalization -= 1; industrial_psoe += 1; landless_psoe += 1
+
+= The Amnesty
+
+The first act of the Popular Front is the one it was elected to perform: the thirty thousand prisoners of October walk free. In the Asturian towns and the working-class barrios, the returning miners and militiamen are met like an army come home from the wars - a victory the left tastes after two years of defeat.
+
+It is a genuine release of pressure; for a moment the fever seems to break. But amnesty is also a demonstration that the streets, not the ministries, delivered the win, and the crowds that carry the prisoners shoulder-high are in no mood to go quietly back to work. The right watches the processions and sees not justice but the mob triumphant.
+
+[? if radicalization >= 4 : Our own base has learned that direct action pays; the moderates' authority over it is thinner than ever. ?]

@@ -1,0 +1,15 @@
+title: The Rise of Gil Robles
+subtitle: The Catholic right finds its party
+tags: event
+view-if: year = 1933 and month >= 3 and month <= 8
+priority: 1
+max-visits: 1
+on-arrival: ceda_relation -= 2; catholic_ceda += 3; catholic_psoe -= 1; radicalization += 1
+
+= The Rise of Gil Robles
+
+The scattered Catholic and agrarian right coalesces into a single mass party: the Spanish Confederation of Autonomous Right-wing Groups - the <span style="color: #0087DC;">**CEDA**</span> - under José María Gil Robles. It is something new in Spain: a modern, disciplined, well-funded party of the right, with a youth movement that drills and salutes and a leader its rallies hail as *Jefe*.
+
+Gil Robles is careful never quite to swear loyalty to the Republic - only "respect for constituted power" until he can change it from within. His enemies call it the Trojan horse of fascism; his voters call it the defence of religion and property. Either way, the days of the divided, dynastic right are over, and the Republic now faces an organized enemy at the ballot box.
+
+[? if radicalization >= 3 : On our own left, the Caballeristas point to Gil Robles and ask what elections are worth if this is what they deliver. ?]

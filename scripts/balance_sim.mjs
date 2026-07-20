@@ -160,6 +160,10 @@ const ESCALATION = [
   'falange_founding_1933', 'womens_vote_1933',
   'catalan_revolt_1934', 'october_repression_1934',
   'straperlo_1935', 'prieto_caballero_rift', 'azana_presidency_1936',
+  // second batch
+  'jesuits_dissolved_1932', 'misiones_pedagogicas', 'ceda_founded_1933',
+  'ceda_enters_government_1934', 'franco_chief_of_staff_1935',
+  'popular_front_pact_1936', 'prisoner_amnesty_1936', 'land_seizures_1936',
 ];
 // The historical coalition arc sets the in_* flags that gate the 1934/1936
 // escalation events. In live play coalition_formation is reached via go-to

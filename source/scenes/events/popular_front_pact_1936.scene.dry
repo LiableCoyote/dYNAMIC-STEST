@@ -1,0 +1,15 @@
+title: The Popular Front Pact
+subtitle: The left signs a common front
+tags: event
+view-if: year = 1936 and month = 1
+priority: 1
+max-visits: 1
+on-arrival: izq_rep_relation += 3; pce_relation += 3; left_dissent -= 2; pro_republic += 2
+
+= The Popular Front Pact
+
+In January the pact is signed: the <span style="color: #c00000;">**PSOE**</span>, the republican parties of Azaña and Martínez Barrio, the <span style="color: #8a0303;">**PCE**</span>, and - tacitly - the <span style="color: #7A2E2E;">POUM</span> and the syndicalist rank and file, on a common electoral programme. Amnesty for the prisoners of October, restoration of the reforms, no more.
+
+It is Prieto's strategy vindicated over Caballero's: coalition to win back the Republic through the ballot. The Caballeristas sign only on the understanding that the alliance is electoral, not governmental - the workers' parties will support a republican government from outside, not join it. The papering-over will hold exactly until the votes are counted.
+
+[? if pce_relation >= 40 : Moscow's line has shifted to the Popular Front, and the small but disciplined <span style="color: #8a0303;">**PCE**</span> now marches in step with us. ?]

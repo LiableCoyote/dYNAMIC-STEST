@@ -1,0 +1,15 @@
+title: Gil Robles at the War Ministry
+subtitle: The Africanistas are given the keys
+tags: event
+view-if: year = 1935 and month >= 5
+priority: 2
+max-visits: 1
+on-arrival: coup_progress += 1; army_loyalty -= 0.03 if army_loyalty > 0.1; africa_army += 1; ceda_relation -= 1
+
+= Gil Robles at the War Ministry
+
+As War Minister in the bienio negro cabinets, Gil Robles sets about undoing Azaña's military reforms. He appoints Francisco Franco - the hero of the Asturias repression - as Chief of the General Staff, and salts the high command and the key garrisons with the *Africanista* officers who despise the Republic: Mola, Goded, Fanjul, Varela.
+
+They are not plotting yet, not quite. But the men who will make the July rising are now, courtesy of a Republican government, sitting in exactly the posts from which it can be made. The Army has been handed back to its most reactionary faction, and the reforms that might have made it loyal are being quietly reversed.
+
+[? if coup_progress >= 6 : Everything the conspirators will need in 1936 - the commands, the Moroccan army, the network - is being assembled now, in plain sight. ?]

@@ -1,0 +1,15 @@
+title: The CEDA Enters the Government
+subtitle: Three ministries, and the left goes to the streets
+tags: event
+view-if: year = 1934 and month >= 9 and month <= 10 and in_radical_ceda = 1
+priority: 3
+max-visits: 1
+on-arrival: left_dissent += 4; coup_progress += 1; ceda_relation -= 2; pro_republic -= 2; radicalization += 1
+
+= The CEDA Enters the Government
+
+President Alcalá-Zamora gives way at last: three CEDA ministers enter Lerroux's cabinet. To the right it is normal parliamentary arithmetic - the largest party takes its place in government. To the left it is 1922 all over again, the moment Mussolini was let in the door, and the <span style="color: #c00000;">**PSOE**</span> and <span style="color: #700000;">**UGT**</span> have sworn for a year that they would answer it with a general strike.
+
+Now the threat must be made good or abandoned. The revolutionary committees issue the call. In most of Spain the rising will sputter and fail within a day - but in Asturias, and in Barcelona, it will not.
+
+[? if left_dissent >= 40 : There is no holding our base back now; the order to rise has been given. ?]

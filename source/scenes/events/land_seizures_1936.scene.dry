@@ -1,0 +1,15 @@
+title: The Peasants Take the Land
+subtitle: Spring 1936 in the Andalusian countryside
+tags: event
+view-if: year = 1936 and month >= 3 and month <= 6 and in_popular_front = 1
+priority: 1
+max-visits: 1
+on-arrival: land_reform += 1; landless_psoe += 2; monarchist_relation -= 3; ceda_relation -= 2; coup_progress += 1; budget -= 1
+
+= The Peasants Take the Land
+
+In Extremadura and the Andalusian latifundios, the braceros no longer wait for the Institute of Agrarian Reform. In March, sixty thousand peasants in Badajoz province simply walk onto the great estates at dawn and begin to plough. The government, rather than send the Civil Guard against its own voters, sends officials to legalize the occupations after the fact. In weeks, more land changes hands than in the whole first bienio.
+
+To the landless it is the revolution they were promised, arriving at last from below. To the landlords it is the confiscation of Spain, and their sons are already driving to Pamplona and Lisbon to tell the generals that property, church, and nation will be defended by the Army if the state will not defend them.
+
+[? if land_reform >= 3 : The land question that has haunted Spain for a century is being answered in the fields, faster than any law - and the answer is terrifying the men with the guns. ?]

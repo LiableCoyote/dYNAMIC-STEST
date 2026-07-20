@@ -1,0 +1,15 @@
+title: The Pedagogical Missions
+subtitle: The Republic of teachers goes to the villages
+tags: event
+view-if: year = 1932 and month >= 6
+priority: 1
+max-visits: 1
+on-arrival: democratization += 1; pro_republic += 2*(1-dissent); urban_middle_psoe += 1; landless_psoe += 1
+
+= The Pedagogical Missions
+
+Not everything the Republic does is fought over. Into the poorest villages of Spain - places that had never seen a cinema, a library, or a reproduction of a Velázquez - go the Pedagogical Missions: travelling libraries, gramophones, film screenings, and a student theatre company, "La Barraca," directed by a young poet named Federico García Lorca, playing the classics of the Spanish stage on carts in the plaza.
+
+Thousands of new schools are built, teachers' salaries raised, a war on illiteracy declared. This is the Republic the <span style="color: #c00000;">**PSOE**</span> believes in - not only bread, but books; not only the union hall, but the enlightenment of a whole people long kept in the dark.
+
+[? if democratization >= 3 : For a moment, in the lamplight of a village schoolroom, the Republic is exactly what its founders dreamed. ?]
