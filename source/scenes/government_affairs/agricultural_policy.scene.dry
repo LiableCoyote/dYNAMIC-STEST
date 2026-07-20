@@ -5,7 +5,7 @@ on-arrival: agricultural_policy_timer += 6; month_actions += 1
 view-if: psoe_in_government = 1 and agricultural_policy_timer == 0
 card-image: img/es/leaders/marcelino_domingo.jpg
 tags: govt_affairs, cabinet
-#subtitle: The land question - latifundios, braceros, and the IRA.
+subtitle: The land question - latifundios, braceros, and the IRA.
 
 = Agrarian Reform
 

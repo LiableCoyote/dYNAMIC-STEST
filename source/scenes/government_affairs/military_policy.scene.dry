@@ -5,7 +5,7 @@ tags: govt_affairs, cabinet
 on-arrival: military_policy_timer += 6; month_actions += 1
 view-if: psoe_in_government = 1 and military_policy_timer <= 0
 card-image: img/es/leaders/masquelet.png
-#subtitle: Azaña's reforms and the Africanista officer corps.
+subtitle: Azaña's reforms and the Africanista officer corps.
 
 = Military Policy
 

@@ -5,7 +5,7 @@ on-arrival: catalan_affairs_timer += 6; month_actions += 1
 view-if: psoe_in_government = 1 and catalan_affairs_timer == 0
 card-image: img/es/leaders/macia.jpg
 tags: govt_affairs
-#subtitle: Catalonia's Generalitat, the Basque statute, and the limits of devolution.
+subtitle: Catalonia's Generalitat, the Basque statute, and the limits of devolution.
 
 = The Statute of Autonomy
 

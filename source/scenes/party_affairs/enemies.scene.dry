@@ -5,6 +5,7 @@ on-arrival: month_actions += 1; enemies_timer = 18
 max-visits: 3
 is-card: true
 card-image: img/es/leaders/jose_antonio.jpg
+subtitle: Which of the Republic's foes do we treat as the main danger?
 tags: party_affairs
 
 = Choosing our enemies
