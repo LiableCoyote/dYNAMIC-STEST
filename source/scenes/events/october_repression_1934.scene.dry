@@ -1,0 +1,15 @@
+title: The Prisons of the Republic
+subtitle: The reckoning after October
+tags: event
+view-if: year = 1934 and month >= 11 and in_radical_ceda = 1
+priority: 2
+max-visits: 1
+on-arrival: left_dissent += 5; radicalization += 2; pro_republic -= 3; pce_relation += 3; landless_psoe += 2; industrial_psoe += 1
+
+= The Prisons of the Republic
+
+In the aftermath of the October rising, some thirty thousand prisoners fill the jails of a Republic that only three years ago promised liberty. The Asturian coalfields are placed under a state of war; the Army of Africa's Moorish regiments and the Legion, brought to the mainland by a rising general named Franco, conduct a repression the country will not forget. Torture in the Oviedo barracks becomes a national scandal.
+
+The <span style="color: #c00000;">**PSOE**</span> and <span style="color: #700000;">**UGT**</span> leadership - Largo Caballero among them - are imprisoned or in hiding. Yet from the cells a strange strength grows: October gives the left its martyrs, its prison-poetry, and a slogan for the elections to come - *amnistía*. The Popular Front is being forged in these jails.
+
+[? if left_dissent >= 40 : Our own base no longer wants coalition and compromise; it wants the prisoners freed and the guilty punished. ?]

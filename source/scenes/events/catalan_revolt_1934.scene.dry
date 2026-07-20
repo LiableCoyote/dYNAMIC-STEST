@@ -1,0 +1,15 @@
+title: The Catalan State
+subtitle: Companys proclaims - and the Generalitat falls
+tags: event
+view-if: year = 1934 and month >= 10 and in_radical_ceda = 1
+priority: 1
+max-visits: 1
+on-arrival: catalan_autonomy -= 1; army_loyalty -= 0.05 if army_loyalty > 0.1; radicalization += 1; left_dissent += 3; coup_progress += 1; monarchist_relation += 2
+
+= The Catalan State
+
+As the CEDA enters the national government, Lluís Companys - Macià's successor at the Generalitat - proclaims the "Catalan State within the Federal Spanish Republic" from the balcony in Barcelona, in solidarity with the October rising. It is a gesture more than a plan: General Batet's troops shell the Generalitat palace and the Catalan government surrenders within hours.
+
+The Statute of Autonomy is suspended, the Generalitat's leaders imprisoned, Catalan self-rule extinguished at gunpoint. The army has now put down an elected regional government by force and been thanked for it by Madrid - a rehearsal, and an education, for the officers who took part.
+
+[? if catalan_autonomy <= 0 : Everything Catalonia won in 1932 is gone; the reckoning for that will come. ?]

@@ -1,0 +1,15 @@
+title: Prieto and Caballero
+subtitle: Two roads out of the bienio negro
+tags: event
+view-if: year = 1935 and month >= 5 and month <= 8
+priority: 1
+max-visits: 1
+on-arrival: left_dissent += 4; reformist_dissent += 4; radicalization += 1
+
+= Prieto and Caballero
+
+From prison and exile, the two great figures of the <span style="color: #c00000;">**PSOE**</span> pull the party in opposite directions. Indalecio Prieto argues that October was a catastrophe and that the only path is a broad electoral alliance with the republicans to win back the Republic through the ballot. Francisco Largo Caballero - the "Spanish Lenin" to his adoring youth - has concluded the opposite: that bourgeois democracy is a trap, and that the workers must prepare for the dictatorship of the proletariat.
+
+The <span style="color: #8a0303;">Socialist Youth</span> chant Caballero's name; the union machine and the moderates hold with Prieto. The party will hold together for the elections - both men want the prisoners freed - but the fracture running through it is the same one that runs through the whole European left in these years.
+
+[? if left_strength >= reformist_strength : For now the Caballerista tide is running strongest, and the talk in the locals is of revolution, not coalition. ?][? if reformist_strength > left_strength : For now Prieto's caution prevails, and the party bends toward the republican alliance. ?]

@@ -1,0 +1,15 @@
+title: The Straperlo Scandal
+subtitle: The Radicals destroy themselves
+tags: event
+view-if: year = 1935 and month >= 9
+priority: 2
+max-visits: 1
+on-arrival: radical_relation -= 15; pro_republic -= 2; ceda_relation -= 3; urban_middle_radical -= 4
+
+= The Straperlo Scandal
+
+A rigged roulette wheel brings down a government. "Straperlo" - a crooked gambling concession whose promoters bribed their way toward a licence with cash and gold watches handed to men close to Alexander Lerroux - explodes into the open. The Radical Party, the pivot of every conservative cabinet since 1933, is exposed as a machine for graft. The Nombela affair follows within weeks.
+
+Lerroux is finished, and with him the only bridge between the CEDA and the Republic's institutions. President Alcalá-Zamora, unwilling to hand full power to Gil Robles, dissolves the Cortes rather than let the CEDA govern alone - and calls the elections that will become the Popular Front's opportunity.
+
+[? if radical_relation <= 20 : The centre has collapsed; Spain will now choose between the Popular Front and the National Front, with little left in between. ?]
