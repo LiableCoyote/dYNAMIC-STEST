@@ -1,0 +1,15 @@
+title: The Statute of Núria
+subtitle: Catalonia wins its autonomy
+tags: event
+view-if: year = 1932 and month >= 9
+priority: 2
+max-visits: 1
+on-arrival: catalan_autonomy += 1; izq_rep_relation += 2; monarchist_relation -= 3; ceda_relation -= 2; army_loyalty -= 0.03 if army_loyalty > 0.1; pro_republic += 2*(1-dissent)
+
+= The Statute of Núria
+
+After a landslide plebiscite in Catalonia and months of bitter debate in the Cortes, the Statute of Autonomy is passed. Catalonia recovers its Generalitat, its parliament, and joint control over education and public order - the first crack in the centralist Spanish state since the Bourbons. Francesc Macià's <span style="color: #7B2D8E;">Esquerra</span> celebrates in the streets of Barcelona.
+
+For the <span style="color: #c00000;">**PSOE**</span> and the republican left, it is a hard-won victory for a plural Republic. For the army and the monarchist right, "Spain is being dismembered" - the phrase passes from officers' messes to CEDA rallies, another grievance banked against the day of reckoning.
+
+[? if catalan_autonomy >= 2 : Madrid and Barcelona now have real business to conduct as governments, not master and subject. ?]

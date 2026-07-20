@@ -1,0 +1,15 @@
+title: The Agrarian Reform Law
+subtitle: The great question of the land, at last before the Cortes
+tags: event
+view-if: year = 1932 and month >= 9
+priority: 1
+max-visits: 1
+on-arrival: land_reform += 1; landless_psoe += 3*(1-dissent); smallholder_psoe += 1; monarchist_relation -= 4; ceda_relation -= 2; budget -= 1; pce_relation += 1
+
+= The Agrarian Reform Law
+
+Pushed through in the tense weeks after the Sanjurjada, the Agrarian Reform Law finally reaches the statute book. The great estates of the south - the *latifundios* worked by a landless army of *braceros* - are made subject to expropriation, and an Institute of Agrarian Reform is charged with settling peasant families on the land.
+
+It is the reform the <span style="color: #c00000;">**PSOE**</span> and the landless south have waited generations for. But the Institute is starved of funds, the legal machinery is slow, and in the first year only a few thousand families are settled where hundreds of thousands wait.
+
+[? if land_reform >= 2 : Where the settlements do come, the day-labourers begin, cautiously, to believe the Republic is theirs. ?][? if land_reform < 2 : The braceros' patience is not infinite, and the CNT and the Caballerista left are already asking why a workers' Republic moves so slowly. ?] The landlords, for their part, treat the law as robbery and bankroll every enemy the Republic has.
