@@ -382,14 +382,34 @@ this.achieve('game_completed');
 # screen. Retargeted onto the actual Spanish default: no coup was ever triggered
 # (republic_victory/long_war/total_defeat are all unset).
 @no_hitler
-view-if: not republic_victory and not long_war and not total_defeat
-title: The Republic endures.
+view-if: not republic_victory and not long_war and not total_defeat and not workers_revolution and not legal_coup
+title: [? if polarization < 45 : La República Consolidada ?][? if polarization >= 45 : The Republic endures - for now ?]
 tags: endings
 go-to: eg_menu
 
-[? if coup_progress >= 7 : The plotting of the authoritarian right and the disloyal officer corps never quite comes together into an open rising - Sanjurjo, Mola, and the Africanista generals bide their time, but July 1936 passes without a coup. The Republic has survived its most dangerous hour, though the men who might have overthrown it have not gone away. ?][? if coup_progress < 7 : The Republic reaches July 1936 without ever coming close to a military rising. Whatever else can be said of these five years, the Second Republic has endured. ?]
+[? if polarization < 45 : The impossible has happened. Five years on from its proclamation, the Republic is not only alive but *settled* - the fever of the two Spains has broken, the generals' plots have found no purchase in a country that no longer wants them, and the Republic has become something Spain has never had: a boring, durable, democratic normalcy. It is the hardest victory of all, and the least dramatic. ?][? if polarization >= 45 : The plotting of the authoritarian right and the disloyal officer corps never quite comes together into an open rising - Sanjurjo, Mola, and the Africanista generals bide their time, but July 1936 passes without a coup. The Republic has survived its most dangerous hour. But the country is still split into two camps that despise each other, and the men who might have overthrown it have not gone away. ?]
 
 [? if in_popular_front : The Popular Front government continues its work, for however long its uneasy coalition can hold together. ?][? if in_radical_ceda : The Radical-CEDA government continues to govern, the PSOE still in opposition. ?][? if in_republican_socialist : The Republican-Socialist coalition continues its reform program. ?]
+
+@workers_revolution
+title: La Revolución
+view-if: workers_revolution == 1
+tags: endings
+go-to: eg_menu
+
+The generals' rising has been broken - not by the state, but by the armed workers who poured into the streets to stop it. And having taken up the rifle and seized the factory, the barracks and the great estate, they have no intention of handing any of it back. Across Republican Spain the committees, the collectives and the militias are the real power now; the government exists on their sufferance.
+
+The <span style="color: #c00000;">**PSOE**</span> has ridden the revolution rather than restrained it - a workers' Spain is being built in the middle of a war, exhilarating and precarious, with the <span style="color: #8a0303;">**PCE**</span> and the CNT as rivals as much as allies. What it becomes, and whether it can survive the war it was born in, no one can yet say.
+
+@legal_coup
+title: El Golpe Legal
+view-if: legal_coup == 1
+tags: endings
+go-to: eg_menu
+
+When the generals moved, there was nothing to stop them. The party chose legality and coalition to the very end, and never built the movement - the militias, the armed unions, the committees - that might have resisted. And so the state simply changed hands: a swift, almost bloodless seizure of power, the Cortes sent home, the parties dissolved, the reforms undone by decree.
+
+It is not quite the civil war the conspirators feared they would need. It is worse, in its way: an authoritarian Spain installed with barely a shot, and a workers' movement that discovers, too late, that respectability was not a shield. The <span style="color: #c00000;">**PSOE**</span>'s leaders take the road to exile and the prison.
 
 @civil_war_won
 title: The rising has failed.

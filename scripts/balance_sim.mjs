@@ -101,6 +101,8 @@ const PROFILES = {
       // antagonize the CNT toward insurrection/abstention (trips casas_viejas)
       if ((Q.anarchist_militancy || 0) < 0.9) Q.anarchist_militancy = (Q.anarchist_militancy || 0) + 0.03;
       if (month % 4 === 0) Q.pce_relation = (Q.pce_relation || 0) + 2;
+      // the Caballerista line (Area O): steer party_line toward revolution
+      if ((Q.party_line || 0) < 80) Q.party_line = (Q.party_line || 0) + 1.5;
       // a working-class electoral strategy: campaign among workers + unemployed
       // (real card onArrivals -> moves the class->party matrix that feeds elections)
       if (month % 6 === 0) { runOnArrival(Q, 'campaigning.workers'); runOnArrival(Q, 'campaigning.unemployed'); }
@@ -113,6 +115,8 @@ const PROFILES = {
       if (Q.army_loyalty < 0.5) Q.army_loyalty += 0.004;
       if (month % 3 === 0) { Q.izq_rep_relation = (Q.izq_rep_relation || 0) + 2; Q.pro_republic = (Q.pro_republic || 0) + 1; }
       Q.ugt_militia_strength += 8;
+      // the Prietista line (Area O): steer party_line toward reform
+      if ((Q.party_line || 0) > 15) Q.party_line = (Q.party_line || 0) - 1;
       // adopt the UGT public-works plan early (via the labor-economist advisor path)
       if (month === 2) { Q.wtb_adopted = 1; Q.economic_plan = 1; }
       // a broadening electoral strategy: campaign among the urban middle class and
@@ -133,6 +137,7 @@ const PROFILES = {
       Q.ugt_militia_strength += 12;
       if ((Q.anarchist_militancy || 0) > 0.1) Q.anarchist_militancy -= 0.02; // keep CNT calm
       Q.anarchist_electoral_stance = 1;
+      if ((Q.party_line || 0) > 20) Q.party_line = (Q.party_line || 0) - 1; // institutional/reformist
       if (month % 2 === 0) {
         runOnArrival(Q, 'military_policy.increase_funding');       // army_loyalty +0.07
         runOnArrival(Q, 'dealing_with_toleration.conspiracy_success'); // loyalty +0.05, coup -2
@@ -234,7 +239,10 @@ function simulate(profileName, difficultyName) {
     }
   }
   // if we reached July 1936 without triggering, it's the coup-averted ending
-  const ending = Q.republic_victory ? 'republic_victory'
+  // (Area O: La República Consolidada if de-polarized, else an uneasy survival).
+  const ending = Q.workers_revolution ? 'workers_revolution'
+    : Q.legal_coup ? 'legal_coup'
+    : Q.republic_victory ? 'republic_victory'
     : Q.long_war ? 'long_war'
     : Q.total_defeat ? 'total_defeat'
     : 'coup_averted';

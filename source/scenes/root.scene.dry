@@ -289,6 +289,15 @@ Q.polarization = 0;
 Q.polarization_bonus = 0;
 Q.balance_of_power = 50;
 
+// The branching 1936 endgames (Area O D-4). republic_victory / long_war /
+// total_defeat are the Civil-War sub-outcomes (set by the force math, as before);
+// these two add the distinctive branches: the workers' movement transforms the war
+// into a revolution, or - a reformist party with no movement to fall back on - the
+// authoritarian right takes power swiftly. La República Consolidada is the
+// coup-never-fired ending (@no_hitler), reframed by polarization.
+Q.workers_revolution = 0;
+Q.legal_coup = 0;
+
 Q.budget = 4;
 
 // --- Spanish-Republic subsystem axes (declared here; mechanics designed in Area F) ---

@@ -76,12 +76,37 @@ Q.enemy_power += Q.guardia_civil_strength * (1 - Q.guardia_civil_loyalty) * Q.gu
 
 Q.is_favorable = (Q.total_power >= Q.enemy_power * 0.9) ? 1 : 0;
 
+// Area O D-4: branch by the Party Line and Dual Power, not force math alone.
+// Derive the two power bases (mirrors status.scene.dry / status_right.scene.dry).
+Q.movement_power = Math.round(
+    (Q.ugt_militia_strength + Q.cnt_militia_strength) / 50
+    + Q.dues * 2 + (Q.works_councils || 0) * 3 + (Q.radicalization || 0) * 2
+    + (Q.nationalization_progress || 0) * 4 + (Q.anarchist_strength || 0) * 0.2
+    + (Q.movement_power_bonus || 0));
+Q.institutional_power = Math.round(
+    (Q.psoe_in_government ? 15 : 0) + Q.army_loyalty * 30 + Q.asalto_loyalty * 15
+    + Q.guardia_civil_loyalty * 10 + Q.budget + (Q.democratization || 0) * 2
+    + (Q.welfare || 0) + (Q.institutional_power_bonus || 0));
+
 if (Q.total_power > Q.enemy_power * 1.1) {
-    Q.republic_victory = 1;
+    // The rising is beaten. WHO wins the aftermath depends on the party's soul:
+    // a revolutionary movement that armed the workers does not simply restore the
+    // old Republic -- it makes a revolution.
+    if (Q.party_line >= 60 && Q.movement_power >= Q.institutional_power) {
+        Q.workers_revolution = 1;
+    } else {
+        Q.republic_victory = 1;
+    }
 } else if (Q.total_power / Q.enemy_power >= 0.6) {
     Q.long_war = 1;
 } else {
-    Q.total_defeat = 1;
+    // The rising wins. A reformist party that never built a movement has nothing
+    // to fall back on when the state fails -- the takeover is swift and near-legal.
+    if (Q.party_line <= 40 && Q.movement_power < 35) {
+        Q.legal_coup = 1;
+    } else {
+        Q.total_defeat = 1;
+    }
 }
 
 Q.total_power = Math.round(Q.total_power);
@@ -93,4 +118,4 @@ go-to: game_over
 
 The Republic's defenders - the UGT and CNT militias, the loyal Army, the Assault Guard, and whatever portion of the Guardia Civil has not gone over - muster a combined strength of roughly [+ total_power +]. Ranged against them, the rebel generals command the Army of Africa, the Falange and Requetés militias, and the disloyal garrisons, totaling roughly [+ enemy_power +].
 
-[? if republic_victory : The rising has failed to take the country. ?][? if long_war : Neither side has the strength to finish the other quickly. ?][? if total_defeat : The rebels have the upper hand. ?]
+[? if republic_victory : The rising has failed to take the country. ?][? if workers_revolution : The rising has failed - and in the workers' districts that broke it, the militias are not giving their weapons back. ?][? if long_war : Neither side has the strength to finish the other quickly. ?][? if total_defeat : The rebels have the upper hand. ?][? if legal_coup : There is no defence to speak of. The state simply changes hands. ?]
