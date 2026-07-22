@@ -30,9 +30,13 @@ It is a **standalone build**, not a mod. Decisions already locked: standalone (n
 15. `docs/planning/M_balancing.md` — Area M (balancing), done. The simulation-driven calibration
     pass: the `scripts/balance_sim.mjs` harness, the live election-arc calibration, the
     coup/insurrection/force tuning, the endings cleanup, and the human-playtesting punch list.
-16. `docs/planning/N_content_depth.md` — Area N (content depth), done. 11 new historically-grounded
+16. `docs/planning/N_content_depth.md` — Area N (content depth), done. 19 new historically-grounded
     mid-game events (1931–1936) populating the sparse middle years; the M calibration is untouched
     (harness-verified arc + coup outcomes).
+17. `docs/planning/O_divergence.md` — Area O ("The Two Spains"), core done. The re-spine away from
+    the Weimar frame: **Dual Power** (Poder Popular/Institucional), **the Party Line** (reform↔
+    revolution), **Polarization** (Las dos Españas), and **branching endgames** (Consolidada /
+    Revolución / Guerra Civil / Golpe Legal). Reuses existing state; election arc untouched.
 
 ## Build & verify (do this after every change)
 
@@ -217,6 +221,22 @@ date, not narrative flags); others were genuinely inert. Verify, don't guess.
   existing state axes only — **no new mechanics/vars, and the M calibration is untouched** (the
   harness confirms the historical election arc and all four coup outcomes unchanged, coup still
   avertable, zero NaN). Details in `docs/planning/N_content_depth.md`.
+
+- **Area O (divergence — "The Two Spains"):** ✅ core done (D-1…D-5), shipped. The re-spine away from
+  the Weimar frame into a distinctively Spanish game. **Dual Power** — two derived ~0-100 power bases,
+  `movement_power` (Poder Popular: militias/dues/committees/street) vs `institutional_power` (Poder
+  Institucional: ministries/army/budget/legality) — shown on the Status page. **The Party Line**
+  (`party_line`, 0 reformist↔100 revolutionary), steered at the "Questions of Ideology" congress card,
+  sets the win condition. **Polarization** (`polarization` 0-100 + `balance_of_power`) replaces the
+  linear coup clock as the framing (`coup_progress` subsumed as an input); the Conspiracy tab is
+  repurposed into the **"Las dos Españas"** board. **Branching endgames** — the July-1936 resolver now
+  branches on party line × dual power into **La Revolución** (revolutionary movement wins → workers'
+  revolution), **La República Consolidada** (reformist + de-polarized → coup never fires), **El Golpe
+  Legal** (reformist + no movement → swift takeover), and the Civil-War outcomes (won/long_war/
+  total_defeat). All derived from existing state; the historical election arc is orthogonal and
+  unchanged; harness-verified reachable + strategy-correlated, zero NaN. **Next (deferred):** card
+  trade-dynamics (cards that explicitly trade institutional↔movement power) + `party_line` line-gating
+  of cards; a mid-game Golpe-Legal path. Details in `docs/planning/O_divergence.md`.
 
 ## How to continue (recommended next step)
 
