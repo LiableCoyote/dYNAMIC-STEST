@@ -32,6 +32,35 @@ if (Q.left_force >= Q.right_force && Q.left_force >= Q.cnt_force && Q.left_force
 } else {
     Q.streets_controlled_by = "the forces of the state";
 }
+
+// --- "The Two Spains" (Area O): the two power bases, derived at display time --
+// Poder Popular: the mobilized base outside the state (militias, union treasury,
+// worker councils, the radicalized street). Poder Institucional: command of the
+// state (ministries, a loyal army/security apparatus, the budget, legitimacy).
+// A readable ~0-100 index; the crisis resolver (events/july_1936_coup, Area O
+// D-4) and scripts/balance_sim.mjs mirror this formula so display and endgame
+// agree. Cards move the *_bonus accumulators.
+Q.movement_power = Math.round(
+    (Q.ugt_militia_strength + Q.cnt_militia_strength) / 50
+    + Q.dues * 2
+    + (Q.works_councils || 0) * 3
+    + (Q.radicalization || 0) * 2
+    + (Q.nationalization_progress || 0) * 4
+    + (Q.anarchist_strength || 0) * 0.2
+    + (Q.movement_power_bonus || 0)
+);
+if (Q.movement_power < 0) Q.movement_power = 0;
+Q.institutional_power = Math.round(
+    (Q.psoe_in_government ? 15 : 0)
+    + Q.army_loyalty * 30
+    + Q.asalto_loyalty * 15
+    + Q.guardia_civil_loyalty * 10
+    + Q.budget
+    + (Q.democratization || 0) * 2
+    + (Q.welfare || 0)
+    + (Q.institutional_power_bonus || 0)
+);
+if (Q.institutional_power < 0) Q.institutional_power = 0;
 !}
 
 = Status
@@ -39,6 +68,10 @@ if (Q.left_force >= Q.right_force && Q.left_force >= Q.cnt_force && Q.left_force
 [+ month : month +] [+ year +][? if rubicon:, Week [+ week +]?]
 
 Resources available: [+ resources +]
+
+**The Two Spains — where power really lies:**
+<span style="color: #c00000;">Poder Popular</span> (the movement, the militias, the street): [+ movement_power +]
+<span style="color: #2E3B6E;">Poder Institucional</span> (the ministries, the army, the law): [+ institutional_power +]
 
 <span style="color: #c00000;">**PSOE**</span> position: [? if psoe_toleration : toleration ?][? if psoe_in_government : in government - ?][? if psoe_toleration == 0 and psoe_in_government == 0 : opposition ?]
 [? if in_republican_socialist and psoe_in_government: Republican-Socialist Coalition ?][? if in_radical_ceda and psoe_in_government: Radical-CEDA Bloc ?][? if in_popular_front and psoe_in_government: Popular Front ?][? if in_workers_alliance and psoe_in_government: Workers' Alliance ?][? if in_psoe_majority and psoe_in_government: <span style="color: #c00000;">**PSOE**</span> majority ?][? if in_minority_government and psoe_in_government: minority government ?][? if in_emergency_government and psoe_in_government: emergency government ?]

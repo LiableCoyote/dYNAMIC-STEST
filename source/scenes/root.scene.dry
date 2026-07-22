@@ -258,6 +258,17 @@ Q.falange_banned = 0;
 Q.coup_progress = 0;
 Q.capital_strike_progress = 0;
 
+// --- "The Two Spains" divergence (Area O) -----------------------------------
+// Dual Power: the game's two rival power bases. Both are DERIVED each turn in
+// post_event.scene.dry from existing state (militias/dues/committees -> movement;
+// ministries/army/budget/legality -> institutional) PLUS a card-pushed accumulator
+// (*_bonus). They resolve the 1936 crisis (Area O D-4) alongside the force math.
+// Scale is a readable ~0-100 index. See docs/planning/O_divergence.md.
+Q.movement_power = 0;
+Q.movement_power_bonus = 0;
+Q.institutional_power = 0;
+Q.institutional_power_bonus = 0;
+
 Q.budget = 4;
 
 // --- Spanish-Republic subsystem axes (declared here; mechanics designed in Area F) ---
