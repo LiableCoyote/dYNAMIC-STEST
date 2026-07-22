@@ -1,0 +1,8 @@
+
+# the PSOE's line on the reform<->revolution axis (0 reformist .. 100 revolutionary)
+
+(..20) <span style="color: #E8B23A;">reformist</span> (Prietista)
+(20..40) <span style="color: #c0a000;">moderate</span>
+(40..60) <span style="color: #c07000;">centrist / torn</span>
+(60..80) <span style="color: #c04000;">revolutionary</span> (Caballerista)
+(80..) <span style="color: #9b0000;">maximalist</span>

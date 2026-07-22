@@ -269,6 +269,14 @@ Q.movement_power_bonus = 0;
 Q.institutional_power = 0;
 Q.institutional_power_bonus = 0;
 
+// The Party Line: the PSOE's soul on the reform<->revolution axis.
+// 0 = reformist (Prietista collaboration with the Republic) ... 100 = revolutionary
+// (Caballerista class struggle). Steered at the "Questions of Ideology" congress card
+// and by faction events; gates content and sets the 1936 win condition (Area O D-4).
+// Starts moderate-reformist (the 1931 PSOE of Besteiro and Prieto), radicalizes if
+// played that way. Clamped [0,100] at read sites.
+Q.party_line = 40;
+
 Q.budget = 4;
 
 // --- Spanish-Republic subsystem axes (declared here; mechanics designed in Area F) ---

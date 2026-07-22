@@ -28,7 +28,7 @@ if (Q.ideology && Q.ideology != "left") {
 }
 !}
 go-to: changed if changed = 1
-on-departure: ideology = "left"; left_strength += 8; communist_coalition += 1; left_dissent -= 5; reformist_dissent += 5; ceda_relation -= 3; radical_relation -= 5; izq_rep_relation -= 3; nationalization_support += 1; pce_relation += 3
+on-departure: party_line += 20; ideology = "left"; left_strength += 8; communist_coalition += 1; left_dissent -= 5; reformist_dissent += 5; ceda_relation -= 3; radical_relation -= 5; izq_rep_relation -= 3; nationalization_support += 1; pce_relation += 3
 
 The Caballerista left of the party supports a course of class struggle, and potentially a worker alliance with the <span style="color: #8a0303;">**PCE**</span>.
 
@@ -39,7 +39,7 @@ if (Q.ideology && Q.ideology != "centrist") {
 }
 !}
 go-to: changed if changed = 1
-on-departure: ideology = "centrist"; center_strength += 8; center_dissent -= 10; left_dissent -= 5; reformist_dissent -= 5
+on-departure: party_line += 5; ideology = "centrist"; center_strength += 8; center_dissent -= 10; left_dissent -= 5; reformist_dissent -= 5
 
 The Besteiristas, followers of Julián Besteiro's orthodox Marxism, support a middle course: preparing the party for eventual socialism while building up the consciousness of the working class, and rejecting both premature revolution and bourgeois collaboration.
 
@@ -50,7 +50,7 @@ if (Q.ideology && Q.ideology != "labor") {
 }
 !}
 go-to: changed if changed = 1
-on-departure: ideology = "labor"; labor_strength += 8; center_dissent += 5; wtb_support += 1; labor_dissent -= 5; pce_relation -= 3
+on-departure: party_line -= 8; ideology = "labor"; labor_strength += 8; center_dissent += 5; wtb_support += 1; labor_dissent -= 5; pce_relation -= 3
 
 The <span style="color: #700000;">**UGT**</span> wing of the party supports continued participation in government in order to provide benefits to organized workers, and the creation of public works programs for employment.
 
@@ -61,7 +61,7 @@ if (Q.ideology && Q.ideology != "reformist") {
 }
 !}
 go-to: changed if changed = 1
-on-departure: ideology = "reformist"; reformist_strength += 8; democratization += 1; reformist_dissent -= 5; left_dissent += 5; ceda_relation += 5; radical_relation += 5; izq_rep_relation += 5; pce_relation -= 8; moderate_plan_support += 1
+on-departure: party_line -= 20; ideology = "reformist"; reformist_strength += 8; democratization += 1; reformist_dissent -= 5; left_dissent += 5; ceda_relation += 5; radical_relation += 5; izq_rep_relation += 5; pce_relation -= 8; moderate_plan_support += 1
 
 The Prietista wing of the party seeks to preserve the Republic through collaboration with the republican parties, and is most supportive of coalitions with the other pro-Republic forces.
 
@@ -78,7 +78,7 @@ if (Q.ideology && Q.ideology != "socpat") {
 }
 !}
 go-to: changed if changed = 1
-on-departure: ideology = "socpat"; social_patriot_strength += 10; left_dissent += 10; center_dissent += 10; reformist_dissent += 5; ceda_relation += 6; radical_relation += 6; izq_rep_relation += 6; pce_relation -= 15
+on-departure: party_line -= 25; ideology = "socpat"; social_patriot_strength += 10; left_dissent += 10; center_dissent += 10; reformist_dissent += 5; ceda_relation += 6; radical_relation += 6; izq_rep_relation += 6; pce_relation -= 15
 
 This small current within the party, regarded by many as unprincipled accommodationists, argues that the <span style="color: #c00000;">**PSOE**</span> and <span style="color: #700000;">**UGT**</span> should set aside class politics in favor of national unity.
 

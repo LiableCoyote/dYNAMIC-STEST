@@ -4,7 +4,7 @@ tags: event
 view-if: year = 1935 and month >= 5 and month <= 8
 priority: 1
 max-visits: 1
-on-arrival: left_dissent += 4; reformist_dissent += 4; radicalization += 1
+on-arrival: left_dissent += 4; reformist_dissent += 4; radicalization += 1; party_line += 8 if left_strength >= reformist_strength; party_line -= 5 if reformist_strength > left_strength
 
 = Prieto and Caballero
 
