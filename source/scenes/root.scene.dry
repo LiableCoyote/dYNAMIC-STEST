@@ -277,6 +277,18 @@ Q.institutional_power_bonus = 0;
 // played that way. Clamped [0,100] at read sites.
 Q.party_line = 40;
 
+// Polarization ("Las dos Españas"): 0 = a broad republican consensus ... 100 = two
+// irreconcilable Spains, where elections are no longer accepted and violence is the
+// normal language of politics. DERIVED at read time from the confrontation signals
+// (coup_progress, clerical_conflict, radicalization, the anarchist insurrection)
+// minus conciliation (democratization), plus a card/event accumulator. When it is
+// high AND the balance favours the right AND the player has not pre-empted, the
+// generals move (Area O D-4). balance_of_power: 50 = even; >50 = the workers'/Popular
+// -Front bloc ascendant; <50 = the National/military bloc ascendant.
+Q.polarization = 0;
+Q.polarization_bonus = 0;
+Q.balance_of_power = 50;
+
 Q.budget = 4;
 
 // --- Spanish-Republic subsystem axes (declared here; mechanics designed in Area F) ---

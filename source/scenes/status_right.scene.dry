@@ -1,8 +1,63 @@
-title: The Conspiracy
+title: Las dos Españas
 new-page: true
 is-special: true
+on-arrival: {!
+// --- The Two Spains board (Area O D-3): derive the polarization state ---------
+// Poder Popular / Poder Institucional (mirrors status.scene.dry).
+Q.movement_power = Math.round(
+    (Q.ugt_militia_strength + Q.cnt_militia_strength) / 50
+    + Q.dues * 2 + (Q.works_councils || 0) * 3 + (Q.radicalization || 0) * 2
+    + (Q.nationalization_progress || 0) * 4 + (Q.anarchist_strength || 0) * 0.2
+    + (Q.movement_power_bonus || 0));
+if (Q.movement_power < 0) Q.movement_power = 0;
+Q.institutional_power = Math.round(
+    (Q.psoe_in_government ? 15 : 0) + Q.army_loyalty * 30 + Q.asalto_loyalty * 15
+    + Q.guardia_civil_loyalty * 10 + Q.budget + (Q.democratization || 0) * 2
+    + (Q.welfare || 0) + (Q.institutional_power_bonus || 0));
+if (Q.institutional_power < 0) Q.institutional_power = 0;
 
-= The Conspiracy
+// Polarization: confrontation signals minus conciliation (mirrored in the crisis
+// resolver, events/july_1936_coup, and scripts/balance_sim.mjs).
+Q.polarization = Math.round(
+    (Q.coup_progress || 0) * 3.5
+    + (Q.clerical_conflict || 0) * 2
+    + (Q.radicalization || 0) * 1.5
+    + (Q.anarchist_insurrection ? 8 : 0)
+    + (Q.polarization_bonus || 0)
+    - (Q.democratization || 0) * 1.5);
+if (Q.polarization < 0) Q.polarization = 0;
+if (Q.polarization > 100) Q.polarization = 100;
+
+// Balance of power: the workers'/Popular-Front bloc vs the National/military bloc,
+// from the same force components the coup resolver uses. 50 = even.
+var left_bloc = Q.ugt_militia_strength * Q.ugt_militia_militancy
+    + Q.cnt_militia_strength * Q.cnt_militia_militancy
+    + Q.asalto_strength * Q.asalto_loyalty
+    + Q.army_strength * Q.army_loyalty;
+var right_bloc = Q.falange_militia_strength * Q.falange_militia_militancy
+    + Q.requetes_strength * Q.requetes_militancy
+    + (Q.africa_army || 0) * 35
+    + Q.army_strength * (1 - Q.army_loyalty)
+    + Q.guardia_civil_strength * (1 - Q.guardia_civil_loyalty);
+Q.balance_of_power = Math.round(100 * left_bloc / (left_bloc + right_bloc + 0.0001));
+if (Q.balance_of_power < 0) Q.balance_of_power = 0;
+if (Q.balance_of_power > 100) Q.balance_of_power = 100;
+!}
+
+= Las dos Españas
+
+Spain is coming apart into two camps that no longer share common ground. Where each finds its power, and how far the rupture has gone, will decide what July 1936 becomes.
+
+**Polarization — the distance between the two Spains:** [+ polarization : polarization +]
+[? if polarization < 30 : The Republic still commands a broad centre; compromise is still a language people speak. ?][? if polarization >= 30 and polarization < 60 : The centre is thinning. Each crisis pushes more people to one pole or the other. ?][? if polarization >= 60 and polarization < 85 : There are now two Spains, arming and watching each other; an election settles nothing. ?][? if polarization >= 85 : The country is a powder keg. Any spark will do. ?]
+
+**Balance of power:** [+ balance_of_power +] / 100 [? if balance_of_power >= 55 : — the workers' and republican bloc holds the advantage. ?][? if balance_of_power < 55 and balance_of_power > 45 : — the two camps are evenly matched. ?][? if balance_of_power <= 45 : — the military and the authoritarian right hold the advantage. ?]
+
+<span style="color: #c00000;">Poder Popular</span> (movement / militias / street): [+ movement_power +] &nbsp; | &nbsp; <span style="color: #2E3B6E;">Poder Institucional</span> (ministries / army / law): [+ institutional_power +]
+
+Party line: [+ party_line : party_line +]
+
+<h1>The Military Conspiracy</h1>
 
 Across the barracks of the peninsula and the Army of Africa, a conspiracy against the Republic is taking shape. Its threads run through monarchist salons, Carlist Navarre, and the officers' messes of the Moroccan Protectorate.
 
